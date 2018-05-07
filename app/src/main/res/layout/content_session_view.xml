@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".views.activities.SessionViewActivity"
+    tools:showIn="@layout/activity_session_view">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/sessionview_time"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            android:text="@string/session_room"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:text="@string/large_text"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="15dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/sessionLabelText"
+                android:background="@drawable/circle_outline"
+                android:layout_height="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/session_category"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/sessionLabelText"
+                android:layout_marginStart="6dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
