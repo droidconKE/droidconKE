@@ -1,4 +1,6 @@
 package droiddevelopers254.droidconke.views.fragments;
 
-public class AgendaFragment {
+import android.support.v4.app.Fragment;
+
+public class AgendaFragment extends Fragment {
 }
