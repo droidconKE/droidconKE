@@ -3,4 +3,10 @@
     <string name="title_home">Info</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_map">Map</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="session_title">Firebase Remote config</string>
+    <string name="session_separator">/</string>
+    <string name="session_time">1 hour</string>
+    <string name="session_room">6th Floor,Senteu Plaza</string>
+    <string name="session_category">Firebase</string>
 </resources>
