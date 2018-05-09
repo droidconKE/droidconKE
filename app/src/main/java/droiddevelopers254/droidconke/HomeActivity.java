@@ -9,13 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import droiddevelopers254.droidconke.views.activities.InfoActivity;
-import droiddevelopers254.droidconke.views.activities.MapActivity;
-import droiddevelopers254.droidconke.views.activities.ScheduleActivity;
+import droiddevelopers254.droidconke.views.fragments.InfoFragment;
+import droiddevelopers254.droidconke.views.fragments.MapFragment;
+import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    public static final String PREF_USER_FIRST_TIME = "user_first_time";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -24,17 +25,19 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent infoIntent= new Intent(HomeActivity.this, InfoActivity.class);
-                    startActivity(infoIntent);
+                    InfoFragment infoFragment= new InfoFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,infoFragment)
+                            .commit();
                     return true;
                 case R.id.navigation_schedule:
-                    Intent scheduleIntent= new Intent(HomeActivity.this, ScheduleActivity.class);
-                    startActivity(scheduleIntent);
-
+                    ScheduleFragment scheduleFragment= new ScheduleFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,scheduleFragment)
+                            .commit();
                     return true;
                 case R.id.navigation_map:
-                    Intent mapsIntent = new Intent(HomeActivity.this, MapActivity.class);
-                    startActivity(mapsIntent);
+                    MapFragment mapFragment= new MapFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,mapFragment)
+                            .commit();;
                     return true;
             }
             return false;

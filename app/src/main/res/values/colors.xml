@@ -15,4 +15,6 @@
     <color name="colorLightPeriwinkle">#bcc8fb</color>
     <color name="colorWarmGrey">#9b9b9b</color>
     <color name="colorGreyishBrown">#424242</color>
+    <color name="colorIndicatorUnselected">#4D000000</color>
+    <color name="mdtp_transparent_black">7f000000</color>
 </resources>

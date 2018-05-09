@@ -4,19 +4,128 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.chip.ChipGroup
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
 
-        <android.support.design.chip.Chip
-            android:layout_width="wrap_content"
-            app:chipText="Design"
+       <android.support.design.chip.Chip
+           android:layout_width="wrap_content"
+           app:chipText="Your starred and reserved events"
+           android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/fab_margin"
+            android:text="Topics"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:textSize="19sp"
             android:layout_height="wrap_content" />
-        <android.support.design.chip.Chip
-            android:layout_width="wrap_content"
-            app:chipText="Design"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_height="wrap_content">
+            <android.support.design.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
 
-    </android.support.design.chip.ChipGroup>
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Firebase"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Android Things"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Payments"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="@string/location"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.chip.ChipGroup>
+            <android.support.design.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="@string/play_text"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Keynote"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Ads"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Flutter"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.chip.ChipGroup>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/fab_margin"
+            android:text="Types"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_height="wrap_content">
+            <android.support.design.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Codelabs"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="After Hours"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.chip.ChipGroup>
+            <android.support.design.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
+
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Session"
+                    android:layout_height="wrap_content" />
+                <android.support.design.chip.Chip
+                    android:layout_width="match_parent"
+                    app:chipText="Meetups"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.chip.ChipGroup>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

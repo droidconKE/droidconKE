@@ -32,4 +32,23 @@
     <string name="title_activity_schedule">ScheduleActivity</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="title_activity_map">Map</string>
+    <string name="play_text"><![CDATA[Android & Play]]></string>
+    <string name="location"><![CDATA[Location & Maps]]></string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="welcome_title">Welcome to droidconKE</string>
+    <string name="welcome_dates">
+        July 26- 27,\n
+        2018 Senteu Plaza,Nairobi
+    </string>
+    <string name="welcome_build">Build your own schedule</string>
+    <string name="welcome_build_description">
+        Build your custom droidconKE experience\n
+        and get notified if you are an\n
+        attendee
+    </string>
+    <string name="welcome_sync">Get notified </string>
+    <string name="welcome_sync_description">
+        Never miss a session as we \n
+        will notify you before the sessions start</string>
 </resources>

@@ -30,14 +30,7 @@
             android:label="@string/title_activity_session_view"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".views.activities.ScheduleActivity"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".views.activities.InfoActivity"
-            android:label="@string/title_activity_info"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,8 +44,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".views.activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
+            android:name=".views.activities.WelcomeActivity"
+            android:label="@string/title_activity_welcome"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
