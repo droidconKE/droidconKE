@@ -1,7 +1,7 @@
-Contributing to {{Put project name here}}
-We'd love to accept your patches! To contribute to {{Put project name here}} simply open a pull request against the develop branch
+Contributing to droidconKE android app
+We'd love to accept your patches! To contribute to droidconKE simply open a pull request against the develop branch
 
-Ensure you have a develop branch before you place the link.
+
 
 To ensure you that your pull request is accepted:
 
