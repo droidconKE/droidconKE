@@ -51,4 +51,16 @@
     <string name="welcome_sync_description">
         Never miss a session as we \n
         will notify you before the sessions start</string>
+    <string name="schedule_title">Schedule</string>
+    <string name="info_title">Info</string>
+    <string name="map_title">Map</string>
+    <string name="settings_east_african_time">Events in East African Zone</string>
+    <string name="settings_enable_notifications">Enable notifications</string>
+    <string name="settings_send_statistics">Send anonymous usage statistics</string>
+    <string name="faqs">FAQ</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="open_source_licences">Open source licenses</string>
+    <string name="built_with">Built with</string>
+    <string name="material_components">Material Components</string>
 </resources>

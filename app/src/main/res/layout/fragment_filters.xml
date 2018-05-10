@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -30,52 +31,66 @@
             android:orientation="horizontal"
             android:weightSum="4"
             android:layout_height="wrap_content">
-            <android.support.design.chip.ChipGroup
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
                 android:layout_weight="2"
                 android:layout_height="wrap_content">
 
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Firebase"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Android Things"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Payments"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
                     app:chipText="@string/location"
                     android:layout_height="wrap_content" />
 
-            </android.support.design.chip.ChipGroup>
-            <android.support.design.chip.ChipGroup
-                android:layout_width="wrap_content"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_weight="2"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="6dp"
                     app:chipText="@string/play_text"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Keynote"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Ads"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
                     app:chipText="Flutter"
                     android:layout_height="wrap_content" />
 
-            </android.support.design.chip.ChipGroup>
+            </LinearLayout>
 
         </LinearLayout>
         <TextView
@@ -92,36 +107,42 @@
             android:orientation="horizontal"
             android:weightSum="4"
             android:layout_height="wrap_content">
-            <android.support.design.chip.ChipGroup
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_weight="2"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Codelabs"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
                     app:chipText="After Hours"
                     android:layout_height="wrap_content" />
 
-            </android.support.design.chip.ChipGroup>
-            <android.support.design.chip.ChipGroup
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_weight="2"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="6dp"
                     app:chipText="Session"
                     android:layout_height="wrap_content" />
                 <android.support.design.chip.Chip
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
                     app:chipText="Meetups"
                     android:layout_height="wrap_content" />
 
-            </android.support.design.chip.ChipGroup>
+            </LinearLayout>
 
         </LinearLayout>
 

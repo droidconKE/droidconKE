@@ -15,34 +15,36 @@ import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    private TextView mTextMessage,toolbarTitleText;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
+    public  static int navItemIndex = 1; //controls toolbar titles and icons
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    InfoFragment infoFragment= new InfoFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,infoFragment)
-                            .commit();
-                    return true;
-                case R.id.navigation_schedule:
-                    ScheduleFragment scheduleFragment= new ScheduleFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,scheduleFragment)
-                            .commit();
-                    return true;
-                case R.id.navigation_map:
-                    MapFragment mapFragment= new MapFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_home,mapFragment)
-                            .commit();;
-                    return true;
-            }
-            return false;
-        }
-    };
+                        navItemIndex =0;
+                        InfoFragment infoFragment= new InfoFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_home,infoFragment)
+                                .commit();
+                        return true;
+                    case R.id.navigation_schedule:
+
+                        navItemIndex= 1;
+                        ScheduleFragment scheduleFragment= new ScheduleFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_home,scheduleFragment)
+                                .commit();
+                        return true;
+                    case R.id.navigation_map:
+                        navItemIndex= 2;
+                        MapFragment mapFragment= new MapFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_home,mapFragment)
+                                .commit();;
+                        return true;
+                }
+                return false;
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,20 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
+
+        toolbarTitleText=findViewById(R.id.toolbarTitleText);
+
+        //change the toolbar titles according to position
+        if (navItemIndex == 0){
+            toolbarTitleText.setText(R.string.info_title);
+        }
+        if (navItemIndex == 1){
+            toolbarTitleText.setText(R.string.schedule_title);
+        }
+        if (navItemIndex == 2){
+            toolbarTitleText.setText(R.string.map_title);
+        }
+
     }
 
 }

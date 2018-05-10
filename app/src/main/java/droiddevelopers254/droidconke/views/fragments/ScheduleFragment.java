@@ -3,13 +3,10 @@ package droiddevelopers254.droidconke.views.fragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.views.fragments.AgendaFragment;
-import droiddevelopers254.droidconke.views.fragments.DayOneFragment;
-import droiddevelopers254.droidconke.views.fragments.DayTwoFragment;
 
 public class ScheduleFragment extends Fragment {
     private TabLayout tabLayout;
@@ -30,7 +24,7 @@ public class ScheduleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -51,9 +45,10 @@ public class ScheduleFragment extends Fragment {
     }
      private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new DayOneFragment(),"July 26");
-        adapter.addFragment(new DayTwoFragment(),"July 27");
+        adapter.addFragment(new DayOneFragment(),"Day 1");
+        adapter.addFragment(new DayTwoFragment(),"Day 2");
         adapter.addFragment(new AgendaFragment(),"Agenda");
+        viewPager.setAdapter(adapter);
     }
     class ViewPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

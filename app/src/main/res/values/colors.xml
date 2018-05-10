@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3F51B5</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorFavourite">#3F51B5</color>
@@ -16,5 +16,5 @@
     <color name="colorWarmGrey">#9b9b9b</color>
     <color name="colorGreyishBrown">#424242</color>
     <color name="colorIndicatorUnselected">#4D000000</color>
-    <color name="mdtp_transparent_black">7f000000</color>
+    <color name="mdtp_transparent_black">#7f000000</color>
 </resources>

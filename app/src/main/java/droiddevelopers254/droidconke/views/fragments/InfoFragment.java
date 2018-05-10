@@ -1,14 +1,10 @@
 package droiddevelopers254.droidconke.views.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.views.fragments.AboutFragment;
-import droiddevelopers254.droidconke.views.fragments.EventFragment;
-import droiddevelopers254.droidconke.views.fragments.SettingsFragment;
-import droiddevelopers254.droidconke.views.fragments.TravelFragment;
 
 public class InfoFragment extends Fragment {
     private TabLayout tabLayout;
@@ -28,7 +20,7 @@ public class InfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
 
         viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -46,6 +38,8 @@ public class InfoFragment extends Fragment {
         adapter.addFragment(new TravelFragment(),"Travel");
         adapter.addFragment(new AboutFragment(),"About");
         adapter.addFragment(new SettingsFragment(),"Settings");
+        viewPager.setAdapter(adapter);
+
     }
     class ViewPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
