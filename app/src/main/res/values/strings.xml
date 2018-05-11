@@ -63,4 +63,25 @@
     <string name="open_source_licences">Open source licenses</string>
     <string name="built_with">Built with</string>
     <string name="material_components">Material Components</string>
+    <string name="travel_shuttle_info_title">Shuttle service</string>
+    <string name="travel_public_transportation_info_title">Public Transportation</string>
+
+    <!-- The label used on a button when a view is in an expanded state. Clicking on the icon
+    collapses the view. -->
+    <string name="expanded">Expanded</string>
+
+    <!-- The label used on a button when a view is in an collapsed state. Clicking on the icon
+    expanded the view. -->
+    <string name="collapsed">Collapsed</string>
+
+    <string name="travel_carpool_parking_info_title">Parking</string>
+    <string name="travel_ride_sharing_info_title">Ride Sharing</string>
+    <string name="travel_biking_info_title">Biking</string>
+    <string name="shuttle_info">Test</string>
+    <string name="public_transportation_info">Test</string>
+    <string name="car_pooling_parking_info">Test</string>
+    <string name="biking_info">Test</string>
+    <string name="ride_sharing_info">Test</string>
+
+
 </resources>
