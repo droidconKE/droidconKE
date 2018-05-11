@@ -82,6 +82,7 @@
     <string name="car_pooling_parking_info">Test</string>
     <string name="biking_info">Test</string>
     <string name="ride_sharing_info">Test</string>
+    <string name="title_activity_authenticate_user">AuthenticateUser</string>
 
 
 </resources>
