@@ -77,6 +77,7 @@
     <string name="travel_carpool_parking_info_title">Parking</string>
     <string name="travel_ride_sharing_info_title">Ride Sharing</string>
     <string name="travel_biking_info_title">Biking</string>
+<<<<<<< HEAD
     <string name="shuttle_info">Find directions on Google Maps or your location to IHub,Senteu Plaza,Nairobi Kenya</string>
     <string name="public_transportation_info">Public transit does not go directly to iHub. Make sure you search the directions on Google Map properly</string>
     <string name="car_pooling_parking_info">Complementary bike parking will be available at Senteu Plaza. Security officers
@@ -85,6 +86,14 @@
     <string name="ride_sharing_info">Parking is very limited and available only in IHub designated slots located in Senteu Plaza. If you plan to drive,we recommend carpooling with other attendees as preffered parking spaces will be available for cars containing two or more people</string>
     <string name="wifi_ssid">"droidconKE"</string>
     <string name="wifi_password">makegoodthings </string>
+=======
+    <string name="shuttle_info">Test</string>
+    <string name="public_transportation_info">Test</string>
+    <string name="car_pooling_parking_info">Test</string>
+    <string name="biking_info">Test</string>
+    <string name="ride_sharing_info">Test</string>
+    <string name="title_activity_authenticate_user">AuthenticateUser</string>
+>>>>>>> f694cbe27d68236538d698e8bc77e2f265a477a0
 
 
 </resources>

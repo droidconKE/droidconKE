@@ -7,6 +7,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:id="@+id/sessionsRv"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -15,4 +16,11 @@
     </android.support.v7.widget.RecyclerView>
 
 
+=======
+        android:id="@+id/rv"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+>>>>>>> f694cbe27d68236538d698e8bc77e2f265a477a0
 </RelativeLayout>
