@@ -37,6 +37,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:15.1.0'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-database:15.0.1'
 
     //butter knife dep
     implementation 'com.jakewharton:butterknife:8.8.1'
