@@ -49,6 +49,7 @@ public class DayOneFragment extends Fragment{
             @Override
             public void onClick(View view, int position) {
                 Intent sessionDetails = new Intent(getActivity(), SessionViewActivity.class);
+                sessionDetails.putExtra("sessionTitle",sessionsList.get(position).getSessionTitle());
                 startActivity(sessionDetails);
             }
 

@@ -29,10 +29,10 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
+                style="@style/CollapsibleCardTitle"
                 android:id="@+id/agendaTitleText"
                 android:text="@string/agenda_title"
                 android:textSize="19sp"
-                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"

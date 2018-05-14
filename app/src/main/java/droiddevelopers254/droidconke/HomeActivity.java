@@ -4,23 +4,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import droiddevelopers254.droidconke.ui.RoundedDialog;
+import droiddevelopers254.droidconke.utils.OpenSourceLicencesUtil;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
 import droiddevelopers254.droidconke.views.fragments.MapFragment;
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView mTextMessage,toolbarTitleText;
+    private TextView mTextMessage,toolbarTitleText,cancelText;
     ImageView accountImg;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
     public  static int navItemIndex = 1; //controls toolbar titles and icons
+    private  AlertDialog.Builder builder= null;
+    Button signInBtn;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -67,10 +77,31 @@ public class HomeActivity extends AppCompatActivity {
         accountImg=findViewById(R.id.accountImg);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
+        
+        //show sign in dialog
+        accountImg.setOnClickListener(view -> {
+            showDialog();
+        });
 
 
 
 
+    }
+
+    private void showDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prev = fm.findFragmentByTag("dialog_signup");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        new RoundedDialog().show(ft, "dialog_signup");
+
+    }
+
+    private void signInWithGoogle() {
     }
 
     @Override

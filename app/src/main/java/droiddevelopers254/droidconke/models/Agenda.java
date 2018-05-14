@@ -1,10 +1,10 @@
 package droiddevelopers254.droidconke.models;
 
 public class Agenda {
-    String agendaTitle;
-    String agendaTimeline;
-    int agendaIcon;
-    int agendaBackgroundColor;
+    private String agendaTitle;
+    private String agendaTimeline;
+    private int agendaIcon;
+    private int agendaBackgroundColor;
 
     public String getAgendaTitle() {
         return agendaTitle;

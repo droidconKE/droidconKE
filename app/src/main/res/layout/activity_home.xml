@@ -26,7 +26,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:id="@+id/accountImg"
-                    app:srcCompat="@drawable/ic_person_outline_black_24dp"
+                    app:srcCompat="@drawable/profile"
                     android:layout_height="30dp" />
                 <TextView
                     android:layout_width="wrap_content"

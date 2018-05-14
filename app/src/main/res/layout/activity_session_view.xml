@@ -28,7 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/sessionViewTitleText"
+                    style="@style/CollapsibleCardTitle"
+                    android:text="@string/session_title"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

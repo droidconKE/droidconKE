@@ -25,10 +25,10 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
+                style="@style/CollapsibleCardTitle"
                 android:id="@+id/sessionTitleText"
                 android:text="@string/session_title"
                 android:textSize="19sp"
-                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
+                    style="@style/CollapsibleCardTitle"
                     android:id="@+id/sessionTimeText"
                     android:text="@string/session_time"
                     android:textSize="18sp"
@@ -43,6 +44,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
+                    style="@style/CollapsibleCardTitle"
                     android:layout_toEndOf="@id/sessionTimeText"
                     android:id="@+id/sessionSeparatorText"
                     android:text="@string/session_separator"
@@ -50,6 +52,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
+                    style="@style/CollapsibleCardTitle"
                     android:layout_marginStart="6dp"
                     android:layout_toEndOf="@id/sessionSeparatorText"
                     android:id="@+id/sessionRoomText"
@@ -63,13 +66,15 @@
                 android:layout_marginTop="6dp"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="15dp"
+                    android:layout_width="12dp"
                     android:layout_centerVertical="true"
                     android:id="@+id/sessionLabelText"
                     android:background="@drawable/circle_outline"
-                    android:layout_height="15dp" />
+                    android:layout_height="12dp" />
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    style="@style/CollapsibleCardTitle"
                     android:id="@+id/sessionCategoryText"
                     android:text="@string/session_category"
                     android:textSize="18sp"
@@ -82,7 +87,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGrey"
-        android:layout_height="5dp"/>
+        android:background="@color/colorWhite"
+        android:layout_height="3dp"/>
 
 </LinearLayout>

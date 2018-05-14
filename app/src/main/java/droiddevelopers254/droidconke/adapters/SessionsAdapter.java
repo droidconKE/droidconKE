@@ -14,8 +14,8 @@ import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.Sessions;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyViewHolder> {
-    List<Sessions> sessionsList;
-    Context context;
+    private List<Sessions> sessionsList;
+    private Context context;
 
     public SessionsAdapter(List<Sessions>sessionsList,Context context){
         this.sessionsList=sessionsList;

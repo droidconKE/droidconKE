@@ -89,6 +89,19 @@
     <string name="title_activity_authenticate_user">AuthenticateUser</string>
     <string name="action_share">Share</string>
     <string name="action_map">Map</string>
+    <string name="droidconke_site">https://droidcon.co.ke</string>
+    <string name="droidcoke_hashtag">#droidconKE</string>
+    <string name="faqs_link">https://droidcon.co.ke</string>
+    <string name="terms_of_service_link">https://droidcon.co.ke</string>
+    <string name="privacy_policy_link">https://droidcon.co.ke</string>
+    <string name="about_licenses">Open Source Licenses</string>
+    <string name="ok">OK</string>
+    <string name="customize_schedule">Customize your schedule</string>
+    <string name="star_event">Add to your starred events</string>
+    <string name="see_event_map">See session venue</string>
+    <string name="sign_in_to_customize">Sign in to customize \nyour schedule</string>
+    <string name="sign_in_descrption">Sign in to save events znd get notifications. Actions will be synced from your account across app and site</string>
+    <string name="not_now">Not now</string>
 
 
 </resources>

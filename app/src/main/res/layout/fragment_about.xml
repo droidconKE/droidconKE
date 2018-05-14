@@ -14,38 +14,38 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/faqText"
             style="@style/CollapsibleCardTitle"
             android:text="@string/faqs"
             android:textColor="@color/colorFavourite"
-            android:textSize="16sp"
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/termsOfServiceText"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:text="@string/terms_of_service"
             android:textColor="@color/colorFavourite"
-            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/privacyPolicyText"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:text="@string/privacy_policy"
             android:textColor="@color/colorFavourite"
-            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/openLicensesText"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:text="@string/open_source_licences"
             android:textColor="@color/colorFavourite"
-            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <RelativeLayout
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                     android:layout_marginTop="6dp"
                     style="@style/CollapsibleCardTitle"
                     android:text="@string/material_components"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

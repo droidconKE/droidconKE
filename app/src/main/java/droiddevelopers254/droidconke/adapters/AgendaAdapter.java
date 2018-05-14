@@ -17,8 +17,8 @@ import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.Agenda;
 
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHolder> {
-    List<Agenda> agendaList ;
-    Context context;
+    private List<Agenda> agendaList ;
+    private Context context;
 
     public AgendaAdapter(List<Agenda> agendaList, Context context){
         this.agendaList=agendaList;
@@ -50,7 +50,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
         Agenda agenda= agendaList.get(position);
         holder.agendaTitleText.setText(agenda.getAgendaTitle());
         holder.agendaTimelineText.setText(agenda.getAgendaTimeline());
-//        holder.agendaImg.setBackgroundResource(agenda.getAgendaIcon());
+        holder.agendaImg.setImageResource(agenda.getAgendaIcon());
         holder.agendaLinear.setBackgroundColor(agenda.getAgendaBackgroundColor());
 
     }
