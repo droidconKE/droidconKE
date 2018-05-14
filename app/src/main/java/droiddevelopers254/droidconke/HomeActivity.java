@@ -56,19 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
-
-        toolbarTitleText=findViewById(R.id.toolbarTitleText);
-
-        //change the toolbar titles according to position
-        if (navItemIndex == 0){
-            toolbarTitleText.setText(R.string.info_title);
-        }
-        if (navItemIndex == 1){
-            toolbarTitleText.setText(R.string.schedule_title);
-        }
-        if (navItemIndex == 2){
-            toolbarTitleText.setText(R.string.map_title);
-        }
+        
 
     }
 

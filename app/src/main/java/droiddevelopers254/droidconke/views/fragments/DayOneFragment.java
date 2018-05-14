@@ -1,5 +1,6 @@
 package droiddevelopers254.droidconke.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,7 +17,9 @@ import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.AgendaAdapter;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
 import droiddevelopers254.droidconke.models.Sessions;
+import droiddevelopers254.droidconke.utils.ItemClickListener;
 import droiddevelopers254.droidconke.utils.SessionData;
+import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 
 public class DayOneFragment extends Fragment{
     RecyclerView recyclerView;
@@ -42,5 +45,17 @@ public class DayOneFragment extends Fragment{
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(sessionsAdapter);
+        recyclerView.addOnItemTouchListener(new ItemClickListener(getActivity(), recyclerView, new ItemClickListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent sessionDetails = new Intent(getActivity(), SessionViewActivity.class);
+                startActivity(sessionDetails);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 }

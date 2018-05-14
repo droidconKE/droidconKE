@@ -20,22 +20,7 @@
             android:background="@color/colorWhite"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="30dp"
-                    app:srcCompat="@drawable/ic_person_outline_black_24dp"
-                    android:layout_height="30dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/toolbarTitleText"
-                    android:text="Schedule"
-                    android:textSize="22sp"
-                    android:textColor="@color/colorBlack"
-                    android:layout_centerInParent="true"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
+
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_home" />
