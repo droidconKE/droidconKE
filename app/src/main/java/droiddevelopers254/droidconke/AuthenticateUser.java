@@ -47,7 +47,7 @@ public class AuthenticateUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //check whether the user is signed in first
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
             navigateToHome();
@@ -67,11 +67,17 @@ public class AuthenticateUser extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == RESULT_OK) {
 
-                //save the user
-               // firebaseUser = auth.getCurrentUser();
-               // checkUserExistence(firebaseUser);
+                //save the user now to db
+                firebaseUser = auth.getCurrentUser();
 
-                navigateToHome();
+                if(firebaseUser!=null){
+                    checkUserExistence(firebaseUser);
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"User is null",Toast.LENGTH_LONG).show();
+                }
+
+               // navigateToHome();
 
                 return;
             } else {
