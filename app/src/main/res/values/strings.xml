@@ -87,7 +87,8 @@
     <string name="wifi_password">makegoodthings </string>
 
     <string name="title_activity_authenticate_user">AuthenticateUser</string>
-
+    <string name="action_share">Share</string>
+    <string name="action_map">Map</string>
 
 
 </resources>

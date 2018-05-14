@@ -19,7 +19,7 @@ public class SessionViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_session_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         bottomAppBar=findViewById(R.id.bottomAppBar);
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);

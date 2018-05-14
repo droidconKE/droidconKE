@@ -35,15 +35,25 @@
 
     <include layout="@layout/content_session_view" />
 
+
     <android.support.design.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:id="@+id/bottomAppBar"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorWhite"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:fabAttached="true"
         app:fabAlignmentMode="end"
         app:fabCradleVerticalOffset="6dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/bottomAppBar"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorWhite"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_star_border_black_24dp" />
+
 </android.support.design.widget.CoordinatorLayout>
