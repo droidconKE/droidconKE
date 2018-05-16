@@ -100,8 +100,24 @@
     <string name="star_event">Add to your starred events</string>
     <string name="see_event_map">See session venue</string>
     <string name="sign_in_to_customize">Sign in to customize \nyour schedule</string>
-    <string name="sign_in_descrption">Sign in to save events znd get notifications. Actions will be synced from your account across app and site</string>
+    <string name="sign_in_descrption">Sign in to save events and get notifications. Actions will be synced from your account across app and site</string>
     <string name="not_now">Not now</string>
+
+    <!--Remote config Keys-->
+    <string name="driving_directions_key" translatable="false">driving_directions</string>
+    <string name="public_transportation_key" translatable="false">public_transportation</string>
+    <string name="biking_key" translatable="false">biking</string>
+    <string name="ride_sharing_key" translatable="false">ride_sharing</string>
+    <string name="car_pooling_key" translatable="false">car_pooling_parking_info</string>
+    <string name="wifi_ssid_key" translatable="false">wifi_ssid</string>
+    <string name="wifi_password_key" translatable="false">wifi_password</string>
+    <string name="droidconke_site_key" translatable="false">droidconke_site</string>
+    <string name="droidconke_hashtag_ke" translatable="false">droidconke_hashtag</string>
+    <string name="faqs_link_key" translatable="false">faqs_link</string>
+    <string name="terms_of_service_link_key" translatable="false">terms_of_service_link</string>
+    <string name="privacy_policy_link_key" translatable="false">privacy_policy_link</string>
+
+
 
 
 </resources>
