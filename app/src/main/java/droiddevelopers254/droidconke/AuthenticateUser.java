@@ -2,6 +2,7 @@ package droiddevelopers254.droidconke;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,16 +10,26 @@ import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.data.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
+import droiddevelopers254.droidconke.models.UserModel;
 
 public class AuthenticateUser extends AppCompatActivity {
 
@@ -36,7 +47,7 @@ public class AuthenticateUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //check whether the user is signed in first
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
             navigateToHome();
@@ -56,17 +67,23 @@ public class AuthenticateUser extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == RESULT_OK) {
 
-                //save the user
-               // firebaseUser = auth.getCurrentUser();
-               // checkUserExistence(firebaseUser);
+                //save the user now to db
+                firebaseUser = auth.getCurrentUser();
 
-                navigateToHome();
+                if(firebaseUser!=null){
+                    checkUserExistence(firebaseUser);
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"User is null",Toast.LENGTH_LONG).show();
+                }
+
+               // navigateToHome();
 
                 return;
             } else {
                 // Sign in failed
                 if (response == null) {
-                    // User pressed back button
+                    // UserModel pressed back button
                     showSnackbar("You pressed back button before log in");
                     return;
                 }
@@ -105,6 +122,60 @@ public class AuthenticateUser extends AppCompatActivity {
 
         Snackbar.make(snackBarView,message,Snackbar.LENGTH_SHORT).show();
 
+    }
+
+    private void checkUserExistence(final FirebaseUser currentUser) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference users = database.getReference("users");
+        users.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+
+                    Toast.makeText(AuthenticateUser.this,"UserModel exists " + currentUser.getDisplayName(),
+                            Toast.LENGTH_LONG).show();
+
+                    navigateToHome();
+
+                } else {
+
+
+                    Toast.makeText(AuthenticateUser.this,"NO user",Toast.LENGTH_LONG).show();
+                   // User user = new User();
+
+                    UserModel user = new UserModel();
+
+                    user.setEmail(currentUser.getEmail());
+                    user.setUser_id(currentUser.getUid());
+
+                    saveCurrentUser(currentUser, user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveCurrentUser(final FirebaseUser currentUser,UserModel user) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference users = database.getReference("users");
+        users.child(currentUser.getUid()).setValue(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        navigateToHome();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void navigateToHome() {
