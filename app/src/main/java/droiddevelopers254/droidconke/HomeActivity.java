@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -32,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collections;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import droiddevelopers254.droidconke.models.UserModel;
 import droiddevelopers254.droidconke.ui.RoundSigninDialog;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
@@ -41,7 +44,7 @@ import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
 public class HomeActivity extends AppCompatActivity {
 
     private TextView mTextMessage,toolbarTitleText,cancelText;
-    ImageView accountImg;
+    CircleImageView accountImg;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
     public  static int navItemIndex = 1; //controls toolbar titles and icons
     private  AlertDialog.Builder builder= null;
@@ -90,9 +93,21 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        auth=FirebaseAuth.getInstance();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         toolbarTitleText=findViewById(R.id.toolbarTitleText);
         accountImg=findViewById(R.id.accountImg);
+
+        if (auth.getCurrentUser() != null) {
+            //load user profile image
+            Glide.with(getApplicationContext()).load(auth.getCurrentUser().getPhotoUrl())
+                    .thumbnail(Glide.with(getApplicationContext()).load(auth.getCurrentUser().getPhotoUrl()))
+                    .centerCrop()
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(accountImg);
+        }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
