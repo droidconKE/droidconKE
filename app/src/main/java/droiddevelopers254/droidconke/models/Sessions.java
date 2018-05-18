@@ -1,47 +1,134 @@
 package droiddevelopers254.droidconke.models;
 
 public class Sessions {
-    String sessionTitle;
-    String sessionDuration;
-    String sessionRoom;
-    String sessionCategory;
 
-    public String getSessionTitle() {
-        return sessionTitle;
+    private int id;
+    private String main_tag;
+    private String room;
+    private String speakers;
+    private String starred;
+    private String startTimeStamp;
+    private String title;
+    private String topic;
+
+    private String url;
+    private String endTimeStamp;
+    private String duration;
+    private String description;
+
+    public Sessions() {
     }
 
-    public void setSessionTitle(String sessionTitle) {
-        this.sessionTitle = sessionTitle;
+    public int getId() {
+        return id;
     }
 
-    public String getSessionDuration() {
-        return sessionDuration;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setSessionDuration(String sessionDuration) {
-        this.sessionDuration = sessionDuration;
+    public String getMain_tag() {
+        return main_tag;
     }
 
-    public String getSessionRoom() {
-        return sessionRoom;
+    public void setMain_tag(String main_tag) {
+        this.main_tag = main_tag;
     }
 
-    public void setSessionRoom(String sessionRoom) {
-        this.sessionRoom = sessionRoom;
+    public String getRoom() {
+        return room;
     }
 
-    public String getSessionCategory() {
-        return sessionCategory;
+    public void setRoom(String room) {
+        this.room = room;
     }
 
-    public void setSessionCategory(String sessionCategory) {
-        this.sessionCategory = sessionCategory;
+    public String getSpeakers() {
+        return speakers;
     }
 
-    public Sessions(String sessionTitle, String sessionDuration, String sessionRoom, String sessionCategory) {
-        this.sessionTitle = sessionTitle;
-        this.sessionDuration = sessionDuration;
-        this.sessionRoom = sessionRoom;
-        this.sessionCategory = sessionCategory;
+    public void setSpeakers(String speakers) {
+        this.speakers = speakers;
+    }
+
+    public String getStarred() {
+        return starred;
+    }
+
+    public void setStarred(String starred) {
+        this.starred = starred;
+    }
+
+    public String getStartTimeStamp() {
+        return startTimeStamp;
+    }
+
+    public void setStartTimeStamp(String startTimeStamp) {
+        this.startTimeStamp = startTimeStamp;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getEndTimeStamp() {
+        return endTimeStamp;
+    }
+
+    public void setEndTimeStamp(String endTimeStamp) {
+        this.endTimeStamp = endTimeStamp;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Sessions(int id, String main_tag, String room, String speakers, String starred,
+                    String startTimeStamp, String title, String topic, String url,
+                    String endTimeStamp, String duration, String description) {
+        this.id = id;
+        this.main_tag = main_tag;
+        this.room = room;
+        this.speakers = speakers;
+        this.starred = starred;
+        this.startTimeStamp = startTimeStamp;
+        this.title = title;
+        this.topic = topic;
+        this.url = url;
+        this.endTimeStamp = endTimeStamp;
+        this.duration = duration;
+        this.description = description;
     }
 }

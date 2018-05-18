@@ -6,7 +6,7 @@ import java.util.List;
 import droiddevelopers254.droidconke.models.Sessions;
 
 public class SessionData {
-    public static List<Sessions> getSessions(){
+   /* public static List<Sessions> getSessions(){
         List<Sessions> sessionsList = new ArrayList<>();
 
         Sessions sessions = new Sessions("Android Things","1 hour","6th Floor Ihub","Android");
@@ -28,5 +28,5 @@ public class SessionData {
         sessionsList.add(sessions5);
 
         return sessionsList;
-    }
+    }*/
 }

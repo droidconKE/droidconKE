@@ -12,25 +12,31 @@
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
             android:text="@string/sessionview_time"
             android:textSize="14sp"
+            android:id="@+id/txtSessionTime"
             android:textColor="@color/colorBlack"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
             android:layout_marginTop="6dp"
+            android:id="@+id/txtSessionRoom"
             android:text="@string/session_room"
             android:textSize="14sp"
             android:textColor="@color/colorBlack"
             android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/txtSessionDesc"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fab_margin"
             android:text="@string/large_text"
-            android:textSize="14sp"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/fab_margin"
@@ -43,6 +49,7 @@
                 android:layout_height="15dp" />
             <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/txtSessionCategory"
                 android:text="@string/session_category"
                 android:textSize="18sp"
                 android:layout_toEndOf="@+id/sessionLabelText"
