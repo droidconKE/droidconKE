@@ -1,21 +1,26 @@
 package droiddevelopers254.droidconke;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.User;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import butterknife.BindView;
 import droiddevelopers254.droidconke.models.UserModel;
@@ -36,15 +42,28 @@ public class AuthenticateUser extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
+    SignInButton googleSignInBtn;
     @BindView(R.id.coorAuthUser)
     CoordinatorLayout snackBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //set layout tu fullcreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //transparent status bar
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.mdtp_transparent_black));
+        }
+
         setContentView(R.layout.activity_authenticate_user);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        googleSignInBtn=findViewById(R.id.googleSignInBtn);
 
         //check whether the user is signed in first
          auth = FirebaseAuth.getInstance();
@@ -53,9 +72,13 @@ public class AuthenticateUser extends AppCompatActivity {
             navigateToHome();
         } else {
             // not signed in
-            signInUser();
+           showUI();
         }
 
+    }
+
+    private void showUI() {
+        googleSignInBtn.setOnClickListener(view -> signInUser());
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -101,7 +124,6 @@ public class AuthenticateUser extends AppCompatActivity {
 
         }
     }
-
     //function to log in
     private void signInUser(){
 
@@ -110,8 +132,7 @@ public class AuthenticateUser extends AppCompatActivity {
                         .createSignInIntentBuilder()
                         .setIsSmartLockEnabled(false)
                         .setAvailableProviders(
-                                Arrays.asList(
-                                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                                Collections.singletonList(
                                         new AuthUI.IdpConfig.GoogleBuilder().build()
                                 ))
                         .build(),
@@ -138,15 +159,13 @@ public class AuthenticateUser extends AppCompatActivity {
                     navigateToHome();
 
                 } else {
-
-
                     Toast.makeText(AuthenticateUser.this,"NO user",Toast.LENGTH_LONG).show();
-                   // User user = new User();
 
                     UserModel user = new UserModel();
-
                     user.setEmail(currentUser.getEmail());
                     user.setUser_id(currentUser.getUid());
+                    user.setUser_name(currentUser.getDisplayName());
+                    user.setPhoto_url(String.valueOf(currentUser.getPhotoUrl()));
 
                     saveCurrentUser(currentUser, user);
                 }
@@ -158,18 +177,11 @@ public class AuthenticateUser extends AppCompatActivity {
             }
         });
     }
-
     private void saveCurrentUser(final FirebaseUser currentUser,UserModel user) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference users = database.getReference("users");
         users.child(currentUser.getUid()).setValue(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-
-                        navigateToHome();
-                    }
-                })
+                .addOnSuccessListener(aVoid -> navigateToHome())
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -179,7 +191,6 @@ public class AuthenticateUser extends AppCompatActivity {
     }
 
     private void navigateToHome() {
-
         Intent intent = new Intent(AuthenticateUser.this,HomeActivity.class);
         startActivity(intent);
         finish();

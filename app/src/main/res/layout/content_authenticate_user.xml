@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AuthenticateUser"
     tools:showIn="@layout/activity_authenticate_user">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        android:id="@+id/welcomeText"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:text="@string/welcome_title"
+        android:textSize="22sp"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_below="@+id/welcomeText"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_height="200dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:id="@+id/googleSignInBtn"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_height="wrap_content">
+        </com.google.android.gms.common.SignInButton>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:text="@string/copyright"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
