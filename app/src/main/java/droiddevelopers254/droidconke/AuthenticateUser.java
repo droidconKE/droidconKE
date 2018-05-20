@@ -144,7 +144,6 @@ public class AuthenticateUser extends AppCompatActivity {
         Snackbar.make(snackBarView,message,Snackbar.LENGTH_SHORT).show();
 
     }
-
     private void checkUserExistence(final FirebaseUser currentUser) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference users = database.getReference("users");
@@ -152,15 +151,9 @@ public class AuthenticateUser extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-
-                    Toast.makeText(AuthenticateUser.this,"UserModel exists " + currentUser.getDisplayName(),
-                            Toast.LENGTH_LONG).show();
-
                     navigateToHome();
 
                 } else {
-                    Toast.makeText(AuthenticateUser.this,"NO user",Toast.LENGTH_LONG).show();
-
                     UserModel user = new UserModel();
                     user.setEmail(currentUser.getEmail());
                     user.setUser_id(currentUser.getUid());
@@ -182,12 +175,7 @@ public class AuthenticateUser extends AppCompatActivity {
         final DatabaseReference users = database.getReference("users");
         users.child(currentUser.getUid()).setValue(user)
                 .addOnSuccessListener(aVoid -> navigateToHome())
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show());
     }
 
     private void navigateToHome() {

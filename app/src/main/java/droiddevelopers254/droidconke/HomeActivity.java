@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -36,7 +37,6 @@ import java.util.Collections;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import droiddevelopers254.droidconke.models.UserModel;
-import droiddevelopers254.droidconke.ui.RoundSigninDialog;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
 import droiddevelopers254.droidconke.views.fragments.MapFragment;
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
@@ -119,4 +119,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sign_out, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }

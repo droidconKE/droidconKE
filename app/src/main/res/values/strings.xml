@@ -117,6 +117,7 @@
     <string name="terms_of_service_link_key" translatable="false">terms_of_service_link</string>
     <string name="privacy_policy_link_key" translatable="false">privacy_policy_link</string>
     <string name="copyright">© 2018 droidconKE</string>
+    <string name="action_sign_out">Sign Out</string>
 
 
 </resources>
