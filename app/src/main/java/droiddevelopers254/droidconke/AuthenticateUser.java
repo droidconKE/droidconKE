@@ -89,10 +89,8 @@ public class AuthenticateUser extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-
                 //save the user now to db
                 firebaseUser = auth.getCurrentUser();
-
                 if(firebaseUser!=null){
                     checkUserExistence(firebaseUser);
 
@@ -100,25 +98,22 @@ public class AuthenticateUser extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"User is null",Toast.LENGTH_LONG).show();
                 }
 
-               // navigateToHome();
-
-                return;
             } else {
                 // Sign in failed
                 if (response == null) {
                     // UserModel pressed back button
-                    showSnackbar("You pressed back button before log in");
+                   Toast.makeText(getApplicationContext(),"You pressed back button before log in",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showSnackbar("Network Error");
+                   Toast.makeText(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    showSnackbar("PLease try again");
-                    return;
+                   Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -140,7 +135,6 @@ public class AuthenticateUser extends AppCompatActivity {
     }
 
     private void showSnackbar(String message){
-
         Snackbar.make(snackBarView,message,Snackbar.LENGTH_SHORT).show();
 
     }
