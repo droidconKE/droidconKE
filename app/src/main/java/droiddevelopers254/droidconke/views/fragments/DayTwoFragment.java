@@ -38,11 +38,9 @@ public class DayTwoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_day_two, container, false);
 
         recyclerView=view.findViewById(R.id.sessionsRv);
-       // sessionsList= SessionData.getSessions();
 
-         initView();
-
-       getDayTwoSessions();
+        initView();
+        getDayTwoSessions();
 
         return view;
     }
@@ -89,21 +87,6 @@ public class DayTwoFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         sessionsAdapter = new SessionsAdapter(getActivity(),sessionsList);
         recyclerView.setAdapter(sessionsAdapter);
-
-        recyclerView.addOnItemTouchListener(new ItemClickListener(getActivity(), recyclerView, new ItemClickListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                Intent intent = new Intent(getActivity(),SessionViewActivity.class);
-                intent.putExtra("sessionId",sessionsList.get(position).getId());
-                startActivity(intent);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
     }
 
 

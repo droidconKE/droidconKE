@@ -41,7 +41,7 @@ public class DayOneFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_day_one, container, false);
 
         recyclerView=view.findViewById(R.id.sessionsRv);
-       // sessionsList= SessionData.getSessions();
+
         initView();
         getDayOneSessions();
 
@@ -92,20 +92,5 @@ public class DayOneFragment extends Fragment{
         sessionsAdapter = new SessionsAdapter(getActivity(),sessionsList);
         recyclerView.setAdapter(sessionsAdapter);
 
-        recyclerView.addOnItemTouchListener(new ItemClickListener(getActivity(), recyclerView, new ItemClickListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                Intent  intent = new Intent(getActivity(),SessionViewActivity.class);
-                intent.putExtra("sessionId",sessionsList.get(position).getId());
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
     }
 }

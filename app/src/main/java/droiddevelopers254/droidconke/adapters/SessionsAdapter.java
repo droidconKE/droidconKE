@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,22 +29,25 @@ import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyViewHolder> {
     private List<Sessions> sessionsList;
     private Context context;
+    private  Sessions sessions;
 
-    private   Sessions sessions;
-
-    public SessionsAdapter(Context context,List<Sessions> sessions){
-        this.sessionsList = sessions;
+    public SessionsAdapter(Context context,List<Sessions> sessionsList){
+        this.sessionsList = sessionsList;
         this.context=context;
 
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sessionCategoryText,sessionTimeText,sessionRoomText,sessionTitleText;
+        ImageView starImg;
+        LinearLayout sessionDetailsLinear;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             sessionCategoryText=itemView.findViewById(R.id.sessionCategoryText);
             sessionTimeText=itemView.findViewById(R.id.sessionTimeText);
             sessionTitleText=itemView.findViewById(R.id.sessionTitleText);
             sessionRoomText=itemView.findViewById(R.id.sessionRoomText);
+            starImg=itemView.findViewById(R.id.starImg);
+            sessionDetailsLinear=itemView.findViewById(R.id.sessionDetailsLinear);
 
         }
 
@@ -58,13 +62,25 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         sessions =sessionsList.get(position);
 
         holder.sessionTitleText.setText(sessions.getTitle());
         holder.sessionTimeText.setText(sessions.getDuration());
         holder.sessionRoomText.setText(sessions.getRoom());
         holder.sessionCategoryText.setText(sessions.getTopic());
+        holder.starImg.setOnClickListener(view -> {
+
+            //start a session
+            holder.starImg.setImageResource(R.drawable.ic_star_blue_24dp);
+
+        });
+
+        //start session detail view
+        holder.sessionDetailsLinear.setOnClickListener(view -> {
+            Intent  intent = new Intent(context,SessionViewActivity.class);
+            intent.putExtra("sessionId",sessionsList.get(position).getId());
+            context.startActivity(intent);
+        });
 
     }
 

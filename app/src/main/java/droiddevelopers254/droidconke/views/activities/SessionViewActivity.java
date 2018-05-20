@@ -82,7 +82,7 @@ public class SessionViewActivity extends AppCompatActivity {
             return false;
         });
 
-        //reserve an event
+        //star a session
         fab.setOnClickListener(view -> {
             fab.setImageResource(R.drawable.ic_star_blue_24dp);
         });
