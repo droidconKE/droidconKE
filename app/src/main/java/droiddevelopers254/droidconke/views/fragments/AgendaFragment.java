@@ -14,21 +14,21 @@ import java.util.List;
 
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.AgendaAdapter;
-import droiddevelopers254.droidconke.models.Agenda;
+import droiddevelopers254.droidconke.models.AgendaModel;
 import droiddevelopers254.droidconke.utils.AgendaData;
 
 public class AgendaFragment extends Fragment {
     RecyclerView recyclerView;
     AgendaAdapter agendaAdapter;
-    List<Agenda> agendaList= new ArrayList<>();
+    List<AgendaModel> agendaModelList = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        
+
         recyclerView=view.findViewById(R.id.agendaRv);
-        agendaList= AgendaData.getAgendas();
+        agendaModelList = AgendaData.getAgendas();
         
         initView();
 
@@ -36,7 +36,7 @@ public class AgendaFragment extends Fragment {
     }
 
     private void initView() {
-        agendaAdapter= new AgendaAdapter(agendaList,getActivity());
+        agendaAdapter= new AgendaAdapter(agendaModelList,getActivity());
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

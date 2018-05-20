@@ -1,16 +1,13 @@
-package droiddevelopers254.droidconke;
+package droiddevelopers254.droidconke.views.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,10 +16,7 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,18 +25,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import butterknife.BindView;
+import droiddevelopers254.droidconke.HomeActivity;
+import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.UserModel;
 
-public class AuthenticateUser extends AppCompatActivity {
+public class AuthenticateUserActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     SignInButton googleSignInBtn;
+    private ProgressDialog pDialog;
     @BindView(R.id.coorAuthUser)
     CoordinatorLayout snackBarView;
 
@@ -63,6 +59,11 @@ public class AuthenticateUser extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_authenticate_user);
+
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+
         googleSignInBtn=findViewById(R.id.googleSignInBtn);
 
         //check whether the user is signed in first
@@ -78,13 +79,18 @@ public class AuthenticateUser extends AppCompatActivity {
     }
 
     private void showUI() {
-        googleSignInBtn.setOnClickListener(view -> signInUser());
+        googleSignInBtn.setOnClickListener(view -> {
+            pDialog.setTitle("Signing in..");
+            showDialog();
+            signInUser();
+        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
         if (requestCode == RC_SIGN_IN) {
+            hideDialog();
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             // Successfully signed in
@@ -173,9 +179,20 @@ public class AuthenticateUser extends AppCompatActivity {
     }
 
     private void navigateToHome() {
-        Intent intent = new Intent(AuthenticateUser.this,HomeActivity.class);
+        Intent intent = new Intent(AuthenticateUserActivity.this,HomeActivity.class);
         startActivity(intent);
         finish();
+
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
 
     }
 

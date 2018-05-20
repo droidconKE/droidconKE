@@ -10,18 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.models.Agenda;
+import droiddevelopers254.droidconke.models.AgendaModel;
 
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHolder> {
-    private List<Agenda> agendaList ;
+    private List<AgendaModel> agendaModelList;
     private Context context;
 
-    public AgendaAdapter(List<Agenda> agendaList, Context context){
-        this.agendaList=agendaList;
+    public AgendaAdapter(List<AgendaModel> agendaModelList, Context context){
+        this.agendaModelList = agendaModelList;
         this.context=context;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -47,17 +46,17 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Agenda agenda= agendaList.get(position);
-        holder.agendaTitleText.setText(agenda.getAgendaTitle());
-        holder.agendaTimelineText.setText(agenda.getAgendaTimeline());
-        holder.agendaImg.setImageResource(agenda.getAgendaIcon());
-        holder.agendaLinear.setBackgroundColor(agenda.getAgendaBackgroundColor());
+        AgendaModel agendaModel = agendaModelList.get(position);
+        holder.agendaTitleText.setText(agendaModel.getAgendaTitle());
+        holder.agendaTimelineText.setText(agendaModel.getAgendaTimeline());
+        holder.agendaImg.setImageResource(agendaModel.getAgendaIcon());
+        holder.agendaLinear.setBackgroundColor(agendaModel.getAgendaBackgroundColor());
 
     }
 
     @Override
     public int getItemCount() {
-        return agendaList.size();
+        return agendaModelList.size();
     }
 
 

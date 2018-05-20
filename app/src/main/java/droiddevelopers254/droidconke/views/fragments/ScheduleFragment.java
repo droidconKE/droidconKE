@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import droiddevelopers254.droidconke.HomeActivity;
 import droiddevelopers254.droidconke.R;
 
 public class ScheduleFragment extends Fragment {
@@ -33,22 +35,18 @@ public class ScheduleFragment extends Fragment {
         tabLayout =view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-//        FloatingActionButton fab = view.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
+        int currentItem = viewPager.getCurrentItem();
+        if (currentItem ==2){
+            HomeActivity.fabVisible=false;
+            Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
      private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new DayOneFragment(),"Day 1");
         adapter.addFragment(new DayTwoFragment(),"Day 2");
-        adapter.addFragment(new AgendaFragment(),"Agenda");
+        adapter.addFragment(new AgendaFragment(),"AgendaModel");
         viewPager.setAdapter(adapter);
     }
     class ViewPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {

@@ -77,10 +77,19 @@
             android:layout_width="match_parent"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:text="Event types"
             android:textAllCaps="true"
             android:textSize="17sp"
             android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/eventTypesRv"
+            android:scrollbars="none"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -2,7 +2,7 @@
     <string name="app_name">droidconKE</string>
     <string name="title_home">Info</string>
     <string name="title_schedule">Schedule</string>
-    <string name="title_map">Map</string>
+    <string name="title_map">Venue</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="session_title">Firebase Remote config</string>
     <string name="session_separator">/</string>
@@ -50,7 +50,7 @@
     <string name="welcome_sync">Get notified </string>
     <string name="welcome_sync_description">
         Never miss a session as we \n
-        will notify you before the sessions start</string>
+        will notify you before the sessionsModel start</string>
     <string name="schedule_title">Schedule</string>
     <string name="info_title">Info</string>
     <string name="map_title">Map</string>
@@ -58,8 +58,8 @@
     <string name="settings_enable_notifications">Enable notifications</string>
     <string name="settings_send_statistics">Send anonymous usage statistics</string>
     <string name="faqs">FAQ</string>
-    <string name="terms_of_service">Terms of Service</string>
-    <string name="privacy_policy">Privacy policy</string>
+    <string name="android_254">Android254 Community</string>
+    <string name="droidcon_ke">droidconKE</string>
     <string name="open_source_licences">Open source licenses</string>
     <string name="built_with">Built with</string>
     <string name="material_components">Material Components</string>
@@ -118,6 +118,11 @@
     <string name="privacy_policy_link_key" translatable="false">privacy_policy_link</string>
     <string name="copyright">© 2018 droidconKE</string>
     <string name="action_sign_out">Sign Out</string>
+    <string name="event_description">
+        In Person attendees can star sessions. A material metaphor is the unifying theory of a rationalized space
+        and a system of motion.The material is grounded in tactile reality, inspired by the study of paper and ink, yet</string>
+    <string name="speaker_name">John Doe</string>
+    <string name="speaker_company">Google</string>
 
 
 </resources>

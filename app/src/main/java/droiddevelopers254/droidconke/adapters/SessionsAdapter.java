@@ -4,35 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.models.Sessions;
+import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyViewHolder> {
-    private List<Sessions> sessionsList;
+    private List<SessionsModel> sessionsModelList;
     private Context context;
-    private  Sessions sessions;
+    private SessionsModel sessionsModel;
 
-    public SessionsAdapter(Context context,List<Sessions> sessionsList){
-        this.sessionsList = sessionsList;
+    public SessionsAdapter(Context context,List<SessionsModel> sessionsModelList){
+        this.sessionsModelList = sessionsModelList;
         this.context=context;
 
     }
@@ -62,12 +53,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        sessions =sessionsList.get(position);
+        sessionsModel = sessionsModelList.get(position);
 
-        holder.sessionTitleText.setText(sessions.getTitle());
-        holder.sessionTimeText.setText(sessions.getDuration());
-        holder.sessionRoomText.setText(sessions.getRoom());
-        holder.sessionCategoryText.setText(sessions.getTopic());
+        holder.sessionTitleText.setText(sessionsModel.getTitle());
+        holder.sessionTimeText.setText(sessionsModel.getDuration());
+        holder.sessionRoomText.setText(sessionsModel.getRoom());
+        holder.sessionCategoryText.setText(sessionsModel.getTopic());
         holder.starImg.setOnClickListener(view -> {
 
             //start a session
@@ -78,7 +69,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         //start session detail view
         holder.sessionDetailsLinear.setOnClickListener(view -> {
             Intent  intent = new Intent(context,SessionViewActivity.class);
-            intent.putExtra("sessionId",sessionsList.get(position).getId());
+            intent.putExtra("sessionId", sessionsModelList.get(position).getId());
             context.startActivity(intent);
         });
 
@@ -87,7 +78,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     @Override
     public int getItemCount() {
 
-        return sessionsList.size();
+        return sessionsModelList.size();
     }
 
 

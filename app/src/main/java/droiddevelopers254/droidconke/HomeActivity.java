@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
     Button signInBtn;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
+    public FloatingActionButton fab;
+    public static boolean fabVisible=true;
     private static final int RC_SIGN_IN = 123;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -59,7 +62,10 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.navigation_home:
 
                         navItemIndex =0;
+
+                        //hide views not required by these fragment
                         accountImg.setVisibility(View.GONE);
+                        fab.hide();
                         toolbarTitleText.setText(R.string.info_title);
                         InfoFragment infoFragment= new InfoFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,infoFragment)
@@ -68,15 +74,22 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.navigation_schedule:
 
                         navItemIndex= 1;
+
+                        //hide views not required by these fragment
                         accountImg.setVisibility(View.VISIBLE);
+                        fab.show();
                         toolbarTitleText.setText(R.string.schedule_title);
                         ScheduleFragment scheduleFragment= new ScheduleFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,scheduleFragment)
                                 .commit();
                         return true;
                     case R.id.navigation_map:
+
                         navItemIndex= 2;
+
+                        //hide views not required by these fragment
                         accountImg.setVisibility(View.GONE);
+                        fab.hide();
                         toolbarTitleText.setText(R.string.map_title);
                         MapFragment mapFragment= new MapFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,mapFragment)
@@ -98,6 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         toolbarTitleText=findViewById(R.id.toolbarTitleText);
         accountImg=findViewById(R.id.accountImg);
+        fab=findViewById(R.id.fab);
 
         if (auth.getCurrentUser() != null) {
             //load user profile image
@@ -112,11 +126,22 @@ public class HomeActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
 
+        //open filters
+        fab.setOnClickListener(view ->{} );
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        //control fab visibility
+        if (fabVisible){
+            fab.show();
+        }else {
+            fab.hide();
+        }
+
     }
 
     @Override

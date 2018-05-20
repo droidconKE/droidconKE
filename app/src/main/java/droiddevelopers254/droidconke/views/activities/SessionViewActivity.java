@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.models.Sessions;
+import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class SessionViewActivity extends AppCompatActivity {
     BottomAppBar bottomAppBar;
@@ -97,13 +97,13 @@ public class SessionViewActivity extends AppCompatActivity {
 
                 if(dataSnapshot!=null){
 
-                    Sessions sessions = dataSnapshot.getValue(Sessions.class);
+                    SessionsModel sessionsModel = dataSnapshot.getValue(SessionsModel.class);
 
                     //set the data on the view
-                    txtSessionTime.setText(sessions.getStartTimeStamp() + " - " + sessions.getEndTimeStamp());
-                    txtSessionRoom.setText(sessions.getRoom());
-                    txtSessionDesc.setText(sessions.getDescription());
-                    txtSessionCategory.setText(sessions.getTopic());
+                    txtSessionTime.setText(sessionsModel.getStartTimeStamp() + " - " + sessionsModel.getEndTimeStamp());
+                    txtSessionRoom.setText(sessionsModel.getRoom());
+                    txtSessionDesc.setText(sessionsModel.getDescription());
+                    txtSessionCategory.setText(sessionsModel.getTopic());
 
                 }else{
 

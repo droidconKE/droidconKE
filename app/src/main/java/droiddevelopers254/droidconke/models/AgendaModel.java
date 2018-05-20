@@ -1,6 +1,6 @@
 package droiddevelopers254.droidconke.models;
 
-public class Agenda {
+public class AgendaModel {
     private String agendaTitle;
     private String agendaTimeline;
     private int agendaIcon;
@@ -38,7 +38,7 @@ public class Agenda {
         this.agendaBackgroundColor = agendaBackgroundColor;
     }
 
-    public Agenda(String agendaTitle, String agendaTimeline, int agendaIcon, int agendaBackgroundColor) {
+    public AgendaModel(String agendaTitle, String agendaTimeline, int agendaIcon, int agendaBackgroundColor) {
         this.agendaTitle = agendaTitle;
         this.agendaTimeline = agendaTimeline;
         this.agendaIcon = agendaIcon;

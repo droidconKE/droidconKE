@@ -1,6 +1,6 @@
 package droiddevelopers254.droidconke.models;
 
-public class Sessions {
+public class SessionsModel {
 
     private int id;
     private String main_tag;
@@ -16,7 +16,7 @@ public class Sessions {
     private String duration;
     private String description;
 
-    public Sessions() {
+    public SessionsModel() {
     }
 
     public int getId() {
@@ -115,9 +115,9 @@ public class Sessions {
         this.description = description;
     }
 
-    public Sessions(int id, String main_tag, String room, String speakers, String starred,
-                    String startTimeStamp, String title, String topic, String url,
-                    String endTimeStamp, String duration, String description) {
+    public SessionsModel(int id, String main_tag, String room, String speakers, String starred,
+                         String startTimeStamp, String title, String topic, String url,
+                         String endTimeStamp, String duration, String description) {
         this.id = id;
         this.main_tag = main_tag;
         this.room = room;

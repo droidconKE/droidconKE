@@ -1,6 +1,5 @@
 package droiddevelopers254.droidconke.views.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,15 +21,12 @@ import java.util.List;
 
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
-import droiddevelopers254.droidconke.models.Sessions;
-import droiddevelopers254.droidconke.utils.ItemClickListener;
-import droiddevelopers254.droidconke.utils.SessionData;
-import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
+import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class DayTwoFragment extends Fragment {
     RecyclerView recyclerView;
     SessionsAdapter sessionsAdapter;
-    List<Sessions> sessionsList = new ArrayList<>();
+    List<SessionsModel> sessionsModelList = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -58,8 +54,8 @@ public class DayTwoFragment extends Fragment {
 
                     for(DataSnapshot data :dataSnapshot.getChildren()){
 
-                        Sessions sessions = data.getValue(Sessions.class);
-                        sessionsList.add(sessions);
+                        SessionsModel sessionsModel = data.getValue(SessionsModel.class);
+                        sessionsModelList.add(sessionsModel);
                     }
 
                     //notify data change
@@ -85,7 +81,7 @@ public class DayTwoFragment extends Fragment {
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(),sessionsList);
+        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList);
         recyclerView.setAdapter(sessionsAdapter);
     }
 
