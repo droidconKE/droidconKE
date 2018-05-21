@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
-import droiddevelopers254.droidconke.models.EventTypesModel;
+import droiddevelopers254.droidconke.models.EventTypeModel;
 
 public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.MyViewHolder> {
-    private List<EventTypesModel> eventTypesList;
+    private List<EventTypeModel> eventTypesList;
     private Context context;
 
-    public EventTypeAdapter(List<EventTypesModel> eventTypesList, Context context){
+    public EventTypeAdapter(List<EventTypeModel> eventTypesList, Context context){
         this.eventTypesList=eventTypesList;
         this.context=context;
 
@@ -44,9 +44,9 @@ public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull EventTypeAdapter.MyViewHolder holder, int position) {
-        EventTypesModel eventTypes = eventTypesList.get(position);
+        EventTypeModel eventTypes = eventTypesList.get(position);
         holder.eventImg.setImageResource(R.drawable.event_image);
-        holder.eventDescriptionText.setText(eventTypes.getEventDescription());
+        holder.eventDescriptionText.setText(eventTypes.getDescription());
 
     }
 

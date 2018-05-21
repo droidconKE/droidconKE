@@ -46,7 +46,7 @@ public class ScheduleFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new DayOneFragment(),"Day 1");
         adapter.addFragment(new DayTwoFragment(),"Day 2");
-        adapter.addFragment(new AgendaFragment(),"AgendaModel");
+        adapter.addFragment(new AgendaFragment(),"Agenda");
         viewPager.setAdapter(adapter);
     }
     class ViewPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
