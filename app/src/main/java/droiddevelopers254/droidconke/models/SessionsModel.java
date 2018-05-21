@@ -3,16 +3,17 @@ package droiddevelopers254.droidconke.models;
 public class SessionsModel {
 
     private int id;
+    private  int speaker_id;
+    private int room_id;
     private String main_tag;
     private String room;
     private String speakers;
     private String starred;
-    private String startTimeStamp;
+    private String time;
     private String title;
     private String topic;
 
     private String url;
-    private String endTimeStamp;
     private String duration;
     private String description;
 
@@ -59,14 +60,6 @@ public class SessionsModel {
         this.starred = starred;
     }
 
-    public String getStartTimeStamp() {
-        return startTimeStamp;
-    }
-
-    public void setStartTimeStamp(String startTimeStamp) {
-        this.startTimeStamp = startTimeStamp;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -91,14 +84,6 @@ public class SessionsModel {
         this.url = url;
     }
 
-    public String getEndTimeStamp() {
-        return endTimeStamp;
-    }
-
-    public void setEndTimeStamp(String endTimeStamp) {
-        this.endTimeStamp = endTimeStamp;
-    }
-
     public String getDuration() {
         return duration;
     }
@@ -115,19 +100,42 @@ public class SessionsModel {
         this.description = description;
     }
 
-    public SessionsModel(int id, String main_tag, String room, String speakers, String starred,
-                         String startTimeStamp, String title, String topic, String url,
-                         String endTimeStamp, String duration, String description) {
+    public int getSpeaker_id() {
+        return speaker_id;
+    }
+
+    public void setSpeaker_id(int speaker_id) {
+        this.speaker_id = speaker_id;
+    }
+
+    public int getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(int room_id) {
+        this.room_id = room_id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public SessionsModel(int id, int speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description) {
         this.id = id;
+        this.speaker_id = speaker_id;
+        this.room_id = room_id;
         this.main_tag = main_tag;
         this.room = room;
         this.speakers = speakers;
         this.starred = starred;
-        this.startTimeStamp = startTimeStamp;
+        this.time = time;
         this.title = title;
         this.topic = topic;
         this.url = url;
-        this.endTimeStamp = endTimeStamp;
         this.duration = duration;
         this.description = description;
     }

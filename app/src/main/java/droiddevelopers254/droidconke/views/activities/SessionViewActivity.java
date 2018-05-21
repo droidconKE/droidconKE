@@ -100,7 +100,7 @@ public class SessionViewActivity extends AppCompatActivity {
                     SessionsModel sessionsModel = dataSnapshot.getValue(SessionsModel.class);
 
                     //set the data on the view
-                    txtSessionTime.setText(sessionsModel.getStartTimeStamp() + " - " + sessionsModel.getEndTimeStamp());
+                    txtSessionTime.setText(sessionsModel.getTime());
                     txtSessionRoom.setText(sessionsModel.getRoom());
                     txtSessionDesc.setText(sessionsModel.getDescription());
                     txtSessionCategory.setText(sessionsModel.getTopic());

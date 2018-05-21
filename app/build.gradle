@@ -54,6 +54,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:15.0.2'
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
 
+    //architecture components dependacies
+    implementation "android.arch.persistence.room:runtime:1.1.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "android.arch.lifecycle:common-java8:1.1.1"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
