@@ -12,36 +12,35 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import droiddevelopers254.droidconke.datastates.EventTypeState;
-import droiddevelopers254.droidconke.models.EventTypeModel;
-import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.datastates.AgendaState;
+import droiddevelopers254.droidconke.models.AgendaModel;
 
-public class EventTypeRepo {
+public class AgendaRepo {
 
-
-    public EventTypeRepo(){
+    public AgendaRepo(){
 
     }
-    public LiveData<EventTypeState> getSessionData(){
-        final MutableLiveData<EventTypeState> sessionsModelMutableLiveData= new MutableLiveData<>();
+
+    public LiveData<AgendaState> getAgendaData(){
+        final MutableLiveData<AgendaState> sessionsModelMutableLiveData= new MutableLiveData<>();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("event_types");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("agenda");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(databaseReference!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
-                        EventTypeModel eventTypeModel = data.getValue(EventTypeModel.class);
-                        List<EventTypeModel> eventTypeList= new ArrayList<>();
-                        eventTypeList.add(eventTypeModel);
-                        sessionsModelMutableLiveData.setValue(new EventTypeState(eventTypeList));
+                        AgendaModel agendaModel = data.getValue(AgendaModel.class);
+                        List<AgendaModel> agendaList= new ArrayList<>();
+                        agendaList.add(agendaModel);
+                        sessionsModelMutableLiveData.setValue(new AgendaState(agendaList));
                     }
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                sessionsModelMutableLiveData.setValue(new EventTypeState(databaseError));
+                sessionsModelMutableLiveData.setValue(new AgendaState(databaseError));
             }
         });
 

@@ -1,6 +1,7 @@
 package droiddevelopers254.droidconke.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,11 +48,10 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         AgendaModel agendaModel = agendaModelList.get(position);
-        holder.agendaTitleText.setText(agendaModel.getAgendaTitle());
-        holder.agendaTimelineText.setText(agendaModel.getAgendaTimeline());
-        holder.agendaImg.setImageResource(agendaModel.getAgendaIcon());
-        holder.agendaLinear.setBackgroundColor(agendaModel.getAgendaBackgroundColor());
-
+        holder.agendaTitleText.setText(agendaModel.getName());
+        holder.agendaTimelineText.setText(agendaModel.getTime());
+       //TODO add logic for changing agenda icon
+        holder.agendaLinear.setBackgroundColor(Color.parseColor(agendaModel.getBackground_color()));
     }
 
     @Override

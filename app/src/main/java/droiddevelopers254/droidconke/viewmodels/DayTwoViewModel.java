@@ -5,28 +5,28 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import droiddevelopers254.droidconke.datastates.SessionsState;
-import droiddevelopers254.droidconke.repository.DayOneRepo;
+import droiddevelopers254.droidconke.repository.DayTwoRepo;
 
-public class DayOneViewModel extends ViewModel {
+public class DayTwoViewModel extends ViewModel{
     private MediatorLiveData<SessionsState> sessionsStateMediatorLiveData;
-    private DayOneRepo dayOneRepo;
+    private DayTwoRepo dayTwoRepo;
 
-    public DayOneViewModel(){
+    public DayTwoViewModel(){
         sessionsStateMediatorLiveData= new MediatorLiveData<>();
-        dayOneRepo= new DayOneRepo();
+        dayTwoRepo= new DayTwoRepo();
     }
 
     public LiveData<SessionsState> getSessions(){
         return sessionsStateMediatorLiveData;
     }
-    public void fetchDayOneSessions(){
-        final LiveData<SessionsState> sessionsStateLiveData= dayOneRepo.getSessionData();
+    public void fetchDayTwoSessions(){
+        final LiveData<SessionsState> sessionsStateLiveData= dayTwoRepo.getSessionData();
         sessionsStateMediatorLiveData.addSource(sessionsStateLiveData,
                 sessionsStateMediatorLiveData ->{
-            if (this.sessionsStateMediatorLiveData.hasActiveObservers()){
-                this.sessionsStateMediatorLiveData.removeSource(sessionsStateLiveData);
-            }
-            this.sessionsStateMediatorLiveData.setValue(sessionsStateMediatorLiveData);
+                    if (this.sessionsStateMediatorLiveData.hasActiveObservers()){
+                        this.sessionsStateMediatorLiveData.removeSource(sessionsStateLiveData);
+                    }
+                    this.sessionsStateMediatorLiveData.setValue(sessionsStateMediatorLiveData);
                 });
     }
 }

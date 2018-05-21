@@ -1,47 +1,40 @@
 package droiddevelopers254.droidconke.models;
 
 public class AgendaModel {
-    private String agendaTitle;
-    private String agendaTimeline;
-    private int agendaIcon;
-    private int agendaBackgroundColor;
+    private int id;
+    private String name;
+    private String time;
+    private String background_color;
 
-    public String getAgendaTitle() {
-        return agendaTitle;
+    public int getId() {
+        return id;
     }
 
-    public void setAgendaTitle(String agendaTitle) {
-        this.agendaTitle = agendaTitle;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAgendaTimeline() {
-        return agendaTimeline;
+    public String getName() {
+        return name;
     }
 
-    public void setAgendaTimeline(String agendaTimeline) {
-        this.agendaTimeline = agendaTimeline;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getAgendaIcon() {
-        return agendaIcon;
+    public String getTime() {
+        return time;
     }
 
-    public void setAgendaIcon(int agendaIcon) {
-        this.agendaIcon = agendaIcon;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public int getAgendaBackgroundColor() {
-        return agendaBackgroundColor;
+    public String getBackground_color() {
+        return background_color;
     }
 
-    public void setAgendaBackgroundColor(int agendaBackgroundColor) {
-        this.agendaBackgroundColor = agendaBackgroundColor;
-    }
-
-    public AgendaModel(String agendaTitle, String agendaTimeline, int agendaIcon, int agendaBackgroundColor) {
-        this.agendaTitle = agendaTitle;
-        this.agendaTimeline = agendaTimeline;
-        this.agendaIcon = agendaIcon;
-        this.agendaBackgroundColor = agendaBackgroundColor;
+    public void setBackground_color(String background_color) {
+        this.background_color = background_color;
     }
 }

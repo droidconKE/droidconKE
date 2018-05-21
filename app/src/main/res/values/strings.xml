@@ -11,7 +11,7 @@
     <string name="session_category">Firebase</string>
     <string name="agenda_title">Breakfast</string>
     <string name="agenda_time">7:00 AM - 9:30 AM</string>
-    <string name="title_activity_session_view">SessionViewActivity</string>
+    <string name="title_activity_session_view"></string>
     <string name="large_text">
         "Material is the metaphor"
 

@@ -1,5 +1,6 @@
 package droiddevelopers254.droidconke.views.activities;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.bottomappbar.BottomAppBar;
@@ -9,21 +10,17 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
 public class SessionViewActivity extends AppCompatActivity {
     BottomAppBar bottomAppBar;
     int sessionId;
-    TextView sessionViewTitleText;
     FloatingActionButton fab;
 
     @BindView(R.id.txtSessionTime)
@@ -34,9 +31,10 @@ public class SessionViewActivity extends AppCompatActivity {
     TextView txtSessionDesc;
     @BindView(R.id.txtSessionCategory)
     TextView txtSessionCategory;
+    @BindView(R.id.sessionViewTitleText)
+    TextView sessionViewTitleText;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    SessionDataViewModel sessionDataViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,27 +42,31 @@ public class SessionViewActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        sessionDataViewModel= ViewModelProviders.of(this).get(SessionDataViewModel.class);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
 
         //get extras
         Intent extraIntent=getIntent();
         sessionId = extraIntent.getIntExtra("sessionId",0);
 
-      // Toast.makeText(this, String.valueOf(sessionId),Toast.LENGTH_LONG).show();
-
         getSessionData(sessionId);
+
+        //observe live data emitted by view model
+        sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
+            if (sessionDataState.getDatabaseError() != null){
+                handleDatabaseError(sessionDataState.getDatabaseError());
+            }else {
+                handleFetchSessionData(sessionDataState.getSessionsModel());
+            }
+        });
 
         bottomAppBar=findViewById(R.id.bottomAppBar);
         sessionViewTitleText=findViewById(R.id.sessionViewTitleText);
         fab=findViewById(R.id.fab);
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
-
-       // sessionViewTitleText.setText(sessionId);
 
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
@@ -89,33 +91,22 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
+    private void handleFetchSessionData(SessionsModel sessionsModel) {
+        if (sessionsModel != null){
+            //set the data on the view
+            txtSessionTime.setText(sessionsModel.getTime());
+            txtSessionRoom.setText(sessionsModel.getRoom());
+            txtSessionDesc.setText(sessionsModel.getDescription());
+            txtSessionCategory.setText(sessionsModel.getTopic());
+            sessionViewTitleText.setText(sessionsModel.getTitle());
+        }
+    }
+
+    private void handleDatabaseError(DatabaseError databaseError) {
+    }
+
     private void getSessionData(int sessionId){
-
-        databaseReference.child("day_one").child(String.valueOf(sessionId)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot!=null){
-
-                    SessionsModel sessionsModel = dataSnapshot.getValue(SessionsModel.class);
-
-                    //set the data on the view
-                    txtSessionTime.setText(sessionsModel.getTime());
-                    txtSessionRoom.setText(sessionsModel.getRoom());
-                    txtSessionDesc.setText(sessionsModel.getDescription());
-                    txtSessionCategory.setText(sessionsModel.getTopic());
-
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-                Toast.makeText(SessionViewActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
+        sessionDataViewModel.fetchSessionDetails(sessionId);
     }
 
 }

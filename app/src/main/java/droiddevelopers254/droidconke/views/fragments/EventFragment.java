@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseError;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +38,26 @@ public class EventFragment extends Fragment{
 
         //observe live data emiited by view model
         eventTypeViewModel.getSessions().observe(this,eventTypeModel -> {
-            if (eventTypeModel != null){
-               eventTypesList.add(eventTypeModel);
-               initView();
+            if (eventTypeModel.getDatabaseError() != null){
+              handleDatabaseError(eventTypeModel.getDatabaseError());
+            }else {
+                handleFetchEventsResponse(eventTypeModel.getEventTypeModel());
             }
         });
         //fetch data from firebase
         eventTypeViewModel.fetchSessions();
 
         return view;
+    }
+
+    private void handleFetchEventsResponse(List<EventTypeModel> eventTypeModelList) {
+        if (eventTypesList != null){
+            eventTypesList = eventTypeModelList;
+            initView();
+        }
+    }
+
+    private void handleDatabaseError(DatabaseError databaseError) {
     }
 
     private void initView() {

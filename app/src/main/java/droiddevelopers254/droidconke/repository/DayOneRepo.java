@@ -13,35 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.datastates.EventTypeState;
+import droiddevelopers254.droidconke.datastates.SessionsState;
 import droiddevelopers254.droidconke.models.EventTypeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 
-public class EventTypeRepo {
+public class DayOneRepo {
 
-
-    public EventTypeRepo(){
+    public DayOneRepo(){
 
     }
-    public LiveData<EventTypeState> getSessionData(){
-        final MutableLiveData<EventTypeState> sessionsModelMutableLiveData= new MutableLiveData<>();
+    public LiveData<SessionsState> getSessionData(){
+        final MutableLiveData<SessionsState> sessionsModelMutableLiveData= new MutableLiveData<>();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("event_types");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("day_one");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(databaseReference!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
-                        EventTypeModel eventTypeModel = data.getValue(EventTypeModel.class);
-                        List<EventTypeModel> eventTypeList= new ArrayList<>();
-                        eventTypeList.add(eventTypeModel);
-                        sessionsModelMutableLiveData.setValue(new EventTypeState(eventTypeList));
+                        SessionsModel sessionsModel = data.getValue(SessionsModel.class);
+                        List<SessionsModel> sessionList= new ArrayList<>();
+                        sessionList.add(sessionsModel);
+                        sessionsModelMutableLiveData.setValue(new SessionsState(sessionList));
                     }
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                sessionsModelMutableLiveData.setValue(new EventTypeState(databaseError));
+                sessionsModelMutableLiveData.setValue(new SessionsState(databaseError));
             }
         });
 
