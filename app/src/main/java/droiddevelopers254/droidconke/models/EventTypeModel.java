@@ -6,6 +6,9 @@ public class EventTypeModel {
     private int id;
     private String name;
 
+    public EventTypeModel() {
+    }
+
     public String getEventImageUrl() {
         return eventImageUrl;
     }

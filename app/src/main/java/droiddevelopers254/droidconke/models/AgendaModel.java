@@ -6,6 +6,9 @@ public class AgendaModel {
     private String time;
     private String background_color;
 
+    public AgendaModel() {
+    }
+
     public int getId() {
         return id;
     }

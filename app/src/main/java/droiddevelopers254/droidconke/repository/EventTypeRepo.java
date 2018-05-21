@@ -17,7 +17,7 @@ import droiddevelopers254.droidconke.models.EventTypeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class EventTypeRepo {
-
+    List<EventTypeModel> eventTypeList= new ArrayList<>();
 
     public EventTypeRepo(){
 
@@ -33,7 +33,6 @@ public class EventTypeRepo {
                 if(databaseReference!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
                         EventTypeModel eventTypeModel = data.getValue(EventTypeModel.class);
-                        List<EventTypeModel> eventTypeList= new ArrayList<>();
                         eventTypeList.add(eventTypeModel);
                         sessionsModelMutableLiveData.setValue(new EventTypeState(eventTypeList));
                     }

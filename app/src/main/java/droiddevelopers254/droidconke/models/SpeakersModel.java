@@ -7,6 +7,9 @@ public class SpeakersModel {
     private String company;
     private String photoUrl;
 
+    public SpeakersModel() {
+    }
+
     public int getId() {
         return id;
     }

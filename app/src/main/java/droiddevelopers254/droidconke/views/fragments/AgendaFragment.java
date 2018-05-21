@@ -38,7 +38,7 @@ public class AgendaFragment extends Fragment {
 
         //fetch agendas
         agendaViewModel.fetchAgendas();
-        initView();
+
         //observe live data emiited by view model
         agendaViewModel.getAgendas().observe(this,agendaState -> {
             if (agendaState.getDatabaseError() != null){
@@ -54,6 +54,7 @@ public class AgendaFragment extends Fragment {
     private void handleAgendaResponse(List<AgendaModel> agendaList) {
         if (agendaList != null){
           agendaModelList=agendaList;
+          initView();
         }
     }
 

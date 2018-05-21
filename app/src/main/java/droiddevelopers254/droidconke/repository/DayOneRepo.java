@@ -18,6 +18,7 @@ import droiddevelopers254.droidconke.models.EventTypeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class DayOneRepo {
+    List<SessionsModel> sessionList= new ArrayList<>();
 
     public DayOneRepo(){
 
@@ -33,7 +34,6 @@ public class DayOneRepo {
                 if(databaseReference!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
                         SessionsModel sessionsModel = data.getValue(SessionsModel.class);
-                        List<SessionsModel> sessionList= new ArrayList<>();
                         sessionList.add(sessionsModel);
                         sessionsModelMutableLiveData.setValue(new SessionsState(sessionList));
                     }
