@@ -16,6 +16,7 @@ import droiddevelopers254.droidconke.datastates.AgendaState;
 import droiddevelopers254.droidconke.models.AgendaModel;
 
 public class AgendaRepo {
+    List<AgendaModel> agendaList= new ArrayList<>();
 
     public AgendaRepo(){
 
@@ -32,7 +33,6 @@ public class AgendaRepo {
                 if(databaseReference!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
                         AgendaModel agendaModel = data.getValue(AgendaModel.class);
-                        List<AgendaModel> agendaList= new ArrayList<>();
                         agendaList.add(agendaModel);
                         sessionsModelMutableLiveData.setValue(new AgendaState(agendaList));
                     }

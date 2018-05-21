@@ -12,7 +12,7 @@ public class SessionDataViewModel extends ViewModel {
     private SessionDataRepo sessionDataRepo;
 
 
-    private SessionDataViewModel (){
+    public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
         sessionDataRepo = new SessionDataRepo();
 

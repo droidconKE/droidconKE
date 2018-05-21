@@ -36,7 +36,8 @@ public class AgendaFragment extends Fragment {
 
         recyclerView=view.findViewById(R.id.agendaRv);
 
-        
+        //fetch agendas
+        agendaViewModel.fetchAgendas();
         initView();
         //observe live data emiited by view model
         agendaViewModel.getAgendas().observe(this,agendaState -> {

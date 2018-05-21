@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +39,7 @@ import java.util.Collections;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import droiddevelopers254.droidconke.models.UserModel;
+import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
 import droiddevelopers254.droidconke.views.fragments.MapFragment;
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
@@ -109,6 +111,9 @@ public class HomeActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        CoordinatorLayout.LayoutParams layoutParams=(CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationBehaviour());
+
         toolbarTitleText=findViewById(R.id.toolbarTitleText);
         accountImg=findViewById(R.id.accountImg);
         fab=findViewById(R.id.fab);
