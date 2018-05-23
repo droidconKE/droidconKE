@@ -2,7 +2,7 @@
     <string name="app_name">droidconKE</string>
     <string name="title_home">Info</string>
     <string name="title_schedule">Schedule</string>
-    <string name="title_map">Map</string>
+    <string name="title_map">Venue</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="session_title">Firebase Remote config</string>
     <string name="session_separator">/</string>
@@ -11,7 +11,7 @@
     <string name="session_category">Firebase</string>
     <string name="agenda_title">Breakfast</string>
     <string name="agenda_time">7:00 AM - 9:30 AM</string>
-    <string name="title_activity_session_view">SessionViewActivity</string>
+    <string name="title_activity_session_view"></string>
     <string name="large_text">
         "Material is the metaphor"
 
@@ -50,7 +50,7 @@
     <string name="welcome_sync">Get notified </string>
     <string name="welcome_sync_description">
         Never miss a session as we \n
-        will notify you before the sessions start</string>
+        will notify you before the sessionsModel start</string>
     <string name="schedule_title">Schedule</string>
     <string name="info_title">Info</string>
     <string name="map_title">Map</string>
@@ -58,12 +58,12 @@
     <string name="settings_enable_notifications">Enable notifications</string>
     <string name="settings_send_statistics">Send anonymous usage statistics</string>
     <string name="faqs">FAQ</string>
-    <string name="terms_of_service">Terms of Service</string>
-    <string name="privacy_policy">Privacy policy</string>
+    <string name="android_254">Android254 Community</string>
+    <string name="droidcon_ke">droidconKE</string>
     <string name="open_source_licences">Open source licenses</string>
     <string name="built_with">Built with</string>
     <string name="material_components">Material Components</string>
-    <string name="travel_shuttle_info_title">Shuttle service</string>
+    <string name="travel_shuttle_info_title">Driving Directions</string>
     <string name="travel_public_transportation_info_title">Public Transportation</string>
 
     <!-- The label used on a button when a view is in an expanded state. Clicking on the icon
@@ -77,12 +77,52 @@
     <string name="travel_carpool_parking_info_title">Parking</string>
     <string name="travel_ride_sharing_info_title">Ride Sharing</string>
     <string name="travel_biking_info_title">Biking</string>
-    <string name="shuttle_info">Test</string>
-    <string name="public_transportation_info">Test</string>
-    <string name="car_pooling_parking_info">Test</string>
-    <string name="biking_info">Test</string>
-    <string name="ride_sharing_info">Test</string>
+    <string name="shuttle_info">Find directions on Google Maps or your location to IHub,Senteu Plaza,Nairobi Kenya</string>
+    <string name="public_transportation_info">Public transit does not go directly to iHub. Make sure you search the directions on Google Map properly</string>
+    <string name="car_pooling_parking_info">Parking is very limited and available only in IHub designated slots located in Senteu Plaza. If you plan to drive,we recommend carpooling with other attendees as preferred parking spaces will be available for cars containing two or more people</string>
+    <string name="biking_info"> Complementary bike parking will be available at Senteu Plaza. Security officers
+    will provide secure valet parking for your bicycle from 7 am until the event ends each day</string>
+    <string name="ride_sharing_info"> You can share rides with your colleagues to and from the event using either of the famous taxi hailing services</string>
+    <string name="wifi_ssid">"droidconKE"</string>
+    <string name="wifi_password">makegoodthings </string>
+
     <string name="title_activity_authenticate_user">AuthenticateUser</string>
+    <string name="action_share">Share</string>
+    <string name="action_map">Map</string>
+    <string name="droidconke_site">https://droidcon.co.ke</string>
+    <string name="droidcoke_hashtag">#droidconKE</string>
+    <string name="faqs_link">https://droidcon.co.ke</string>
+    <string name="terms_of_service_link">https://droidcon.co.ke</string>
+    <string name="privacy_policy_link">https://droidcon.co.ke</string>
+    <string name="about_licenses">Open Source Licenses</string>
+    <string name="ok">OK</string>
+    <string name="customize_schedule">Customize your schedule</string>
+    <string name="star_event">Add to your starred events</string>
+    <string name="see_event_map">See session venue</string>
+    <string name="sign_in_to_customize">Sign in to customize \nyour schedule</string>
+    <string name="sign_in_descrption">Sign in to save events and get notifications. Actions will be synced from your account across app and site</string>
+    <string name="not_now">Not now</string>
+
+    <!--Remote config Keys-->
+    <string name="driving_directions_key" translatable="false">driving_directions</string>
+    <string name="public_transportation_key" translatable="false">public_transportation</string>
+    <string name="biking_key" translatable="false">biking</string>
+    <string name="ride_sharing_key" translatable="false">ride_sharing</string>
+    <string name="car_pooling_key" translatable="false">car_pooling_parking_info</string>
+    <string name="wifi_ssid_key" translatable="false">wifi_ssid</string>
+    <string name="wifi_password_key" translatable="false">wifi_password</string>
+    <string name="droidconke_site_key" translatable="false">droidconke_site</string>
+    <string name="droidconke_hashtag_ke" translatable="false">droidconke_hashtag</string>
+    <string name="faqs_link_key" translatable="false">faqs_link</string>
+    <string name="terms_of_service_link_key" translatable="false">terms_of_service_link</string>
+    <string name="privacy_policy_link_key" translatable="false">privacy_policy_link</string>
+    <string name="copyright">© 2018 droidconKE</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="event_description">
+        In Person attendees can star sessions. A material metaphor is the unifying theory of a rationalized space
+        and a system of motion.The material is grounded in tactile reality, inspired by the study of paper and ink, yet</string>
+    <string name="speaker_name">John Doe</string>
+    <string name="speaker_company">Google</string>
 
 
 </resources>

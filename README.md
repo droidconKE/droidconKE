@@ -15,10 +15,10 @@ The source code in this repository reflects the app as of droidconKE 2018.
 
 With the app, you can:
 
-- View the conference agenda and edit your personal schedule
+- View the conference agendaModel and edit your personal schedule
 - Sync your schedule between all of your devices
 - View detailed session, code lab, office hours, and speaker information,
   including speaker bios, photos, and Google+ profiles
 - Guide yourself using the vector-based conference map
-- Get a reminder a few minutes before sessions in your schedule are due to
+- Get a reminder a few minutes before sessionsModel in your schedule are due to
   start

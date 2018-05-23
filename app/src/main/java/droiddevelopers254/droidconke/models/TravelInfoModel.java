@@ -1,6 +1,6 @@
 package droiddevelopers254.droidconke.models;
 
-public class TravelInfo {
+public class TravelInfoModel {
     private String shuttleInfo;
     private String publicTransportationInfo;
     private String carpoolingParkingInfo;
@@ -49,7 +49,7 @@ public class TravelInfo {
 
     @Override
     public String toString() {
-        return "TravelInfo{" +
+        return "TravelInfoModel{" +
                 "shuttleInfo='" + shuttleInfo + '\'' +
                 ", publicTransportationInfo='" + publicTransportationInfo + '\'' +
                 ", carpoolingParkingInfo='" + carpoolingParkingInfo + '\'' +
@@ -57,7 +57,7 @@ public class TravelInfo {
                 '}';
     }
 
-    public TravelInfo(String shuttleInfo, String publicTransportationInfo, String carpoolingParkingInfo, String bikingInfo, String rideSharingInfo) {
+    public TravelInfoModel(String shuttleInfo, String publicTransportationInfo, String carpoolingParkingInfo, String bikingInfo, String rideSharingInfo) {
         this.shuttleInfo = shuttleInfo;
         this.publicTransportationInfo = publicTransportationInfo;
         this.carpoolingParkingInfo = carpoolingParkingInfo;

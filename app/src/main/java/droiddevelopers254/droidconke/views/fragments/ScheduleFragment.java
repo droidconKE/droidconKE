@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import droiddevelopers254.droidconke.HomeActivity;
 import droiddevelopers254.droidconke.R;
 
 public class ScheduleFragment extends Fragment {
@@ -25,6 +27,7 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        getActivity().setTitle("Schedule");
 
         viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -32,15 +35,11 @@ public class ScheduleFragment extends Fragment {
         tabLayout =view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        int currentItem = viewPager.getCurrentItem();
+        if (currentItem ==2){
+            HomeActivity.fabVisible=false;
+            Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
      private void setupViewPager(ViewPager viewPager) {
