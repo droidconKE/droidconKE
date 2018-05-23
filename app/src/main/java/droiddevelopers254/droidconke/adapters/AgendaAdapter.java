@@ -48,7 +48,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         AgendaModel agendaModel = agendaModelList.get(position);
-        holder.agendaTitleText.setText(agendaModel.getName());
+        holder.agendaTitleText.setText(agendaModel.getTitle());
         holder.agendaTimelineText.setText(agendaModel.getTime());
        //TODO add logic for changing agenda icon
         holder.agendaLinear.setBackgroundColor(Color.parseColor(agendaModel.getBackground_color()));
