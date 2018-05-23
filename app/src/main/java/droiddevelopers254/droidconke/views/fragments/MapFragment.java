@@ -1,5 +1,6 @@
 package droiddevelopers254.droidconke.views.fragments;
 
+import android.support.design.button.MaterialButton;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -28,6 +29,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Marker senteuMarker;
     private BottomSheetBehavior bottomSheetBehavior;
     ImageView collapseBottomSheetImg;
+    MaterialButton googleDirectionsBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View bottomSheetView=view.findViewById(R.id.bottomSheetView);
         bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
         collapseBottomSheetImg=bottomSheetView.findViewById(R.id.collapseBottomSheetImg);
+        googleDirectionsBtn=view.findViewById(R.id.googleDirectionsBtn);
 
         //collapse bottom sheet
         collapseBottomSheetImg.setOnClickListener(view1 -> {
@@ -72,7 +75,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
                 if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }

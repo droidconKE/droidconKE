@@ -45,6 +45,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_session_view" />
+    <include layout="@layout/room_bottom_sheet"/>
 
 
     <android.support.design.bottomappbar.BottomAppBar

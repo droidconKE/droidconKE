@@ -4,9 +4,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.bottomappbar.BottomAppBar;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +36,12 @@ public class SessionViewActivity extends AppCompatActivity {
     TextView txtSessionCategory;
     @BindView(R.id.sessionViewTitleText)
     TextView sessionViewTitleText;
+    @BindView(R.id.bottomSheetView)
+    View bottomSheetView;
 
     SessionDataViewModel sessionDataViewModel;
+    private BottomSheetBehavior bottomSheetBehavior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,7 @@ public class SessionViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         sessionDataViewModel= ViewModelProviders.of(this).get(SessionDataViewModel.class);
+        bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,7 +87,16 @@ public class SessionViewActivity extends AppCompatActivity {
                 startActivity(shareSession);
             }
             if (id == R.id.action_map){
-                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
+                CoordinatorLayout.LayoutParams layoutParams= (CoordinatorLayout.LayoutParams)fab.getLayoutParams();
+                layoutParams.setAnchorId(R.id.bottomSheetView);
+                fab.setLayoutParams(layoutParams);
+
+                if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                else {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
             }
             return false;
         });
