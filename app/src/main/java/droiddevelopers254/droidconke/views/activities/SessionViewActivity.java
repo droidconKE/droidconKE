@@ -9,6 +9,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,15 +88,19 @@ public class SessionViewActivity extends AppCompatActivity {
                 startActivity(shareSession);
             }
             if (id == R.id.action_map){
-                CoordinatorLayout.LayoutParams layoutParams= (CoordinatorLayout.LayoutParams)fab.getLayoutParams();
-                layoutParams.setAnchorId(R.id.bottomSheetView);
-                fab.setLayoutParams(layoutParams);
+//                //animate fab to display on top of the bottom sheet
+//                CoordinatorLayout.LayoutParams layoutParams= (CoordinatorLayout.LayoutParams)fab.getLayoutParams();
+//                layoutParams.setAnchorId(R.id.bottomSheetView);
+//
+//                fab.setLayoutParams(layoutParams);
 
                 if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    fab.hide();
                 }
                 else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    fab.show();
                 }
             }
             return false;

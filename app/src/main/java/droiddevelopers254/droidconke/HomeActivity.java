@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.Collections;
 
@@ -54,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
     Button signInBtn;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
+    FirebaseRemoteConfig firebaseRemoteConfig;
     public FloatingActionButton fab;
     public static boolean fabVisible=true;
     private static final int RC_SIGN_IN = 123;
@@ -109,6 +111,9 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         auth=FirebaseAuth.getInstance();
+        //setup defaults for remote config
+        firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
+        firebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         CoordinatorLayout.LayoutParams layoutParams=(CoordinatorLayout.LayoutParams) navigation.getLayoutParams();

@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:background="@color/colorWhite"
     android:layout_height="match_parent"
     android:scrollbarStyle="insideOverlay"
@@ -60,18 +61,18 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_toEndOf="@+id/wifiLabelText"
+                    android:id="@+id/wifiSsidText"
                     style="@style/CollapsibleCardTitle"
-                    android:text="@string/wifi_ssid"
+                    tool:text="@string/wifi_ssid"
                     android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="@dimen/fab_margin"
-                    android:layout_toEndOf="@+id/wifiPaswordText"
+                    android:id="@+id/wifiPasswordText"
                     android:textColor="@color/colorFavourite"
                     style="@style/CollapsibleCardTitle"
-                    android:text="@string/wifi_password"
+                    tool:text="@string/wifi_password"
                     android:textSize="14sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>

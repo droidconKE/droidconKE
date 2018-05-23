@@ -64,4 +64,7 @@ public class TravelInfoModel {
         this.bikingInfo = bikingInfo;
         this.rideSharingInfo = rideSharingInfo;
     }
+
+    public TravelInfoModel() {
+    }
 }
