@@ -17,4 +17,5 @@
     <color name="colorGreyishBrown">#424242</color>
     <color name="colorIndicatorUnselected">#4D000000</color>
     <color name="mdtp_transparent_black">#7f000000</color>
+    <color name="colorLightBlue">#2196f3</color>
 </resources>

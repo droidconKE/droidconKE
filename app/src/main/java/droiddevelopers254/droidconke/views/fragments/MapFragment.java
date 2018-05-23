@@ -1,27 +1,49 @@
 package droiddevelopers254.droidconke.views.fragments;
 
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import droiddevelopers254.droidconke.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+    LatLng senteuPlaza = new LatLng(-1.289256, 36.783180);
+    private static final int DEFAULT_ZOOM = 17;
 
     private GoogleMap mMap;
+    private Marker senteuMarker;
+    private BottomSheetBehavior bottomSheetBehavior;
+    ImageView collapseBottomSheetImg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_map, container, false);
+
+        //bottom sheet view
+        View bottomSheetView=view.findViewById(R.id.bottomSheetView);
+        bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
+        collapseBottomSheetImg=bottomSheetView.findViewById(R.id.collapseBottomSheetImg);
+
+        //collapse bottom sheet
+        collapseBottomSheetImg.setOnClickListener(view1 -> {
+            if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -44,10 +66,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //add marker
+        senteuMarker= mMap.addMarker(new MarkerOptions().position(senteuPlaza));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(senteuPlaza,DEFAULT_ZOOM));
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
+                if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                else {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+                return true;
+            }
+        });
     }
+
 }

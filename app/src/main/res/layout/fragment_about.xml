@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:id="@+id/faqText"
             style="@style/CollapsibleCardTitle"
-            android:text="@string/faqs"
+            android:text="@string/about"
             android:textColor="@color/colorFavourite"
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:text="@string/android_254"
+            android:text="@string/organizers"
             android:textColor="@color/colorFavourite"
             android:layout_height="wrap_content" />
         <TextView
@@ -35,7 +35,7 @@
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:text="@string/droidcon_ke"
+            android:text="@string/sponsors"
             android:textColor="@color/colorFavourite"
             android:layout_height="wrap_content" />
         <TextView

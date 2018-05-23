@@ -57,9 +57,9 @@
     <string name="settings_east_african_time">Events in East African Zone</string>
     <string name="settings_enable_notifications">Enable notifications</string>
     <string name="settings_send_statistics">Send anonymous usage statistics</string>
-    <string name="faqs">FAQ</string>
-    <string name="android_254">Android254 Community</string>
-    <string name="droidcon_ke">droidconKE</string>
+    <string name="about">About .droidconKE</string>
+    <string name="organizers">Organisers</string>
+    <string name="sponsors">Sponsors</string>
     <string name="open_source_licences">Open source licenses</string>
     <string name="built_with">Built with</string>
     <string name="material_components">Material Components</string>
@@ -123,6 +123,8 @@
         and a system of motion.The material is grounded in tactile reality, inspired by the study of paper and ink, yet</string>
     <string name="speaker_name">John Doe</string>
     <string name="speaker_company">Google</string>
+    <string name="ihub">IHub</string>
+    <string name="senteu_plaza">6th Floor, Senteu Plaza</string>
 
 
 </resources>
