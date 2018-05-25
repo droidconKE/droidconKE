@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,6 +47,17 @@ public class SpeakersAdapter extends RecyclerView.Adapter<SpeakersAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull SpeakersAdapter.MyViewHolder holder, int position) {
+        SpeakersModel speakersModel=speakersList.get(position);
+        holder.speakerNameText.setText(speakersModel.getName());
+        holder.speakerCompanyText.setText(speakersModel.getCompany());
+
+        //load speaker profile image
+        Glide.with(context).load(speakersModel.getPhotoUrl())
+                .thumbnail(Glide.with(context).load(speakersModel.getPhotoUrl()))
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.speakerImg);
 
     }
 

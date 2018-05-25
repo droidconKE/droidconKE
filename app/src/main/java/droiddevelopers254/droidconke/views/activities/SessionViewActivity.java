@@ -9,10 +9,14 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +24,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
+import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
 import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
 public class SessionViewActivity extends AppCompatActivity {
@@ -45,12 +54,19 @@ public class SessionViewActivity extends AppCompatActivity {
     View bottomSheetView;
     @BindView(R.id.collapseBottomImg)
     ImageView collapseBottomImg;
+    @BindView(R.id.speakersRV)
+    RecyclerView recyclerView;
+    @BindView(R.id.speakersLinear)
+    LinearLayout speakersLinear;
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
-    String starStatus,dayNumber;
+    String starStatus,dayNumber,speakerId;
     SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
+    List<SpeakersModel> speakersList= new ArrayList<>();
+    SpeakersAdapter speakersAdapter;
+    static RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +80,7 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionId = extraIntent.getIntExtra("sessionId",0);
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
+        speakerId=extraIntent.getStringExtra("speakerId");
 
         ButterKnife.bind(this);
 
@@ -98,6 +115,14 @@ public class SessionViewActivity extends AppCompatActivity {
                 handleDatabaseError(sessionDataState.getDatabaseError());
             }else {
                 handleFetchSessionData(sessionDataState.getSessionsModel());
+            }
+        });
+
+        sessionDataViewModel.getSpeakerInfo().observe(this,speakersState -> {
+            if (speakersState.getDatabaseError() != null){
+                handleDatabaseError(speakersState.getDatabaseError());
+            }else {
+                handleFetchSpeakerDetails(speakersState.getSpeakersModel());
             }
         });
 
@@ -157,7 +182,6 @@ public class SessionViewActivity extends AppCompatActivity {
                 databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
             }
         });
-
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
             if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -165,6 +189,24 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {
+        if (speakersModel != null){
+            speakersList=speakersModel;
+            initView();
+        }else {
+            //if there are no speakers for this session hide views
+            speakersLinear.setVisibility(View.GONE);
+        }
+    }
+
+    private void initView() {
+        speakersAdapter= new SpeakersAdapter(speakersList,getApplicationContext());
+        mLayoutManager= new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(speakersAdapter);
     }
 
     private void handleFetchSessionData(SessionsModel sessionsModel) {
