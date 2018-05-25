@@ -4,27 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorYellow"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.activities.AuthenticateUserActivity"
     tools:showIn="@layout/activity_authenticate_user">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="80dp"
-        android:id="@+id/welcomeText"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:text="@string/welcome_title"
-        android:textSize="22sp"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_below="@+id/welcomeText"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-        android:layout_height="200dp" />
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/welcomeImg"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/main_logo"
+            android:layout_height="100dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:id="@+id/welcomeText"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:text="@string/welcome_title"
+            android:textSize="19sp"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_gravity="center"
+            android:background="@color/colorWarmGrey"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="30dp"
+                android:id="@+id/dateRangeImg"
+                android:src="@drawable/ic_date_range_black_24dp"
+                android:layout_height="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_toEndOf="@id/dateRangeImg"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:text="@string/welcome_date"
+                    android:layout_marginStart="6dp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:text="@string/welcome_location"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="100dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_gravity="center"
+            android:background="@color/colorWarmGrey"
+            android:layout_height="1dp"/>
+
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +99,7 @@
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:text="@string/copyright"
             android:layout_height="wrap_content" />

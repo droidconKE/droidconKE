@@ -36,7 +36,11 @@
     <string name="location"><![CDATA[Location & Maps]]></string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="welcome_title">Welcome to droidconKE</string>
+    <string name="welcome_title">
+        First Sub-Saharan\n
+        Android Focused\n
+        Developer conference
+    </string>
     <string name="welcome_dates">
         July 26- 27,\n
         2018 Senteu Plaza,Nairobi
@@ -127,6 +131,9 @@
     <string name="senteu_plaza">6th Floor, Senteu Plaza</string>
     <string name="room_details">Room Details</string>
     <string name="room_description">\"Surfaces and edges of the material provide visual cues that are grounded in reality. The \"         \"use of familiar tactile attributes helps users quickly understand affordances. Yet the \"         \"flexibility of the material creates new affordances that supercede those in the physical \"         \"world, without breaking the rules of physics.\\n\"</string>
+    <string name="welcome_date">October 5th - 6th \n 2018</string>
+    <string name="welcome_year">2018</string>
+    <string name="welcome_location">iHub Nairobi</string>
 
 
 </resources>

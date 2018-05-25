@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlack">#000000</color>
+    <color name="colorBlack">#1B1E1E</color>
     <color name="colorFavourite">#3F51B5</color>
     <color name="colorGrey">#e5e9ec</color>
     <color name="colorLighterBlue">#8799ff</color>
@@ -18,4 +18,7 @@
     <color name="colorIndicatorUnselected">#4D000000</color>
     <color name="mdtp_transparent_black">#7f000000</color>
     <color name="colorLightBlue">#2196f3</color>
+    <color name="colorYellow">#FFD54F</color>
+    <color name="colorPurple">#863B96</color>
+    <color name="colorDroidBug">#6ADEA3</color>
 </resources>
