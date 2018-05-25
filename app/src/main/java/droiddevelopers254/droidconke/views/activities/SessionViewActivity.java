@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,11 +48,22 @@ public class SessionViewActivity extends AppCompatActivity {
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
+    String starStatus,dayNumber;
+    SessionsModel sessionsModel1;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_view);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //get extras
+        Intent extraIntent=getIntent();
+        sessionId = extraIntent.getIntExtra("sessionId",0);
+        dayNumber=extraIntent.getStringExtra("dayNumber");
+        starStatus=extraIntent.getStringExtra("starred");
 
         ButterKnife.bind(this);
 
@@ -78,12 +91,7 @@ public class SessionViewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //get extras
-        Intent extraIntent=getIntent();
-        sessionId = extraIntent.getIntExtra("sessionId",0);
-
         getSessionData(sessionId);
-
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
             if (sessionDataState.getDatabaseError() != null){
@@ -97,6 +105,13 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionViewTitleText=findViewById(R.id.sessionViewTitleText);
         fab=findViewById(R.id.fab);
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
+
+        //check a session was previously starred
+        if (starStatus.equals("0")){
+            fab.setImageResource(R.drawable.ic_star_border_black_24dp);
+        }else if (starStatus.equals("1")){
+            fab.setImageResource(R.drawable.ic_star_blue_24dp);
+        }
 
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
@@ -128,7 +143,21 @@ public class SessionViewActivity extends AppCompatActivity {
 
         //star a session
         fab.setOnClickListener(view -> {
-            fab.setImageResource(R.drawable.ic_star_blue_24dp);
+            if (starStatus.equals("0")){
+                //start a session
+               fab.setImageResource(R.drawable.ic_star_blue_24dp);
+
+                //update in firebase
+                databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("1");
+                Toast.makeText(getApplicationContext(),String.valueOf(sessionsModel1.getId()),Toast.LENGTH_SHORT).show();
+
+            }else if(starStatus.equals("1")){
+                fab.setImageResource(R.drawable.ic_star_border_black_24dp);
+
+                //update in firebase
+                databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
+                Toast.makeText(getApplicationContext(),String.valueOf(sessionsModel1.getId()),Toast.LENGTH_SHORT).show();
+            }
         });
 
         //collapse bottom bar
@@ -142,6 +171,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
     private void handleFetchSessionData(SessionsModel sessionsModel) {
         if (sessionsModel != null){
+            sessionsModel1=sessionsModel;
             //set the data on the view
             txtSessionTime.setText(sessionsModel.getTime());
             txtSessionRoom.setText(sessionsModel.getRoom());

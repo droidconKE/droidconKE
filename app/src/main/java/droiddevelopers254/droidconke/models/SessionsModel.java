@@ -1,5 +1,10 @@
 package droiddevelopers254.droidconke.models;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class SessionsModel {
 
     private int id;
@@ -138,5 +143,19 @@ public class SessionsModel {
         this.url = url;
         this.duration = duration;
         this.description = description;
+    }
+
+    public SessionsModel(int id, String starred) {
+        this.id = id;
+        this.starred = starred;
+    }
+    // [START post_to_map]
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("starred", starred);
+
+        return result;
     }
 }

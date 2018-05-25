@@ -74,7 +74,7 @@ public class DayTwoFragment extends Fragment {
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList);
+        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList,"day_two");
         recyclerView.setAdapter(sessionsAdapter);
     }
 
