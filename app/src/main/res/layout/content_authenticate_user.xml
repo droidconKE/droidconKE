@@ -41,6 +41,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content">
             <ImageView

@@ -149,14 +149,12 @@ public class SessionViewActivity extends AppCompatActivity {
 
                 //update in firebase
                 databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("1");
-                Toast.makeText(getApplicationContext(),String.valueOf(sessionsModel1.getId()),Toast.LENGTH_SHORT).show();
 
             }else if(starStatus.equals("1")){
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
 
                 //update in firebase
                 databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
-                Toast.makeText(getApplicationContext(),String.valueOf(sessionsModel1.getId()),Toast.LENGTH_SHORT).show();
             }
         });
 

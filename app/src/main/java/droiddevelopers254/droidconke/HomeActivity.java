@@ -1,6 +1,7 @@
 package droiddevelopers254.droidconke;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -51,6 +52,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView mTextMessage,toolbarTitleText,cancelText;
     CircleImageView accountImg;
+    SharedPreferences sharedPreferences;
+    public static final String PREF_NAME="droidconKE_pref";
+    public static final String FIREBASE_TOKEN="firebaseToken";
+    public static final String TOKEN_SENT="tokenSent";
+    String refreshToken;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
     public  static int navItemIndex = 1; //controls toolbar titles and icons
     private  AlertDialog.Builder builder= null;
@@ -61,6 +67,8 @@ public class HomeActivity extends AppCompatActivity {
     public FloatingActionButton fab;
     public static boolean fabVisible=true;
     private static final int RC_SIGN_IN = 123;
+    int tokenSent;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -112,9 +120,21 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        sharedPreferences=getSharedPreferences(PREF_NAME,MODE_PRIVATE);
         auth=FirebaseAuth.getInstance();
         //setup defaults for remote config
         firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
+
+        //check whether refresh token is sent to db
+        tokenSent=sharedPreferences.getInt(TOKEN_SENT,0);
+        if (tokenSent == 0){
+            refreshToken=sharedPreferences.getString(FIREBASE_TOKEN,null);
+            firebaseUser= auth.getCurrentUser();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference users=database.getReference();
+            //update in firebase
+            users.child("users").child(users.getKey()).child("refresh_token").setValue(refreshToken);
+        }
 
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
