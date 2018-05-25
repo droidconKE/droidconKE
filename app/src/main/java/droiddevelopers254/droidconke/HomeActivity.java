@@ -113,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         //setup defaults for remote config
         firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
-        firebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         CoordinatorLayout.LayoutParams layoutParams=(CoordinatorLayout.LayoutParams) navigation.getLayoutParams();

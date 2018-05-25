@@ -6,8 +6,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.concurrent.Executor;
@@ -36,9 +34,6 @@ public class TravelInfoRepo {
                     } else {
 
                     }
-                    TravelInfoModel travelInfoModel = new TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
-                            firebaseRemoteConfig.getString("biking"), firebaseRemoteConfig.getString("ride_sharing"));
-                    travelInfoModelMutableLiveData.setValue(travelInfoModel);
 
                 });
         return travelInfoModelMutableLiveData;

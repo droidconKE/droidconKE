@@ -72,17 +72,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         //add marker
         senteuMarker= mMap.addMarker(new MarkerOptions().position(senteuPlaza));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(senteuPlaza,DEFAULT_ZOOM));
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-                else {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                return true;
+        mMap.setOnMarkerClickListener(marker -> {
+            if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
+            else {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+            return true;
         });
     }
 

@@ -3,6 +3,7 @@ package droiddevelopers254.droidconke.views.activities;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,8 @@ public class SessionViewActivity extends AppCompatActivity {
     TextView sessionViewTitleText;
     @BindView(R.id.bottomSheetView)
     View bottomSheetView;
+    @BindView(R.id.collapseBottomImg)
+    ImageView collapseBottomImg;
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -52,6 +56,23 @@ public class SessionViewActivity extends AppCompatActivity {
 
         sessionDataViewModel= ViewModelProviders.of(this).get(SessionDataViewModel.class);
         bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                // this part hides the button immediately and waits bottom sheet
+                // to collapse to show
+                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
+                    fab.animate().scaleX(0).scaleY(0).setDuration(300).start();
+                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
+                    fab.animate().scaleX(1).scaleY(1).setDuration(300).start();
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,11 +117,10 @@ public class SessionViewActivity extends AppCompatActivity {
 
                 if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    fab.hide();
                 }
                 else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    fab.show();
+
                 }
             }
             return false;
@@ -109,6 +129,13 @@ public class SessionViewActivity extends AppCompatActivity {
         //star a session
         fab.setOnClickListener(view -> {
             fab.setImageResource(R.drawable.ic_star_blue_24dp);
+        });
+
+        //collapse bottom bar
+        collapseBottomImg.setOnClickListener(view -> {
+            if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
         });
 
     }

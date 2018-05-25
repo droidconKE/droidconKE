@@ -31,6 +31,12 @@
                 android:textSize="19sp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/collapseBottomImg"
+                android:src="@drawable/ic_expand"
+                android:layout_height="30dp" />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"

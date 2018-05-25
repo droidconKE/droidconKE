@@ -17,10 +17,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import droiddevelopers254.droidconke.BuildConfig;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.EventTypeAdapter;
 import droiddevelopers254.droidconke.models.EventTypeModel;
@@ -42,6 +44,14 @@ public class EventFragment extends Fragment{
 
         eventTypeViewModel= ViewModelProviders.of(this).get(EventTypeViewModel.class);
         firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
+
+        // [START enable_dev_mode]
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .build();
+        firebaseRemoteConfig.setConfigSettings(configSettings);
+
+        firebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
 
         recyclerView =view.findViewById(R.id.eventTypesRv);
         wifiSsidText=view.findViewById(R.id.wifiSsidText);
@@ -65,25 +75,24 @@ public class EventFragment extends Fragment{
     }
 
     private void getRemoteConfigValues() {
-        long cacheExpiration= 12*60*60;
+        long cacheExpiration= 3600;
+
+        if (firebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
         firebaseRemoteConfig.fetch(cacheExpiration)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-
-                            // After config data is successfully fetched, it must be activated before newly fetched
-                            // values are returned.
-                            firebaseRemoteConfig.activateFetched();
-                        } else {
-
-                        }
-                        WifiDetailsModel wifiDetailsModel= new WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"),firebaseRemoteConfig.getString("wifi_password"));
-                        updateViews(wifiDetailsModel);
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // After config data is successfully fetched, it must be activated before newly fetched
+                        // values are returned.
+                        firebaseRemoteConfig.activateFetched();
+                    } else {
 
                     }
+                    WifiDetailsModel wifiDetailsModel= new WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"),firebaseRemoteConfig.getString("wifi_password"));
+                    updateViews(wifiDetailsModel);
 
-                }  );
+                });
     }
 
     private void updateViews(WifiDetailsModel wifiDetailsModel) {
