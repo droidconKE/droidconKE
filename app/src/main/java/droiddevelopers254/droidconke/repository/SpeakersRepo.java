@@ -33,7 +33,7 @@ public class SpeakersRepo {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
-                        SpeakersModel speakersModel = dataSnapshot.getValue(SpeakersModel.class);
+                        SpeakersModel speakersModel = data.getValue(SpeakersModel.class);
                         speakersModelList.add(speakersModel);
                         speakersStateMutableLiveData.setValue(new SpeakersState(speakersModelList));
                     }

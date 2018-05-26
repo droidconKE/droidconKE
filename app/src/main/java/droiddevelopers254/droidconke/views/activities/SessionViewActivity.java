@@ -80,7 +80,7 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionId = extraIntent.getIntExtra("sessionId",0);
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
-        speakerId=extraIntent.getStringExtra("speakerId");
+        speakerId= String.valueOf(extraIntent.getIntExtra("speakerId",0));
 
         ButterKnife.bind(this);
 
@@ -109,6 +109,7 @@ public class SessionViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSessionData(sessionId);
+        getSpeakerDetails(speakerId);
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
             if (sessionDataState.getDatabaseError() != null){
@@ -189,6 +190,10 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getSpeakerDetails(String speakerId) {
+        sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
 
     private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {

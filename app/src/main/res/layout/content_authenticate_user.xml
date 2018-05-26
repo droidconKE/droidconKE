@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorYellow"
+    android:scrollbarThumbVertical="@android:color/transparent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.activities.AuthenticateUserActivity"
     tools:showIn="@layout/activity_authenticate_user">
@@ -22,6 +23,7 @@
             android:layout_height="100dp" />
         <TextView
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:id="@+id/welcomeText"
             android:textAlignment="center"
@@ -73,40 +75,45 @@
         <View
             android:layout_width="100dp"
             android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:layout_gravity="center"
             android:background="@color/colorWarmGrey"
             android:layout_height="1dp"/>
 
-
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-
-        <com.google.android.gms.common.SignInButton
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/googleSignInBtn"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_height="wrap_content">
-        </com.google.android.gms.common.SignInButton>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/fab_margin"
+           android:layout_marginStart="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:textAlignment="center"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            android:text="@string/copyright"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="36dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.google.android.gms.common.SignInButton
+                android:layout_width="match_parent"
+                android:id="@+id/googleSignInBtn"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_height="wrap_content">
+            </com.google.android.gms.common.SignInButton>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:text="@string/copyright"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
 
 
-</RelativeLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

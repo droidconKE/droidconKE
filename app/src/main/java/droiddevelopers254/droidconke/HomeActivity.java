@@ -129,11 +129,12 @@ public class HomeActivity extends AppCompatActivity {
         tokenSent=sharedPreferences.getInt(TOKEN_SENT,0);
         if (tokenSent == 0){
             refreshToken=sharedPreferences.getString(FIREBASE_TOKEN,null);
+            Toast.makeText(getApplicationContext(),refreshToken,Toast.LENGTH_SHORT).show();
             firebaseUser= auth.getCurrentUser();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference users=database.getReference();
             //update in firebase
-            users.child("users").child(users.getKey()).child("refresh_token").setValue(refreshToken);
+            users.child("users").child(firebaseUser.getUid()).child("refresh_token").setValue(refreshToken);
         }
 
 

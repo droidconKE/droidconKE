@@ -159,7 +159,7 @@ public class AuthenticateUserActivity extends AppCompatActivity {
                     user.setUser_id(currentUser.getUid());
                     user.setUser_name(currentUser.getDisplayName());
                     user.setPhoto_url(String.valueOf(currentUser.getPhotoUrl()));
-                    user.setRefresh_token("");
+                    user.setRefresh_token(currentUser.getUid());
 
                     saveCurrentUser(currentUser, user);
                 }
