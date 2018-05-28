@@ -92,9 +92,9 @@ public class SessionViewActivity extends AppCompatActivity {
                 // this part hides the button immediately and waits bottom sheet
                 // to collapse to show
                 if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-                    fab.animate().scaleX(0).scaleY(0).setDuration(100).start();
+                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
                 } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
-                    fab.animate().scaleX(1).scaleY(1).setDuration(100).start();
+                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
                 }
             }
 

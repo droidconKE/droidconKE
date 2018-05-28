@@ -27,8 +27,8 @@ public class SpeakersRepo {
     public LiveData<SpeakersState> getSpeakersInfo(String speakerId){
         final MutableLiveData<SpeakersState> speakersStateMutableLiveData= new MutableLiveData<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("speakers").child(speakerId).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference = firebaseDatabase.getReference("speakers");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
