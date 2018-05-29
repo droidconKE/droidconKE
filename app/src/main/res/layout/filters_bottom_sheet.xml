@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/bottomSheetView"
     android:background="@color/colorWhite"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="6dp"
+    app:behavior_peekHeight="0dp"
+    app:behavior_hideable="true"
+    app:cardCornerRadius="5dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:text="@string/filter_details"
+                android:textSize="19sp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/collapseBottomImg"
+                android:src="@drawable/ic_expand"
+                android:layout_height="30dp" />
+        </RelativeLayout>
 
        <android.support.design.chip.Chip
            android:layout_width="wrap_content"
@@ -149,4 +174,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</android.support.design.card.MaterialCardView>

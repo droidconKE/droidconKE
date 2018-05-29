@@ -135,6 +135,7 @@
     <string name="welcome_year">2018</string>
     <string name="welcome_location">iHub Nairobi</string>
     <string name="speakers">Speakers</string>
+    <string name="filter_details">Filter</string>
 
 
 </resources>

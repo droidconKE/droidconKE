@@ -41,6 +41,7 @@
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_home" />
     <include layout="@layout/home_fragment_content"/>
+    <include layout="@layout/filters_bottom_sheet"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

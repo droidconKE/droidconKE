@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -68,7 +70,8 @@ public class HomeActivity extends AppCompatActivity {
     public static boolean fabVisible=true;
     private static final int RC_SIGN_IN = 123;
     int tokenSent;
-
+    private BottomSheetBehavior bottomSheetBehavior;
+    View bottomSheetView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -144,6 +147,26 @@ public class HomeActivity extends AppCompatActivity {
         toolbarTitleText=findViewById(R.id.toolbarTitleText);
         accountImg=findViewById(R.id.accountImg);
         fab=findViewById(R.id.fab);
+        bottomSheetView=findViewById(R.id.bottomSheetView);
+        bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                // this part hides the button immediately and waits bottom sheet
+                // to collapse to show
+                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
+                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
+                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
+                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
 
         if (auth.getCurrentUser() != null) {
             //load user profile image
@@ -159,10 +182,17 @@ public class HomeActivity extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_schedule);
 
         //open filters
-        fab.setOnClickListener(view ->{} );
+        fab.setOnClickListener(view ->{
+            if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+            else {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            }
+        } );
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();

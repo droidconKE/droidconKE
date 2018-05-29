@@ -39,6 +39,7 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:lineSpacingExtra="8dp"
             android:id="@+id/txtSessionDesc"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fab_margin"

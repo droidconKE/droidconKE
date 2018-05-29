@@ -46,6 +46,7 @@
             android:layout_height="1dp"/>
         <TextView
             android:layout_width="match_parent"
+            android:lineSpacingExtra="8dp"
             android:layout_margin="@dimen/fab_margin"
             android:text="@string/room_description"
             android:textColor="@color/colorBlack"
