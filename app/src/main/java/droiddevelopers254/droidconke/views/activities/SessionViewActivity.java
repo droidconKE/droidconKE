@@ -83,7 +83,7 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionId = extraIntent.getIntExtra("sessionId",0);
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
-        speakerId= String.valueOf(extraIntent.getIntExtra("speakerId",0));
+        speakerId= extraIntent.getStringExtra("speakerId");
         roomId=extraIntent.getStringExtra("roomId");
 
         ButterKnife.bind(this);
@@ -114,7 +114,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getSessionData(sessionId);
         getSpeakerDetails(speakerId);
-        getRoomDetails(roomId);
+//        getRoomDetails(roomId);
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
             if (sessionDataState.getDatabaseError() != null){
@@ -132,13 +132,13 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         });
 
-        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
-            if (roomState.getDatabaseError() != null){
-                handleDatabaseError(roomState.getDatabaseError());
-            }else {
-                handleFetchRoomDetails(roomState.getRoomModel());
-            }
-        });
+//        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
+//            if (roomState.getDatabaseError() != null){
+//                handleDatabaseError(roomState.getDatabaseError());
+//            }else {
+//                handleFetchRoomDetails(roomState.getRoomModel());
+//            }
+//        });
 
         bottomAppBar=findViewById(R.id.bottomAppBar);
         sessionViewTitleText=findViewById(R.id.sessionViewTitleText);
@@ -205,9 +205,9 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
-    private void getRoomDetails(String roomId) {
-        sessionDataViewModel.fetchRoomDetails(roomId);
-    }
+//    private void getRoomDetails(String roomId) {
+//        sessionDataViewModel.fetchRoomDetails(roomId);
+//    }
     private void handleFetchRoomDetails(RoomModel roomModel) {
         if (roomModel != null){
             roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+roomModel.getCapacity());

@@ -137,6 +137,7 @@
     <string name="speakers">Speakers</string>
     <string name="filter_details">Filters</string>
     <string name="about_detail_title">Company A</string>
+    <string name="title_activity_about_details">AboutDetails</string>
 
 
 </resources>

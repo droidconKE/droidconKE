@@ -209,7 +209,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //on select of a filter
         starredEventsChip.setOnClickListener(view -> {
-            starredEventsChip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
         });
 
     }

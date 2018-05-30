@@ -35,7 +35,13 @@ public class SpeakersRepo {
                     for(DataSnapshot data :dataSnapshot.getChildren()) {
                         SpeakersModel speakersModel = data.getValue(SpeakersModel.class);
                         speakersModelList.add(speakersModel);
-                        speakersStateMutableLiveData.setValue(new SpeakersState(speakersModelList));
+                        for (int i=0;i<speakersModelList.size();i++){
+                            int speaker=speakersModelList.get(i).getId();
+                            if (String.valueOf(speakerId).equals(speakerId)){
+                                speakersStateMutableLiveData.setValue(new SpeakersState(speakersModelList));
+                            }
+                        }
+
                     }
                 }
             }

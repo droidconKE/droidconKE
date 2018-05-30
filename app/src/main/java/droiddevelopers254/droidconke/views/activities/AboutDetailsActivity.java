@@ -2,11 +2,15 @@ package droiddevelopers254.droidconke.views.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.google.firebase.database.DatabaseError;
 
@@ -30,11 +34,25 @@ public class AboutDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_details);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         aboutDetailsViewModel= ViewModelProviders.of(this).get(AboutDetailsViewModel.class);
 
         //get intent extras
         Intent extraIntent=getIntent();
         aboutType=extraIntent.getStringExtra("aboutType");
+
+        if (aboutType.equals("about_droidconKE")) {
+            getSupportActionBar().setTitle("About droidconKE");
+        }
+        if (aboutType.equals("organizers")) {
+            getSupportActionBar().setTitle("Organizers");
+        }
+        if (aboutType.equals("sponsors")) {
+            getSupportActionBar().setTitle("Sponsors");
+        }
 
         //fetch about details
         fetchAboutDetails(aboutType);
@@ -73,4 +91,5 @@ public class AboutDetailsActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(aboutDetailsAdapter);
     }
+
 }
