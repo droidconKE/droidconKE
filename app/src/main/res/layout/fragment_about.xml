@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
-            android:id="@+id/faqText"
+            android:id="@+id/aboutDroidconText"
             style="@style/CollapsibleCardTitle"
             android:text="@string/about"
             android:textColor="@color/colorFavourite"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
-            android:id="@+id/termsOfServiceText"
+            android:id="@+id/organizersText"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
@@ -31,22 +31,22 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_width="match_parent"
-            android:id="@+id/privacyPolicyText"
+            android:id="@+id/sponsorsText"
             style="@style/CollapsibleCardTitle"
             android:layout_marginTop="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:text="@string/sponsors"
             android:textColor="@color/colorFavourite"
             android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="match_parent"
-            android:id="@+id/openLicensesText"
-            style="@style/CollapsibleCardTitle"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:text="@string/open_source_licences"
-            android:textColor="@color/colorFavourite"
-            android:layout_height="wrap_content" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:id="@+id/openLicensesText"-->
+            <!--style="@style/CollapsibleCardTitle"-->
+            <!--android:layout_marginTop="@dimen/fab_margin"-->
+            <!--android:layout_marginBottom="@dimen/fab_margin"-->
+            <!--android:text="@string/open_source_licences"-->
+            <!--android:textColor="@color/colorFavourite"-->
+            <!--android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 

@@ -136,6 +136,7 @@
     <string name="welcome_location">iHub Nairobi</string>
     <string name="speakers">Speakers</string>
     <string name="filter_details">Filters</string>
+    <string name="about_detail_title">Company A</string>
 
 
 </resources>

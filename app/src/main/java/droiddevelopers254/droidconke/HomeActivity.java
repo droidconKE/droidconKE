@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.chip.Chip;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -42,6 +43,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.Collections;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import droiddevelopers254.droidconke.models.UserModel;
 import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour;
@@ -73,6 +76,8 @@ public class HomeActivity extends AppCompatActivity {
     private BottomSheetBehavior bottomSheetBehavior;
     View bottomSheetView;
     ImageView collapseBottomImg;
+    @BindView(R.id.starredEventsChip)
+    Chip starredEventsChip;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -123,6 +128,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
 
         sharedPreferences=getSharedPreferences(PREF_NAME,MODE_PRIVATE);
         auth=FirebaseAuth.getInstance();
@@ -198,6 +205,11 @@ public class HomeActivity extends AppCompatActivity {
             if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
+        });
+
+        //on select of a filter
+        starredEventsChip.setOnClickListener(view -> {
+            starredEventsChip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         });
 
     }
