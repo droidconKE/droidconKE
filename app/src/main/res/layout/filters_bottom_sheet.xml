@@ -12,6 +12,9 @@
     app:layout_behavior="@string/bottom_sheet_behavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginStart="16dp"
@@ -27,7 +30,7 @@
                 android:layout_centerInParent="true"
                 android:textAlignment="center"
                 android:text="@string/filter_details"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -47,9 +50,8 @@
             android:layout_margin="@dimen/fab_margin"
             android:text="Topics"
             android:textAllCaps="true"
-            android:textColor="@color/colorBlack"
             android:textStyle="bold"
-            android:textSize="19sp"
+            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,9 +125,8 @@
             android:layout_margin="@dimen/fab_margin"
             android:text="Types"
             android:textAllCaps="true"
-            android:textColor="@color/colorBlack"
             android:textStyle="bold"
-            android:textSize="19sp"
+            android:textSize="16sp"
             android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,5 +174,6 @@
 
 
     </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.card.MaterialCardView>

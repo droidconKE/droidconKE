@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
     int tokenSent;
     private BottomSheetBehavior bottomSheetBehavior;
     View bottomSheetView;
+    ImageView collapseBottomImg;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -147,6 +148,7 @@ public class HomeActivity extends AppCompatActivity {
         toolbarTitleText=findViewById(R.id.toolbarTitleText);
         accountImg=findViewById(R.id.accountImg);
         fab=findViewById(R.id.fab);
+        collapseBottomImg=findViewById(R.id.collapseBottomImg);
         bottomSheetView=findViewById(R.id.bottomSheetView);
         bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -191,6 +193,12 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         } );
+        //close filters
+        collapseBottomImg.setOnClickListener(view -> {
+            if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
 
     }
     @Override

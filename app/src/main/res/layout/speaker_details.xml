@@ -6,16 +6,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
+            android:layout_width="40dp"
+            android:layout_centerVertical="true"
             android:id="@+id/speakerImg"
             android:src="@drawable/profile"
-            android:layout_height="50dp" />
+            android:layout_height="40dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/fab_margin"
+            android:layout_marginStart="6dp"
             android:layout_toEndOf="@id/speakerImg"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -23,14 +24,16 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/speakerNameText"
                 tools:text="@string/speaker_name"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textColor="@color/colorFavourite"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/speakerCompanyText"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="3dp"
                 tools:text="@string/speaker_company"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </RelativeLayout>
