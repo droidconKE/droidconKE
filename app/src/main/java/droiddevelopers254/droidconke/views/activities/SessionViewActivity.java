@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
+import droiddevelopers254.droidconke.models.RoomModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
@@ -58,10 +59,12 @@ public class SessionViewActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     @BindView(R.id.speakersLinear)
     LinearLayout speakersLinear;
+    @BindView(R.id.roomDetailsText)
+    TextView roomDetailsText;
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
-    String starStatus,dayNumber,speakerId;
+    String starStatus,dayNumber,speakerId,roomId;
     SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
     List<SpeakersModel> speakersList= new ArrayList<>();
@@ -81,6 +84,7 @@ public class SessionViewActivity extends AppCompatActivity {
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
         speakerId= String.valueOf(extraIntent.getIntExtra("speakerId",0));
+        roomId=extraIntent.getStringExtra("roomId");
 
         ButterKnife.bind(this);
 
@@ -110,6 +114,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getSessionData(sessionId);
         getSpeakerDetails(speakerId);
+        getRoomDetails(roomId);
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
             if (sessionDataState.getDatabaseError() != null){
@@ -124,6 +129,14 @@ public class SessionViewActivity extends AppCompatActivity {
                 handleDatabaseError(speakersState.getDatabaseError());
             }else {
                 handleFetchSpeakerDetails(speakersState.getSpeakersModel());
+            }
+        });
+
+        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
+            if (roomState.getDatabaseError() != null){
+                handleDatabaseError(roomState.getDatabaseError());
+            }else {
+                handleFetchRoomDetails(roomState.getRoomModel());
             }
         });
 
@@ -192,6 +205,14 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
+    private void getRoomDetails(String roomId) {
+        sessionDataViewModel.fetchRoomDetails(roomId);
+    }
+    private void handleFetchRoomDetails(RoomModel roomModel) {
+        if (roomModel != null){
+            roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+roomModel.getCapacity());
+        }
+    }
     private void getSpeakerDetails(String speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }

@@ -100,7 +100,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
             intent.putExtra("sessionId", sessionsModelList.get(position).getId());
             intent.putExtra("dayNumber",dayNumber);
             intent.putExtra("starred",sessionsModelList.get(position).getStarred());
-            intent.getIntExtra("speakerId",sessionsModelList.get(position).getSpeaker_id());
+            intent.putExtra("speakerId",String.valueOf(sessionsModelList.get(position).getSpeaker_id()));
+            intent.putExtra("roomId",String.valueOf(sessionsModelList.get(position).getRoom_id()));
             context.startActivity(intent);
         });
 

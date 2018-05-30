@@ -8,6 +8,7 @@
     app:contentPadding="6dp"
     app:behavior_peekHeight="0dp"
     app:behavior_hideable="true"
+    android:clickable="true"
     app:cardCornerRadius="5dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -17,8 +18,8 @@
         android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <RelativeLayout

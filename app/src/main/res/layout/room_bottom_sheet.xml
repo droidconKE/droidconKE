@@ -8,6 +8,7 @@
     app:cardUseCompatPadding="true"
     app:contentPadding="6dp"
     app:behavior_peekHeight="0dp"
+    android:clickable="true"
     app:behavior_hideable="true"
     android:layout_height="wrap_content">
     
@@ -46,6 +47,7 @@
             android:layout_height="1dp"/>
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/roomDetailsText"
             android:lineSpacingExtra="8dp"
             android:layout_margin="@dimen/fab_margin"
             android:text="@string/room_description"

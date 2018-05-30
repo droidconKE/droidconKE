@@ -4,8 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import droiddevelopers254.droidconke.datastates.RoomState;
 import droiddevelopers254.droidconke.datastates.SessionDataState;
 import droiddevelopers254.droidconke.datastates.SpeakersState;
+import droiddevelopers254.droidconke.repository.RoomRepo;
 import droiddevelopers254.droidconke.repository.SessionDataRepo;
 import droiddevelopers254.droidconke.repository.SpeakersRepo;
 
@@ -14,6 +16,8 @@ public class SessionDataViewModel extends ViewModel {
     private SessionDataRepo sessionDataRepo;
     private MediatorLiveData<SpeakersState> speakersStateMediatorLiveData;
     private SpeakersRepo speakersRepo;
+    private MediatorLiveData<RoomState> roomStateMediatorLiveData;
+    private RoomRepo roomRepo;
 
 
     public SessionDataViewModel (){
@@ -21,6 +25,8 @@ public class SessionDataViewModel extends ViewModel {
         sessionDataRepo = new SessionDataRepo();
         speakersStateMediatorLiveData= new MediatorLiveData<>();
         speakersRepo= new SpeakersRepo();
+        roomStateMediatorLiveData= new MediatorLiveData<>();
+        roomRepo= new RoomRepo();
 
     }
 
@@ -29,6 +35,10 @@ public class SessionDataViewModel extends ViewModel {
     }
     public LiveData<SpeakersState> getSpeakerInfo(){
         return speakersStateMediatorLiveData;
+    }
+
+    public LiveData<RoomState> getRoomInfo(){
+        return roomStateMediatorLiveData;
     }
 
     public void fetchSessionDetails(int sessionId){
@@ -50,6 +60,17 @@ public class SessionDataViewModel extends ViewModel {
                 this.speakersStateMediatorLiveData.removeSource(speakersStateLiveData);
             }
             this.speakersStateMediatorLiveData.setValue(speakersStateMediatorLiveData);
+                });
+    }
+
+    public void fetchRoomDetails(String roomId){
+        final LiveData<RoomState> roomStateLiveData=roomRepo.getRoomDetails(roomId);
+        roomStateMediatorLiveData.addSource(roomStateLiveData,
+                roomStateMediatorLiveData-> {
+            if (this.roomStateMediatorLiveData.hasActiveObservers()){
+                this.roomStateMediatorLiveData.removeSource(roomStateLiveData);
+            }
+            this.roomStateMediatorLiveData.setValue(roomStateMediatorLiveData);
                 });
     }
 }
