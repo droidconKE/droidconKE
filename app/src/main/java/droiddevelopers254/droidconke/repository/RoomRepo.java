@@ -26,14 +26,13 @@ public class RoomRepo {
         final MutableLiveData<RoomState> roomStateLiveData= new MutableLiveData<>();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("rooms").child(roomId).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("rooms").child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(databaseReference!=null){
-                    for(DataSnapshot data :dataSnapshot.getChildren()) {
-                        RoomModel roomModel = data.getValue(RoomModel.class);
-                        roomStateLiveData.setValue(new RoomState(roomModel));
-                    }
+                if(dataSnapshot !=null){
+                    RoomModel roomModel = dataSnapshot.getValue(RoomModel.class);
+                    roomStateLiveData.setValue(new RoomState(roomModel));
+
                 }
             }
             @Override

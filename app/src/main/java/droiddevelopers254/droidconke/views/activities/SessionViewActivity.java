@@ -114,7 +114,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getSessionData(sessionId);
         getSpeakerDetails(speakerId);
-//        getRoomDetails(roomId);
+        getRoomDetails(roomId);
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
             if (sessionDataState.getDatabaseError() != null){
@@ -132,13 +132,13 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         });
 
-//        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
-//            if (roomState.getDatabaseError() != null){
-//                handleDatabaseError(roomState.getDatabaseError());
-//            }else {
-//                handleFetchRoomDetails(roomState.getRoomModel());
-//            }
-//        });
+        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
+            if (roomState.getDatabaseError() != null){
+                handleDatabaseError(roomState.getDatabaseError());
+            }else {
+                handleFetchRoomDetails(roomState.getRoomModel());
+            }
+        });
 
         bottomAppBar=findViewById(R.id.bottomAppBar);
         sessionViewTitleText=findViewById(R.id.sessionViewTitleText);
@@ -205,21 +205,21 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
-//    private void getRoomDetails(String roomId) {
-//        sessionDataViewModel.fetchRoomDetails(roomId);
-//    }
+    private void getRoomDetails(String roomId) {
+        sessionDataViewModel.fetchRoomDetails(roomId);
+    }
     private void handleFetchRoomDetails(RoomModel roomModel) {
         if (roomModel != null){
-            roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+roomModel.getCapacity());
+            roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+String.valueOf(roomModel.getCapacity()));
         }
     }
     private void getSpeakerDetails(String speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
 
-    private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {
+    private void handleFetchSpeakerDetails(SpeakersModel speakersModel) {
         if (speakersModel != null){
-            speakersList=speakersModel;
+            speakersList.add(speakersModel);
             initView();
         }else {
             //if there are no speakers for this session hide views

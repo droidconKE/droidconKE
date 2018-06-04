@@ -3,7 +3,10 @@ package droiddevelopers254.droidconke.models;
 public class RoomModel {
     private int id;
     private  String name;
-    private  String capacity;
+    private  int capacity;
+
+    public RoomModel() {
+    }
 
     public int getId() {
         return id;
@@ -21,11 +24,11 @@ public class RoomModel {
         this.name = name;
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 }
