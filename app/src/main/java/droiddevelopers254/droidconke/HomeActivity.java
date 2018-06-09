@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.chip.Chip;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -80,6 +81,8 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.starredEventsChip)
     Chip starredEventsChip;
     boolean categoryChosen;
+    Toolbar toolbar;
+    AppBarLayout.LayoutParams params;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -92,6 +95,12 @@ public class HomeActivity extends AppCompatActivity {
                         accountImg.setVisibility(View.GONE);
                         fab.hide();
                         toolbarTitleText.setText(R.string.info_title);
+
+                        //activate the hide toolbar
+                        params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+                        params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+
                         InfoFragment infoFragment= new InfoFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,infoFragment)
                                 .commit();
@@ -104,6 +113,12 @@ public class HomeActivity extends AppCompatActivity {
                         accountImg.setVisibility(View.VISIBLE);
                         fab.show();
                         toolbarTitleText.setText(R.string.schedule_title);
+
+                        //activate the hide toolbar
+                        params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+                        params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+
                         ScheduleFragment scheduleFragment= new ScheduleFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,scheduleFragment)
                                 .commit();
@@ -116,6 +131,11 @@ public class HomeActivity extends AppCompatActivity {
                         accountImg.setVisibility(View.GONE);
                         fab.hide();
                         toolbarTitleText.setText(R.string.map_title);
+
+                        //show toolbar if it was hidden
+                        params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+                        params.setScrollFlags(0);  // clear all scroll flags
+
                         MapFragment mapFragment= new MapFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_home,mapFragment)
                                 .commit();;
@@ -128,7 +148,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
