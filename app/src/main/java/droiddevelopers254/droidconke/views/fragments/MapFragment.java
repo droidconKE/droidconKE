@@ -136,9 +136,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         //open google maps intent to get directions
         googleDirectionsBtn.setOnClickListener(view1 -> {
-            String uri = "http://maps.google.com/maps?f=d&hl=en&saddr="+currentLatLng.latitude+","+currentLatLng.longitude+"&daddr="+senteuPlaza.latitude+","+senteuPlaza.longitude;
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-            startActivity(Intent.createChooser(intent, "Open with"));
+            if (currentLatLng != null ){
+                String uri = "http://maps.google.com/maps?f=d&hl=en&saddr="+currentLatLng.latitude+","+currentLatLng.longitude+"&daddr="+senteuPlaza.latitude+","+senteuPlaza.longitude;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(Intent.createChooser(intent, "Open with"));
+            }else {
+                Toast.makeText(getActivity(),"A problem occured in getting your location",Toast.LENGTH_SHORT).show();
+            }
+
 
         });
 

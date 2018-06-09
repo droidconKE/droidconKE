@@ -21,6 +21,7 @@ public class SessionsModel {
     private String url;
     private String duration;
     private String description;
+    private String topic_color;
 
     public SessionsModel() {
     }
@@ -129,7 +130,15 @@ public class SessionsModel {
         this.time = time;
     }
 
-    public SessionsModel(int id, int speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description) {
+    public String getTopic_color() {
+        return topic_color;
+    }
+
+    public void setTopic_color(String topic_color) {
+        this.topic_color = topic_color;
+    }
+
+    public SessionsModel(int id, int speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String topic_color) {
         this.id = id;
         this.speaker_id = speaker_id;
         this.room_id = room_id;
@@ -143,6 +152,7 @@ public class SessionsModel {
         this.url = url;
         this.duration = duration;
         this.description = description;
+        this.topic_color = topic_color;
     }
 
     public SessionsModel(int id, String starred) {

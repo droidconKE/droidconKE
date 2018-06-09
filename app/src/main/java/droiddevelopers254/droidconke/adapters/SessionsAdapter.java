@@ -2,6 +2,7 @@ package droiddevelopers254.droidconke.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     private List<SessionsModel> sessionsModelList;
     private Context context;
     private SessionsModel sessionsModel;
-    String starStatus,dayNumber;
+    private String starStatus,dayNumber;
     private DatabaseReference databaseReference;
 
 
@@ -38,7 +39,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
 
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView sessionCategoryText,sessionTimeText,sessionRoomText,sessionTitleText;
+        TextView sessionCategoryText,sessionTimeText,sessionRoomText,sessionTitleText,sessionLabelText;
         ImageView starImg;
         LinearLayout sessionDetailsLinear;
         public MyViewHolder(@NonNull View itemView) {
@@ -49,6 +50,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
             sessionRoomText=itemView.findViewById(R.id.sessionRoomText);
             starImg=itemView.findViewById(R.id.starImg);
             sessionDetailsLinear=itemView.findViewById(R.id.sessionDetailsLinear);
+            sessionLabelText=itemView.findViewById(R.id.sessionLabelText);
 
         }
 
@@ -69,6 +71,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         holder.sessionTimeText.setText(sessionsModel.getDuration());
         holder.sessionRoomText.setText(sessionsModel.getRoom());
         holder.sessionCategoryText.setText(sessionsModel.getTopic());
+        holder.sessionLabelText.setBackgroundColor(Color.parseColor(sessionsModel.getTopic_color()));
 
         //check a session was previously starred
         starStatus=sessionsModel.getStarred();
@@ -109,7 +112,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
 
     @Override
     public int getItemCount() {
-
         return sessionsModelList.size();
     }
 
