@@ -39,7 +39,7 @@ public class EventFragment extends Fragment{
     FirebaseRemoteConfig firebaseRemoteConfig;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
         eventTypeViewModel= ViewModelProviders.of(this).get(EventTypeViewModel.class);

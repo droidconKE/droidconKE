@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
     public static final String PREF_NAME="droidconKE_pref";
     public static final String FIREBASE_TOKEN="firebaseToken";
     public static final String TOKEN_SENT="tokenSent";
+    public static final String CATEGORY_CHOSEN="categoryChosen";
     String refreshToken;
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
     public  static int navItemIndex = 1; //controls toolbar titles and icons
@@ -78,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView collapseBottomImg;
     @BindView(R.id.starredEventsChip)
     Chip starredEventsChip;
+    boolean categoryChosen;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -207,10 +209,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //on select of a filter
-        starredEventsChip.setOnClickListener(view -> {
+        //check if the category was previously chosen
+        categoryChosen=sharedPreferences.getBoolean(CATEGORY_CHOSEN,false);
+        if (categoryChosen){
+            starredEventsChip.setChecked(true);
+        }
 
-        });
+        //on select of a filter
+        starredEventsChip.setOnClickListener(view -> sharedPreferences.edit().putBoolean(CATEGORY_CHOSEN,true).apply());
 
     }
     @Override

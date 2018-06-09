@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,11 +113,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_map, container, false);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         sharedPreferences=getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+
+        //show toolbar if its hidden
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         //bottom sheet view
         View bottomSheetView=view.findViewById(R.id.bottomSheetView);
         bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
