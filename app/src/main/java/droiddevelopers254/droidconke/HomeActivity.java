@@ -1,9 +1,8 @@
 package droiddevelopers254.droidconke;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.chip.Chip;
@@ -12,43 +11,38 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-import droiddevelopers254.droidconke.models.UserModel;
+import droiddevelopers254.droidconke.adapters.ChipViewAdapter;
+import droiddevelopers254.droidconke.models.FiltersModel;
 import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour;
+import droiddevelopers254.droidconke.utils.CategoriesData;
+import droiddevelopers254.droidconke.viewmodels.HomeViewModel;
 import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
 import droiddevelopers254.droidconke.views.fragments.MapFragment;
@@ -83,6 +77,11 @@ public class HomeActivity extends AppCompatActivity {
     boolean categoryChosen;
     Toolbar toolbar;
     AppBarLayout.LayoutParams params;
+    HomeViewModel homeViewModel;
+    ChipViewAdapter chipViewAdapter;
+    RecyclerView recyclerView;
+    static RecyclerView.LayoutManager mLayoutManager;
+    List<FiltersModel> filtersModelList= new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -152,6 +151,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        homeViewModel= ViewModelProviders.of(this).get(HomeViewModel.class);
 
         sharedPreferences=getSharedPreferences(PREF_NAME,MODE_PRIVATE);
         auth=FirebaseAuth.getInstance();
@@ -178,6 +178,7 @@ public class HomeActivity extends AppCompatActivity {
         accountImg=findViewById(R.id.accountImg);
         fab=findViewById(R.id.fab);
         collapseBottomImg=findViewById(R.id.collapseBottomImg);
+        recyclerView=findViewById(R.id.typesChipRv);
         bottomSheetView=findViewById(R.id.bottomSheetView);
         bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -230,15 +231,30 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //check if the category was previously chosen
-        categoryChosen=sharedPreferences.getBoolean(CATEGORY_CHOSEN,false);
-        if (categoryChosen){
-            starredEventsChip.setChecked(true);
-        }
 
-        //on select of a filter
-        starredEventsChip.setOnClickListener(view -> sharedPreferences.edit().putBoolean(CATEGORY_CHOSEN,true).apply());
+        //observe livedata emitted by view model
+//        homeViewModel.getFiltersList().observe(this,filtersModels -> {
+//           if (filtersModels != null){
+//
+//           }
+//        });
+//        homeViewModel.getFilterStatus().observe(this,filtersModel -> {
+//            if (filtersModel != null){
+//            }
+//        });
+        filtersModelList= CategoriesData.getCategories();
+        initView();
 
     }
+
+    private void initView() {
+        chipViewAdapter=new ChipViewAdapter(filtersModelList,getApplicationContext());
+        mLayoutManager= new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(chipViewAdapter);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -271,5 +287,16 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    public void selectFilter(View view) {
+        int id= view.getId();
+//        FiltersModel filtersModel= new FiltersModel(0,id,true);
+//        homeViewModel.saveFilter(filtersModel);
+
+    }
+
+    private void checkStatus(int id) {
+//        homeViewModel.checkFilterStatus(id);
     }
 }
