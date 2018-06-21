@@ -2,6 +2,7 @@ package droiddevelopers254.droidconke.views.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +35,7 @@ public class DayOneFragment extends Fragment{
     DayOneViewModel dayOneViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day_one, container, false);
 
         dayOneViewModel= ViewModelProviders.of(this).get(DayOneViewModel.class);

@@ -2,6 +2,7 @@ package droiddevelopers254.droidconke.views.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public class TravelFragment extends Fragment{
     FirebaseRemoteConfig firebaseRemoteConfig;
     
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_travel, container, false);
 
         firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
