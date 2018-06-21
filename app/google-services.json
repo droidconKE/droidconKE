@@ -15,6 +15,18 @@
       },
       "oauth_client": [
         {
+          "client_id": "602867001820-hcujt6b2lach0r72khh4it6ugmhjoohl.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "602867001820-utto7oau2or695torg6j0p9ilgcltgt5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "droiddevelopers254.droidconke",
+            "certificate_hash": "64505a0c2539b12d06bd366f4f3a1ff5fe19e5f6"
+          }
+        },
+        {
           "client_id": "602867001820-fhed3i14rvgtloqjcs8jj78t8c8ca8ni.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,6 +45,10 @@
         {
           "client_id": "602867001820-kv86u7gcbmkog91iljg83r4h5cuu20bl.apps.googleusercontent.com",
           "client_type": 3
+        },
+        {
+          "client_id": "602867001820-hcujt6b2lach0r72khh4it6ugmhjoohl.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -48,7 +64,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "602867001820-kv86u7gcbmkog91iljg83r4h5cuu20bl.apps.googleusercontent.com",
+              "client_id": "602867001820-hcujt6b2lach0r72khh4it6ugmhjoohl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

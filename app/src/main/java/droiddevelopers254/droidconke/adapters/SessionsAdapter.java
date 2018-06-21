@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyViewHolder> {
@@ -28,6 +30,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     private SessionsModel sessionsModel;
     String starStatus,dayNumber;
     private DatabaseReference databaseReference;
+    private StarredSessionModel starredSessionModel;
 
 
     public SessionsAdapter(Context context,List<SessionsModel> sessionsModelList,String dayNumber){
@@ -35,6 +38,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         this.context=context;
         this.dayNumber=dayNumber;
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        starredSessionModel = new StarredSessionModel();
 
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -79,7 +83,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         }
 
         //change the star section in db
-        holder.starImg.setOnClickListener(view -> {
+   /*     holder.starImg.setOnClickListener(view -> {
             if (starStatus.equals("0")){
                 //start a session
                 holder.starImg.setImageResource(R.drawable.ic_star_blue_24dp);
@@ -93,7 +97,21 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
                 databaseReference.child(dayNumber).child(String.valueOf(sessionsModelList.get(position).getId())).child("starred").setValue("0");
             }
 
-        });
+        });*/
+/*
+
+       //record the users starred session in their profile
+        starredSessionModel.setDay(String.valueOf(0));//I use 0 for day_one and 1 for day_two
+        starredSessionModel.setSession_id(String.valueOf(sessionsModel.getId()));
+
+        databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("starred").push().setValue(starredSessionModel);
+
+        //this will aid in tracking every starred session and then send a push notification
+        databaseReference.child("starred_sessions").push().setValue(starredSessionModel);
+*/
+
+
         //start session detail view
         holder.sessionDetailsLinear.setOnClickListener(view -> {
             Intent  intent = new Intent(context,SessionViewActivity.class);

@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,6 +35,7 @@ import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
 import droiddevelopers254.droidconke.models.RoomModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SpeakersModel;
+import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
 public class SessionViewActivity extends AppCompatActivity {
@@ -71,12 +73,16 @@ public class SessionViewActivity extends AppCompatActivity {
     SpeakersAdapter speakersAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
 
+    StarredSessionModel starredSessionModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        starredSessionModel = new StarredSessionModel();
 
         //get extras
         Intent extraIntent=getIntent();
@@ -186,14 +192,24 @@ public class SessionViewActivity extends AppCompatActivity {
                 //start a session
                fab.setImageResource(R.drawable.ic_star_blue_24dp);
 
+               starredSessionModel.setDay(dayNumber);
+               starredSessionModel.setSession_id(String.valueOf(sessionsModel1.getId()));
+               starredSessionModel.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+               databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                       .child("starred").push().setValue(starredSessionModel);
+
+               //this will aid in tracking every starred session and then send a push notification
+               databaseReference.child("starred_sessions").push().setValue(starredSessionModel);
+
                 //update in firebase
-                databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("1");
+              //  databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("1");
 
             }else if(starStatus.equals("1")){
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
 
                 //update in firebase
-                databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
+               // databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
             }
         });
         //collapse bottom bar
