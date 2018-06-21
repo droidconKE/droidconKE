@@ -1,0 +1,27 @@
+
+Vsquid:UnusedPrivateMethod«"0Remove this unused private "checkStatus" method.(’’Ÿ²
+Lsquid:EmptyStatementUsageCheckŒ"Remove this empty statement.(ÕŞšÍûÿÿÿÿ
+U"squid:SwitchLastCaseIsDefaultCheckX""Add a default case to this switch.(øå´¡ÿÿÿÿÿ
+Esquid:S16595".Declare "toolbarTitleText" on a separate line.(Õ²é¶
+?squid:S16595"(Declare "cancelText" on a separate line.(Õ²é¶
+Gsquid:S10685"0Remove this unused "mTextMessage" private field.(Õ²é¶
+Esquid:S10685".Remove this unused "cancelText" private field.(Õ²é¶
+Bsquid:S1068?"+Remove this unused "builder" private field.(©Äç
+Esquid:S1068F".Remove this unused "RC_SIGN_IN" private field.(ÃŒ“´
+~squid:S1450H"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ
+Nsquid:S1444>"2Make this "public static navItemIndex" field final(³’¯Æøÿÿÿÿ
+Lsquid:S1444E"0Make this "public static fabVisible" field final(ÅËÔ›ıÿÿÿÿ
+hsquid:CommentedOutCodeLineì"<This block of commented-out lines of code should be removed.(Í¯£«ûÿÿÿÿ
+hsquid:CommentedOutCodeLineï"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+hsquid:CommentedOutCodeLine¦"<This block of commented-out lines of code should be removed.(Şåºûÿÿÿÿ
+hsquid:CommentedOutCodeLine¬"<This block of commented-out lines of code should be removed.(–†§ûÿÿÿÿ
+Ssquid:S2696ü"6Make the enclosing method "static" or remove this set.(•º°ğüÿÿÿÿ
+‹"squid:ClassVariableVisibilityCheck>"XMake navItemIndex a static final constant or non-public and provide accessors if needed.(³’¯Æøÿÿÿÿ
+}"squid:ClassVariableVisibilityCheckD"OMake fab a static final constant or non-public and provide accessors if needed.(€Œ
+‰"squid:ClassVariableVisibilityCheckE"VMake fabVisible a static final constant or non-public and provide accessors if needed.(ÅËÔ›ıÿÿÿÿ
+Dsquid:S1481¥"'Remove this unused "id" local variable.(„™¥Ñúÿÿÿÿ
+Asquid:S1172«")Remove this unused method parameter "id".(’’Ÿ²
+squid:S1186Å"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ
+Ssquid:S1854¥"6Remove this useless assignment to local variable "id".(„™¥Ñúÿÿÿÿ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‚¥Äö
+esquid:MaximumInheritanceDepth3"<This class has 7 parents which is greater than 5 authorized.(Æ¼¾Î
