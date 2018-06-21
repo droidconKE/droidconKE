@@ -195,6 +195,6 @@ public class AuthenticateUserActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
 
-    }
+    } 
 
 }
