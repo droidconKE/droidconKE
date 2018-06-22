@@ -12,12 +12,13 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import droiddevelopers254.droidconke.models.UserModel;
 
+import static droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN;
+import static droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME;
+
 public class InstanceIdService extends FirebaseInstanceIdService {
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     SharedPreferences sharedPreferences;
-    public static final String PREF_NAME="droidconKE_pref";
-    public static final String FIREBASE_TOKEN="firebaseToken";
     String refreshToken;
 
 

@@ -6,7 +6,9 @@ admin.initializeApp();
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
+	var date = new Date().toLocaleTimeString();
+ response.send("helloWorld");
+ console.log(date)
 });
 
 

@@ -10,6 +10,10 @@ public class FiltersModel {
     private boolean checked;
     private String name;
 
+
+    public FiltersModel() {
+    }
+
     public int getId() {
         return id;
     }
@@ -33,9 +37,5 @@ public class FiltersModel {
         this.name = name;
     }
 
-    public FiltersModel(int id, boolean checked, String name) {
-        this.id = id;
-        this.checked = checked;
-        this.name = name;
-    }
+
 }

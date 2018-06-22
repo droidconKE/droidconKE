@@ -6,35 +6,39 @@ import android.arch.lifecycle.ViewModel;
 
 import java.util.List;
 
+import droiddevelopers254.droidconke.datastates.FiltersState;
 import droiddevelopers254.droidconke.models.FiltersModel;
-import droiddevelopers254.droidconke.repository.FiltersRepo;
+import droiddevelopers254.droidconke.repository.TopicFiltersRepo;
+import droiddevelopers254.droidconke.repository.TypeFiltersRepo;
 
 public class HomeViewModel extends ViewModel {
     private LiveData<List<FiltersModel>> filtersList;
-    private FiltersRepo filtersRepo;
-    private MediatorLiveData<FiltersModel> filtersModelMediatorLiveData;
-
+    private TypeFiltersRepo typeFiltersRepo;
+    private MediatorLiveData<FiltersState> filtersStateMediatorLiveData;
+    private MediatorLiveData<FiltersState> stateMediatorLiveData;
+    private TopicFiltersRepo topicFiltersRepo;
 
 
     public HomeViewModel (){
-//        filtersRepo=new FiltersRepo();
-//        filtersList=filtersRepo.getFilters();
-//        filtersModelMediatorLiveData= new MediatorLiveData<>();
+        typeFiltersRepo =new TypeFiltersRepo();
+        filtersStateMediatorLiveData= new MediatorLiveData<>();
+        stateMediatorLiveData= new MediatorLiveData<>();
+        topicFiltersRepo= new TopicFiltersRepo();
     }
 
-    public LiveData<List<FiltersModel>> getFiltersList(){
-        return filtersList;
+    public LiveData<FiltersState> getTypeFiltersResponse(){
+        return filtersStateMediatorLiveData;
     }
-    public LiveData<FiltersModel> getFilterStatus(){
-        return filtersModelMediatorLiveData;
+    public LiveData<FiltersState> getTopicFiltersResponse(){
+        return stateMediatorLiveData;
     }
 
 //    public void saveFilter(FiltersModel filtersModel){
-//        filtersRepo.saveFilter(filtersModel);
+//        typeFiltersRepo.saveFilter(filtersModel);
 //    }
 //
 //    public void checkFilterStatus(int filterId){
-//        final LiveData<FiltersModel> filtersModelLiveData= filtersRepo.checkFilterStatus(filterId);
+//        final LiveData<FiltersModel> filtersModelLiveData= typeFiltersRepo.checkFilterStatus(filterId);
 //        filtersModelMediatorLiveData.addSource(filtersModelLiveData,
 //                filtersModelMediatorLiveData->{
 //            if (this.filtersModelMediatorLiveData.hasActiveObservers()){
@@ -43,4 +47,26 @@ public class HomeViewModel extends ViewModel {
 //            this.filtersModelMediatorLiveData.setValue(filtersModelMediatorLiveData);
 //                });
 //    }
+
+    public void getTypeFilters(){
+        final  LiveData<FiltersState> filtersStateLiveData= typeFiltersRepo.getFilters();
+        filtersStateMediatorLiveData.addSource(filtersStateLiveData,
+                filtersStateMediatorLiveData ->{
+            if (this.filtersStateMediatorLiveData.hasActiveObservers()){
+                this.filtersStateMediatorLiveData.removeSource(filtersStateLiveData);
+            }
+            this.filtersStateMediatorLiveData.setValue(filtersStateMediatorLiveData);
+                });
+    }
+    public void getTopicFilters(){
+        final  LiveData<FiltersState> filtersStateLiveData= topicFiltersRepo.getFilters();
+        stateMediatorLiveData.addSource(filtersStateLiveData,
+                stateMediatorLiveData ->{
+                    if (this.stateMediatorLiveData.hasActiveObservers()){
+                        this.stateMediatorLiveData.removeSource(filtersStateLiveData);
+                    }
+                    this.stateMediatorLiveData.setValue(stateMediatorLiveData);
+                });
+
+    }
 }

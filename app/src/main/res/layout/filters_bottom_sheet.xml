@@ -58,97 +58,13 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_height="wrap_content" />
-        <LinearLayout
+
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:orientation="vertical"
-                android:layout_weight="2"
-                android:layout_height="wrap_content">
+            android:id="@+id/topicsChipsRv"
+            android:scrollbars="none"
+            android:layout_height="wrap_content"/>
 
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/firebaseChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginBottom="6dp"
-                    app:chipText="Firebase"
-                    android:onClick="selectFilter"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/androidThingsChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:onClick="selectFilter"
-                    app:chipText="Android Things"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/paymentsChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    app:chipText="Payments"
-                    android:onClick="selectFilter"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/locationChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    app:chipText="@string/location"
-                    android:onClick="selectFilter"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/androidPayChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginBottom="6dp"
-                    android:onClick="selectFilter"
-                    app:chipText="@string/play_text"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/keynoteChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:onClick="selectFilter"
-                    app:chipText="Keynote"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/addsChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:onClick="selectFilter"
-                    app:chipText="Ads"
-                    android:layout_height="wrap_content" />
-                <android.support.design.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:id="@+id/flutterChip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_marginTop="6dp"
-                    android:onClick="selectFilter"
-                    app:chipText="Flutter"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

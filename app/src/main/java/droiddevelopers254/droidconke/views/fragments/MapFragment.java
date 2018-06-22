@@ -54,6 +54,8 @@ import com.google.android.gms.tasks.Task;
 
 import droiddevelopers254.droidconke.R;
 
+import static droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME;
+
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     LatLng senteuPlaza = new LatLng(-1.289256, 36.783180);
     private static final int DEFAULT_ZOOM = 17;
@@ -75,7 +77,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     boolean sentToSettings = false;
     private static final int PERMISSION_CALLBACK_CONSTANT = 100;
     SharedPreferences sharedPreferences;
-    public static final String PREF_NAME="droidconKE_pref";
     private static final int REQUEST_PERMISSION_SETTING = 101;
 
     @SuppressLint("MissingPermission")

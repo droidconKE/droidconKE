@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import droiddevelopers254.droidconke.HomeActivity;
 import droiddevelopers254.droidconke.R;
+import droiddevelopers254.droidconke.utils.SharedPref;
 import droiddevelopers254.droidconke.utils.WelcomeUtils;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -149,7 +150,7 @@ public class WelcomeActivity extends AppCompatActivity {
         getStartedBtn.setOnClickListener(v -> {
             finish();
             //  update 1st time pref
-            WelcomeUtils.saveSharedSetting(WelcomeActivity.this, HomeActivity.PREF_USER_FIRST_TIME, "false");
+            WelcomeUtils.saveSharedSetting(WelcomeActivity.this, SharedPref.PREF_USER_FIRST_TIME, "false");
 
         });
 

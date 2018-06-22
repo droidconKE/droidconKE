@@ -1,8 +1,8 @@
 
-Hsquid:S1068".Remove this unused "filtersDao" private field.(µψΎύÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(–ΰ«ωÿÿÿÿ
 esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ε—ύΨόÿÿÿÿ
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ξ“¶‹ψÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Σζ—ύÿÿÿÿ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‚£Ή§
 Asquid:S1068",Remove this unused "executor" private field.(δό¥ 
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(–ΰ«ωÿÿÿÿ
+Hsquid:S1068".Remove this unused "filtersDao" private field.(µψΎύÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ξ“¶‹ψÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‚£Ή§
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Σζ—ύÿÿÿÿ

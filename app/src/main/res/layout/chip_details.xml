@@ -4,7 +4,7 @@
     style="@style/Widget.MaterialComponents.Chip.Filter"
     android:tooltipText="Recycleview"
     android:id="@+id/categoryChip"
-    android:layout_marginTop="6dp"
+    android:layout_marginTop="@dimen/fab_margin"
     android:layout_height="wrap_content">
 
 </android.support.design.chip.Chip>
