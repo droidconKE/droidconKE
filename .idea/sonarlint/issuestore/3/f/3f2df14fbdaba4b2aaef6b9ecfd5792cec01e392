@@ -1,0 +1,6 @@
+
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(ª„Ä¬ùÿÿÿÿ
+Nsquid:S1172"4Remove this unused method parameter "databaseError".(úÓãðøÿÿÿÿ
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(úÓãðøÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
+msquid:UselessImportCheck"KRemove this unused import 'droiddevelopers254.droidconke.utils.AgendaData'.(Ñ‹š¢

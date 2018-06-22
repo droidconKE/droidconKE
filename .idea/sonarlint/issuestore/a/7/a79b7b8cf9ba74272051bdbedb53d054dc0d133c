@@ -1,0 +1,4 @@
+
+msquid:S1450"XRemove the "tabLayout" field and declare it as a local variable in the relevant methods.(¤×ä
+rsquid:S1450"XRemove the "viewPager" field and declare it as a local variable in the relevant methods.(åÙ¬Ïûÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ

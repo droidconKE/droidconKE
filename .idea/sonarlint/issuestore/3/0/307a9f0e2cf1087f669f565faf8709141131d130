@@ -1,0 +1,7 @@
+
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢ê÷÷
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ
+rsquid:UselessImportCheck"PRemove this unused import 'droiddevelopers254.droidconke.models.EventTypeModel'.(¨ÏõÛ
+Rsquid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+Rsquid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+{squid:UselessImportCheck"TRemove this unused import 'droiddevelopers254.droidconke.datastates.EventTypeState'.(¹šõøÿÿÿÿ

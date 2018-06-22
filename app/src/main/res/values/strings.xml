@@ -138,6 +138,8 @@
     <string name="filter_details">Filters</string>
     <string name="about_detail_title">Company A</string>
     <string name="title_activity_about_details">AboutDetails</string>
+    <string name="session_time_am">AM</string>
+    <string name="time_session">7:20</string>
 
 
 </resources>

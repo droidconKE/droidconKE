@@ -1,0 +1,7 @@
+
+Ysquid:UnusedPrivateMethod"1Remove this unused private "showSnackbar" method.(È˜ƒùÿÿÿÿ
+gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ŸŒ¹Ñ
+_squid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(Á°úÁûÿÿÿÿ
+Zsquid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(ëá—
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ
+csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ó¿

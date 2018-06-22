@@ -1,0 +1,8 @@
+
+Osquid:S1118":Add a private constructor to hide the implicit public one.(Œ§í—
+psquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÃÜÉæ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(›§ƒÒ8¦È»Â,
+fsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(´¥¨t8¦È»Â,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÔŒ™œ8¦È»Â,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‹åÄ’8¦È»Â,
+„squid:S1488"hImmediately return this expression instead of assigning it to the temporary variable "filtersModelList".(™»Þê8¦È»Â,

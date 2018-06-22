@@ -1,0 +1,9 @@
+
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(•º°ðüÿÿÿÿ
+Nsquid:S1172"4Remove this unused method parameter "databaseError".(úÓãðøÿÿÿÿ
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(úÓãðøÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñþÿÿÿÿ
+qsquid:UselessImportCheck"ORemove this unused import 'android.support.design.widget.FloatingActionButton'.(„Ÿ¹¼
+Usquid:UselessImportCheck".Remove this unused import 'android.view.View'.(Ø½­äþÿÿÿÿ
+dsquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p
+hsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ããÍ±ùÿÿÿÿ

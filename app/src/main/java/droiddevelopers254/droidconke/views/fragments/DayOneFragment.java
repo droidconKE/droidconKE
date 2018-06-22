@@ -10,45 +10,56 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import droiddevelopers254.droidconke.R;
+import droiddevelopers254.droidconke.adapters.SessionTimeAdapter;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
+import droiddevelopers254.droidconke.models.SessionTimeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel;
 
-public class DayOneFragment extends Fragment{
-    RecyclerView recyclerView;
+public class DayOneFragment extends Fragment {
     SessionsAdapter sessionsAdapter;
     List<SessionsModel> sessionsModelList = new ArrayList<>();
+    List<SessionTimeModel> sessionTimeModelList = new ArrayList<>();
     List<String> sessionIds = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     DayOneViewModel dayOneViewModel;
+    @BindView(R.id.sessionTimeRv)
+    RecyclerView sessionTimeRv;
+    @BindView(R.id.sessionsRv)
+    RecyclerView sessionsRv;
+    Unbinder unbinder;
+    SessionTimeAdapter sessionTimeAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day_one, container, false);
 
-        dayOneViewModel= ViewModelProviders.of(this).get(DayOneViewModel.class);
+        dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel.class);
+        unbinder = ButterKnife.bind(this, view);
 
-        recyclerView=view.findViewById(R.id.sessionsRv);
+        SessionTimeModel sessionTimeModel= new SessionTimeModel("7:00","AM");
+        sessionTimeModelList.add(sessionTimeModel);
+
+
+        initTimeView();
 
         getDayOneSessions();
 
         //observe live data emitted by view model
-        dayOneViewModel.getSessions().observe(this,sessionsState -> {
-            if (sessionsState.getDatabaseError() != null){
+        dayOneViewModel.getSessions().observe(this, sessionsState -> {
+            if (sessionsState.getDatabaseError() != null) {
                 handleDatabaseError(sessionsState.getDatabaseError());
-            }else {
+            } else {
                 handleDayOneSessions(sessionsState.getSessionsModel());
             }
         });
@@ -56,9 +67,17 @@ public class DayOneFragment extends Fragment{
         return view;
     }
 
+    private void initTimeView() {
+        sessionTimeAdapter= new SessionTimeAdapter(getContext(),sessionTimeModelList);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        sessionTimeRv.setLayoutManager(mLayoutManager);
+        sessionTimeRv.setItemAnimator(new DefaultItemAnimator());
+        sessionTimeRv.setAdapter(sessionTimeAdapter);
+    }
+
     private void handleDayOneSessions(List<SessionsModel> sessionsList) {
-        if (sessionsList != null){
-            sessionsModelList= sessionsList;
+        if (sessionsList != null) {
+            sessionsModelList = sessionsList;
             initView();
         }
     }
@@ -66,17 +85,23 @@ public class DayOneFragment extends Fragment{
     private void handleDatabaseError(DatabaseError databaseError) {
     }
 
-    private void getDayOneSessions(){
+    private void getDayOneSessions() {
         dayOneViewModel.fetchDayOneSessions();
     }
 
     private void initView() {
 
-        mLayoutManager= new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList,"day_one");
-        recyclerView.setAdapter(sessionsAdapter);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        sessionsRv.setLayoutManager(mLayoutManager);
+        sessionsRv.setItemAnimator(new DefaultItemAnimator());
+        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList, "day_one");
+        sessionsRv.setAdapter(sessionsAdapter);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
