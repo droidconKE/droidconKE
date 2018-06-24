@@ -3,6 +3,8 @@ package droiddevelopers254.droidconke.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.recyclerview.extensions.ListAdapter;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,29 +13,40 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.List;
-
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.AgendaModel;
 
-public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHolder> {
-    private List<AgendaModel> agendaModelList;
+public class AgendaAdapter extends ListAdapter<AgendaModel, AgendaAdapter.MyViewHolder> {
     private Context context;
 
-    public AgendaAdapter(List<AgendaModel> agendaModelList, Context context){
-        this.agendaModelList = agendaModelList;
-        this.context=context;
+    private static DiffUtil.ItemCallback<AgendaModel> COMPARATOR = new DiffUtil.ItemCallback<AgendaModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull AgendaModel oldItem, @NonNull AgendaModel newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull AgendaModel oldItem, @NonNull AgendaModel newItem) {
+            return oldItem == newItem;
+        }
+    };
+
+    public AgendaAdapter(Context context) {
+        super(COMPARATOR);
+        this.context = context;
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView agendaTitleText,agendaTimelineText;
+        TextView agendaTitleText, agendaTimelineText;
         ImageView agendaImg;
         LinearLayout agendaLinear;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            agendaTitleText=itemView.findViewById(R.id.agendaTitleText);
-            agendaTimelineText=itemView.findViewById(R.id.agendaTimelineText);
-            agendaImg=itemView.findViewById(R.id.agendaImg);
-            agendaLinear=itemView.findViewById(R.id.agendaLinear);
+            agendaTitleText = itemView.findViewById(R.id.agendaTitleText);
+            agendaTimelineText = itemView.findViewById(R.id.agendaTimelineText);
+            agendaImg = itemView.findViewById(R.id.agendaImg);
+            agendaLinear = itemView.findViewById(R.id.agendaLinear);
         }
     }
 
@@ -47,17 +60,10 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        AgendaModel agendaModel = agendaModelList.get(position);
+        AgendaModel agendaModel = getItem(position);
         holder.agendaTitleText.setText(agendaModel.getTitle());
         holder.agendaTimelineText.setText(agendaModel.getTime());
-       //TODO add logic for changing agenda icon
+        //TODO add logic for changing agenda icon
         holder.agendaLinear.setBackgroundColor(Color.parseColor(agendaModel.getBackground_color()));
     }
-
-    @Override
-    public int getItemCount() {
-        return agendaModelList.size();
-    }
-
-
 }

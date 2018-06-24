@@ -3,7 +3,7 @@ apply plugin: 'io.fabric'
 
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 28
     defaultConfig {
         applicationId "droiddevelopers254.droidconke"
         minSdkVersion 21

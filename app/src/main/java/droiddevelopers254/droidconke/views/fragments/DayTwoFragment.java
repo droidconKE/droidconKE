@@ -9,15 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
@@ -28,7 +22,6 @@ import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel;
 public class DayTwoFragment extends Fragment {
     RecyclerView recyclerView;
     SessionsAdapter sessionsAdapter;
-    List<SessionsModel> sessionsModelList = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     DayTwoViewModel dayTwoViewModel;
 
@@ -56,7 +49,7 @@ public class DayTwoFragment extends Fragment {
 
     private void handleDayTwoSessions(List<SessionsModel> sessionsList) {
         if (sessionsList != null){
-            sessionsModelList =sessionsList;
+            sessionsAdapter.submitList(sessionsList);
             initView();
         }
     }
@@ -74,7 +67,7 @@ public class DayTwoFragment extends Fragment {
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList);
+        sessionsAdapter = new SessionsAdapter(getActivity());
         recyclerView.setAdapter(sessionsAdapter);
     }
 

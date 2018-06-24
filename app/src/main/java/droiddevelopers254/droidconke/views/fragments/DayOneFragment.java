@@ -9,13 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +20,9 @@ import droiddevelopers254.droidconke.adapters.SessionsAdapter;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel;
 
-public class DayOneFragment extends Fragment{
+public class DayOneFragment extends Fragment {
     RecyclerView recyclerView;
     SessionsAdapter sessionsAdapter;
-    List<SessionsModel> sessionsModelList = new ArrayList<>();
     List<String> sessionIds = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     DayOneViewModel dayOneViewModel;
@@ -37,17 +31,17 @@ public class DayOneFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day_one, container, false);
 
-        dayOneViewModel= ViewModelProviders.of(this).get(DayOneViewModel.class);
+        dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel.class);
 
-        recyclerView=view.findViewById(R.id.sessionsRv);
+        recyclerView = view.findViewById(R.id.sessionsRv);
 
         getDayOneSessions();
 
         //observe live data emitted by view model
-        dayOneViewModel.getSessions().observe(this,sessionsState -> {
-            if (sessionsState.getDatabaseError() != null){
+        dayOneViewModel.getSessions().observe(this, sessionsState -> {
+            if (sessionsState.getDatabaseError() != null) {
                 handleDatabaseError(sessionsState.getDatabaseError());
-            }else {
+            } else {
                 handleDayOneSessions(sessionsState.getSessionsModel());
             }
         });
@@ -56,8 +50,8 @@ public class DayOneFragment extends Fragment{
     }
 
     private void handleDayOneSessions(List<SessionsModel> sessionsList) {
-        if (sessionsList != null){
-            sessionsModelList= sessionsList;
+        if (sessionsList != null) {
+            sessionsAdapter.submitList(sessionsList);
             initView();
         }
     }
@@ -65,16 +59,16 @@ public class DayOneFragment extends Fragment{
     private void handleDatabaseError(DatabaseError databaseError) {
     }
 
-    private void getDayOneSessions(){
+    private void getDayOneSessions() {
         dayOneViewModel.fetchDayOneSessions();
     }
 
     private void initView() {
 
-        mLayoutManager= new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList);
+        sessionsAdapter = new SessionsAdapter(getActivity());
         recyclerView.setAdapter(sessionsAdapter);
 
     }
