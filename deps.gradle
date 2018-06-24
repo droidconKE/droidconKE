@@ -1,0 +1,81 @@
+ext.deps = [:]
+
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 27
+build_versions.compile_sdk = 28
+ext.build_versions = build_versions
+
+def versions = [:]
+versions.support = "28.0.0-alpha1"
+versions.butterknife = "8.8.1"
+versions.lifecycle = "1.1.1"
+versions.room = "1.1.0"
+versions.junit = "4.12"
+versions.runner = "1.0.2"
+versions.glide = "3.7.0"
+versions.play_services = "15.0.1"
+versions.commons = "3.5"
+versions.constraint_layout = "1.1.0"
+versions.circleview = "2.1.0"
+versions.espresso = "3.0.2"
+versions.gradle_plugin = "3.1.2"
+versions.play_services_plugin = "3.2.0"
+versions.fabric_plugin = "1.25.1"
+versions.firebase1 = "15.0.2"
+versions.firebase2 = "15.1.0"
+versions.firebase3 = "15.0.1"
+versions.firebase_ui = "3.2.2"
+
+def deps = [:]
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle_plugin"
+deps.play_services_plugin = "com.google.gms:google-services:$versions.play_services_plugin"
+deps.fabric_plugin = "io.fabric.tools:gradle:$versions.fabric_plugin"
+deps.circle_image_view = "de.hdodenhof:circleimageview:$versions.circleview"
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.apache_commons = "org.apache.commons:commons-lang3:$versions.commons"
+deps.junit = "junit:junit:$versions.junit"
+deps.firebase_ui_auth = "com.firebaseui:firebase-ui-auth:$versions.firebase_ui"
+deps.runner = "com.android.support.test:runner:$versions.runner"
+deps.espresso = "com.android.support.test.espresso:espresso-core:$versions.espresso"
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+
+def firebase = [:]
+firebase.core = "com.google.firebase:firebase-core:$versions.firebase1"
+firebase.auth = "com.google.firebase:firebase-auth:$versions.firebase2"
+firebase.database = "com.google.firebase:firebase-database:$versions.firebase3"
+firebase.config = "com.google.firebase:firebase-config:$versions.firebase1"
+firebase.crash = "com.google.firebase:firebase-crash:$versions.firebase1"
+firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase1"
+deps.firebase = firebase
+
+def lifecycle = [:]
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def support = [:]
+support.appcompat = "com.android.support:appcompat-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.vector_drawable = "com.android.support:support-vector-drawable:$versions.support"
+support.media_compat = "com.android.support:support-media-compat:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.customtabs = "com.android.support:customtabs:$versions.support"
+deps.support = support
+
+def play_services = [:]
+play_services.auth = "com.google.android.gms:play-services-auth:$versions.play_services"
+play_services.maps = "com.google.android.gms:play-services-maps:$versions.play_services"
+deps.play_services = play_services
+
+def butterknife = [:]
+butterknife.core = "com.jakewharton:butterknife:$versions.butterknife"
+butterknife.compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.butterknife = butterknife
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.room"
+room.compiler = "android.arch.persistence.room:compiler:$versions.room"
+deps.room = room
+
+ext.deps = deps
