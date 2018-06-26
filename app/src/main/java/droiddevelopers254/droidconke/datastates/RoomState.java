@@ -8,23 +8,23 @@ import droiddevelopers254.droidconke.models.RoomModel;
 
 public class RoomState {
     private RoomModel roomModel;
-    private DatabaseError databaseError;
+    private String error;
 
     public RoomState(RoomModel roomModel) {
         this.roomModel = roomModel;
-        this.roomModel= roomModel;
+        this.error= null;
     }
 
-    public RoomState(DatabaseError databaseError) {
-        this.databaseError = databaseError;
-        this.databaseError= databaseError;
+    public RoomState(String  databaseError) {
+        this.error = databaseError;
+        this.roomModel= null;
     }
 
     public RoomModel getRoomModel() {
         return roomModel;
     }
 
-    public DatabaseError getDatabaseError() {
-        return databaseError;
+    public String  getDatabaseError() {
+        return error;
     }
 }

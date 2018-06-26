@@ -2,13 +2,21 @@ package droiddevelopers254.droidconke.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +37,20 @@ public class SessionDataRepo {
 
     public LiveData<SessionDataState> getSessionData(int sessionId){
         final MutableLiveData<SessionDataState> sessionsModelMutableLiveData= new MutableLiveData<>();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("day_one").child(String.valueOf(sessionId)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot!=null){
-                    SessionsModel sessionsModel = dataSnapshot.getValue(SessionsModel.class);
-                   sessionsModelMutableLiveData.setValue(new SessionDataState(sessionsModel));
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                sessionsModelMutableLiveData.setValue(new SessionDataState(error));
-            }
-        });
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("day_one")
+                .whereEqualTo("id",sessionId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                            SessionsModel sessionsModel=queryDocumentSnapshot.toObject(SessionsModel.class);
+                            sessionsModelMutableLiveData.setValue(new SessionDataState(sessionsModel));
+                        }
+                    }else {
+                        sessionsModelMutableLiveData.setValue(new SessionDataState("Error getting session details"));
+                    }
+                });
 
         return  sessionsModelMutableLiveData;
     }

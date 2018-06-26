@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 
@@ -59,7 +60,8 @@ public class AgendaFragment extends Fragment {
         }
     }
 
-    private void handleDatabaseError(DatabaseError databaseError) {
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
     private void initView() {

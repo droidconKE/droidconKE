@@ -2,12 +2,18 @@ package droiddevelopers254.droidconke.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +30,22 @@ public class RoomRepo {
 
     public LiveData<RoomState> getRoomDetails(String roomId){
         final MutableLiveData<RoomState> roomStateLiveData= new MutableLiveData<>();
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("rooms").child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot !=null){
-                    RoomModel roomModel = dataSnapshot.getValue(RoomModel.class);
-                    roomStateLiveData.setValue(new RoomState(roomModel));
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("speakers")
+                .whereEqualTo("id",roomId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                            RoomModel roomModel= queryDocumentSnapshot.toObject(RoomModel.class);
+                            roomStateLiveData.setValue(new RoomState(roomModel));
 
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                roomStateLiveData.setValue(new RoomState(databaseError));
-            }
-        });
+                        }
+                    }else {
+                        roomStateLiveData.setValue(new RoomState("Error getting room details"));
+                    }
 
+                });
         return roomStateLiveData;
     }
 }

@@ -8,21 +8,21 @@ import droiddevelopers254.droidconke.models.AgendaModel;
 
 public class AgendaState {
     private List<AgendaModel> agendaModel;
-    private DatabaseError databaseError;
+    private String error;
 
     public AgendaState(List<AgendaModel> agendaModel) {
         this.agendaModel = agendaModel;
     }
 
-    public AgendaState(DatabaseError databaseError) {
-        this.databaseError = databaseError;
+    public AgendaState(String  databaseError) {
+        this.error = databaseError;
     }
 
     public List<AgendaModel> getAgendaModel() {
         return agendaModel;
     }
 
-    public DatabaseError getDatabaseError() {
-        return databaseError;
+    public String getDatabaseError() {
+        return error;
     }
 }

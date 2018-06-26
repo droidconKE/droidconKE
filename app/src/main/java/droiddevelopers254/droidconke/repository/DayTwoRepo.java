@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,35 +18,23 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class DayTwoRepo {
 
-    List<SessionsModel> sessionList = new ArrayList<>();
-
     public DayTwoRepo(){
 
     }
 
     public LiveData<SessionsState> getSessionData(){
-
         final MutableLiveData<SessionsState> sessionsModelMutableLiveData= new MutableLiveData<>();
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("day_two");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(databaseReference!=null){
-                    for(DataSnapshot data :dataSnapshot.getChildren()) {
-                        SessionsModel sessionsModel = data.getValue(SessionsModel.class);
-                        sessionList.add(sessionsModel);
-                        sessionsModelMutableLiveData.setValue(new SessionsState(sessionList));
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("day_two")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()){
+                        List<SessionsModel> sessionsModelList=queryDocumentSnapshots.toObjects(SessionsModel.class);
+                        sessionsModelMutableLiveData.setValue(new SessionsState(sessionsModelList));
                     }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                sessionsModelMutableLiveData.setValue(new SessionsState(databaseError));
-            }
-        });
 
+                })
+                .addOnFailureListener(e -> sessionsModelMutableLiveData.setValue(new SessionsState(e.getMessage())));
         return  sessionsModelMutableLiveData;
     }
 }

@@ -2,13 +2,15 @@ package droiddevelopers254.droidconke.models;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SessionsModel {
 
     private int id;
-    private  int speaker_id;
+    private ArrayList<Integer> speaker_id;
     private int room_id;
     private String main_tag;
     private String room;
@@ -21,7 +23,9 @@ public class SessionsModel {
     private String url;
     private String duration;
     private String description;
-    private String topic_color;
+    private String session_color;
+    private String topic_id;
+    private String type_id;
 
     public SessionsModel() {
     }
@@ -106,11 +110,11 @@ public class SessionsModel {
         this.description = description;
     }
 
-    public int getSpeaker_id() {
+    public ArrayList<Integer> getSpeaker_id() {
         return speaker_id;
     }
 
-    public void setSpeaker_id(int speaker_id) {
+    public void setSpeaker_id(ArrayList<Integer> speaker_id) {
         this.speaker_id = speaker_id;
     }
 
@@ -130,15 +134,15 @@ public class SessionsModel {
         this.time = time;
     }
 
-    public String getTopic_color() {
-        return topic_color;
+    public String getSession_color() {
+        return session_color;
     }
 
-    public void setTopic_color(String topic_color) {
-        this.topic_color = topic_color;
+    public void setSession_color(String session_color) {
+        this.session_color = session_color;
     }
 
-    public SessionsModel(int id, int speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String topic_color) {
+    public SessionsModel(int id, ArrayList<Integer> speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String session_color) {
         this.id = id;
         this.speaker_id = speaker_id;
         this.room_id = room_id;
@@ -152,20 +156,11 @@ public class SessionsModel {
         this.url = url;
         this.duration = duration;
         this.description = description;
-        this.topic_color = topic_color;
+        this.session_color = session_color;
     }
 
     public SessionsModel(int id, String starred) {
         this.id = id;
         this.starred = starred;
-    }
-    // [START post_to_map]
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("id", id);
-        result.put("starred", starred);
-
-        return result;
     }
 }

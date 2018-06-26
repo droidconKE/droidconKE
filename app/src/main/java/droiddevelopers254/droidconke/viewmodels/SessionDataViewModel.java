@@ -52,7 +52,7 @@ public class SessionDataViewModel extends ViewModel {
                 });
     }
 
-    public void fetchSpeakerDetails(String speakerId){
+    public void fetchSpeakerDetails(int speakerId){
         final LiveData<SpeakersState> speakersStateLiveData= speakersRepo.getSpeakersInfo(speakerId);
         speakersStateMediatorLiveData.addSource(speakersStateLiveData,
                 speakersStateMediatorLiveData ->{

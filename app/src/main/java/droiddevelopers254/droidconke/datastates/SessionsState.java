@@ -8,15 +8,15 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class SessionsState {
     private List<SessionsModel> sessionsModel;
-    private DatabaseError databaseError;
+    private String error;
 
     public SessionsState(List<SessionsModel> sessionsModel) {
         this.sessionsModel = sessionsModel;
-        this.databaseError= null;
+        this.error= null;
     }
 
-    public SessionsState(DatabaseError databaseError) {
-        this.databaseError = databaseError;
+    public SessionsState(String error) {
+        this.error = error;
         this.sessionsModel = null;
     }
 
@@ -24,7 +24,7 @@ public class SessionsState {
         return sessionsModel;
     }
 
-    public DatabaseError getDatabaseError() {
-        return databaseError;
+    public String getDatabaseError() {
+        return error;
     }
 }

@@ -66,13 +66,13 @@ public class SessionViewActivity extends AppCompatActivity {
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
-    String starStatus,dayNumber,speakerId,roomId;
+    String starStatus,dayNumber,roomId;
     SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
     List<SpeakersModel> speakersList= new ArrayList<>();
+    ArrayList<Integer> speakerId;
     SpeakersAdapter speakersAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
-
     StarredSessionModel starredSessionModel;
 
     @Override
@@ -89,7 +89,7 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionId = extraIntent.getIntExtra("sessionId",0);
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
-        speakerId= extraIntent.getStringExtra("speakerId");
+        speakerId= extraIntent.getIntegerArrayListExtra("speakerId");
         roomId=extraIntent.getStringExtra("roomId");
 
         ButterKnife.bind(this);
@@ -119,7 +119,12 @@ public class SessionViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSessionData(sessionId);
-        getSpeakerDetails(speakerId);
+
+        for (int i=0;i<speakerId.size();i++){
+            int id = speakerId.get(i);
+            getSpeakerDetails(String.valueOf(id));
+        }
+
         getRoomDetails(roomId);
         //observe live data emitted by view model
         sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
@@ -152,11 +157,11 @@ public class SessionViewActivity extends AppCompatActivity {
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
 
         //check a session was previously starred
-        if (starStatus.equals("0")){
-            fab.setImageResource(R.drawable.ic_star_border_black_24dp);
-        }else if (starStatus.equals("1")){
-            fab.setImageResource(R.drawable.ic_star_blue_24dp);
-        }
+//        if (starStatus.equals("0")){
+//            fab.setImageResource(R.drawable.ic_star_border_black_24dp);
+//        }else if (starStatus.equals("1")){
+//            fab.setImageResource(R.drawable.ic_star_blue_24dp);
+//        }
 
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
@@ -233,9 +238,9 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
 
-    private void handleFetchSpeakerDetails(SpeakersModel speakersModel) {
+    private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {
         if (speakersModel != null){
-            speakersList.add(speakersModel);
+            speakersList= speakersModel;
             initView();
         }else {
             //if there are no speakers for this session hide views
@@ -263,7 +268,8 @@ public class SessionViewActivity extends AppCompatActivity {
         }
     }
 
-    private void handleDatabaseError(DatabaseError databaseError) {
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
     private void getSessionData(int sessionId){

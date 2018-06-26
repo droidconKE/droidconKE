@@ -12,13 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.SessionsModel;
@@ -75,15 +72,15 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         holder.sessionTimeText.setText(sessionsModel.getDuration());
         holder.sessionRoomText.setText(sessionsModel.getRoom());
         holder.sessionCategoryText.setText(sessionsModel.getTopic());
-        holder.sessionLabelText.setBackgroundColor(Color.parseColor(sessionsModel.getTopic_color()));
+        holder.sessionLabelText.setBackgroundColor(Color.parseColor(sessionsModel.getSession_color()));
 
         //check a session was previously starred
-        starStatus=sessionsModel.getStarred();
-        if (starStatus.equals("0")){
-            holder.starImg.setImageResource(R.drawable.ic_star_border_black_24dp);
-        }else if (starStatus.equals("1")){
-            holder.starImg.setImageResource(R.drawable.ic_star_blue_24dp);
-        }
+//        starStatus=sessionsModel.getStarred();
+//        if (starStatus.equals("0")){
+//            holder.starImg.setImageResource(R.drawable.ic_star_border_black_24dp);
+//        }else if (starStatus.equals("1")){
+//            holder.starImg.setImageResource(R.drawable.ic_star_blue_24dp);
+//        }
 
         //change the star section in db
    /*     holder.starImg.setOnClickListener(view -> {
@@ -121,8 +118,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
             intent.putExtra("sessionId", sessionsModelList.get(position).getId());
             intent.putExtra("dayNumber",dayNumber);
             intent.putExtra("starred",sessionsModelList.get(position).getStarred());
-            intent.putExtra("speakerId",String.valueOf(sessionsModelList.get(position).getSpeaker_id()));
-            intent.putExtra("roomId",String.valueOf(sessionsModelList.get(position).getRoom_id()));
+            intent.putIntegerArrayListExtra("speakerId",sessionsModelList.get(position).getSpeaker_id());
+            intent.putExtra("roomId",sessionsModelList.get(position).getRoom_id());
             context.startActivity(intent);
         });
 

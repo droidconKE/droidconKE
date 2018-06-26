@@ -1,15 +1,14 @@
 
-usquid:S1450"YRemove the "starStatus" field and declare it as a local variable in the relevant methods.(ªöÍ8ñ•îœÂ,
-Xsquid:S1068"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8ñ•îœÂ,
-Csquid:S1659"'Declare "dayNumber" on a separate line.(ªöÍ8ñ•îœÂ,
-Nsquid:S1659"-Declare "sessionTimeText" on a separate line.(ä¯¹ıÿÿÿÿ8ñ•îœÂ,
-Osquid:S1659".Declare "sessionLabelText" on a separate line.(ä¯¹ıÿÿÿÿ8ñ•îœÂ,
-fsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(—¦õ=8ñ•îœÂ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8ñ•îœÂ,
-\squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ñ•îœÂ,
-Osquid:S1659".Declare "sessionTitleText" on a separate line.(ä¯¹ıÿÿÿÿ8ñ•îœÂ,
-Xsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8ñ•îœÂ,
-Nsquid:S1659"-Declare "sessionRoomText" on a separate line.(ä¯¹ıÿÿÿÿ8ñ•îœÂ,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(õÓò©8ñ•îœÂ,
-xsquid:S1450"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8ñ•îœÂ,
-Vsquid:S1068"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8ñ•îœÂ,
+Psquid:S1659+"-Declare "sessionRoomText" on a separate line.(ä¯¹ıÿÿÿÿ8Æ¬€âÃ,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8Æ¬€âÃ,
+Lsquid:S1068".Remove this unused "starStatus" private field.(ªöÍ8Æ¬€âÃ,
+Zsquid:S1068"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8Æ¬€âÃ,
+nsquid:CommentedOutCodeLineN"<This block of commented-out lines of code should be removed.(¼Û˜ùÿÿÿÿ8Æ¬€âÃ,
+hsquid:CommentedOutCodeLinei"<This block of commented-out lines of code should be removed.(—¦õ=8Æ¬€âÃ,
+Qsquid:S1659+".Declare "sessionLabelText" on a separate line.(ä¯¹ıÿÿÿÿ8Æ¬€âÃ,
+Psquid:S1659+"-Declare "sessionTimeText" on a separate line.(ä¯¹ıÿÿÿÿ8Æ¬€âÃ,
+Qsquid:S1659+".Declare "sessionTitleText" on a separate line.(ä¯¹ıÿÿÿÿ8Æ¬€âÃ,
+zsquid:S1450"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8Æ¬€âÃ,
+Esquid:S1659"'Declare "dayNumber" on a separate line.(ªöÍ8Æ¬€âÃ,
+Xsquid:S1068"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8Æ¬€âÃ,
+isquid:CommentedOutCodeLineV"<This block of commented-out lines of code should be removed.(õÓò©8Æ¬€âÃ,

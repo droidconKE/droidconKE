@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 
@@ -33,8 +34,6 @@ public class DayOneFragment extends Fragment {
     List<String> sessionIds = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     DayOneViewModel dayOneViewModel;
-    @BindView(R.id.sessionTimeRv)
-    RecyclerView sessionTimeRv;
     @BindView(R.id.sessionsRv)
     RecyclerView sessionsRv;
     Unbinder unbinder;
@@ -50,9 +49,6 @@ public class DayOneFragment extends Fragment {
         SessionTimeModel sessionTimeModel= new SessionTimeModel("7:00","AM");
         sessionTimeModelList.add(sessionTimeModel);
 
-
-        initTimeView();
-
         getDayOneSessions();
 
         //observe live data emitted by view model
@@ -67,14 +63,6 @@ public class DayOneFragment extends Fragment {
         return view;
     }
 
-    private void initTimeView() {
-        sessionTimeAdapter= new SessionTimeAdapter(getContext(),sessionTimeModelList);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        sessionTimeRv.setLayoutManager(mLayoutManager);
-        sessionTimeRv.setItemAnimator(new DefaultItemAnimator());
-        sessionTimeRv.setAdapter(sessionTimeAdapter);
-    }
-
     private void handleDayOneSessions(List<SessionsModel> sessionsList) {
         if (sessionsList != null) {
             sessionsModelList = sessionsList;
@@ -82,7 +70,8 @@ public class DayOneFragment extends Fragment {
         }
     }
 
-    private void handleDatabaseError(DatabaseError databaseError) {
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
     private void getDayOneSessions() {

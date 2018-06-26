@@ -7,30 +7,30 @@ import java.util.List;
 import droiddevelopers254.droidconke.models.SpeakersModel;
 
 public class SpeakersState {
-    private SpeakersModel speakersModel;
-    private DatabaseError databaseError;
+    private List<SpeakersModel> speakersModel;
+    private String error;
 
-    public SpeakersState(SpeakersModel speakersModel) {
+    public SpeakersState(List<SpeakersModel> speakersModel) {
         this.speakersModel = speakersModel;
     }
 
-    public SpeakersState(DatabaseError databaseError) {
-        this.databaseError = databaseError;
+    public SpeakersState(String databaseError) {
+        this.error = databaseError;
     }
 
-    public SpeakersModel getSpeakersModel() {
+    public List<SpeakersModel> getSpeakersModel() {
         return speakersModel;
     }
 
-    public void setSpeakersModel(SpeakersModel speakersModel) {
+    public void setSpeakersModel(List<SpeakersModel> speakersModel) {
         this.speakersModel = speakersModel;
     }
 
-    public DatabaseError getDatabaseError() {
-        return databaseError;
+    public String getDatabaseError() {
+        return error;
     }
 
-    public void setDatabaseError(DatabaseError databaseError) {
-        this.databaseError = databaseError;
+    public void setDatabaseError(String  databaseError) {
+        this.error = databaseError;
     }
 }

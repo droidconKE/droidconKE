@@ -62,9 +62,9 @@ public class DayTwoFragment extends Fragment {
         }
     }
 
-    private void handleDatabaseError(DatabaseError databaseError) {
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
     }
-
     private void getDayTwoSessions(){
         dayTwoViewModel.fetchDayTwoSessions();
 

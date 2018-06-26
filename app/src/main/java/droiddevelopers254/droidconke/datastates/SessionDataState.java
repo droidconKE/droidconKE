@@ -6,15 +6,15 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 
 public class SessionDataState {
     private SessionsModel sessionsModel;
-    private DatabaseError databaseError;
+    private String error;
 
     public SessionDataState(SessionsModel sessionsModel) {
         this.sessionsModel = sessionsModel;
-        this.databaseError= null;
+        this.error= null;
     }
 
-    public SessionDataState(DatabaseError databaseError) {
-        this.databaseError = databaseError;
+    public SessionDataState(String error) {
+        this.error = error;
         this.sessionsModel=null;
     }
 
@@ -22,7 +22,7 @@ public class SessionDataState {
         return sessionsModel;
     }
 
-    public DatabaseError getDatabaseError() {
-        return databaseError;
+    public String getDatabaseError() {
+        return error;
     }
 }

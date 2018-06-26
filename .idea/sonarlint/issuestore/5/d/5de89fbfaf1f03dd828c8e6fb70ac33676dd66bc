@@ -1,23 +1,34 @@
 
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÉĞùÿÿÿÿ
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î‰½Èùÿÿÿÿ
-Xsquid:S00107"BConstructor has 14 parameters, which is greater than 7 authorized.(ñ”–£
-gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ”–£
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖĞß­üÿÿÿÿ
-dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰‘©«
-psquid:S00116"URename this field "speaker_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šóç¬ÿÿÿÿÿ
-gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ”–£
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åµÕ—ıÿÿÿÿ
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í…µ©ûÿÿÿÿ
-isquid:S00116"SRename this field "main_tag" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š¯Äı
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÁ‘şÿÿÿÿ
-lsquid:S00116"VRename this field "topic_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤¾«™
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÁ‘şÿÿÿÿ
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÏìÏûÿÿÿÿ
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÏìÏûÿÿÿÿ
-gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ”–£
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Î¥©ÿÿÿÿÿ
-hsquid:S00116"RRename this field "room_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ñÉÁ
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Î¥©ÿÿÿÿÿ
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÉĞùÿÿÿÿ
-gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ”–£
+Xsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8§šİÛÃ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åµÕ—ıÿÿÿÿ8§šİÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ“íÿÿÿÿÿ8§šİÛÃ,
+\squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8§šİÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸¡†˜ÿÿÿÿÿ8§šİÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®œ“—ıÿÿÿÿ8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸¡†˜ÿÿÿÿÿ8§šİÛÃ,
+tsquid:S00116"RRename this field "type_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜÆŒùÿÿÿÿ8§šİÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖĞß­üÿÿÿÿ8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÁ‘şÿÿÿÿ8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í”ÏÅÿÿÿÿÿ8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í”ÏÅÿÿÿÿÿ8§šİÛÃ,
+dsquid:S00107"BConstructor has 14 parameters, which is greater than 7 authorized.(Í”ÏÅÿÿÿÿÿ8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í”ÏÅÿÿÿÿÿ8§šİÛÃ,
+–squid:S1319"uThe type of the "speaker_id" object should be an interface such as "List" rather than the implementation "ArrayList".(¸¡†˜ÿÿÿÿÿ8ÓŞÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÁ‘şÿÿÿÿ8§šİÛÃ,
+psquid:S00116"SRename this field "topic_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æÛ£8§šİÛÃ,
+Hsquid:S1068",Remove this unused "topic_id" private field.(æÛ£8§šİÛÃ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—â¿´8§šİÛÃ,
+osquid:S00116"RRename this field "room_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ñÉÁ8§šİÛÃ,
+wsquid:S00116"URename this field "speaker_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­è¬úÿÿÿÿ8§šİÛÃ,
+Lsquid:S1068"+Remove this unused "type_id" private field.(ÜÆŒùÿÿÿÿ8§šİÛÃ,
+–squid:S1319"uThe type of the "speaker_id" object should be an interface such as "List" rather than the implementation "ArrayList".(Í”ÏÅÿÿÿÿÿ8¼˜ßÛÃ,
+psquid:S00116"SRename this field "main_tag" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š¯Äı8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í”ÏÅÿÿÿÿÿ8§šİÛÃ,
+usquid:S00116"XRename this field "session_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÂøÎ8§šİÛÃ,
+osquid:UselessImportCheck"ARemove this unused import 'com.google.firebase.database.Exclude'.(ÂËğüÿÿÿÿ8§šİÛÃ,
+ksquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—â¿´8§šİÛÃ,
+ksquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰‘©«8§šİÛÃ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÉĞùÿÿÿÿ8§šİÛÃ,
+psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÉĞùÿÿÿÿ8§šİÛÃ,
+‘squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(®œ“—ıÿÿÿÿ8„°áÛÃ,
+Ysquid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8„°áÛÃ,
