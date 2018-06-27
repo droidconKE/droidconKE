@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 
@@ -81,9 +82,9 @@ public class AboutDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void handleDatabaseError(DatabaseError databaseError) {
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
-
     private void initView() {
         aboutDetailsAdapter= new AboutDetailsAdapter(aboutDetailsList,getApplicationContext());
         mLayoutManager= new LinearLayoutManager(getApplicationContext());

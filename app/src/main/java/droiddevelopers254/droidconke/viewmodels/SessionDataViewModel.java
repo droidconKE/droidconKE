@@ -41,8 +41,8 @@ public class SessionDataViewModel extends ViewModel {
         return roomStateMediatorLiveData;
     }
 
-    public void fetchSessionDetails(int sessionId){
-        final LiveData<SessionDataState> sessionDataStateLiveData= sessionDataRepo.getSessionData(sessionId);
+    public void fetchSessionDetails(String dayNumber,int sessionId){
+        final LiveData<SessionDataState> sessionDataStateLiveData= sessionDataRepo.getSessionData(dayNumber,sessionId);
         sessionDataStateMediatorLiveData.addSource(sessionDataStateLiveData,
                 sessionDataStateMediatorLiveData-> {
             if (this.sessionDataStateMediatorLiveData.hasActiveObservers()){
@@ -63,7 +63,7 @@ public class SessionDataViewModel extends ViewModel {
                 });
     }
 
-    public void fetchRoomDetails(String roomId){
+    public void fetchRoomDetails(int roomId){
         final LiveData<RoomState> roomStateLiveData=roomRepo.getRoomDetails(roomId);
         roomStateMediatorLiveData.addSource(roomStateLiveData,
                 roomStateMediatorLiveData-> {

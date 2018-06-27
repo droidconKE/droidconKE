@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -281,8 +282,8 @@ public class HomeActivity extends AppCompatActivity {
         typeFilterList =filtersModel;
         initView(typesChipRv,typeFilterList);
     }
-    private void handleDatabaseError(DatabaseError databaseError) {
-
+    private void handleDatabaseError(String databaseError) {
+        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
     private void initView(RecyclerView recyclerView,List<FiltersModel> filtersModelList) {
@@ -291,9 +292,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(chipViewAdapter);
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();

@@ -40,8 +40,9 @@ import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
 public class SessionViewActivity extends AppCompatActivity {
     BottomAppBar bottomAppBar;
-    int sessionId;
+    int sessionId,roomId;
     FloatingActionButton fab;
+
 
     @BindView(R.id.txtSessionTime)
     TextView txtSessionTime;
@@ -66,11 +67,11 @@ public class SessionViewActivity extends AppCompatActivity {
 
     SessionDataViewModel sessionDataViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
-    String starStatus,dayNumber,roomId;
+    String starStatus,dayNumber;
     SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
     List<SpeakersModel> speakersList= new ArrayList<>();
-    ArrayList<Integer> speakerId;
+    List<Integer> speakerId =new ArrayList<>();
     SpeakersAdapter speakersAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
     StarredSessionModel starredSessionModel;
@@ -90,7 +91,7 @@ public class SessionViewActivity extends AppCompatActivity {
         dayNumber=extraIntent.getStringExtra("dayNumber");
         starStatus=extraIntent.getStringExtra("starred");
         speakerId= extraIntent.getIntegerArrayListExtra("speakerId");
-        roomId=extraIntent.getStringExtra("roomId");
+        roomId=extraIntent.getIntExtra("roomId",0);
 
         ButterKnife.bind(this);
 
@@ -118,11 +119,10 @@ public class SessionViewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSessionData(sessionId);
+        getSessionData(dayNumber,sessionId);
 
-        for (int i=0;i<speakerId.size();i++){
-            int id = speakerId.get(i);
-            getSpeakerDetails(String.valueOf(id));
+        for (Integer i : speakerId){
+            getSpeakerDetails(i);
         }
 
         getRoomDetails(roomId);
@@ -226,7 +226,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
-    private void getRoomDetails(String roomId) {
+    private void getRoomDetails(int roomId) {
         sessionDataViewModel.fetchRoomDetails(roomId);
     }
     private void handleFetchRoomDetails(RoomModel roomModel) {
@@ -234,7 +234,7 @@ public class SessionViewActivity extends AppCompatActivity {
             roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+String.valueOf(roomModel.getCapacity()));
         }
     }
-    private void getSpeakerDetails(String speakerId) {
+    private void getSpeakerDetails(int speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
 
@@ -272,8 +272,8 @@ public class SessionViewActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
-    private void getSessionData(int sessionId){
-        sessionDataViewModel.fetchSessionDetails(sessionId);
+    private void getSessionData(String dayNumber, int sessionId){
+        sessionDataViewModel.fetchSessionDetails(dayNumber,sessionId);
     }
 
 }

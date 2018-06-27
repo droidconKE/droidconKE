@@ -137,3 +137,9 @@ Oapp/src/main/java/droiddevelopers254/droidconke/repository/SessionDataRepo.java
 Lapp/src/main/java/droiddevelopers254/droidconke/repository/SpeakersRepo.java,c/6/c68ad954937afc5972ddc12873194e5aaa3c8994
 „
 Tapp/src/main/java/droiddevelopers254/droidconke/viewmodels/SessionDataViewModel.java,2/3/23c57cab8c9209958d5a81ef75610e8cb79883c5
+€
+Papp/src/main/java/droiddevelopers254/droidconke/repository/AboutDetailsRepo.java,4/8/4853cf50521e19c803c8818cc6072b973d3ed412
+a
+1app/src/main/res/layout/activity_session_view.xml,d/f/dfc33d68e312bf039b699e0c4707b99896180958
+u
+Eapp/src/main/java/droiddevelopers254/droidconke/models/RoomModel.java,c/3/c38ab9cb0bbc5e6f620e105b87c52f6a11d6b699

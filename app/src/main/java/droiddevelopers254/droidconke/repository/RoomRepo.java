@@ -28,10 +28,10 @@ public class RoomRepo {
 
     }
 
-    public LiveData<RoomState> getRoomDetails(String roomId){
+    public LiveData<RoomState> getRoomDetails(int roomId){
         final MutableLiveData<RoomState> roomStateLiveData= new MutableLiveData<>();
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("speakers")
+        firebaseFirestore.collection("rooms")
                 .whereEqualTo("id",roomId)
                 .get()
                 .addOnCompleteListener(task -> {

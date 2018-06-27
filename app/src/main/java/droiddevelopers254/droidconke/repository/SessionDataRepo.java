@@ -35,10 +35,10 @@ public class SessionDataRepo {
 
     }
 
-    public LiveData<SessionDataState> getSessionData(int sessionId){
+    public LiveData<SessionDataState> getSessionData(String dayNumber,int sessionId){
         final MutableLiveData<SessionDataState> sessionsModelMutableLiveData= new MutableLiveData<>();
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("day_one")
+        firebaseFirestore.collection(dayNumber)
                 .whereEqualTo("id",sessionId)
                 .get()
                 .addOnCompleteListener(task -> {

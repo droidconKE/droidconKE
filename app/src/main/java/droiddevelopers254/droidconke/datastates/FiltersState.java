@@ -8,14 +8,14 @@ import droiddevelopers254.droidconke.models.FiltersModel;
 
 public class FiltersState {
     private List<FiltersModel> filtersModel;
-    private DatabaseError databaseError;
+    private String databaseError;
 
     public FiltersState(List<FiltersModel> filtersModel) {
         this.filtersModel = filtersModel;
         this.databaseError=null;
     }
 
-    public FiltersState(DatabaseError databaseError) {
+    public FiltersState(String databaseError) {
         this.databaseError = databaseError;
         this.filtersModel=null;
     }
@@ -24,7 +24,7 @@ public class FiltersState {
         return filtersModel;
     }
 
-    public DatabaseError getDatabaseError() {
+    public String getDatabaseError() {
         return databaseError;
     }
 }

@@ -8,14 +8,14 @@ import droiddevelopers254.droidconke.models.AboutDetailsModel;
 
 public class AboutDetailsState {
     private List<AboutDetailsModel> aboutDetailsModelList;
-    private DatabaseError databaseError;
+    private String databaseError;
 
     public AboutDetailsState(List<AboutDetailsModel> aboutDetailsModelList) {
         this.aboutDetailsModelList = aboutDetailsModelList;
         this.databaseError=null;
     }
 
-    public AboutDetailsState(DatabaseError databaseError) {
+    public AboutDetailsState(String databaseError) {
         this.databaseError = databaseError;
         this.aboutDetailsModelList=null;
     }
@@ -24,7 +24,7 @@ public class AboutDetailsState {
         return aboutDetailsModelList;
     }
 
-    public DatabaseError getDatabaseError() {
+    public String getDatabaseError() {
         return databaseError;
     }
 }

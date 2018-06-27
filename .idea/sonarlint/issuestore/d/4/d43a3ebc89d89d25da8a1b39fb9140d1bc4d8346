@@ -1,8 +1,8 @@
 
-nsquid:CommentedOutCodeLine$"<This block of commented-out lines of code should be removed.(Å—ýØüÿÿÿÿ8ˆœ±¼Â,
-nsquid:CommentedOutCodeLine("<This block of commented-out lines of code should be removed.(—ÕØÍüÿÿÿÿ8ˆœ±¼Â,
-~squid:HiddenFieldCheck6"PRename "filtersStateMediatorLiveData" which hides the field declared at line 17.(Õþè‹ÿÿÿÿÿ8ˆœ±¼Â,
-rsquid:HiddenFieldCheck@"IRename "stateMediatorLiveData" which hides the field declared at line 18.(µô”»8ˆœ±¼Â,
-isquid:CommentedOutCodeLine+"<This block of commented-out lines of code should be removed.(ö‹âà8ˆœ±¼Â,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8ˆœ±¼Â,
-Rsquid:S1068"/Remove this unused "filtersList" private field.(‡ÞÏ†ýÿÿÿÿ8ˆœ±¼Â,
+Psquid:S1068"/Remove this unused "filtersList" private field.(‡ÞÏ†ýÿÿÿÿ8ˆœ±¼Â,
+|squid:HiddenFieldCheck"PRename "filtersStateMediatorLiveData" which hides the field declared at line 17.(Õþè‹ÿÿÿÿÿ8ˆœ±¼Â,
+psquid:HiddenFieldCheck"IRename "stateMediatorLiveData" which hides the field declared at line 18.(µô”»8ˆœ±¼Â,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Å—ýØüÿÿÿÿ8ˆœ±¼Â,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ö‹âà8ˆœ±¼Â,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(—ÕØÍüÿÿÿÿ8ˆœ±¼Â,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8ˆœ±¼Â,

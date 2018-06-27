@@ -3,11 +3,9 @@ package droiddevelopers254.droidconke.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,27 +30,16 @@ public class TypeFiltersRepo {
 
     public LiveData<FiltersState> getFilters(){
         final MutableLiveData<FiltersState> filtersStateMutableLiveData=new MutableLiveData<>();
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("session_types");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (databaseReference != null){
-                    for (DataSnapshot data : dataSnapshot.getChildren()){
-                        FiltersModel filtersModel= data.getValue(FiltersModel.class);
-                        filtersModelList.add(filtersModel);
-                        filtersStateMutableLiveData.setValue(new FiltersState(filtersModelList));
-                    }
-                }
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("session_types")
+                .orderBy("id", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<FiltersModel> filtersModelList=queryDocumentSnapshots.toObjects(FiltersModel.class);
+                    filtersStateMutableLiveData.setValue(new FiltersState(filtersModelList));
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                filtersStateMutableLiveData.setValue(new FiltersState(databaseError));
-
-            }
-        });
+                })
+                .addOnFailureListener(e -> filtersStateMutableLiveData.setValue(new FiltersState(e.getMessage())));
         return filtersStateMutableLiveData;
     }
 

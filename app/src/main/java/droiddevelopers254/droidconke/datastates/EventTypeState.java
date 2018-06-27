@@ -8,14 +8,14 @@ import droiddevelopers254.droidconke.models.EventTypeModel;
 
 public class EventTypeState {
     private List<EventTypeModel> eventTypeModel;
-    private DatabaseError databaseError;
+    private String  databaseError;
 
     public EventTypeState(List<EventTypeModel> eventTypeModel) {
         this.eventTypeModel = eventTypeModel;
         this.databaseError= null;
     }
 
-    public EventTypeState(DatabaseError databaseError) {
+    public EventTypeState(String  databaseError) {
         this.databaseError = databaseError;
         this.eventTypeModel= null;
     }
@@ -24,7 +24,7 @@ public class EventTypeState {
         return eventTypeModel;
     }
 
-    public DatabaseError getDatabaseError() {
+    public String getDatabaseError() {
         return databaseError;
     }
 }
