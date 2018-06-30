@@ -1,9 +1,8 @@
 
-Hsquid:S1659".Declare "wifiPasswordText" on a separate line.(†û¿÷øÿÿÿÿ
 Psquid:S2696"6Make the enclosing method "static" or remove this set.(ª„Ä¬ùÿÿÿÿ
-Nsquid:S1172"4Remove this unused method parameter "databaseError".(úÓãðøÿÿÿÿ
-?squid:S00108")Either remove or fill this block of code.(å¥ž‡
-›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(úÓãðøÿÿÿÿ
+usquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµýÿÿÿÿ8·µŠƒÄ,
 usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
-ssquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çð¸Òÿÿÿÿÿ
+Hsquid:S1659".Declare "wifiPasswordText" on a separate line.(†û¿÷øÿÿÿÿ
 `squid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô
+?squid:S00108")Either remove or fill this block of code.(å¥ž‡
+ssquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çð¸Òÿÿÿÿÿ

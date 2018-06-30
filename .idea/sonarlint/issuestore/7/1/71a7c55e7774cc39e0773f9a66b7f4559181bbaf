@@ -1,8 +1,9 @@
 
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Óæ—ýÿÿÿÿ8Ÿ ¾»Â,
-Hsquid:S1068",Remove this unused "executor" private field.(äü¥ 8Ÿ ¾»Â,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(–Ÿà«ùÿÿÿÿ8Ÿ ¾»Â,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8Ÿ ¾»Â,
-Osquid:S1068".Remove this unused "filtersDao" private field.(µŸø¾ýÿÿÿÿ8Ÿ ¾»Â,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ô ©›úÿÿÿÿ8Ÿ ¾»Â,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Å—ýØüÿÿÿÿ8Ÿ ¾»Â,
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Óæ—ýÿÿÿÿ8†©™‰Ä,
+nsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(Ô ©›úÿÿÿÿ8†©™‰Ä,
+nsquid:CommentedOutCodeLine6"<This block of commented-out lines of code should be removed.(–Ÿà«ùÿÿÿÿ8†©™‰Ä,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8†©™‰Ä,
+Jsquid:S1068",Remove this unused "executor" private field.(äü¥ 8†©™‰Ä,
+Qsquid:S1068".Remove this unused "filtersDao" private field.(µŸø¾ýÿÿÿÿ8†©™‰Ä,
+nsquid:CommentedOutCodeLine2"<This block of commented-out lines of code should be removed.(Å—ýØüÿÿÿÿ8†©™‰Ä,
+rsquid:HiddenFieldCheck&"DRename "filtersModelList" which hides the field declared at line 24.(ÿ“Öãþÿÿÿÿ8†©™‰Ä,

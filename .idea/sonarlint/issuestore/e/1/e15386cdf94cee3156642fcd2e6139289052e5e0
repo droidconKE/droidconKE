@@ -1,3 +1,3 @@
 
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8¬‰“ÊÂ,
-Fsquid:S1068"+Remove this unused "context" private field.(êİç8¬‰“ÊÂ,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8¬‰“ÊÂ,
+Hsquid:S1068"+Remove this unused "context" private field.(êİç8¬‰“ÊÂ,

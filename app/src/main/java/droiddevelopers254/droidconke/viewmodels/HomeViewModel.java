@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel;
 import java.util.List;
 
 import droiddevelopers254.droidconke.datastates.FiltersState;
+import droiddevelopers254.droidconke.firebase.Filters;
 import droiddevelopers254.droidconke.models.FiltersModel;
 import droiddevelopers254.droidconke.repository.TopicFiltersRepo;
 import droiddevelopers254.droidconke.repository.TypeFiltersRepo;
@@ -17,6 +18,7 @@ public class HomeViewModel extends ViewModel {
     private MediatorLiveData<FiltersState> filtersStateMediatorLiveData;
     private MediatorLiveData<FiltersState> stateMediatorLiveData;
     private TopicFiltersRepo topicFiltersRepo;
+    private Filters filters;
 
 
     public HomeViewModel (){

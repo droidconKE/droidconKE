@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation 'com.google.firebase:firebase-firestore:17.0.2'
+    implementation "com.firebaseui:firebase-ui-firestore:3.0.0"
 
     //architecture components dependacies
     implementation "android.arch.persistence.room:runtime:1.1.1"

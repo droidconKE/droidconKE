@@ -4,17 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
@@ -27,18 +32,16 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     private Context context;
     private SessionsModel sessionsModel;
     private String starStatus,dayNumber;
-    private DatabaseReference databaseReference;
     private StarredSessionModel starredSessionModel;
 
 
     public SessionsAdapter(Context context,List<SessionsModel> sessionsModelList,String dayNumber){
-        this.sessionsModelList = sessionsModelList;
+        this.sessionsModelList=sessionsModelList;
         this.context=context;
         this.dayNumber=dayNumber;
-        databaseReference = FirebaseDatabase.getInstance().getReference();
         starredSessionModel = new StarredSessionModel();
-
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sessionCategoryText,sessionTimeText,sessionRoomText,sessionTitleText,sessionLabelText;
         ImageView starImg;
@@ -46,9 +49,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             sessionCategoryText=itemView.findViewById(R.id.sessionCategoryText);
-            sessionTimeText=itemView.findViewById(R.id.sessionTimeText);
             sessionTitleText=itemView.findViewById(R.id.sessionTitleText);
-            sessionRoomText=itemView.findViewById(R.id.sessionRoomText);
             starImg=itemView.findViewById(R.id.starImg);
             sessionDetailsLinear=itemView.findViewById(R.id.sessionDetailsLinear);
             sessionLabelText=itemView.findViewById(R.id.sessionLabelText);
@@ -69,10 +70,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
         sessionsModel = sessionsModelList.get(position);
 
         holder.sessionTitleText.setText(sessionsModel.getTitle());
-        holder.sessionTimeText.setText(sessionsModel.getDuration());
-        holder.sessionRoomText.setText(sessionsModel.getRoom());
         holder.sessionCategoryText.setText(sessionsModel.getTopic());
         holder.sessionLabelText.setBackgroundColor(Color.parseColor(sessionsModel.getSession_color()));
+        holder.starImg.setOnClickListener(view -> Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show());
 
         //check a session was previously starred
 //        starStatus=sessionsModel.getStarred();

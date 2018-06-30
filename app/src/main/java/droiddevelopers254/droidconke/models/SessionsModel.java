@@ -9,6 +9,11 @@ import java.util.Map;
 
 public class SessionsModel {
 
+    public static final String FIELD_ID="id";
+    public static final String FIELD_TOPIC="topic";
+    public static final String FIELD_TYPE="type";
+    public static final String FIELD_STARRED="starred";
+
     private int id;
     private ArrayList<Integer> speaker_id;
     private int room_id;
@@ -24,8 +29,9 @@ public class SessionsModel {
     private String duration;
     private String description;
     private String session_color;
-    private String topic_id;
-    private String type_id;
+    private int topic_id;
+    private int type_id;
+    private String type;
 
     public SessionsModel() {
     }
@@ -142,7 +148,31 @@ public class SessionsModel {
         this.session_color = session_color;
     }
 
-    public SessionsModel(int id, ArrayList<Integer> speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String session_color) {
+    public int getTopic_id() {
+        return topic_id;
+    }
+
+    public void setTopic_id(int topic_id) {
+        this.topic_id = topic_id;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public SessionsModel(int id, ArrayList<Integer> speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String session_color, int topic_id, int type_id, String type) {
         this.id = id;
         this.speaker_id = speaker_id;
         this.room_id = room_id;
@@ -157,6 +187,9 @@ public class SessionsModel {
         this.duration = duration;
         this.description = description;
         this.session_color = session_color;
+        this.topic_id = topic_id;
+        this.type_id = type_id;
+        this.type = type;
     }
 
     public SessionsModel(int id, String starred) {

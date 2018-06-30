@@ -2,63 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:weightSum="4"
         android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="30dp"
-            android:id="@+id/starImg"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:padding="@dimen/fab_margin"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_star_border_black_24dp"
-            android:layout_height="30dp" />
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/starImg"
+                app:srcCompat="@drawable/ic_star_border_black_24dp"
+                android:layout_height="35dp" />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_weight="3"
             android:id="@+id/sessionDetailsLinear"
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextViewDark"
                 android:id="@+id/sessionTitleText"
                 android:text="@string/session_title"
-                android:textSize="19sp"
+                android:textSize="16sp"
                 android:layout_height="wrap_content" />
-            <RelativeLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_marginTop="6dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/sessionTimeText"
-                    android:text="@string/session_time"
-                    android:textSize="18sp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_toEndOf="@id/sessionTimeText"
-                    android:id="@+id/sessionSeparatorText"
-                    android:text="@string/session_separator"
-                    android:textSize="18sp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_toEndOf="@id/sessionSeparatorText"
-                    android:id="@+id/sessionRoomText"
-                    android:text="@string/session_room"
-                    android:textSize="18sp"
-                    android:layout_height="wrap_content" />
+                android:text="@string/session_hour"
+                android:textColor="@color/colorTextViewLight"
+                android:layout_height="wrap_content" />
 
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_marginTop="6dp"
@@ -72,9 +59,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/colorTextViewLight"
                     android:id="@+id/sessionCategoryText"
                     android:text="@string/session_category"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_toEndOf="@+id/sessionLabelText"
                     android:layout_marginStart="6dp"
                     android:layout_height="wrap_content" />
@@ -84,7 +72,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
-        android:layout_height="3dp"/>
+        android:background="@color/colorGrey"
+        android:layout_height="1dp"/>
 
 </LinearLayout>

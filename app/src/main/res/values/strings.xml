@@ -140,6 +140,7 @@
     <string name="title_activity_about_details">AboutDetails</string>
     <string name="session_time_am">AM</string>
     <string name="time_session">7:20</string>
+    <string name="session_hour">10:00 AM - 11:00 AM</string>
 
 
 </resources>

@@ -21,4 +21,6 @@
     <color name="colorYellow">#FFD54F</color>
     <color name="colorPurple">#863B96</color>
     <color name="colorDroidBug">#6ADEA3</color>
+    <color name="colorTextViewDark">#606674</color>
+    <color name="colorTextViewLight">#adb3c0</color>
 </resources>
