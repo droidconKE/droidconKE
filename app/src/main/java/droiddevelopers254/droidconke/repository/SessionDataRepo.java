@@ -45,6 +45,7 @@ public class SessionDataRepo {
                     if (task.isSuccessful()){
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
                             SessionsModel sessionsModel=queryDocumentSnapshot.toObject(SessionsModel.class);
+                            sessionsModel.setDocumentId(queryDocumentSnapshot.getId());
                             sessionsModelMutableLiveData.setValue(new SessionDataState(sessionsModel));
                         }
                     }else {

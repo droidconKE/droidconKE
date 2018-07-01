@@ -26,6 +26,7 @@ public class AuthenticateUserRepo {
                     if (task.isSuccessful()){
                         DocumentSnapshot documentSnapshot= task.getResult();
                         if (documentSnapshot.exists()){
+                            //user already exists do nothing
                             userStateMutableLiveData.setValue(new AuthenticateUserState(true));
                         }else {
                             UserModel user = new UserModel();
@@ -36,7 +37,13 @@ public class AuthenticateUserRepo {
                             user.setRefresh_token(null);
                             userStateMutableLiveData.setValue(new AuthenticateUserState(user));
 
-                            saveUser(user);
+                            //save user in firestore
+
+                            firebaseFirestore.collection("users").document(user.getUser_id())
+                                    .set(user)
+                                    .addOnSuccessListener(aVoid -> userStateMutableLiveData.setValue(new AuthenticateUserState(true)))
+                                    .addOnFailureListener(e -> userStateMutableLiveData.setValue(new AuthenticateUserState(e.getMessage())));
+
 
                         }
                     }
@@ -45,13 +52,4 @@ public class AuthenticateUserRepo {
     return userStateMutableLiveData;
     }
 
-    private LiveData<AuthenticateUserState> saveUser(UserModel userModel){
-        final MutableLiveData<AuthenticateUserState> stateMutableLiveData= new MutableLiveData<>();
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("users").document(userModel.getUser_id())
-                .set(userModel)
-                .addOnSuccessListener(aVoid -> stateMutableLiveData.setValue(new AuthenticateUserState(true)))
-                .addOnFailureListener(e -> stateMutableLiveData.setValue(new AuthenticateUserState(e.getMessage())));
-        return stateMutableLiveData;
-    }
 }

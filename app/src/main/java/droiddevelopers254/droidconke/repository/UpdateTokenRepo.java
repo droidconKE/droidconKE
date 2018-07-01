@@ -21,12 +21,8 @@ public class UpdateTokenRepo {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection("users").document(userId)
                 .update("refresh_token",refreshToken)
-                .addOnSuccessListener(aVoid -> {
-                    updateTokenStateMutableLiveData.setValue(new UpdateTokenState(true));
-                })
-                .addOnFailureListener(e -> {
-                  updateTokenStateMutableLiveData.setValue(new UpdateTokenState(e.getMessage()));
-                });
+                .addOnSuccessListener(aVoid -> updateTokenStateMutableLiveData.setValue(new UpdateTokenState(true)))
+                .addOnFailureListener(e -> updateTokenStateMutableLiveData.setValue(new UpdateTokenState(e.getMessage())));
     return updateTokenStateMutableLiveData;
     }
 }

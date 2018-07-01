@@ -32,6 +32,7 @@ public class SessionsModel {
     private int topic_id;
     private int type_id;
     private String type;
+    private String documentId;
 
     public SessionsModel() {
     }
@@ -170,6 +171,14 @@ public class SessionsModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public SessionsModel(int id, ArrayList<Integer> speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String session_color, int topic_id, int type_id, String type) {

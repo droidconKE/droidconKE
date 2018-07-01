@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,10 +36,7 @@ import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
 public class SessionViewActivity extends AppCompatActivity {
-    BottomAppBar bottomAppBar;
-    int sessionId,roomId;
-    FloatingActionButton fab;
-
+    int sessionId, roomId;
 
     @BindView(R.id.txtSessionTime)
     TextView txtSessionTime;
@@ -66,15 +60,24 @@ public class SessionViewActivity extends AppCompatActivity {
     TextView roomDetailsText;
 
     SessionDataViewModel sessionDataViewModel;
+    @BindView(R.id.sessionLabelText)
+    TextView sessionLabelText;
+    @BindView(R.id.bottomAppBar)
+    BottomAppBar bottomAppBar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.rommLocationImg)
+    ImageView rommLocationImg;
     private BottomSheetBehavior bottomSheetBehavior;
-    String starStatus,dayNumber;
+    String starStatus, dayNumber,documentId;
     SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
-    List<SpeakersModel> speakersList= new ArrayList<>();
-    List<Integer> speakerId =new ArrayList<>();
+    List<SpeakersModel> speakersList = new ArrayList<>();
+    List<Integer> speakerId = new ArrayList<>();
     SpeakersAdapter speakersAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
     StarredSessionModel starredSessionModel;
+    boolean starred;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +85,23 @@ public class SessionViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_session_view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
         starredSessionModel = new StarredSessionModel();
 
         //get extras
-        Intent extraIntent=getIntent();
-        sessionId = extraIntent.getIntExtra("sessionId",0);
-        dayNumber=extraIntent.getStringExtra("dayNumber");
-        starStatus=extraIntent.getStringExtra("starred");
-        speakerId= extraIntent.getIntegerArrayListExtra("speakerId");
-        roomId=extraIntent.getIntExtra("roomId",0);
+        Intent extraIntent = getIntent();
+        sessionId = extraIntent.getIntExtra("sessionId", 0);
+        dayNumber = extraIntent.getStringExtra("dayNumber");
+        starStatus = extraIntent.getStringExtra("starred");
+        speakerId = extraIntent.getIntegerArrayListExtra("speakerId");
+        roomId = extraIntent.getIntExtra("roomId", 0);
 
         ButterKnife.bind(this);
 
-        sessionDataViewModel= ViewModelProviders.of(this).get(SessionDataViewModel.class);
-        bottomSheetBehavior= BottomSheetBehavior.from(bottomSheetView);
+        sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel.class);
+        //check star status
+        sessionDataViewModel.getStarStatus(String.valueOf(sessionId));
+
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -119,71 +124,104 @@ public class SessionViewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSessionData(dayNumber,sessionId);
+        getSessionData(dayNumber, sessionId);
 
-        for (Integer i : speakerId){
+        for (Integer i : speakerId) {
             getSpeakerDetails(i);
         }
 
         getRoomDetails(roomId);
         //observe live data emitted by view model
-        sessionDataViewModel.getSessionDetails().observe(this,sessionDataState -> {
-            if (sessionDataState.getDatabaseError() != null){
+        sessionDataViewModel.getSessionDetails().observe(this, sessionDataState -> {
+            assert sessionDataState != null;
+            if (sessionDataState.getDatabaseError() != null) {
                 handleDatabaseError(sessionDataState.getDatabaseError());
-            }else {
+            } else {
                 handleFetchSessionData(sessionDataState.getSessionsModel());
             }
         });
 
-        sessionDataViewModel.getSpeakerInfo().observe(this,speakersState -> {
-            if (speakersState.getDatabaseError() != null){
+        sessionDataViewModel.getSpeakerInfo().observe(this, speakersState -> {
+            assert speakersState != null;
+            if (speakersState.getDatabaseError() != null) {
                 handleDatabaseError(speakersState.getDatabaseError());
-            }else {
+            } else {
                 handleFetchSpeakerDetails(speakersState.getSpeakersModel());
             }
         });
 
-        sessionDataViewModel.getRoomInfo().observe(this,roomState -> {
-            if (roomState.getDatabaseError() != null){
+        sessionDataViewModel.getRoomInfo().observe(this, roomState -> {
+            assert roomState != null;
+            if (roomState.getDatabaseError() != null) {
                 handleDatabaseError(roomState.getDatabaseError());
-            }else {
+            } else {
                 handleFetchRoomDetails(roomState.getRoomModel());
             }
         });
-
-        bottomAppBar=findViewById(R.id.bottomAppBar);
-        sessionViewTitleText=findViewById(R.id.sessionViewTitleText);
-        fab=findViewById(R.id.fab);
-        bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
-
+        sessionDataViewModel.getStarStatus().observe(this, starSessionState -> {
+            assert starSessionState != null;
+            if (starSessionState.getError() != null) {
+                handleStarResponse(starSessionState.getError());
+            } else {
+                if (starSessionState.isStarred()){
+                    starred= true;
+                }else {
+                    starred = false;
+                }
+            }
+        });
+        sessionDataViewModel.starSessionResponse().observe(this,starSessionState -> {
+            assert starSessionState != null;
+            if (starSessionState.getError() != null){
+              handleStarResponse(starSessionState.getError());
+            }
+        });
+        sessionDataViewModel.unstarSessionResponse().observe(this,starSessionState -> {
+            assert starSessionState != null;
+            if (starSessionState.getError() != null){
+                handleStarResponse(starSessionState.getError());
+            }
+        });
+        sessionDataViewModel.starUserSessionResponse().observe(this,starSessionState -> {
+            assert starSessionState != null;
+            if (starSessionState.getError() != null){
+                handleStarUserSession(starSessionState.getError());
+            }
+        });
+        sessionDataViewModel.unStarUserSessionResponse().observe(this,starSessionState -> {
+            assert starSessionState != null;
+            if (starSessionState.getError() != null){
+                handleStarUserSession(starSessionState.getError());
+            }
+        });
         //check a session was previously starred
-//        if (starStatus.equals("0")){
-//            fab.setImageResource(R.drawable.ic_star_border_black_24dp);
-//        }else if (starStatus.equals("1")){
-//            fab.setImageResource(R.drawable.ic_star_blue_24dp);
-//        }
+        if (starred){
+            fab.setImageResource(R.drawable.ic_star_blue_24dp);
+        }else {
+            fab.setImageResource(R.drawable.ic_star_border_black_24dp);
+        }
+        bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
 
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
-            int id= item.getItemId();
-            if (id == R.id.action_share){
-                Intent shareSession=new Intent();
+            int id = item.getItemId();
+            if (id == R.id.action_share) {
+                Intent shareSession = new Intent();
                 shareSession.setAction(Intent.ACTION_SEND);
-                shareSession.putExtra(Intent.EXTRA_TEXT,"Check out "+"'"+ sessionId +"' at "+getString(R.string.droidcoke_hashtag)+"\n"+getString(R.string.droidconke_site));
+                shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" + sessionId + "' at " + getString(R.string.droidcoke_hashtag) + "\n" + getString(R.string.droidconke_site));
                 shareSession.setType("text/plain");
                 startActivity(shareSession);
             }
-            if (id == R.id.action_map){
+            if (id == R.id.action_map) {
 //                //animate fab to display on top of the bottom sheet
 //                CoordinatorLayout.LayoutParams layoutParams= (CoordinatorLayout.LayoutParams)fab.getLayoutParams();
 //                layoutParams.setAnchorId(R.id.bottomSheetView);
 //
 //                fab.setLayoutParams(layoutParams);
 
-                if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-                else {
+                } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
                 }
@@ -193,72 +231,85 @@ public class SessionViewActivity extends AppCompatActivity {
 
         //star a session
         fab.setOnClickListener(view -> {
-            if (starStatus.equals("0")){
-                //start a session
-               fab.setImageResource(R.drawable.ic_star_blue_24dp);
+            if (!starred) {
+                //starr a session
+                fab.setImageResource(R.drawable.ic_star_blue_24dp);
 
-               starredSessionModel.setDay(dayNumber);
-               starredSessionModel.setSession_id(String.valueOf(sessionsModel1.getId()));
-               starredSessionModel.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                starredSessionModel.setDay(dayNumber);
+                starredSessionModel.setSession_id(String.valueOf(sessionsModel1.getId()));
+                starredSessionModel.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                starredSessionModel.setStarred(true);
+                starredSessionModel.setDocumentId(sessionsModel1.getDocumentId());
 
-               databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                       .child("starred").push().setValue(starredSessionModel);
+                //save starred session in user document
+                sessionDataViewModel.starUserSession(starredSessionModel,FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-               //this will aid in tracking every starred session and then send a push notification
-               databaseReference.child("starred_sessions").push().setValue(starredSessionModel);
+                //star session in starred_sessions collection
+                //this will aid in tracking every starred session and then send a push notification
+               sessionDataViewModel.starSession(starredSessionModel);
 
-                //update in firebase
-              //  databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("1");
-
-            }else if(starStatus.equals("1")){
+            } else if (starred) {
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
 
-                //update in firebase
-               // databaseReference.child(dayNumber).child(String.valueOf(sessionsModel1.getId())).child("starred").setValue("0");
+                //unstar session in user document
+                sessionDataViewModel.unStarUserSession(sessionsModel1.getDocumentId(),FirebaseAuth.getInstance().getCurrentUser().getUid(),false);
+
+                //unstar session in starred_sessions collection
+                sessionDataViewModel.unStarSession(String.valueOf(sessionsModel1.getDocumentId()));
             }
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
-            if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
     }
 
+    private void handleStarUserSession(String error) {
+        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleStarResponse(String error) {
+        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+    }
+
     private void getRoomDetails(int roomId) {
         sessionDataViewModel.fetchRoomDetails(roomId);
     }
+
     private void handleFetchRoomDetails(RoomModel roomModel) {
-        if (roomModel != null){
-            roomDetailsText.setText(roomModel.getName() + "Room capacity is: "+String.valueOf(roomModel.getCapacity()));
+        if (roomModel != null) {
+            roomDetailsText.setText(roomModel.getName() + "Room capacity is: " + String.valueOf(roomModel.getCapacity()));
         }
     }
+
     private void getSpeakerDetails(int speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
 
     private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {
-        if (speakersModel != null){
-            speakersList= speakersModel;
+        if (speakersModel != null) {
+            speakersList = speakersModel;
             initView();
-        }else {
+        } else {
             //if there are no speakers for this session hide views
             speakersLinear.setVisibility(View.GONE);
         }
     }
 
     private void initView() {
-        speakersAdapter= new SpeakersAdapter(speakersList,getApplicationContext());
-        mLayoutManager= new LinearLayoutManager(getApplicationContext());
+        speakersAdapter = new SpeakersAdapter(speakersList, getApplicationContext());
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(speakersAdapter);
     }
 
     private void handleFetchSessionData(SessionsModel sessionsModel) {
-        if (sessionsModel != null){
-            sessionsModel1=sessionsModel;
+        if (sessionsModel != null) {
+            sessionsModel1 = sessionsModel;
             //set the data on the view
             txtSessionTime.setText(sessionsModel.getTime());
             txtSessionRoom.setText(sessionsModel.getRoom());
@@ -269,11 +320,11 @@ public class SessionViewActivity extends AppCompatActivity {
     }
 
     private void handleDatabaseError(String databaseError) {
-        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), databaseError, Toast.LENGTH_SHORT).show();
     }
 
-    private void getSessionData(String dayNumber, int sessionId){
-        sessionDataViewModel.fetchSessionDetails(dayNumber,sessionId);
+    private void getSessionData(String dayNumber, int sessionId) {
+        sessionDataViewModel.fetchSessionDetails(dayNumber, sessionId);
     }
 
 }

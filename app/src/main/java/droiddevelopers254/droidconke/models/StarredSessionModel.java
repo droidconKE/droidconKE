@@ -4,16 +4,18 @@ public class StarredSessionModel {
     private String day;
     private String session_id;
     private String user_id;
+    private boolean starred;
+    private String documentId;
 
     public StarredSessionModel() {
     }
 
 
-
-    public StarredSessionModel(String day, String session_id, String user_id) {
+    public StarredSessionModel(String day, String session_id, String user_id, boolean starred) {
         this.day = day;
         this.session_id = session_id;
         this.user_id = user_id;
+        this.starred = starred;
     }
 
     public String getUser_id() {
@@ -38,5 +40,21 @@ public class StarredSessionModel {
 
     public void setSession_id(String session_id) {
         this.session_id = session_id;
+    }
+
+    public boolean isStarred() {
+        return starred;
+    }
+
+    public void setStarred(boolean starred) {
+        this.starred = starred;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 }
