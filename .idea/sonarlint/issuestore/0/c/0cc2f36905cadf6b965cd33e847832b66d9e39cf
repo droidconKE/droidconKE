@@ -1,19 +1,18 @@
 
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8üŒ ŞÃ,
-{squid:UselessImportCheck"PRemove this unused import 'droiddevelopers254.droidconke.models.EventTypeModel'.(¨ÏõÛ8üŒ ŞÃ,
-asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8üŒ ŞÃ,
-[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8üŒ ŞÃ,
-„squid:UselessImportCheck"TRemove this unused import 'droiddevelopers254.droidconke.datastates.EventTypeState'.(¹šõøÿÿÿÿ8üŒ ŞÃ,
-wsquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8 ÈßŞÃ,
-‰squid:UselessImportCheck"_Remove this unused import 'droiddevelopers254.droidconke.views.activities.SessionViewActivity'.(şÕ–f8üŒ ŞÃ,
-[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8üŒ ŞÃ,
-qsquid:UselessImportCheck"FRemove this unused import 'com.google.firebase.database.DataSnapshot'.(şÇŒ„8 ÈßŞÃ,
-¤squid:S1186""€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡çÑ¹úÿÿÿÿ8üŒ ŞÃ,
-|squid:UselessImportCheck"LRemove this unused import 'com.google.firebase.database.ValueEventListener'.(‹ŞÜ‹ıÿÿÿÿ8 ÈßŞÃ,
-{squid:UselessImportCheck	"KRemove this unused import 'com.google.android.gms.tasks.OnFailureListener'.(ï¿ŞŞúÿÿÿÿ8üŒ ŞÃ,
-isquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8•÷ßŞÃ,
-|squid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8•÷ßŞÃ,
-vsquid:UselessImportCheck
-"KRemove this unused import 'com.google.android.gms.tasks.OnSuccessListener'.(íå¡8üŒ ŞÃ,
-xsquid:UselessImportCheck"HRemove this unused import 'com.google.firebase.firestore.QuerySnapshot'.(Ä¡Ş©ıÿÿÿÿ8•÷ßŞÃ,
-isquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8•÷ßŞÃ,
+‚squid:UselessImportCheck"TRemove this unused import 'droiddevelopers254.droidconke.datastates.EventTypeState'.(¹šõøÿÿÿÿ8üŒ ŞÃ,
+zsquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8•÷ßŞÃ,
+Ysquid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8üŒ ŞÃ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8üŒ ŞÃ,
+_squid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8üŒ ŞÃ,
+vsquid:UselessImportCheck"HRemove this unused import 'com.google.firebase.firestore.QuerySnapshot'.(Ä¡Ş©ıÿÿÿÿ8•÷ßŞÃ,
+tsquid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnSuccessListener'.(íå¡8üŒ ŞÃ,
+ysquid:UselessImportCheck"PRemove this unused import 'droiddevelopers254.droidconke.models.EventTypeModel'.(¨ÏõÛ8üŒ ŞÃ,
+osquid:UselessImportCheck"FRemove this unused import 'com.google.firebase.database.DataSnapshot'.(şÇŒ„8 ÈßŞÃ,
+gsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8•÷ßŞÃ,
+¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡çÑ¹úÿÿÿÿ8üŒ ŞÃ,
+gsquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8•÷ßŞÃ,
+zsquid:UselessImportCheck"LRemove this unused import 'com.google.firebase.database.ValueEventListener'.(‹ŞÜ‹ıÿÿÿÿ8 ÈßŞÃ,
+ysquid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnFailureListener'.(ï¿ŞŞúÿÿÿÿ8üŒ ŞÃ,
+‡squid:UselessImportCheck"_Remove this unused import 'droiddevelopers254.droidconke.views.activities.SessionViewActivity'.(şÕ–f8üŒ ŞÃ,
+usquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8 ÈßŞÃ,
+Ysquid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8üŒ ŞÃ,

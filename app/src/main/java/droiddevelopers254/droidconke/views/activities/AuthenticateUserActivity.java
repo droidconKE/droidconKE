@@ -1,7 +1,9 @@
 package droiddevelopers254.droidconke.views.activities;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.Collections;
 
@@ -31,6 +34,7 @@ import butterknife.BindView;
 import droiddevelopers254.droidconke.HomeActivity;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.models.UserModel;
+import droiddevelopers254.droidconke.viewmodels.AuthenticateUserViewModel;
 
 public class AuthenticateUserActivity extends AppCompatActivity {
 
@@ -38,9 +42,10 @@ public class AuthenticateUserActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     SignInButton googleSignInBtn;
-    private ProgressDialog pDialog;
+    private SweetAlertDialog pDialog;
     @BindView(R.id.coorAuthUser)
     CoordinatorLayout snackBarView;
+    AuthenticateUserViewModel authenticateUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +65,11 @@ public class AuthenticateUserActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_authenticate_user);
 
+        authenticateUserViewModel= ViewModelProviders.of(this).get(AuthenticateUserViewModel.class);
+
         // Progress dialog
-        pDialog = new ProgressDialog(this);
+        pDialog = new SweetAlertDialog(AuthenticateUserActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#863B96"));
         pDialog.setCancelable(false);
 
         googleSignInBtn=findViewById(R.id.googleSignInBtn);
@@ -75,12 +83,26 @@ public class AuthenticateUserActivity extends AppCompatActivity {
             // not signed in
            showUI();
         }
+        //observe livedata emitted by view model
+        authenticateUserViewModel.getAuthenticateResponse().observe(this,authenticateUserState -> {
+            if (authenticateUserState.isUserExists()){
+                navigateToHome();
+            }else{
+                if (authenticateUserState.getError() != null){
+                    handleError(authenticateUserState.getError());
+                }
+            }
+        });
 
+    }
+
+    private void handleError(String error) {
+        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
     }
 
     private void showUI() {
         googleSignInBtn.setOnClickListener(view -> {
-            pDialog.setTitle("Signing in..");
+            pDialog.setTitleText("Signing in");
             showDialog();
             signInUser();
         });
@@ -98,7 +120,7 @@ public class AuthenticateUserActivity extends AppCompatActivity {
                 //save the user now to db
                 firebaseUser = auth.getCurrentUser();
                 if(firebaseUser!=null){
-                    checkUserExistence(firebaseUser);
+                   authenticateUserViewModel.authenticateUser(firebaseUser);
 
                 }else {
                     Toast.makeText(getApplicationContext(),"User is null",Toast.LENGTH_LONG).show();
@@ -144,41 +166,6 @@ public class AuthenticateUserActivity extends AppCompatActivity {
         Snackbar.make(snackBarView,message,Snackbar.LENGTH_SHORT).show();
 
     }
-    private void checkUserExistence(final FirebaseUser currentUser) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference users = database.getReference("users");
-        users.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null) {
-                    navigateToHome();
-
-                } else {
-                    UserModel user = new UserModel();
-                    user.setEmail(currentUser.getEmail());
-                    user.setUser_id(currentUser.getUid());
-                    user.setUser_name(currentUser.getDisplayName());
-                    user.setPhoto_url(String.valueOf(currentUser.getPhotoUrl()));
-                    user.setRefresh_token(currentUser.getUid());
-
-                    saveCurrentUser(currentUser, user);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void saveCurrentUser(final FirebaseUser currentUser,UserModel user) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference users = database.getReference("users");
-        users.child(currentUser.getUid()).setValue(user)
-                .addOnSuccessListener(aVoid -> navigateToHome())
-                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Unable to log you in at this time, please try again", Toast.LENGTH_SHORT).show());
-    }
-
     private void navigateToHome() {
         Intent intent = new Intent(AuthenticateUserActivity.this,HomeActivity.class);
         startActivity(intent);

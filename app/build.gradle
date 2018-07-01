@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
 
     //butter knife dep
     implementation 'com.jakewharton:butterknife:8.8.1'

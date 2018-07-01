@@ -155,3 +155,7 @@ Napp/src/main/java/droiddevelopers254/droidconke/repository/TravelInfoRepo.java
 Mapp/src/main/java/droiddevelopers254/droidconke/viewmodels/SortViewModel.java,7/8/78ea6ed94edddb1ded77646d83b4431ac6e9d018
 u
 Eapp/src/main/java/droiddevelopers254/droidconke/firebase/Filters.java,7/9/7953b3a95c8835de6fd36fc6c96efac72bd26463
+R
+"app/src/main/res/values/styles.xml,f/7/f79cc2688e29fcbc286fda14ae07b27c9e83690f
+}
+Mapp/src/main/java/droiddevelopers254/droidconke/models/AboutDetailsModel.java,2/e/2e70d62224e8b3cb65e325c06002a7738e531145

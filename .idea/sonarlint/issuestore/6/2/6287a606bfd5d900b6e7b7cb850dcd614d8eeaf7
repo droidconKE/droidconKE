@@ -1,19 +1,20 @@
 
-Esquid:S1659!"'Declare "dayNumber" on a separate line.(ªöÍ8ó¼ßƒÄ,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8ó¼ßƒÄ,
-isquid:CommentedOutCodeLineX"<This block of commented-out lines of code should be removed.(õÓò©8ó¼ßƒÄ,
-Psquid:S1659-"-Declare "sessionRoomText" on a separate line.(ä¯¹ıÿÿÿÿ8ó¼ßƒÄ,
-hsquid:CommentedOutCodeLinek"<This block of commented-out lines of code should be removed.(—¦õ=8ó¼ßƒÄ,
-bsquid:UselessImportCheck"2Remove this unused import 'android.widget.Filter'.(ëªôÍùÿÿÿÿ8ÔğšãÄ,
-Qsquid:S1659-".Declare "sessionLabelText" on a separate line.(ä¯¹ıÿÿÿÿ8ó¼ßƒÄ,
-zsquid:S1450 "\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8ó¼ßƒÄ,
-`squid:UselessImportCheck"6Remove this unused import 'android.widget.Filterable'.(ô…éJ8ëş›ãÄ,
-Psquid:S1659-"-Declare "sessionTimeText" on a separate line.(ä¯¹ıÿÿÿÿ8ó¼ßƒÄ,
-nsquid:CommentedOutCodeLineP"<This block of commented-out lines of code should be removed.(¼Û˜ùÿÿÿÿ8ó¼ßƒÄ,
-Zsquid:S1068""7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8ó¼ßƒÄ,
-Qsquid:S1659-".Declare "sessionTitleText" on a separate line.(ä¯¹ıÿÿÿÿ8ó¼ßƒÄ,
-hsquid:UselessImportCheck"=Remove this unused import 'android.support.v7.util.DiffUtil'.(Ü†µ8× šãÄ,
-[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ÔğšãÄ,
-usquid:UselessImportCheck"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—8í´™ãÄ,
-Lsquid:S1068!".Remove this unused "starStatus" private field.(ªöÍ8ó¼ßƒÄ,
-usquid:UselessImportCheck"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹8™¶øàÄ,
+Usquid:S1135$"2Complete the task associated to this TODO comment.(ÒÊˆ‰ûÿÿÿÿ8¢ŒòÅ,
+Qsquid:S1659/".Declare "sessionLabelText" on a separate line.(ä¯¹ıÿÿÿÿ8¢ŒòÅ,
+usquid:UselessImportCheck"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—8¢ŒòÅ,
+`squid:UselessImportCheck"6Remove this unused import 'android.widget.Filterable'.(ô…éJ8¢ŒòÅ,
+Zsquid:S1068#"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8¢ŒòÅ,
+Esquid:S1659""'Declare "dayNumber" on a separate line.(ªöÍ8¢ŒòÅ,
+zsquid:S1450!"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8¢ŒòÅ,
+Qsquid:S1659/".Declare "sessionTitleText" on a separate line.(ä¯¹ıÿÿÿÿ8¢ŒòÅ,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8¢ŒòÅ,
+bsquid:UselessImportCheck"2Remove this unused import 'android.widget.Filter'.(ëªôÍùÿÿÿÿ8¢ŒòÅ,
+Psquid:S1659/"-Declare "sessionTimeText" on a separate line.(ä¯¹ıÿÿÿÿ8¢ŒòÅ,
+hsquid:UselessImportCheck"=Remove this unused import 'android.support.v7.util.DiffUtil'.(Ü†µ8¢ŒòÅ,
+Psquid:S1659/"-Declare "sessionRoomText" on a separate line.(ä¯¹ıÿÿÿÿ8¢ŒòÅ,
+nsquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(¼Û˜ùÿÿÿÿ8¢ŒòÅ,
+isquid:CommentedOutCodeLineW"<This block of commented-out lines of code should be removed.(õÓò©8¢ŒòÅ,
+hsquid:CommentedOutCodeLinej"<This block of commented-out lines of code should be removed.(—¦õ=8¢ŒòÅ,
+[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¢ŒòÅ,
+Lsquid:S1068"".Remove this unused "starStatus" private field.(ªöÍ8¢ŒòÅ,
+usquid:UselessImportCheck"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹8¢ŒòÅ,

@@ -33,6 +33,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     private SessionsModel sessionsModel;
     private String starStatus,dayNumber;
     private StarredSessionModel starredSessionModel;
+    //TODO use list adapter to compare two lists
 
 
     public SessionsAdapter(Context context,List<SessionsModel> sessionsModelList,String dayNumber){
