@@ -181,12 +181,9 @@ public class HomeActivity extends AppCompatActivity {
         if (tokenSent == 0) {
             refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null);
             firebaseUser = auth.getCurrentUser();
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference users = database.getReference();
-            //update in firebase
-            users.child("users").child(firebaseUser.getUid()).child("refresh_token").setValue(refreshToken);
+            //update in firestore
+            homeViewModel.updateToken(firebaseUser.getUid(),refreshToken);
         }
-
         //get filters from firebase
         getTopicFilters();
         getTypeFilters();
@@ -246,6 +243,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //observe livedata emitted by view model
         homeViewModel.getTypeFiltersResponse().observe(this, filtersState -> {
+            assert filtersState != null;
             if (filtersState.getDatabaseError() != null){
                 handleDatabaseError(filtersState.getDatabaseError());
             }else{
@@ -256,15 +254,25 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         homeViewModel.getTopicFiltersResponse().observe(this,filtersState -> {
+            assert filtersState != null;
             if (filtersState.getDatabaseError() != null){
                 handleDatabaseError(filtersState.getDatabaseError());
             }else {
                 handleTopicFilters(filtersState.getFiltersModel());
             }
         });
+        homeViewModel.getUpdateTokenResponse().observe(this,updateTokenState -> {
+            assert updateTokenState != null;
+            if (updateTokenState.isSuccess()){
+                tokenSent=1;
+                sharedPreferences.edit().putInt(TOKEN_SENT,tokenSent).apply();
+            }else {
+                tokenSent= 0;
+                sharedPreferences.edit().putInt(TOKEN_SENT,tokenSent).apply();
+            }
+        });
 
     }
-
     private void handleTopicFilters(List<FiltersModel> filtersModel) {
         topicFilterList=filtersModel;
         initView(topicsChipsRv,topicFilterList);

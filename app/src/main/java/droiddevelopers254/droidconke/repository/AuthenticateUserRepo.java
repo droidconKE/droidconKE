@@ -33,7 +33,7 @@ public class AuthenticateUserRepo {
                             user.setUser_id(firebaseUser.getUid());
                             user.setUser_name(firebaseUser.getDisplayName());
                             user.setPhoto_url(String.valueOf(firebaseUser.getPhotoUrl()));
-                            user.setRefresh_token(firebaseUser.getUid());
+                            user.setRefresh_token(null);
                             userStateMutableLiveData.setValue(new AuthenticateUserState(user));
 
                             saveUser(user);
