@@ -1,18 +1,16 @@
 
-jsquid:CommentedOutCodeLineÓ"<This block of commented-out lines of code should be removed.(þ¤·8™á¼…Ä,
-lsquid:MaximumInheritanceDepth)"<This class has 7 parents which is greater than 5 authorized.(°çòê8™á¼…Ä,
-…squid:S1450E"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8™á¼…Ä,
-usquid:S3776P"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(ž¨Œþÿÿÿÿ8™á¼…Ä,
-ƒsquid:S1450H"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8™á¼…Ä,
-jsquid:CommentedOutCodeLineµ"<This block of commented-out lines of code should be removed.(Ûšµ8™á¼…Ä,
-Usquid:S1153ê"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8™á¼…Ä,
-asquid:UselessImportCheck"1Remove this unused import 'android.view.Gravity'.(ÎÎÎýÿÿÿÿ8™á¼…Ä,
-Bsquid:S1659+"$Declare "roomId" on a separate line.(š®à8™á¼…Ä,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñþÿÿÿÿ8™á¼…Ä,
-jsquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(ÞÆŒ£8™á¼…Ä,
-osquid:CommentedOutCodeLineÙ"<This block of commented-out lines of code should be removed.(ôºïçüÿÿÿÿ8™á¼…Ä,
-Zsquid:S2696ý"6Make the enclosing method "static" or remove this set.(•º°ðüÿÿÿÿ8™á¼…Ä,
-wsquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµýÿÿÿÿ8™á¼…Ä,
-Jsquid:S1659F"'Declare "dayNumber" on a separate line.(±„å¨ûÿÿÿÿ8™á¼…Ä,
-¤squid:S1186q"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°þÿÿÿÿ8™á¼…Ä,
-jsquid:CommentedOutCodeLine²"<This block of commented-out lines of code should be removed.(¿òá8™á¼…Ä,
+Bsquid:S1659'"$Declare "roomId" on a separate line.(š®à8øÂ†¼Å,
+Jsquid:S1659H"'Declare "dayNumber" on a separate line.(„É¯Èþÿÿÿÿ8øÂ†¼Å,
+Ksquid:S1659H"(Declare "documentId" on a separate line.(„É¯Èþÿÿÿÿ8øÂ†¼Å,
+Xsquid:S1068J"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8øÂ†¼Å,
+…squid:S1450G"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8øÂ†¼Å,
+ƒsquid:S1450J"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8øÂ†¼Å,
+jsquid:CommentedOutCodeLineÚ"<This block of commented-out lines of code should be removed.(¿òá8øÂ†¼Å,
+jsquid:CommentedOutCodeLineÝ"<This block of commented-out lines of code should be removed.(Ûšµ8øÂ†¼Å,
+Zsquid:S2696±"6Make the enclosing method "static" or remove this set.(•º°ðüÿÿÿÿ8øÂ†¼Å,
+Psquid:S1135f"2Complete the task associated to this TODO comment.(Ãèéë8øÂ†¼Å,
+usquid:S3776S"RRefactor this method to reduce its Cognitive Complexity from 43 to the 15 allowed.(ž¨Œþÿÿÿÿ8øÂ†¼Å,
+¤squid:S1186w"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°þÿÿÿÿ8øÂ†¼Å,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñþÿÿÿÿ8øÂ†¼Å,
+Usquid:S1153"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8øÂ†¼Å,
+lsquid:MaximumInheritanceDepth&"<This class has 7 parents which is greater than 5 authorized.(°çòê8øÂ†¼Å,

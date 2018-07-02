@@ -141,6 +141,7 @@
     <string name="session_time_am">AM</string>
     <string name="time_session">7:20</string>
     <string name="session_hour">10:00 AM - 11:00 AM</string>
-
-
+    <string name="starred_desc">Event added to your starred items</string>
+    <string name="unstarred_desc">Event removed from starred items</string>
+    <string name="undo">UNDO</string>
 </resources>

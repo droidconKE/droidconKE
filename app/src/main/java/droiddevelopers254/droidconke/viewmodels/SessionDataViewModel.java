@@ -25,9 +25,6 @@ public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<StarSessionState> unStarMediatorLiveData;
     private MediatorLiveData<StarSessionState> starStatusMediatorLiveData;
     private StarSessionRepo starSessionRepo;
-    private MediatorLiveData<StarSessionState> starUserSessionMediatorLiveData;
-    private MediatorLiveData<StarSessionState> unStarUserSessionMediatorLiveData;
-
     public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
         sessionDataRepo = new SessionDataRepo();
@@ -39,8 +36,6 @@ public class SessionDataViewModel extends ViewModel {
         unStarMediatorLiveData = new MediatorLiveData<>();
         starStatusMediatorLiveData = new MediatorLiveData<>();
         starSessionRepo= new StarSessionRepo();
-        starUserSessionMediatorLiveData= new MediatorLiveData<>();
-        unStarUserSessionMediatorLiveData= new MediatorLiveData<>();
 
     }
 
@@ -63,12 +58,6 @@ public class SessionDataViewModel extends ViewModel {
     }
     public LiveData<StarSessionState> unstarSessionResponse(){
         return unStarMediatorLiveData;
-    }
-    public LiveData<StarSessionState> starUserSessionResponse(){
-        return starUserSessionMediatorLiveData;
-    }
-    public LiveData<StarSessionState> unStarUserSessionResponse(){
-        return unStarUserSessionMediatorLiveData;
     }
 
     public void fetchSessionDetails(String dayNumber,int sessionId){
@@ -103,8 +92,8 @@ public class SessionDataViewModel extends ViewModel {
             this.roomStateMediatorLiveData.setValue(roomStateMediatorLiveData);
                 });
     }
-    public void getStarStatus(String sessionId){
-        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.checkStarStatus(sessionId);
+    public void getStarStatus(String sessionId,String userId){
+        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.checkStarStatus(sessionId,userId);
         starStatusMediatorLiveData.addSource(starSessionStateLiveData,
                 starStatusMediatorLiveData->{
             if (this.starStatusMediatorLiveData.hasActiveObservers()){
@@ -113,8 +102,8 @@ public class SessionDataViewModel extends ViewModel {
             this.starStatusMediatorLiveData.setValue(starStatusMediatorLiveData);
                 });
     }
-    public void starSession(StarredSessionModel starredSessionModel){
-        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.starSession(starredSessionModel);
+    public void starSession(StarredSessionModel starredSessionModel,String userId){
+        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.starSession(starredSessionModel,userId);
         starMediatorLiveData.addSource(starSessionStateLiveData,
                 starMediatorLiveData->{
             if (this.starMediatorLiveData.hasActiveObservers()){
@@ -123,35 +112,14 @@ public class SessionDataViewModel extends ViewModel {
             this.starMediatorLiveData.setValue(starMediatorLiveData);
                 });
     }
-    public void unStarSession(String sessionId){
-        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.unStarSession(sessionId);
+    public void unStarSession(String sessionId,String userId,boolean starred){
+        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.unStarSession(sessionId,userId,starred);
         unStarMediatorLiveData.addSource(starSessionStateLiveData,
                 unStarMediatorLiveData->{
             if (this.unStarMediatorLiveData.hasActiveObservers()){
                 this.unStarMediatorLiveData.removeSource(starSessionStateLiveData);
             }
             this.unStarMediatorLiveData.setValue(unStarMediatorLiveData);
-                });
-    }
-
-    public void starUserSession(StarredSessionModel starredSessionModel,String userId){
-        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.starUserSession(starredSessionModel, userId);
-        starUserSessionMediatorLiveData.addSource(starSessionStateLiveData,
-                starUserSessionMediatorLiveData->{
-            if (this.starUserSessionMediatorLiveData.hasActiveObservers()){
-                this.starUserSessionMediatorLiveData.removeSource(starSessionStateLiveData);
-            }
-            this.starUserSessionMediatorLiveData.setValue(starUserSessionMediatorLiveData);
-                });
-    }
-    public void unStarUserSession(String sessionId,String userId,boolean starred){
-        final LiveData<StarSessionState> starSessionStateLiveData=starSessionRepo.unStarUserSession(sessionId, userId, starred);
-        unStarUserSessionMediatorLiveData.addSource(starSessionStateLiveData,
-                unStarUserSessionMediatorLiveData->{
-            if (this.unStarUserSessionMediatorLiveData.hasActiveObservers()){
-                this.unStarUserSessionMediatorLiveData.removeSource(starSessionStateLiveData);
-            }
-            this.unStarUserSessionMediatorLiveData.setValue(unStarUserSessionMediatorLiveData);
                 });
     }
 }

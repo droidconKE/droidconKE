@@ -1,7 +1,13 @@
 
-Ysquid:UnusedPrivateMethod"1Remove this unused private "showSnackbar" method.(È˜ƒùÿÿÿÿ
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ŸŒ¹Ñ
-_squid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(Á°úÁûÿÿÿÿ
-Zsquid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(ëá—
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ
-csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ó¿
+`squid:UnusedPrivateMethod"1Remove this unused private "showSnackbar" method.(È˜ƒùÿÿÿÿ8’Ü§©Å,
+nsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ŸŒ¹Ñ8’Ü§©Å,
+fsquid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(Á°úÁûÿÿÿÿ8’Ü§©Å,
+asquid:CallToDeprecatedMethod"4Remove this use of "getErrorCode"; it is deprecated.(ëá—8’Ü§©Å,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ8’Ü§©Å,
+osquid:UselessImportCheck"FRemove this unused import 'com.google.firebase.database.DataSnapshot'.(şÇŒ„8’Ü§©Å,
+ssquid:UselessImportCheck"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹8’Ü§©Å,
+ssquid:UselessImportCheck"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—8’Ü§©Å,
+zsquid:UselessImportCheck"LRemove this unused import 'com.google.firebase.database.ValueEventListener'.(‹ŞÜ‹ıÿÿÿÿ8’Ü§©Å,
+`squid:UselessImportCheck"7Remove this unused import 'android.app.ProgressDialog'.(¶ÍÔÓ8’Ü§©Å,
+usquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8’Ü§©Å,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ó¿8’Ü§©Å,

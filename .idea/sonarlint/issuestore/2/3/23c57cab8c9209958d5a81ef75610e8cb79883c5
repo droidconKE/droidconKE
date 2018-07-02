@@ -1,5 +1,10 @@
 
+|squid:HiddenFieldCheck"URename "unStarUserSessionMediatorLiveData" which hides the field declared at line 29.(Ÿ¿üª8ã÷ø®Å,
 |squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ8ÄÚÿƒÄ,
-}squid:HiddenFieldCheck"QRename "speakersStateMediatorLiveData" which hides the field declared at line 17.(µı×Ÿûÿÿÿÿ8ÄÚÿƒÄ,
-tsquid:HiddenFieldCheck"MRename "roomStateMediatorLiveData" which hides the field declared at line 19.(»÷¬ƒ8ÄÚÿƒÄ,
-€squid:HiddenFieldCheck"TRename "sessionDataStateMediatorLiveData" which hides the field declared at line 15.(ÚŸ³şÿÿÿÿ8ÄÚÿƒÄ,
+usquid:HiddenFieldCheck"NRename "starStatusMediatorLiveData" which hides the field declared at line 26.(´–±à8Ô÷º¬Å,
+tsquid:HiddenFieldCheck"MRename "roomStateMediatorLiveData" which hides the field declared at line 22.(»÷¬ƒ8ÄÚÿƒÄ,
+squid:HiddenFieldCheck"SRename "starUserSessionMediatorLiveData" which hides the field declared at line 28.(ûöûâüÿÿÿÿ8ğ®Å,
+tsquid:HiddenFieldCheck"HRename "starMediatorLiveData" which hides the field declared at line 24.(Œµ‰°øÿÿÿÿ8ÍşÁ¬Å,
+€squid:HiddenFieldCheck"TRename "sessionDataStateMediatorLiveData" which hides the field declared at line 18.(ÚŸ³şÿÿÿÿ8ÄÚÿƒÄ,
+}squid:HiddenFieldCheck"QRename "speakersStateMediatorLiveData" which hides the field declared at line 20.(µı×Ÿûÿÿÿÿ8ÄÚÿƒÄ,
+vsquid:HiddenFieldCheck"JRename "unStarMediatorLiveData" which hides the field declared at line 25.(å¾›¾ûÿÿÿÿ8ìœË¬Å,
