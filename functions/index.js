@@ -2,57 +2,51 @@ let functions = require('firebase-functions');
 let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.sendStarredSessionNotification = functions.database.ref('/starred_sessions/{pushId}')
-.onCreate((snapshot, context)  => {
-
-     // Grab the current value of what was written to the Realtime Database.
-     const data = snapshot.val();
+exports.sendStarredSessionNotification = functions.firestore
+    .document('/starred_sessions/{userId}')
+    .onCreate((snap, context) => {
+    
+    // Grab the current value of what was written to the Realtime Database.
+    var data = snap.data();
     //get the start session event
-    const day = data.day;
+    var day = data.day;
     console.log('day of the event ' +  day);
 
-    const session_id =   data.session_id;
+    var session_id =   data.session_id;
     console.log('session id is  ' +  session_id);
 
-    const user_id =   data.user_id;
+    var user_id =   data.user_id;
     console.log('user id is ' +  user_id);
 
     //device id token get it here
-    const toDeviceIdPromise = admin.database().ref(`/users/${user_id}/${refresh_token}/instanceId`).
-    once('value');
+    admin.firestore().collection('users').doc(user_id).get().then(user => {
+    if (!user.exists) {
+        console.log('No such user!');
+    } else {
+        var deviceId= user.data().refresh_token;
+        console.log('refresh_token:', user.data().refresh_token);
+    }
+    });
 
-    //name of event get it here
-    const eventNamePromise = admin.database().ref(`/${day}/${session_id}/${title}/instanceId`).
-    once('value');
-    //venue of event get it here
-    const eventVenuePromise = admin.database().ref(`/${day}/${session_id}/${room}/instanceId`).
-    once('value');
-    //time of event comes here
-    const eventTimePromise = admin.database().ref(`/${day}/${session_id}/${time_stamp}/instanceId`).
-    once('value');
+    //get session details
+    admin.firestore().collection(day).doc(session_id).where('').get().then(session =>{
+        if (!session.exists) {
+            console.log('No such session')
+        }else{
+            var eventName= session.data().title;
+            var eventVenue= session.data().room;
+            var eventTime= session.data().time;
 
- // const userIdPromise = admin.auth().getUser(user_id);
-
- return Promise.all([toDeviceIdPromise, eventNamePromise,eventVenuePromise,
-    eventTimePromise]).then(results => {
-
-    const toDeviceId = results[0].val();
-    const eventName = results[1].val();
-    const eventVenue = results[2].val();
-    const eventTime = results[3].val();
-
-    console.log('device id is  ' + toDeviceId);
-    console.log('eventName  is  ' + eventName);
-
-    console.log('eventVenue  is ' + eventVenue);
-    console.log('eventTime  is  ' + eventTime);
+            console.log('eventName', eventName);
+            console.log('eventVenue', eventVenue);
+            console.log('eventTime', eventTime);
+        }
+    });
+    
 
 
-        return console.log('eventVenue  is ' + eventVenue) ;
 
-          });
+    return true;
 
 
-     
-
-})
+});
