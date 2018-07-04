@@ -113,10 +113,6 @@ Z
 0app/src/main/res/layout/session_time_details.xml,d/4/d43ac14e408861627a939394dec71d8574158d86
 S
 #app/src/main/res/values/strings.xml,d/2/d2281fbb3027de2722081a53408dd77628bf080e
-W
-'droidKe_functions/.vscode/settings.json,d/8/d89bc5d0127d8275c9a195115bd138827bf30c06
-T
-$droidKe_functions/functions/index.js,1/c/1c66721c8e79b63b32d0251f3ae3622b77e51aa1
 {
 Kapp/src/main/java/droiddevelopers254/droidconke/datastates/AgendaState.java,6/a/6ae3a97b65ae4c08634a5b1affd3363605a3964d
 {

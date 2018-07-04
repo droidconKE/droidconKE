@@ -51,8 +51,24 @@ exports.sendStarredSessionNotification = functions.firestore
     .catch(err => {
         console.log('Error getting session',err);
     });
-    
-return true;
 
+    // notification payload
+    var notificationMessage={
+        notification:{
+            title:'eventName',
+            body:'eventVenue'            
+        }
+    };
 
+ // Send a message to the device corresponding to the provided
+// registration token.
+    admin.messaging().sendToDevice('fz2dWwjzudQ:APA91bEsCbL_B6jQBVN2jk9TMJKDATP-0nRSvsk_ol_Up4P3vxs2DeGWGfgDHcgAuXC02sVdz-zgOlXkk0Ba3V4hTk257_LHSkg-EuOe4GfiPvUhbh4kGyZjEZXSi89JxPUlBTAm7fipEL6c6b_YYbjXT2mbIp7pYw',notificationMessage)
+         .then((response) => {
+         // Response is a message ID string.
+         console.log('Successfully sent message:', response);
+          })
+         .catch((error) => {
+         console.log('Error sending message:', error);
+      });
+   return true;
 });
