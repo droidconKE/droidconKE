@@ -3,6 +3,7 @@ package droiddevelopers254.droidconke.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +31,10 @@ public class StarSessionRepo {
                     //add session to user starred sessions
                     firebaseFirestore.collection("users").document(userId).collection("starred").document(starredSessionModel.getDocumentId())
                             .set(starredSessionModel)
-                            .addOnSuccessListener(documentSnapshot -> starSessionStateMutableLiveData.setValue(new StarSessionState(true)))
+                            .addOnSuccessListener(documentSnapshot -> {
+                                Log.d("star_response","success");
+                                starSessionStateMutableLiveData.setValue(new StarSessionState(true));
+                            })
                             .addOnFailureListener(e -> starSessionStateMutableLiveData.setValue(new StarSessionState(e.getMessage())));
                 })
                 .addOnFailureListener(e -> starSessionStateMutableLiveData.setValue(new StarSessionState(e.getMessage())));
@@ -44,7 +48,10 @@ public class StarSessionRepo {
                     //change starred field in users starred sessions to false
                     firebaseFirestore.collection("users").document(userId).collection("starred").document(sessionId)
                             .update("starred",starred)
-                            .addOnSuccessListener(aVoid1 -> starSessionStateMutableLiveData.setValue(new StarSessionState(false)))
+                            .addOnSuccessListener(aVoid1 -> {
+                                Log.d("unstar_response","success");
+                                starSessionStateMutableLiveData.setValue(new StarSessionState(false));
+                            })
                             .addOnFailureListener(e -> starSessionStateMutableLiveData.setValue(new StarSessionState(e.getMessage())));
                 })
                 .addOnFailureListener(e -> starSessionStateMutableLiveData.setValue(new StarSessionState(e.getMessage())));

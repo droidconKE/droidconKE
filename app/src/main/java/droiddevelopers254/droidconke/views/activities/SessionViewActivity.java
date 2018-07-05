@@ -191,6 +191,8 @@ public class SessionViewActivity extends AppCompatActivity {
             if (starSessionState.isStarred()){
                 starred=true;
                 Toast.makeText(getApplicationContext(),getString(R.string.starred_desc),Toast.LENGTH_SHORT).show();
+
+                Log.d("star_value", String.valueOf(starred));
             }
         });
         sessionDataViewModel.unstarSessionResponse().observe(this, starSessionState -> {
@@ -201,6 +203,7 @@ public class SessionViewActivity extends AppCompatActivity {
             if (!starSessionState.isStarred()){
                 starred=false;
                 Toast.makeText(getApplicationContext(),getString(R.string.unstarred_desc),Toast.LENGTH_SHORT).show();
+                Log.d("unstar_value", String.valueOf(starred));
             }
         });
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
@@ -227,14 +230,16 @@ public class SessionViewActivity extends AppCompatActivity {
             return false;
         });
 
-        Log.d("starred", String.valueOf(starred));
         //star a session
         fab.setOnClickListener(view -> {
             if (starred) {
+                Log.d("starred", String.valueOf(starred));
+
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
                 //unstar session in starred_sessions collection
                 sessionDataViewModel.unStarSession(String.valueOf(sessionsModel1.getDocumentId()),FirebaseAuth.getInstance().getCurrentUser().getUid(),false);
             }else {
+                Log.d("starred", String.valueOf(starred));
                 //star a session
                 fab.setImageResource(R.drawable.ic_star_blue_24dp);
 

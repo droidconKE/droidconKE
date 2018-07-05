@@ -12,7 +12,7 @@ exports.sendStarredSessionNotification = functions.firestore
     var day = data.day;
     console.log('day of the event ' +  day);
 
-    var session_id =   data.session_id;
+    var session_id =  data.session_id;
     console.log('session id is  ' +  session_id);
 
     var user_id =   data.user_id;
@@ -22,53 +22,46 @@ exports.sendStarredSessionNotification = functions.firestore
     console.log('documentId is '+ documentId);
 
     //device id token get it here
-    admin.firestore().collection('users').doc(user_id).get().then(user => {
-    if (!user.exists) {
-        console.log('No such user!');
-    } else {
-        var deviceId= user.data().refresh_token;
-        console.log('refresh_token:', user.data().refresh_token);
-    }
+    const getDeviceTokenPromise = admin.firestore().collection('users').doc(user_id).get();
+   
+    //get session details
+    const getSessionDetailsPromise = admin.firestore().collection(day).doc(documentId).get();
+
+    let userDocument;
+    let sessionDocument;
+
+   return Promise.all([getDeviceTokenPromise,getSessionDetailsPromise]).then(results => {
+        var refresh_token = '';
+        var notificationMessage = {};
+
+        userDocument= results[0].data();
+        sessionDocument = results[1].data();
+
+        refresh_token = userDocument.refresh_token;     
+        var eventName= sessionDocument.title;
+        var eventVenue= sessionDocument.room;
+        var eventTime= sessionDocument.time;
+
+        console.log('refresh token is '+ refresh_token);
+        console.log('event name is '+ eventName);
+        console.log('event venu is '+ eventVenue);
+        console.log('event name is '+ eventTime);
+         
+        notificationMessage = {
+            notification:{
+                title: eventName + ' About to start',
+                body:  eventName+' time is :'+eventTime +' and venue is '+eventVenue                    
+             }
+        };
+
+        //add condition check for session time                
+    return admin.messaging().sendToDevice(refresh_token, notificationMessage);
+    }).then((response)=>{
+        
+        return console.log('push notification response is'+ response.data);
     })
     .catch(err =>{
-        console.log('Error getting user',err);
+        console.log('Error getting details',err);
     });
 
-    //get session details
-    admin.firestore().collection(day).doc(documentId).get().then(session =>{
-        if (!session.exists) {
-            console.log('No such session');
-        }else{
-            var eventName= session.data().title;
-            var eventVenue= session.data().room;
-            var eventTime= session.data().time;
-
-            console.log('eventName is ' + eventName);
-            console.log('eventVenue is ' +eventVenue);
-            console.log('eventTime is ' +eventTime);
-        }
-    })
-    .catch(err => {
-        console.log('Error getting session',err);
-    });
-
-    // notification payload
-    var notificationMessage={
-        notification:{
-            title:'eventName',
-            body:'eventVenue'            
-        }
-    };
-
- // Send a message to the device corresponding to the provided
-// registration token.
-    admin.messaging().sendToDevice('fz2dWwjzudQ:APA91bEsCbL_B6jQBVN2jk9TMJKDATP-0nRSvsk_ol_Up4P3vxs2DeGWGfgDHcgAuXC02sVdz-zgOlXkk0Ba3V4hTk257_LHSkg-EuOe4GfiPvUhbh4kGyZjEZXSi89JxPUlBTAm7fipEL6c6b_YYbjXT2mbIp7pYw',notificationMessage)
-         .then((response) => {
-         // Response is a message ID string.
-         console.log('Successfully sent message:', response);
-          })
-         .catch((error) => {
-         console.log('Error sending message:', error);
-      });
-   return true;
 });

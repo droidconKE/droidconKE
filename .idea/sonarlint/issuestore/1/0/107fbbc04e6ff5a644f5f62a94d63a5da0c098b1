@@ -1,7 +1,10 @@
 
-msquid:S1192"QDefine a constant instead of duplicating this literal "starred_sessions" 3 times.(¶Ô„8ÔºÖ°Å,
-gsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8ÔºÖ°Å,
-gsquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8ÔºÖ°Å,
-dsquid:S1192"HDefine a constant instead of duplicating this literal "starred" 3 times.(ëøçì8ÔºÖ°Å,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8ÔºÖ°Å,
-zsquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8ÔºÖ°Å,
+isquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8ÔºÖ°Å,
+|squid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ8ÔºÖ°Å,
+isquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô8ÔºÖ°Å,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8ÔºÖ°Å,
+dsquid:S1192"FDefine a constant instead of duplicating this literal "users" 3 times.(ëøçì8ÔºÖ°Å,
+fsquid:S1192"HDefine a constant instead of duplicating this literal "starred" 4 times.(ëøçì8åÊ¾ÈÆ,
+Jsquid:S1602",Remove useless curly braces around statement(§ÀÇ8åÊ¾ÈÆ,
+Jsquid:S1602+",Remove useless curly braces around statement(§ÀÇ8åÊ¾ÈÆ,
+gsquid:UselessImportCheck"<Remove this unused import 'droiddevelopers254.droidconke.R'.(ôßõÜ8åÊ¾ÈÆ,

@@ -175,3 +175,5 @@ Papp/src/main/java/droiddevelopers254/droidconke/datastates/StarSessionState.jav
 Oapp/src/main/java/droiddevelopers254/droidconke/models/StarredSessionModel.java,6/1/612d8837d71617aa5cec8f0702b1ce747233e5e1
 
 Oapp/src/main/java/droiddevelopers254/droidconke/repository/StarSessionRepo.java,1/0/107fbbc04e6ff5a644f5f62a94d63a5da0c098b1
+=
+firebase.json,5/9/59951656e3803454427cfe9d761fed1df10b7528
