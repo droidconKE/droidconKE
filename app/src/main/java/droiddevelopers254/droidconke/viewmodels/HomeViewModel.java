@@ -8,7 +8,6 @@ import java.util.List;
 
 import droiddevelopers254.droidconke.datastates.FiltersState;
 import droiddevelopers254.droidconke.datastates.UpdateTokenState;
-import droiddevelopers254.droidconke.firebase.Filters;
 import droiddevelopers254.droidconke.models.FiltersModel;
 import droiddevelopers254.droidconke.repository.TopicFiltersRepo;
 import droiddevelopers254.droidconke.repository.TypeFiltersRepo;
@@ -21,7 +20,6 @@ public class HomeViewModel extends ViewModel {
     private MediatorLiveData<FiltersState> stateMediatorLiveData;
     private MediatorLiveData<UpdateTokenState> updateTokenStateMediatorLiveData;
     private TopicFiltersRepo topicFiltersRepo;
-    private Filters filters;
     private UpdateTokenRepo updateTokenRepo;
 
 

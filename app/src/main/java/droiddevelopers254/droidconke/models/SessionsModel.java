@@ -1,19 +1,8 @@
 package droiddevelopers254.droidconke.models;
 
-import com.google.firebase.database.Exclude;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SessionsModel {
-
-    public static final String FIELD_ID="id";
-    public static final String FIELD_TOPIC="topic";
-    public static final String FIELD_TYPE="type";
-    public static final String FIELD_STARRED="starred";
-
     private int id;
     private ArrayList<Integer> speaker_id;
     private int room_id;
@@ -24,7 +13,6 @@ public class SessionsModel {
     private String time;
     private String title;
     private String topic;
-
     private String url;
     private String duration;
     private String description;
@@ -33,6 +21,8 @@ public class SessionsModel {
     private int type_id;
     private String type;
     private String documentId;
+    private String timestamp;
+    private String day_number;
 
     public SessionsModel() {
     }
@@ -181,28 +171,19 @@ public class SessionsModel {
         this.documentId = documentId;
     }
 
-    public SessionsModel(int id, ArrayList<Integer> speaker_id, int room_id, String main_tag, String room, String speakers, String starred, String time, String title, String topic, String url, String duration, String description, String session_color, int topic_id, int type_id, String type) {
-        this.id = id;
-        this.speaker_id = speaker_id;
-        this.room_id = room_id;
-        this.main_tag = main_tag;
-        this.room = room;
-        this.speakers = speakers;
-        this.starred = starred;
-        this.time = time;
-        this.title = title;
-        this.topic = topic;
-        this.url = url;
-        this.duration = duration;
-        this.description = description;
-        this.session_color = session_color;
-        this.topic_id = topic_id;
-        this.type_id = type_id;
-        this.type = type;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public SessionsModel(int id, String starred) {
-        this.id = id;
-        this.starred = starred;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getDay_number() {
+        return day_number;
+    }
+
+    public void setDay_number(String day_number) {
+        this.day_number = day_number;
     }
 }

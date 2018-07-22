@@ -1,0 +1,7 @@
+
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(µ§¬ÿÿÿÿÿ8áú‡³Ë,
+‘squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÄŞÔ­ùÿÿÿÿ8áú‡³Ë,
+Tsquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü8¡Ûˆ³Ë,
+}squid:S1488"\Immediately return this expression instead of assigning it to the temporary variable "json".(´Œ›’øÿÿÿÿ8áú‡³Ë,
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(•ÀœÎ8áú‡³Ë,
+squid:S1319"oThe type of the "list" object should be an interface such as "List" rather than the implementation "ArrayList".(Ç«ïÂøÿÿÿÿ8áú‡³Ë,

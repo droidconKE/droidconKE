@@ -1,0 +1,9 @@
+
+Psquid:S1481"9Remove this unused "firebaseRemoteConfig" local variable.(åè­‘
+˜squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Õ½
+_squid:S1854"HRemove this useless assignment to local variable "firebaseRemoteConfig".(ñ©±¼
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ
+csquid:UselessImportCheck":Remove this unused import 'java.util.concurrent.Executor'.(÷ı¶Œúÿÿÿÿ
+bsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß
+usquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ
+bsquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô

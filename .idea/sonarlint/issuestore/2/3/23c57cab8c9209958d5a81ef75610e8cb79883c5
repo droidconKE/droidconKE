@@ -4,5 +4,5 @@ vsquid:HiddenFieldCheckX"MRename "roomStateMediatorLiveData" which hides the 
 wsquid:HiddenFieldCheckb"NRename "starStatusMediatorLiveData" which hides the field declared at line 26.(´–±à8Ô÷º¬Å,
 ~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8ÄÚÿƒÄ,
 vsquid:HiddenFieldCheckl"HRename "starMediatorLiveData" which hides the field declared at line 24.(Œµ‰°øÿÿÿÿ8ÍþÁ¬Å,
-xsquid:HiddenFieldCheckv"JRename "unStarMediatorLiveData" which hides the field declared at line 25.(å¾›¾ûÿÿÿÿ8ìœË¬Å,
 squid:HiddenFieldCheckM"QRename "speakersStateMediatorLiveData" which hides the field declared at line 20.(µý×Ÿûÿÿÿÿ8ÄÚÿƒÄ,
+xsquid:HiddenFieldCheckv"JRename "unStarMediatorLiveData" which hides the field declared at line 25.(å¾›¾ûÿÿÿÿ8ìœË¬Å,

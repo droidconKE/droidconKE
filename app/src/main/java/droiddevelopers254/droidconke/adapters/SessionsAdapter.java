@@ -23,20 +23,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyViewHolder> {
-    private List<SessionsModel> sessionsModelList;
+    private List<SessionsEntity> sessionsModelList;
     private Context context;
-    private SessionsModel sessionsModel;
+    private SessionsEntity sessionsModel;
     private String starStatus,dayNumber;
     private StarredSessionModel starredSessionModel;
     //TODO use list adapter to compare two lists
 
 
-    public SessionsAdapter(Context context,List<SessionsModel> sessionsModelList,String dayNumber){
+    public SessionsAdapter(Context context,List<SessionsEntity> sessionsModelList,String dayNumber){
         this.sessionsModelList=sessionsModelList;
         this.context=context;
         this.dayNumber=dayNumber;

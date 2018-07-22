@@ -23,13 +23,14 @@ import butterknife.Unbinder;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SessionTimeAdapter;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.models.SessionTimeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel;
 
 public class DayOneFragment extends Fragment {
     SessionsAdapter sessionsAdapter;
-    List<SessionsModel> sessionsModelList = new ArrayList<>();
+    List<SessionsEntity> sessionsModelList = new ArrayList<>();
     List<SessionTimeModel> sessionTimeModelList = new ArrayList<>();
     List<String> sessionIds = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
@@ -46,36 +47,15 @@ public class DayOneFragment extends Fragment {
         dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel.class);
         unbinder = ButterKnife.bind(this, view);
 
-        SessionTimeModel sessionTimeModel= new SessionTimeModel("7:00","AM");
-        sessionTimeModelList.add(sessionTimeModel);
-
-        getDayOneSessions();
-
         //observe live data emitted by view model
-        dayOneViewModel.getSessions().observe(this, sessionsState -> {
-            if (sessionsState.getDatabaseError() != null) {
-                handleDatabaseError(sessionsState.getDatabaseError());
-            } else {
-                handleDayOneSessions(sessionsState.getSessionsModel());
-            }
+        dayOneViewModel.getDayOneLiveData().observe(this,listResource -> {
+            assert listResource != null;
+            sessionsModelList=listResource.data;
+            initView();
         });
 
+
         return view;
-    }
-
-    private void handleDayOneSessions(List<SessionsModel> sessionsList) {
-        if (sessionsList != null) {
-            sessionsModelList = sessionsList;
-            initView();
-        }
-    }
-
-    private void handleDatabaseError(String databaseError) {
-        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
-    }
-
-    private void getDayOneSessions() {
-        dayOneViewModel.fetchDayOneSessions();
     }
 
     private void initView() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import droiddevelopers254.droidconke.models.SessionsModel;
 
-public class SessionsState {
+public class SessionsState{
     private List<SessionsModel> sessionsModel;
     private String error;
 

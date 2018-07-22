@@ -1,9 +1,5 @@
 
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(–Ÿà«ùÿÿÿÿ8†©™‰Ä,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Óæ—ýÿÿÿÿ8†©™‰Ä,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ô ©›úÿÿÿÿ8†©™‰Ä,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8†©™‰Ä,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Å—ýØüÿÿÿÿ8†©™‰Ä,
-Osquid:S1068".Remove this unused "filtersDao" private field.(µŸø¾ýÿÿÿÿ8†©™‰Ä,
-psquid:HiddenFieldCheck"DRename "filtersModelList" which hides the field declared at line 24.(ÿ“Öãþÿÿÿÿ8†©™‰Ä,
-Hsquid:S1068",Remove this unused "executor" private field.(äü¥ 8†©™‰Ä,
+psquid:HiddenFieldCheck"DRename "filtersModelList" which hides the field declared at line 18.(ÿ“Öãþÿÿÿÿ8Øë‰ŒÌ,
+¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(á–øáùÿÿÿÿ8Øë‰ŒÌ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8Øë‰ŒÌ,
+hsquid:UselessImportCheck":Remove this unused import 'java.util.concurrent.Executor'.(÷ý¶Œúÿÿÿÿ8Øë‰ŒÌ,

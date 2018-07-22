@@ -1,4 +1,6 @@
 
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ª„Ä¬ùÿÿÿÿ8¤ğ©ºÃ,
+}squid:UselessImportCheck"ORemove this unused import 'droiddevelopers254.droidconke.models.SessionsModel'.(…ŒØıÿÿÿÿ8œ­¨‹Ì,
 |squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ8¤ğ©ºÃ,
 usquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8›ó¤ÛÃ,
+_squid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8‹•š‹Ì,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ª„Ä¬ùÿÿÿÿ8¤ğ©ºÃ,

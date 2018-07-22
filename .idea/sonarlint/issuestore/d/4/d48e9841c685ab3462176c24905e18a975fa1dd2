@@ -1,5 +1,5 @@
 
-tsquid:HiddenFieldCheck"TRename "wifiDetailsModelMediatorLiveData" which hides the field declared at line 17.(Ãï­˜
 usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ
-vsquid:UselessImportCheck"ORemove this unused import 'droiddevelopers254.droidconke.models.SessionsModel'.(…ŒØıÿÿÿÿ
+tsquid:HiddenFieldCheck"TRename "wifiDetailsModelMediatorLiveData" which hides the field declared at line 17.(Ãï­˜
 rsquid:UselessImportCheck"PRemove this unused import 'droiddevelopers254.droidconke.models.EventTypeModel'.(¨ÏõÛ
+vsquid:UselessImportCheck"ORemove this unused import 'droiddevelopers254.droidconke.models.SessionsModel'.(…ŒØıÿÿÿÿ

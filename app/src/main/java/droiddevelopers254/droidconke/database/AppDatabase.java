@@ -1,11 +1,17 @@
 package droiddevelopers254.droidconke.database;
 
+import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import droiddevelopers254.droidconke.database.dao.FiltersDao;
+import droiddevelopers254.droidconke.database.converters.Converter;
+import droiddevelopers254.droidconke.database.dao.SessionsDao;
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 
+@Database(entities = {SessionsEntity.class},version = 1,exportSchema = false)
+@TypeConverters(Converter.class)
 public abstract class AppDatabase extends RoomDatabase {
     //Singleton
     private static volatile AppDatabase INSTANCE;
@@ -13,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "eldo_taxi_db")
+                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "droidconKE_db")
                             .fallbackToDestructiveMigration()
                             .build();
         }
@@ -23,7 +29,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static void destroyInstance() {
         INSTANCE = null;
     }
+
     //dao
-    public abstract FiltersDao filtersDao();
+    public abstract SessionsDao sessionsDao();
 
 }

@@ -1,6 +1,6 @@
 
-ysquid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnFailureListener'.(ï¿ŞŞúÿÿÿÿ8¶“À®Å,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8¶“À®Å,
-tsquid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnSuccessListener'.(íå¡8¶“À®Å,
-gsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8¶“À®Å,
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ª¬åışÿÿÿÿ8¶“À®Å,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8¶“À®Å,
+vsquid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnSuccessListener'.(íå¡8¶“À®Å,
+¤squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ª¬åışÿÿÿÿ8¶“À®Å,
+{squid:UselessImportCheck"KRemove this unused import 'com.google.android.gms.tasks.OnFailureListener'.(ï¿ŞŞúÿÿÿÿ8¶“À®Å,
+isquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß8¶“À®Å,

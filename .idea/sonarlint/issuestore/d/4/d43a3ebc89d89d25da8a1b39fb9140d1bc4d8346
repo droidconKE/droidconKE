@@ -1,10 +1,9 @@
 
-Psquid:S1068"/Remove this unused "filtersList" private field.(‡ŞÏ†ıÿÿÿÿ8±Ûà©Å,
-psquid:HiddenFieldCheck"IRename "stateMediatorLiveData" which hides the field declared at line 21.(µô”»8±Ûà©Å,
-|squid:HiddenFieldCheck"PRename "filtersStateMediatorLiveData" which hides the field declared at line 20.(Õşè‹ÿÿÿÿÿ8±Ûà©Å,
-Gsquid:S1068"+Remove this unused "filters" private field.( ÂØó8±Ûà©Å,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Å—ıØüÿÿÿÿ8±Ûà©Å,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(—ÕØÍüÿÿÿÿ8±Ûà©Å,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ö‹âà8±Ûà©Å,
-{squid:HiddenFieldCheck"TRename "updateTokenStateMediatorLiveData" which hides the field declared at line 22.(«ùø°8‰°ï©Å,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ8±Ûà©Å,
+nsquid:CommentedOutCodeLine1"<This block of commented-out lines of code should be removed.(—ÕØÍüÿÿÿÿ8±Ûà©Å,
+}squid:HiddenFieldCheckT"TRename "updateTokenStateMediatorLiveData" which hides the field declared at line 21.(«ùø°8‰°ï©Å,
+rsquid:HiddenFieldCheckI"IRename "stateMediatorLiveData" which hides the field declared at line 20.(µô”»8±Ûà©Å,
+Rsquid:S1068"/Remove this unused "filtersList" private field.(‡ŞÏ†ıÿÿÿÿ8±Ûà©Å,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ8±Ûà©Å,
+~squid:HiddenFieldCheck?"PRename "filtersStateMediatorLiveData" which hides the field declared at line 19.(Õşè‹ÿÿÿÿÿ8±Ûà©Å,
+isquid:CommentedOutCodeLine4"<This block of commented-out lines of code should be removed.(ö‹âà8±Ûà©Å,
+nsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(Å—ıØüÿÿÿÿ8±Ûà©Å,

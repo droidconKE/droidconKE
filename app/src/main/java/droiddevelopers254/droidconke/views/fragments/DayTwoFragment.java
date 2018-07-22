@@ -23,13 +23,14 @@ import java.util.List;
 
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel;
 
 public class DayTwoFragment extends Fragment {
     RecyclerView recyclerView;
     SessionsAdapter sessionsAdapter;
-    List<SessionsModel> sessionsModelList = new ArrayList<>();
+    List<SessionsEntity> sessionsModelList = new ArrayList<>();
     static RecyclerView.LayoutManager mLayoutManager;
     DayTwoViewModel dayTwoViewModel;
 
@@ -41,35 +42,16 @@ public class DayTwoFragment extends Fragment {
 
         recyclerView=view.findViewById(R.id.sessionsRv);
 
-        getDayTwoSessions();
-
         //observe live data emitted by view model
-        dayTwoViewModel.getSessions().observe(this,sessionsState -> {
-            if (sessionsState.getDatabaseError() != null){
-                handleDatabaseError(sessionsState.getDatabaseError());
-            }else {
-                handleDayTwoSessions(sessionsState.getSessionsModel());
-            }
+        dayTwoViewModel.getSessionsLiveData().observe(this,listResource -> {
+            assert listResource != null;
+            sessionsModelList = listResource.data;
+            initView();
         });
+
 
         return view;
     }
-
-    private void handleDayTwoSessions(List<SessionsModel> sessionsList) {
-        if (sessionsList != null){
-            sessionsModelList =sessionsList;
-            initView();
-        }
-    }
-
-    private void handleDatabaseError(String databaseError) {
-        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
-    }
-    private void getDayTwoSessions(){
-        dayTwoViewModel.fetchDayTwoSessions();
-
-    }
-
     private void initView() {
 
         mLayoutManager= new LinearLayoutManager(getActivity());
@@ -78,6 +60,5 @@ public class DayTwoFragment extends Fragment {
         sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList,"day_two");
         recyclerView.setAdapter(sessionsAdapter);
     }
-
 
 }
