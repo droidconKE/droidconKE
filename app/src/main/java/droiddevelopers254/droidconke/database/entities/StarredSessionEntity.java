@@ -14,7 +14,7 @@ public class StarredSessionEntity {
     private String main_tag;
     private String room;
     private String speakers;
-    private String starred;
+    private boolean isStarred;
     private String time;
     private String title;
     private String topic;
@@ -64,12 +64,12 @@ public class StarredSessionEntity {
         this.speakers = speakers;
     }
 
-    public String getStarred() {
-        return starred;
+    public boolean getStarred() {
+        return isStarred;
     }
 
-    public void setStarred(String starred) {
-        this.starred = starred;
+    public void setStarred(boolean starred) {
+        this.isStarred = starred;
     }
 
     public String getTitle() {

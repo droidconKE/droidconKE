@@ -1,8 +1,9 @@
 
-squid:HiddenFieldCheckK"QRename "speakersStateMediatorLiveData" which hides the field declared at line 23.(µý×Ÿûÿÿÿÿ8« Ï·Ì,
-vsquid:HiddenFieldCheckV"MRename "roomStateMediatorLiveData" which hides the field declared at line 25.(»÷¬ƒ8« Ï·Ì,
-wsquid:HiddenFieldCheck`"NRename "starStatusMediatorLiveData" which hides the field declared at line 29.(´–±à8« Ï·Ì,
-vsquid:HiddenFieldCheckj"HRename "starMediatorLiveData" which hides the field declared at line 27.(Œµ‰°øÿÿÿÿ8« Ï·Ì,
-xsquid:HiddenFieldCheckt"JRename "unStarMediatorLiveData" which hides the field declared at line 28.(å¾›¾ûÿÿÿÿ8« Ï·Ì,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8« Ï·Ì,
-{squid:UselessImportCheck"KRemove this unused import 'android.arch.lifecycle.LiveDataReactiveStreams'.(Ãý‹çøÿÿÿÿ8« Ï·Ì,
+`squid:S1068"DRemove this unused "sessionDataStateMediatorLiveData" private field.(Š¸Æ»8™³’ÚÌ,
+}squid:HiddenFieldCheck"QRename "speakersStateMediatorLiveData" which hides the field declared at line 21.(µý×Ÿûÿÿÿÿ8™³’ÚÌ,
+tsquid:HiddenFieldCheck"MRename "roomStateMediatorLiveData" which hides the field declared at line 23.(»÷¬ƒ8™³’ÚÌ,
+usquid:HiddenFieldCheck"NRename "starStatusMediatorLiveData" which hides the field declared at line 27.(´–±à8™³’ÚÌ,
+tsquid:HiddenFieldCheck"HRename "starMediatorLiveData" which hides the field declared at line 25.(Œµ‰°øÿÿÿÿ8™³’ÚÌ,
+vsquid:HiddenFieldCheck"JRename "unStarMediatorLiveData" which hides the field declared at line 26.(å¾›¾ûÿÿÿÿ8™³’ÚÌ,
+xsquid:HiddenFieldCheck"QRename "sessionsModelMediatorLiveData" which hides the field declared at line 29.(ÏãÕé8™³’ÚÌ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8™³’ÚÌ,

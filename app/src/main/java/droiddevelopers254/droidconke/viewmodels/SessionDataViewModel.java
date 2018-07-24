@@ -1,21 +1,19 @@
 package droiddevelopers254.droidconke.viewmodels;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.LiveDataReactiveStreams;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.datastates.RoomState;
 import droiddevelopers254.droidconke.datastates.SessionDataState;
 import droiddevelopers254.droidconke.datastates.SpeakersState;
 import droiddevelopers254.droidconke.datastates.StarSessionState;
+import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.repository.RoomRepo;
 import droiddevelopers254.droidconke.repository.SessionDataRepo;
 import droiddevelopers254.droidconke.repository.SpeakersRepo;
 import droiddevelopers254.droidconke.repository.StarSessionRepo;
-import io.reactivex.Flowable;
 
 public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<SessionDataState> sessionDataStateMediatorLiveData;
@@ -28,6 +26,7 @@ public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<StarSessionState> unStarMediatorLiveData;
     private MediatorLiveData<StarSessionState> starStatusMediatorLiveData;
     private StarSessionRepo starSessionRepo;
+    private MediatorLiveData<SessionsModel> sessionsModelMediatorLiveData;
 
     public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
@@ -40,17 +39,16 @@ public class SessionDataViewModel extends ViewModel {
         unStarMediatorLiveData = new MediatorLiveData<>();
         starStatusMediatorLiveData = new MediatorLiveData<>();
         starSessionRepo= new StarSessionRepo();
+        sessionsModelMediatorLiveData = new MediatorLiveData<>();
 
     }
 
-    public LiveData<SessionDataState> getSessionDetails(){
-        return  sessionDataStateMediatorLiveData;
+    public LiveData<SessionsModel> getSession(){
+        return  sessionsModelMediatorLiveData;
     }
 
-    public Flowable<SessionsEntity> getSessionDetails(String dayNumber,int sessionId){
+    public LiveData<SessionDataState> getSessionData(){return sessionDataStateMediatorLiveData;}
 
-        return sessionDataRepo.getSessionDetails(dayNumber, sessionId);
-    }
     public LiveData<SpeakersState> getSpeakerInfo(){
         return speakersStateMediatorLiveData;
     }
@@ -118,6 +116,18 @@ public class SessionDataViewModel extends ViewModel {
                 this.unStarMediatorLiveData.removeSource(starSessionStateLiveData);
             }
             this.unStarMediatorLiveData.setValue(unStarMediatorLiveData);
+                });
+    }
+
+    public void getSessionDetails(String dayNumber, int sessionId){
+       final LiveData<SessionDataState>  sessionsModelLiveData = sessionDataRepo.getSessionData(dayNumber, sessionId);
+        sessionDataStateMediatorLiveData.addSource(sessionsModelLiveData,
+                sessionDataStateMediatorLiveData ->{
+            if (this.sessionDataStateMediatorLiveData.hasActiveObservers()){
+                this.sessionDataStateMediatorLiveData.removeSource(sessionsModelLiveData);
+
+            }
+            this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData);
                 });
     }
 }

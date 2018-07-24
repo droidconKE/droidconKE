@@ -1,55 +1,54 @@
 package droiddevelopers254.droidconke.repository;
 
-import android.util.Log;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import droiddevelopers254.droidconke.database.AppDatabase;
 import droiddevelopers254.droidconke.database.dao.SessionsDao;
-import droiddevelopers254.droidconke.database.entities.SessionsEntity;
+import droiddevelopers254.droidconke.datastates.SessionsState;
 import droiddevelopers254.droidconke.models.SessionsModel;
-import droiddevelopers254.droidconke.repository.remote.DayOneService;
 import droiddevelopers254.droidconke.utils.DroidCoin;
-import droiddevelopers254.droidconke.utils.EntityMapper;
-import droiddevelopers254.droidconke.utils.network.NetworkBoundSource;
-import droiddevelopers254.droidconke.utils.network.Resource;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 public class DayOneRepo {
     private SessionsDao sessionsDao;
-    public DayOneService dayOneService;
+    private Executor executor;
 
     public DayOneRepo(){
         sessionsDao = AppDatabase.getDatabase(DroidCoin.context).sessionsDao();
-        dayOneService= new DayOneService();
+        executor = Executors.newSingleThreadExecutor();
 
     }
-    public Flowable<Resource<List<SessionsEntity>>> getDayOneSessions(){
-        return Flowable.create(emitter -> new NetworkBoundSource<List<SessionsEntity>,List<SessionsModel>>(emitter){
+    public LiveData<SessionsState> getDayOneSessions(){
+        final MutableLiveData<SessionsState> sessionsStateMutableLiveData= new MutableLiveData<>();
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("day_one")
+                .orderBy("id", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()){
+                        List<SessionsModel> sessionsModelList=queryDocumentSnapshots.toObjects(SessionsModel.class);
+                        sessionsStateMutableLiveData.setValue(new SessionsState(sessionsModelList));
+                        executor.execute(()-> sessionsDao.saveSession(sessionsModelList));
+                    }
 
-            @Override
-            public Single<List<SessionsModel>> getRemote() {
-                return dayOneService.getDayOneSessions() ;
-            }
+                })
+                .addOnFailureListener(error -> sessionsStateMutableLiveData.setValue(new SessionsState(error.getMessage())));
 
-            @Override
-            public Flowable<List<SessionsEntity>> getLocal() {
-                return sessionsDao.getDayOneSessions("day_one");
-            }
+        return sessionsStateMutableLiveData;
+    }
 
-            @Override
-            public void saveCallResult(List<SessionsEntity> data) {
-                sessionsDao.saveDayOneSession(data);
-                Log.d("data",String.valueOf(data));
-            }
+    public void updateSession(int sessionId, boolean isStarred){
+        executor.execute(()-> sessionsDao.updateSession(sessionId,isStarred));
+    }
 
-            @Override
-            public Function<List<SessionsModel>, List<SessionsEntity>> mapper() {
-                return EntityMapper.convert();
-            }
-        }, BackpressureStrategy.BUFFER);
+    public void isSessionStarred(int sessionId){
+        executor.execute(() -> sessionsDao.isSessionStarred(sessionId));
     }
 }

@@ -1,3 +1,2 @@
 
-“"squid:ClassVariableVisibilityCheck"YMake dayOneService a static final constant or non-public and provide accessors if needed.(Š™†àùÿÿÿÿ8¢¿È¸Ì,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8¢¿È¸Ì,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ8õœÔÚÌ,

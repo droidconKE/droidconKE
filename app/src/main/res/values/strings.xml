@@ -101,7 +101,7 @@
     <string name="about_licenses">Open Source Licenses</string>
     <string name="ok">OK</string>
     <string name="customize_schedule">Customize your schedule</string>
-    <string name="star_event">Add to your starred events</string>
+    <string name="star_event">Add to your isStarred events</string>
     <string name="see_event_map">See session venue</string>
     <string name="sign_in_to_customize">Sign in to customize \nyour schedule</string>
     <string name="sign_in_descrption">Sign in to save events and get notifications. Actions will be synced from your account across app and site</string>

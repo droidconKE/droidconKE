@@ -1,33 +1,0 @@
-
-usquid:S00117/"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Α‘ώÿÿÿÿ8…άσΜ,
-squid:S1319w"uThe type of the "speaker_id" object should be an interface such as "List" rather than the implementation "ArrayList".(Έ΅†ÿÿÿÿÿ8…άσΜ,
-vsquid:S00117—"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°ΆΦίϊÿÿÿÿ8…άσΜ,
-qsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ήψυ·8…άσΜ,
-msquid:S00100»"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥ªΡ8…άσΜ,
-qsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—βΏ΄8…άσΜ,
-usquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ΙΠωÿÿÿÿ8…άσΜ,
-qsquid:S00116"SRename this field "topic_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ε€ÿ=8…άσΜ,
-tsquid:S00116"URename this field "day_number" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(γήΈβ8…άσΜ,
-rsquid:S00100{"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ΦΠί­όÿÿÿÿ8…άσΜ,
-msquid:S00100›"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(΅Νθ8…άσΜ,
-¤squid:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€­›Ψύÿÿÿÿ8…άσΜ,
-ysquid:S00116"URename this field "speaker_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­θ¬ϊÿÿÿÿ8…άσΜ,
-rsquid:S00116"SRename this field "main_tag" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(―Δύ8…άσΜ,
-msquid:S00100+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰‘©«8…άσΜ,
-nsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ήψυ·8…άσΜ,
-vsquid:S00116"RRename this field "type_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”‚¬ÿόÿÿÿÿ8…άσΜ,
-rsquid:S00100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Α‘ώÿÿÿÿ8…άσΜ,
-ssquid:S00100‹"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(π“νÿÿÿÿÿ8…άσΜ,
-qsquid:S00116"RRename this field "room_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ρΙΑ8…άσΜ,
-rsquid:S00100s"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®“—ύÿÿÿÿ8…άσΜ,
-wsquid:S00116"XRename this field "session_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ώΒψΞ8…άσΜ,
-usquid:S00117w"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Έ΅†ÿÿÿÿÿ8…άσΜ,
-ssquid:S00100“"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(άΫ’Ύύÿÿÿÿ8…άσΜ,
-rsquid:S00100w"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Έ΅†ÿÿÿÿÿ8…άσΜ,
-rsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ΙΠωÿÿÿÿ8…άσΜ,
-ssquid:S00100—"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°ΆΦίϊÿÿÿÿ8…άσΜ,
-qsquid:S00117Ώ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Σν8…άσΜ,
-“squid:S1319s"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(®“—ύÿÿÿÿ8…άσΜ,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ήΕλψÿÿÿÿ8…άσΜ,
-nsquid:S00100Ώ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Σν8…άσΜ,
-nsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—βΏ΄8…άσΜ,

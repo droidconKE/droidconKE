@@ -20,7 +20,10 @@ public interface StarredSessionDao {
     @Insert(onConflict = REPLACE)
     void starSession(StarredSessionEntity starredSessionEntity);
 
-    @Query("DELETE FROM starredSessions WHERE id=:sessionId")
-    void unStarSession(int sessionId);
+    @Query("DELETE FROM starredSessions WHERE id=:sessionId AND day_number =:dayNumber")
+    void unStarSession(int sessionId ,String dayNumber);
+
+    @Query("SELECT count(*) FROM starredSessions WHERE id LIKE :sessionId ")
+    int isSessionStarred(int sessionId);
 
 }

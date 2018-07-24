@@ -2,21 +2,18 @@ package droiddevelopers254.droidconke.views.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,15 +31,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
-import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.models.RoomModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class SessionViewActivity extends AppCompatActivity {
     int sessionId, roomId;
@@ -81,7 +75,7 @@ public class SessionViewActivity extends AppCompatActivity {
     CoordinatorLayout sessionCoordinatorLayout;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
-    SessionsEntity sessionsModel1;
+    SessionsModel sessionsModel1;
     private DatabaseReference databaseReference;
     List<SpeakersModel> speakersList = new ArrayList<>();
     List<Integer> speakerId = new ArrayList<>();
@@ -143,6 +137,14 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getRoomDetails(roomId);
         //observe live data emitted by view model
+       sessionDataViewModel.getSessionData().observe(this,sessionDataState -> {
+           assert sessionDataState != null;
+           if (sessionDataState.getDatabaseError() != null){
+               handleDatabaseError(sessionDataState.getDatabaseError());
+           }else {
+               this.handleFetchSessionData(sessionDataState.getSessionsModel());
+           }
+       });
         sessionDataViewModel.getSpeakerInfo().observe(this, speakersState -> {
             assert speakersState != null;
             if (speakersState.getDatabaseError() != null) {
@@ -260,6 +262,10 @@ public class SessionViewActivity extends AppCompatActivity {
 
     }
 
+    private void getSessionData(String dayNumber, int sessionId) {
+        sessionDataViewModel.getSessionDetails(dayNumber, sessionId);
+    }
+
     private void handleStarUserSession(int starMessage) {
        Toast.makeText(getApplicationContext(),getString(starMessage),Toast.LENGTH_SHORT).show();
     }
@@ -299,34 +305,23 @@ public class SessionViewActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(speakersAdapter);
     }
-
-    private void handleFetchSessionData(SessionsEntity sessionsEntity) {
-        if (sessionsEntity != null) {
-            sessionsModel1 = sessionsEntity;
+    private void handleFetchSessionData(SessionsModel sessionsModel) {
+        if (sessionsModel != null) {
+            sessionsModel1 = sessionsModel;
             //check star status
             sessionDataViewModel.getStarStatus(sessionsModel1.getDocumentId(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
             //set the data on the view
-            txtSessionTime.setText(sessionsEntity.getTime());
-            txtSessionRoom.setText(sessionsEntity.getRoom());
-            txtSessionDesc.setText(sessionsEntity.getDescription());
-            txtSessionCategory.setText(sessionsEntity.getTopic());
-            sessionViewTitleText.setText(sessionsEntity.getTitle());
+            txtSessionTime.setText(sessionsModel.getTime());
+            txtSessionRoom.setText(sessionsModel.getRoom());
+            txtSessionDesc.setText(sessionsModel.getDescription());
+            txtSessionCategory.setText(sessionsModel.getTopic());
+            sessionViewTitleText.setText(sessionsModel.getTitle());
 
         }
     }
-
-
     private void handleDatabaseError(String databaseError) {
         Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
-    }
-
-    private void getSessionData(String dayNumber, int sessionId) {
-        compositeDisposable.add(sessionDataViewModel.getSessionDetails(dayNumber, sessionId)
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(this::handleFetchSessionData,
-                throwable ->Log.e(TAG,"Unable to fetch session details",throwable) ));
     }
 
 }

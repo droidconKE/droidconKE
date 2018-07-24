@@ -1,5 +1,2 @@
 
-`squid:UselessImportCheck"0Remove this unused import 'io.reactivex.Single'.(úÃ¶“øÿÿÿÿ8¾òÓ·Ì,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ8¾òÓ·Ì,
-gsquid:UselessImportCheck"<Remove this unused import 'android.arch.lifecycle.LiveData'.(Úò›8¾òÓ·Ì,
-squid:UselessImportCheck"ORemove this unused import 'droiddevelopers254.droidconke.models.SessionsModel'.(…ŒØıÿÿÿÿ8¾òÓ·Ì,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ8¥Ó°ÛÌ,

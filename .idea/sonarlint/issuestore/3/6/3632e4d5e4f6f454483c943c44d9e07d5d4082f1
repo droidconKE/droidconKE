@@ -1,4 +1,3 @@
 
-|squid:UselessImportCheck"SRemove this unused import 'droiddevelopers254.droidconke.datastates.SessionsState'.(”ôÚÀ8ÉèÑ‹Ì,
 usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ
-rsquid:UselessImportCheck"DRemove this unused import 'android.arch.lifecycle.MediatorLiveData'.(È½„Öúÿÿÿÿ8†ÒÑ‹Ì,
+}squid:HiddenFieldCheck"QRename "sessionsStateMediatorLiveData" which hides the field declared at line 11.(ƒ„šÿÿÿÿÿ8ÄåµØÌ,

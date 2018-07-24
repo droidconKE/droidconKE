@@ -1,18 +1,16 @@
 
-Zsquid:S2696©"6Make the enclosing method "static" or remove this set.(•º°ğüÿÿÿÿ8ò™ãÅÌ,
-asquid:UselessImportCheck"1Remove this unused import 'android.view.Gravity'.(ÎÎÎıÿÿÿÿ8ò™ãÅÌ,
-Jsquid:S1659S"'Declare "dayNumber" on a separate line.(„É¯Èşÿÿÿÿ8ò™ãÅÌ,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ8ò™ãÅÌ,
-lsquid:MaximumInheritanceDepth/"<This class has 7 parents which is greater than 5 authorized.(°çòê8ò™ãÅÌ,
-csquid:UselessImportCheck"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8ò™ãÅÌ,
-…squid:S1450R"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8ò™ãÅÌ,
-Ksquid:S1659S"(Declare "documentId" on a separate line.(„É¯Èşÿÿÿÿ8ò™ãÅÌ,
-usquid:S3776`"RRefactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.(¨Œşÿÿÿÿ8ò™ãÅÌ,
-squid:UselessImportCheck'"ORemove this unused import 'droiddevelopers254.droidconke.models.SessionsModel'.(…ŒØıÿÿÿÿ8ò™ãÅÌ,
-Xsquid:S1068U"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8ò™ãÅÌ,
-¥squid:S1186ƒ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ8ò™ãÅÌ,
-Usquid:S1153•"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8ò™ãÅÌ,
-Bsquid:S16590"$Declare "roomId" on a separate line.(š®à8ò™ãÅÌ,
-ƒsquid:S1450U"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8ò™ãÅÌ,
-lsquid:UnusedPrivateMethod‡":Remove this unused private "handleStarUserSession" method.(ø‘‚çùÿÿÿÿ8ò™ãÅÌ,
-msquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p8ò™ãÅÌ,
+¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ8áĞ±ÚÌ,
+Isquid:S1659"(Declare "documentId" on a separate line.(„É¯Èşÿÿÿÿ8áĞ±ÚÌ,
+isquid:UnusedPrivateMethod":Remove this unused private "handleStarUserSession" method.(ø‘‚çùÿÿÿÿ8áĞ±ÚÌ,
+ƒsquid:S1450"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8áĞ±ÚÌ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ8áĞ±ÚÌ,
+Vsquid:S1068"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8áĞ±ÚÌ,
+Hsquid:S1659"'Declare "dayNumber" on a separate line.(„É¯Èşÿÿÿÿ8áĞ±ÚÌ,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÉÄÍıÿÿÿÿ8áĞ±ÚÌ,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(°çòê8áĞ±ÚÌ,
+Ssquid:S1068"7Remove this unused "compositeDisposable" private field.(›î»†8áĞ±ÚÌ,
+squid:S1450"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8áĞ±ÚÌ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(•º°ğüÿÿÿÿ8áĞ±ÚÌ,
+@squid:S1659"$Declare "roomId" on a separate line.(š®à8áĞ±ÚÌ,
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 43 to the 15 allowed.(¨Œşÿÿÿÿ8áĞ±ÚÌ,
+Rsquid:S1153"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8ŸØ¶ÚÌ,

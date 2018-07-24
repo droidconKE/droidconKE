@@ -1,32 +1,54 @@
 package droiddevelopers254.droidconke.viewmodels;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.LiveDataReactiveStreams;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import java.util.List;
-
-import droiddevelopers254.droidconke.database.entities.SessionsEntity;
+import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 import droiddevelopers254.droidconke.datastates.SessionsState;
 import droiddevelopers254.droidconke.repository.DayOneRepo;
-import droiddevelopers254.droidconke.utils.network.Resource;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import droiddevelopers254.droidconke.repository.StarrSessionRepo;
 
 public class DayOneViewModel extends ViewModel {
-    private LiveData<Resource<List<SessionsEntity>>> dayOneLiveData;
+    private MediatorLiveData<SessionsState> sessionsStateMediatorLiveData;
     private DayOneRepo dayOneRepo;
+    private StarrSessionRepo starrSessionRepo;
 
     public DayOneViewModel(){
         dayOneRepo= new DayOneRepo();
-        dayOneLiveData= LiveDataReactiveStreams.fromPublisher(dayOneRepo.getDayOneSessions()
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread()));
+        sessionsStateMediatorLiveData = new MediatorLiveData<>();
+        starrSessionRepo = new StarrSessionRepo();
     }
 
-    public LiveData<Resource<List<SessionsEntity>>> getDayOneLiveData() {
-        return dayOneLiveData;
+    public LiveData<SessionsState> getSessions(){
+        return sessionsStateMediatorLiveData;
     }
+
+    public void getDayOneSessions(){
+        final LiveData<SessionsState> sessionsStateLiveData = dayOneRepo.getDayOneSessions();
+        sessionsStateMediatorLiveData.addSource(sessionsStateLiveData,
+                sessionsStateMediatorLiveData ->{
+            if (this.sessionsStateMediatorLiveData.hasActiveObservers()){
+                this.sessionsStateMediatorLiveData.removeSource(sessionsStateLiveData);
+            }
+            this.sessionsStateMediatorLiveData.setValue(sessionsStateMediatorLiveData);
+                });
+    }
+
+    public void starSession(StarredSessionEntity  starredSessionEntity){
+        starrSessionRepo.starrSession(starredSessionEntity);
+    }
+
+    public void unStarredSession(int sessionId, String dayNumber){
+        starrSessionRepo.unStarrSession(sessionId, dayNumber);
+    }
+
+    public void updateSession(int sessionId, boolean isStarred){
+        dayOneRepo.updateSession(sessionId, isStarred);
+    }
+
+    public void isSessionStarred(int sessionId){
+        dayOneRepo.isSessionStarred(sessionId);
+    }
+
 }

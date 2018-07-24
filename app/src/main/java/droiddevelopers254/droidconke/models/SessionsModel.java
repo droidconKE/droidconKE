@@ -1,15 +1,20 @@
 package droiddevelopers254.droidconke.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity(tableName = "sessionsList")
 public class SessionsModel {
+    @PrimaryKey
     private int id;
     private ArrayList<Integer> speaker_id;
     private int room_id;
     private String main_tag;
     private String room;
     private String speakers;
-    private String starred;
+    private boolean isStarred;
     private String time;
     private String title;
     private String topic;
@@ -59,12 +64,12 @@ public class SessionsModel {
         this.speakers = speakers;
     }
 
-    public String getStarred() {
-        return starred;
+    public boolean getIsStarred() {
+        return isStarred;
     }
 
-    public void setStarred(String starred) {
-        this.starred = starred;
+    public void setIsStarred(boolean isStarred) {
+        this.isStarred = isStarred;
     }
 
     public String getTitle() {

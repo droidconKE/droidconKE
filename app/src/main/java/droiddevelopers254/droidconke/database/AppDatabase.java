@@ -9,10 +9,10 @@ import android.content.Context;
 import droiddevelopers254.droidconke.database.converters.Converter;
 import droiddevelopers254.droidconke.database.dao.SessionsDao;
 import droiddevelopers254.droidconke.database.dao.StarredSessionDao;
-import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
+import droiddevelopers254.droidconke.models.SessionsModel;
 
-@Database(entities = {SessionsEntity.class, StarredSessionEntity.class},version = 1,exportSchema = false)
+@Database(entities = {StarredSessionEntity.class, SessionsModel.class},version = 3,exportSchema = false)
 @TypeConverters(Converter.class)
 public abstract class AppDatabase extends RoomDatabase {
     //Singleton
