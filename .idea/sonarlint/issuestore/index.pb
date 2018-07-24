@@ -205,3 +205,7 @@ Gapp/src/main/java/droiddevelopers254/droidconke/utils/EntityMapper.java,c/6/c6
 Tapp/src/main/java/droiddevelopers254/droidconke/repository/remote/DayTwoService.java,5/2/526552c255f51491a6e13af435179ae11604f830
 }
 Mapp/src/main/java/droiddevelopers254/droidconke/database/dao/SessionsDao.java,f/3/f3bcb7776b8e702946a93a8e0e1fc92c283c734f
+‹
+[app/src/main/java/droiddevelopers254/droidconke/database/entities/StarredSessionEntity.java,7/9/79e6fe9ad8c2fb73999ae9c46c63510989582f7d
+ƒ
+Sapp/src/main/java/droiddevelopers254/droidconke/database/dao/StarredSessionDao.java,a/4/a40c15eda6799ee3793a8271f0b80502d91d6492

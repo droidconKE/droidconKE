@@ -1,5 +1,7 @@
 package droiddevelopers254.droidconke.repository;
 
+import android.util.Log;
+
 import java.util.List;
 
 import droiddevelopers254.droidconke.database.AppDatabase;
@@ -41,6 +43,7 @@ public class DayOneRepo {
             @Override
             public void saveCallResult(List<SessionsEntity> data) {
                 sessionsDao.saveDayOneSession(data);
+                Log.d("data",String.valueOf(data));
             }
 
             @Override

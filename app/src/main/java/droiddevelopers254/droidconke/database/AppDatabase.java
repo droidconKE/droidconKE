@@ -8,9 +8,11 @@ import android.content.Context;
 
 import droiddevelopers254.droidconke.database.converters.Converter;
 import droiddevelopers254.droidconke.database.dao.SessionsDao;
+import droiddevelopers254.droidconke.database.dao.StarredSessionDao;
 import droiddevelopers254.droidconke.database.entities.SessionsEntity;
+import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 
-@Database(entities = {SessionsEntity.class},version = 1,exportSchema = false)
+@Database(entities = {SessionsEntity.class, StarredSessionEntity.class},version = 1,exportSchema = false)
 @TypeConverters(Converter.class)
 public abstract class AppDatabase extends RoomDatabase {
     //Singleton
@@ -32,5 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     //dao
     public abstract SessionsDao sessionsDao();
+
+    public abstract StarredSessionDao starredSessionDao();
 
 }

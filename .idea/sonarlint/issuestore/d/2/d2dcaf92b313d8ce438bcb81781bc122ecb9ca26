@@ -1,5 +1,5 @@
 
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8˜Þð‹Ì,
-[squid:UselessImportCheck"3Remove this unused import 'io.reactivex.Scheduler'.(çší8˜Þð‹Ì,
-rsquid:UselessImportCheck"DRemove this unused import 'android.arch.lifecycle.MediatorLiveData'.(È½„Öúÿÿÿÿ8˜Þð‹Ì,
-|squid:UselessImportCheck"SRemove this unused import 'droiddevelopers254.droidconke.datastates.SessionsState'.(”ôÚÀ8˜Þð‹Ì,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôýÿÿÿÿ8¦åö·Ì,
+]squid:UselessImportCheck"3Remove this unused import 'io.reactivex.Scheduler'.(çší8¦åö·Ì,
+tsquid:UselessImportCheck"DRemove this unused import 'android.arch.lifecycle.MediatorLiveData'.(È½„Öúÿÿÿÿ8¦åö·Ì,
+~squid:UselessImportCheck"SRemove this unused import 'droiddevelopers254.droidconke.datastates.SessionsState'.(”ôÚÀ8¦åö·Ì,

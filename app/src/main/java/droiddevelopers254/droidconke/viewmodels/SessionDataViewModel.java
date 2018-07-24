@@ -1,9 +1,11 @@
 package droiddevelopers254.droidconke.viewmodels;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.LiveDataReactiveStreams;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.datastates.RoomState;
 import droiddevelopers254.droidconke.datastates.SessionDataState;
 import droiddevelopers254.droidconke.datastates.SpeakersState;
@@ -13,6 +15,7 @@ import droiddevelopers254.droidconke.repository.RoomRepo;
 import droiddevelopers254.droidconke.repository.SessionDataRepo;
 import droiddevelopers254.droidconke.repository.SpeakersRepo;
 import droiddevelopers254.droidconke.repository.StarSessionRepo;
+import io.reactivex.Flowable;
 
 public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<SessionDataState> sessionDataStateMediatorLiveData;
@@ -25,6 +28,7 @@ public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<StarSessionState> unStarMediatorLiveData;
     private MediatorLiveData<StarSessionState> starStatusMediatorLiveData;
     private StarSessionRepo starSessionRepo;
+
     public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
         sessionDataRepo = new SessionDataRepo();
@@ -42,6 +46,11 @@ public class SessionDataViewModel extends ViewModel {
     public LiveData<SessionDataState> getSessionDetails(){
         return  sessionDataStateMediatorLiveData;
     }
+
+    public Flowable<SessionsEntity> getSessionDetails(String dayNumber,int sessionId){
+
+        return sessionDataRepo.getSessionDetails(dayNumber, sessionId);
+    }
     public LiveData<SpeakersState> getSpeakerInfo(){
         return speakersStateMediatorLiveData;
     }
@@ -58,17 +67,6 @@ public class SessionDataViewModel extends ViewModel {
     }
     public LiveData<StarSessionState> unstarSessionResponse(){
         return unStarMediatorLiveData;
-    }
-
-    public void fetchSessionDetails(String dayNumber,int sessionId){
-        final LiveData<SessionDataState> sessionDataStateLiveData= sessionDataRepo.getSessionData(dayNumber,sessionId);
-        sessionDataStateMediatorLiveData.addSource(sessionDataStateLiveData,
-                sessionDataStateMediatorLiveData-> {
-            if (this.sessionDataStateMediatorLiveData.hasActiveObservers()){
-                this.sessionDataStateMediatorLiveData.removeSource(sessionDataStateLiveData);
-            }
-            this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData);
-                });
     }
 
     public void fetchSpeakerDetails(int speakerId){

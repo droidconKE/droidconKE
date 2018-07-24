@@ -34,11 +34,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
+import droiddevelopers254.droidconke.database.entities.SessionsEntity;
 import droiddevelopers254.droidconke.models.RoomModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class SessionViewActivity extends AppCompatActivity {
     int sessionId, roomId;
@@ -77,7 +81,7 @@ public class SessionViewActivity extends AppCompatActivity {
     CoordinatorLayout sessionCoordinatorLayout;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
-    SessionsModel sessionsModel1;
+    SessionsEntity sessionsModel1;
     private DatabaseReference databaseReference;
     List<SpeakersModel> speakersList = new ArrayList<>();
     List<Integer> speakerId = new ArrayList<>();
@@ -85,6 +89,8 @@ public class SessionViewActivity extends AppCompatActivity {
     static RecyclerView.LayoutManager mLayoutManager;
     StarredSessionModel starredSessionModel;
     boolean starred = false;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private static final String TAG = SessionViewActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,15 +143,6 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getRoomDetails(roomId);
         //observe live data emitted by view model
-        sessionDataViewModel.getSessionDetails().observe(this, sessionDataState -> {
-            assert sessionDataState != null;
-            if (sessionDataState.getDatabaseError() != null) {
-                handleDatabaseError(sessionDataState.getDatabaseError());
-            } else {
-                handleFetchSessionData(sessionDataState.getSessionsModel());
-            }
-        });
-
         sessionDataViewModel.getSpeakerInfo().observe(this, speakersState -> {
             assert speakersState != null;
             if (speakersState.getDatabaseError() != null) {
@@ -203,7 +200,7 @@ public class SessionViewActivity extends AppCompatActivity {
             if (!starSessionState.isStarred()){
                 starred=false;
                 Toast.makeText(getApplicationContext(),getString(R.string.unstarred_desc),Toast.LENGTH_SHORT).show();
-                Log.d("unstar_value", String.valueOf(starred));
+                Log.d(TAG, String.valueOf(starred));
             }
         });
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
@@ -233,13 +230,13 @@ public class SessionViewActivity extends AppCompatActivity {
         //star a session
         fab.setOnClickListener(view -> {
             if (starred) {
-                Log.d("starred", String.valueOf(starred));
+                Log.d(TAG, String.valueOf(starred));
 
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
                 //unstar session in starred_sessions collection
                 sessionDataViewModel.unStarSession(String.valueOf(sessionsModel1.getDocumentId()),FirebaseAuth.getInstance().getCurrentUser().getUid(),false);
             }else {
-                Log.d("starred", String.valueOf(starred));
+                Log.d(TAG, String.valueOf(starred));
                 //star a session
                 fab.setImageResource(R.drawable.ic_star_blue_24dp);
 
@@ -303,27 +300,33 @@ public class SessionViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(speakersAdapter);
     }
 
-    private void handleFetchSessionData(SessionsModel sessionsModel) {
-        if (sessionsModel != null) {
-            sessionsModel1 = sessionsModel;
+    private void handleFetchSessionData(SessionsEntity sessionsEntity) {
+        if (sessionsEntity != null) {
+            sessionsModel1 = sessionsEntity;
             //check star status
             sessionDataViewModel.getStarStatus(sessionsModel1.getDocumentId(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
             //set the data on the view
-            txtSessionTime.setText(sessionsModel.getTime());
-            txtSessionRoom.setText(sessionsModel.getRoom());
-            txtSessionDesc.setText(sessionsModel.getDescription());
-            txtSessionCategory.setText(sessionsModel.getTopic());
-            sessionViewTitleText.setText(sessionsModel.getTitle());
+            txtSessionTime.setText(sessionsEntity.getTime());
+            txtSessionRoom.setText(sessionsEntity.getRoom());
+            txtSessionDesc.setText(sessionsEntity.getDescription());
+            txtSessionCategory.setText(sessionsEntity.getTopic());
+            sessionViewTitleText.setText(sessionsEntity.getTitle());
+
         }
     }
+
 
     private void handleDatabaseError(String databaseError) {
         Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
     private void getSessionData(String dayNumber, int sessionId) {
-        sessionDataViewModel.fetchSessionDetails(dayNumber, sessionId);
+        compositeDisposable.add(sessionDataViewModel.getSessionDetails(dayNumber, sessionId)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(this::handleFetchSessionData,
+                throwable ->Log.e(TAG,"Unable to fetch session details",throwable) ));
     }
 
 }

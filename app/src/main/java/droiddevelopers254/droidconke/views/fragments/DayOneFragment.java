@@ -52,6 +52,7 @@ public class DayOneFragment extends Fragment {
             assert listResource != null;
             sessionsModelList=listResource.data;
             initView();
+            sessionsAdapter.notifyDataSetChanged();
         });
 
 
@@ -59,11 +60,10 @@ public class DayOneFragment extends Fragment {
     }
 
     private void initView() {
-
+        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList, "day_one");
         mLayoutManager = new LinearLayoutManager(getActivity());
         sessionsRv.setLayoutManager(mLayoutManager);
         sessionsRv.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList, "day_one");
         sessionsRv.setAdapter(sessionsAdapter);
 
     }

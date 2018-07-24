@@ -25,4 +25,8 @@ public interface SessionsDao {
 
     @Query("SELECT * FROM sessionsList WHERE day_number =:dayNumber")
     Flowable<List<SessionsEntity>> getDayTwoSessions(String dayNumber);
+
+    @Query("SELECT * FROM sessionsList WHERE day_number =:dayNumber AND id =:sessionId")
+    Flowable<SessionsEntity> getSessionDetails(String dayNumber,int sessionId);
+
 }

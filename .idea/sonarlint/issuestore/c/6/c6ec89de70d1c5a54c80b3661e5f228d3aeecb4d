@@ -1,3 +1,4 @@
 
-ysquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÃÜÉæ8ÑšÖÌ,
-Isquid:S1168"+Return an empty collection instead of null.(¥¹ï8ş¤¼‘Ì,
+ysquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÃÜÉæ8ê†Í·Ì,
+]squid:S1118
+":Add a private constructor to hide the implicit public one.(ê²úúÿÿÿÿ8ê†Í·Ì,

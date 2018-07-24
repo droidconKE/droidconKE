@@ -47,17 +47,17 @@ public class DayTwoFragment extends Fragment {
             assert listResource != null;
             sessionsModelList = listResource.data;
             initView();
+            sessionsAdapter.notifyDataSetChanged();
         });
 
 
         return view;
     }
     private void initView() {
-
+        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList,"day_two");
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        sessionsAdapter = new SessionsAdapter(getActivity(), sessionsModelList,"day_two");
         recyclerView.setAdapter(sessionsAdapter);
     }
 
