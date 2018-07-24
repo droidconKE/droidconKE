@@ -42,6 +42,8 @@ captures/
 .idea/libraries
 .idea/caches
 .idea/modules.xml
+ app/src/release/res/values/google_maps_api.xml
+ app/src/debug/res/values/google_maps_api.xml
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
