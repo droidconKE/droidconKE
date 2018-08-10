@@ -76,8 +76,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageView collapseBottomImg;
     @BindView(R.id.bottomSheetView)
     MaterialCardView bottomSheetView;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+   // @BindView(R.id.fab)
+    //FloatingActionButton fab;
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     SharedPreferences sharedPreferences;
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 //hide views not required by these fragment
                 accountImg.setVisibility(View.GONE);
-                fab.hide();
+                //fab.hide();
                 toolbarTitleText.setText(R.string.info_title);
 
                 //activate the hide toolbar
@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 //hide views not required by these fragment
                 accountImg.setVisibility(View.VISIBLE);
-                fab.show();
+               // fab.show();
                 toolbarTitleText.setText(R.string.schedule_title);
 
                 //activate the hide toolbar
@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 //hide views not required by these fragment
                 accountImg.setVisibility(View.GONE);
-                fab.hide();
+               // fab.hide();
                 toolbarTitleText.setText(R.string.map_title);
 
                 //show toolbar if it was hidden
@@ -192,23 +192,23 @@ public class HomeActivity extends AppCompatActivity {
         layoutParams.setBehavior(new BottomNavigationBehaviour());
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                // this part hides the button immediately and waits bottom sheet
-                // to collapse to show
-                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
-                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
-                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
+//        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+//                // this part hides the button immediately and waits bottom sheet
+//                // to collapse to show
+//                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
+//                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
+//                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
+//                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
+//                }
+//            }
+//
+//            @Override
+//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//
+//            }
+//        });
 
         if (auth.getCurrentUser() != null) {
             //load user profile image
@@ -223,21 +223,21 @@ public class HomeActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
 
-        //open filters
-        fab.setOnClickListener(view -> {
-            if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-            }
-        });
-        //close filters
-        collapseBottomImg.setOnClickListener(view -> {
-            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+//        //open filters
+//        fab.setOnClickListener(view -> {
+//            if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//            } else {
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//
+//            }
+//        });
+//        //close filters
+//        collapseBottomImg.setOnClickListener(view -> {
+//            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//            }
+//        });
 
         //check if the category was previously chosen
 

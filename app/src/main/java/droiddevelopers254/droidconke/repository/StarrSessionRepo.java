@@ -1,5 +1,8 @@
 package droiddevelopers254.droidconke.repository;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -8,6 +11,7 @@ import droiddevelopers254.droidconke.database.AppDatabase;
 import droiddevelopers254.droidconke.database.dao.SessionsDao;
 import droiddevelopers254.droidconke.database.dao.StarredSessionDao;
 import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
+import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.utils.DroidCoin;
 import io.reactivex.Single;
 
@@ -22,22 +26,18 @@ public class StarrSessionRepo {
         sessionsDao=AppDatabase.getDatabase(DroidCoin.context).sessionsDao();
     }
 
-    public Single<List<StarredSessionEntity>> getStarredSessions(){
+    public Single<List<StarredSessionModel>> getStarredSessions(){
         return starredSessionDao.getStarredSessions();
     }
-    public void starrSession(StarredSessionEntity starredSessionEntity){
-        executor.execute(() -> starredSessionDao.starSession(starredSessionEntity));
+    public void starrSession(int sessionId,String isStarred ,String dayNumber){
+        executor.execute(() -> sessionsDao.starSession(sessionId, isStarred, dayNumber));
     }
 
-    public void unStarrSession(int sessionId, String dayNumber){
-        executor.execute(() -> starredSessionDao.unStarSession(sessionId, dayNumber));
+    public void unStarrSession(int sessionId,String isStarred ,String dayNumber){
+        executor.execute(() -> sessionsDao.unStarSession(sessionId,isStarred,dayNumber));
     }
 
-    public void updateSession(int sessionId, boolean isStarred){
-        executor.execute(()-> sessionsDao.updateSession(sessionId,isStarred));
-    }
-
-    public void isSessionStarred(int sessionId){
-        executor.execute(() -> sessionsDao.isSessionStarred(sessionId));
+    public LiveData<String> isSessionStarred(int sessionId,String dayNumber){
+        return sessionsDao.isSessionStarred(sessionId, dayNumber);
     }
 }

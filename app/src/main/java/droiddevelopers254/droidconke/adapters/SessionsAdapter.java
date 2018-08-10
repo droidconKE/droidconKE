@@ -30,8 +30,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     private StarredSessionModel starredSessionModel;
     private StarrViewModel starrViewModel;
 
-    //TODO use list adapter to compare two lists
-
 
     public SessionsAdapter(Context context, List<SessionsModel> sessionsModelList, String dayNumber) {
         this.sessionsModelList = sessionsModelList;
@@ -41,8 +39,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.starImg)
-        RelativeLayout starImg;
         @BindView(R.id.sessionTitleText)
         TextView sessionTitleText;
         @BindView(R.id.sessionLabelText)
@@ -68,31 +64,16 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         sessionsModel = sessionsModelList.get(position);
-
         holder.sessionTitleText.setText(sessionsModel.getTitle());
         holder.sessionCategoryText.setText(sessionsModel.getTopic());
         holder.sessionLabelText.setBackgroundColor(Color.parseColor(sessionsModel.getSession_color()));
-
-        holder.starImg.setOnClickListener(view ->{
-
-        });
-
-        //start session detail view
-        holder.sessionDetailsLinear.setOnClickListener(view -> {
-            Intent intent = new Intent(context, SessionViewActivity.class);
-            intent.putExtra("sessionId", sessionsModelList.get(position).getId());
-            intent.putExtra("dayNumber", dayNumber);
-            intent.putExtra("starred", sessionsModelList.get(position).getIsStarred());
-            intent.putIntegerArrayListExtra("speakerId", sessionsModelList.get(position).getSpeaker_id());
-            intent.putExtra("roomId", sessionsModelList.get(position).getRoom_id());
-            context.startActivity(intent);
-        });
+        sessionsModel = sessionsModelList.get(position);
 
     }
-
     @Override
     public int getItemCount() {
         return sessionsModelList.size();
     }
+
 
 }

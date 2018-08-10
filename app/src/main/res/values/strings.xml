@@ -144,4 +144,6 @@
     <string name="starred_desc">Event added to your starred items</string>
     <string name="unstarred_desc">Event removed from starred items</string>
     <string name="undo">UNDO</string>
+    <string name="day_one_label">Oct 4</string>
+    <string name="day_two_label">Oct 5</string>
 </resources>

@@ -14,7 +14,7 @@ public class SessionsModel {
     private String main_tag;
     private String room;
     private String speakers;
-    private boolean isStarred;
+    private String isStarred;
     private String time;
     private String title;
     private String topic;
@@ -64,11 +64,11 @@ public class SessionsModel {
         this.speakers = speakers;
     }
 
-    public boolean getIsStarred() {
+    public String getIsStarred() {
         return isStarred;
     }
 
-    public void setIsStarred(boolean isStarred) {
+    public void setIsStarred(String isStarred) {
         this.isStarred = isStarred;
     }
 

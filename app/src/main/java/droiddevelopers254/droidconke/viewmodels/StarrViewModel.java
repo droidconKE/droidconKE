@@ -11,11 +11,4 @@ public class StarrViewModel extends ViewModel {
         starrSessionRepo = new StarrSessionRepo();
     }
 
-    public void updateSession(int sessionId, boolean isStarred){
-        starrSessionRepo.updateSession(sessionId, isStarred);
-    }
-
-    public void isSessionStarred(int sessionId){
-        starrSessionRepo.isSessionStarred(sessionId);
-    }
 }

@@ -43,12 +43,4 @@ public class DayTwoRepo {
 
         return sessionsStateMutableLiveData;
     }
-    public void updateSession(int sessionId, boolean isStarred){
-        executor.execute(()-> sessionsDao.updateSession(sessionId,isStarred));
-    }
-
-    public void isSessionStarred(int sessionId){
-        executor.execute(() -> sessionsDao.isSessionStarred(sessionId));
-    }
-
 }

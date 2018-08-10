@@ -34,19 +34,5 @@ public class DayTwoViewModel extends ViewModel{
                     this.sessionsStateMediatorLiveData.setValue(sessionsStateMediatorLiveData);
                 });
     }
-    public void starSession(StarredSessionEntity starredSessionEntity){
-        starrSessionRepo.starrSession(starredSessionEntity);
-    }
 
-    public void unStarredSession(int sessionId, String dayNumber){
-        starrSessionRepo.unStarrSession(sessionId, dayNumber);
-    }
-
-    public void updateSession(int sessionId, boolean isStarred){
-        dayTwoRepo.updateSession(sessionId, isStarred);
-    }
-
-    public void isSessionStarred(int sessionId){
-        dayTwoRepo.isSessionStarred(sessionId);
-    }
 }

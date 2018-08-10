@@ -6,4 +6,7 @@ public class SharedPref {
     public static final String TOKEN_SENT = "tokenSent";
     public static final String CATEGORY_CHOSEN = "categoryChosen";
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
+    public static final String SESSION_STARRED = "sessionStarred";
+    public static final String SESSION_STARRED_ID = "sessionStarredId";
+
 }

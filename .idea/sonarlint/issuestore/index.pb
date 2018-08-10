@@ -216,3 +216,7 @@ Happ/src/main/java/droiddevelopers254/droidconke/ui/DiffUtilCallback.java,1/0/1
 Papp/src/main/java/droiddevelopers254/droidconke/repository/StarrSessionRepo.java,9/1/91640b259fb70583ee3735a50ae08632735c9a00
 ~
 Napp/src/main/java/droiddevelopers254/droidconke/viewmodels/StarrViewModel.java,6/1/61a76d562791e71a65f9c0019d1b35fb5c7ee281
+v
+Fapp/src/main/java/droiddevelopers254/droidconke/utils/SessionData.java,a/4/a45165d6dfe0c0883f3eb0aba64ec91e9577eb70
+W
+'app/src/main/res/menu/menu_sign_out.xml,6/1/6185ce5963d71c150535cfc4218ec1857e17b669

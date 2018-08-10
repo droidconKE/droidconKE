@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
+import droiddevelopers254.droidconke.models.StarredSessionModel;
 import io.reactivex.Single;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
@@ -15,15 +16,15 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface StarredSessionDao {
 
     @Query("SELECT * FROM starredSessions")
-    Single<List<StarredSessionEntity>> getStarredSessions();
+    Single<List<StarredSessionModel>> getStarredSessions();
 
     @Insert(onConflict = REPLACE)
-    void starSession(StarredSessionEntity starredSessionEntity);
+    void starSession(StarredSessionModel starredSessionModel);
 
-    @Query("DELETE FROM starredSessions WHERE id=:sessionId AND day_number =:dayNumber")
-    void unStarSession(int sessionId ,String dayNumber);
+    @Query("UPDATE  starredSessions SET starred=:starred WHERE documentId =:documentId")
+    void unStarSession(boolean starred,String documentId);
 
-    @Query("SELECT count(*) FROM starredSessions WHERE id LIKE :sessionId ")
-    int isSessionStarred(int sessionId);
+    @Query("SELECT starred FROM starredSessions WHERE documentId LIKE :documentId ")
+    boolean isSessionStarred(String documentId);
 
 }

@@ -44,15 +44,15 @@
     <include layout="@layout/home_fragment_content"/>
     <include layout="@layout/filters_bottom_sheet"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:id="@+id/fab"
-        app:layout_anchor="@id/navigation"
-        app:layout_anchorGravity="top|end"
-        app:useCompatPadding="true"
-        android:src="@drawable/ic_filter_list_black_24dp"
-        android:layout_gravity="top"
-        android:layout_height="wrap_content" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/fab"-->
+        <!--app:layout_anchor="@id/navigation"-->
+        <!--app:layout_anchorGravity="top|end"-->
+        <!--app:useCompatPadding="true"-->
+        <!--android:src="@drawable/ic_filter_list_black_24dp"-->
+        <!--android:layout_gravity="top"-->
+        <!--android:layout_height="wrap_content" />-->
 
 
     <android.support.design.widget.BottomNavigationView

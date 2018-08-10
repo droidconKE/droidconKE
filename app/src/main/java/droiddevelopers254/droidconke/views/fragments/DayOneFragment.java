@@ -1,6 +1,7 @@
 package droiddevelopers254.droidconke.views.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -21,10 +22,11 @@ import butterknife.Unbinder;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SessionTimeAdapter;
 import droiddevelopers254.droidconke.adapters.SessionsAdapter;
-import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 import droiddevelopers254.droidconke.models.SessionTimeModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.utils.ItemClickListener;
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel;
+import droiddevelopers254.droidconke.views.activities.SessionViewActivity;
 
 public class DayOneFragment extends Fragment {
     SessionsAdapter sessionsAdapter;
@@ -47,7 +49,6 @@ public class DayOneFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         dayOneViewModel.getDayOneSessions();
-
         //observe live data emitted by view model
         dayOneViewModel.getSessions().observe(this,sessionsState -> {
             if(sessionsState.getSessionsModel() != null){
@@ -71,6 +72,23 @@ public class DayOneFragment extends Fragment {
         sessionsRv.setLayoutManager(mLayoutManager);
         sessionsRv.setItemAnimator(new DefaultItemAnimator());
         sessionsRv.setAdapter(sessionsAdapter);
+        sessionsRv.addOnItemTouchListener(new ItemClickListener(getContext(), sessionsRv, new ItemClickListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), SessionViewActivity.class);
+                intent.putExtra("sessionId", sessionsModelList.get(position).getId());
+                intent.putExtra("dayNumber", "day_one");
+                intent.putExtra("starred", sessionsModelList.get(position).getIsStarred());
+                intent.putIntegerArrayListExtra("speakerId", sessionsModelList.get(position).getSpeaker_id());
+                intent.putExtra("roomId", sessionsModelList.get(position).getRoom_id());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
     }
 
@@ -80,26 +98,5 @@ public class DayOneFragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void onStarSession(SessionsModel sessionsModel) {
-        isStarred= sessionsModel.getIsStarred();
-        if (isStarred){
 
-        }else {
-            StarredSessionEntity starredSessionEntity = new StarredSessionEntity();
-            starredSessionEntity.setDay_number(sessionsModel.getDay_number());
-            starredSessionEntity.setDescription(sessionsModel.getDescription());
-            starredSessionEntity.setDocumentId(sessionsModel.getDocumentId());
-            starredSessionEntity.setDuration(sessionsModel.getDuration());
-            starredSessionEntity.setId(sessionsModel.getId());
-            starredSessionEntity.setMain_tag(sessionsModel.getMain_tag());
-            starredSessionEntity.setRoom(sessionsModel.getRoom());
-            starredSessionEntity.setRoom_id(sessionsModel.getRoom_id());
-            starredSessionEntity.setSession_color(sessionsModel.getSession_color());
-            starredSessionEntity.setSpeaker_id(sessionsModel.getSpeaker_id());
-            starredSessionEntity.setStarred(false);
-            starredSessionEntity.setTime(sessionsModel.getTime());
-            starredSessionEntity.setTimestamp(sessionsModel.getTimestamp());
-        }
-
-    }
 }

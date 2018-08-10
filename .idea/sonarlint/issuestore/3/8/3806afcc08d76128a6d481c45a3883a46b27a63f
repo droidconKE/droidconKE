@@ -1,15 +1,15 @@
 
+lsquid:UnusedPrivateMethod":Remove this unused private "handleStarUserSession" method.(ø‘‚çùÿÿÿÿ8‰üŒëÌ,
+Ksquid:S1659M"(Declare "documentId" on a separate line.(„É¯Èşÿÿÿÿ8‰üŒëÌ,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ8‰üŒëÌ,
+¤squid:S1186}"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ8‰üŒëÌ,
+Bsquid:S1659*"$Declare "roomId" on a separate line.(š®à8‰üŒëÌ,
+Zsquid:S2696¯"6Make the enclosing method "static" or remove this set.(•º°ğüÿÿÿÿ8‰üŒëÌ,
+Usquid:S1153›"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8‰üŒëÌ,
+ƒsquid:S1450O"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8‰üŒëÌ,
+lsquid:MaximumInheritanceDepth)"<This class has 7 parents which is greater than 5 authorized.(°çòê8‰üŒëÌ,
 Jsquid:S1659M"'Declare "dayNumber" on a separate line.(„É¯Èşÿÿÿÿ8‰üŒëÌ,
 Xsquid:S1068O"5Remove this unused "databaseReference" private field.(Ï¨Î·ùÿÿÿÿ8‰üŒëÌ,
-usquid:S3776Z"RRefactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.(¨Œşÿÿÿÿ8‰üŒëÌ,
-¤squid:S1186}"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ8‰üŒëÌ,
-Zsquid:S2696¯"6Make the enclosing method "static" or remove this set.(•º°ğüÿÿÿÿ8‰üŒëÌ,
-…squid:S1450L"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8‰üŒëÌ,
-Bsquid:S1659*"$Declare "roomId" on a separate line.(š®à8‰üŒëÌ,
-Usquid:S1153›"1Directly append the argument of String.valueOf().(Á÷ì–øÿÿÿÿ8‰üŒëÌ,
-lsquid:MaximumInheritanceDepth)"<This class has 7 parents which is greater than 5 authorized.(°çòê8‰üŒëÌ,
 Usquid:S1068V"7Remove this unused "compositeDisposable" private field.(›î»†8‰üŒëÌ,
-Ksquid:S1659M"(Declare "documentId" on a separate line.(„É¯Èşÿÿÿÿ8‰üŒëÌ,
-lsquid:UnusedPrivateMethod":Remove this unused private "handleStarUserSession" method.(ø‘‚çùÿÿÿÿ8‰üŒëÌ,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ8‰üŒëÌ,
-ƒsquid:S1450O"`Remove the "databaseReference" field and declare it as a local variable in the relevant methods.(Ï¨Î·ùÿÿÿÿ8‰üŒëÌ,
+…squid:S1450L"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8‰üŒëÌ,
+usquid:S3776Z"RRefactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.(¨Œşÿÿÿÿ8‰üŒëÌ,

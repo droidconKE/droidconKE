@@ -1,21 +1,20 @@
 package droiddevelopers254.droidconke.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "starredSessions")
 public class StarredSessionModel {
     private String day;
     private String session_id;
     private String user_id;
     private boolean starred;
+    @PrimaryKey
+    @NonNull
     private String documentId;
 
     public StarredSessionModel() {
-    }
-
-
-    public StarredSessionModel(String day, String session_id, String user_id, boolean starred) {
-        this.day = day;
-        this.session_id = session_id;
-        this.user_id = user_id;
-        this.starred = starred;
     }
 
     public String getUser_id() {

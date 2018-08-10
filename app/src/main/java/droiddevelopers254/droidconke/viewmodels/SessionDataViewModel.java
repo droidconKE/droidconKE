@@ -14,6 +14,7 @@ import droiddevelopers254.droidconke.repository.RoomRepo;
 import droiddevelopers254.droidconke.repository.SessionDataRepo;
 import droiddevelopers254.droidconke.repository.SpeakersRepo;
 import droiddevelopers254.droidconke.repository.StarSessionRepo;
+import droiddevelopers254.droidconke.repository.StarrSessionRepo;
 
 public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<SessionDataState> sessionDataStateMediatorLiveData;
@@ -27,6 +28,8 @@ public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<StarSessionState> starStatusMediatorLiveData;
     private StarSessionRepo starSessionRepo;
     private MediatorLiveData<SessionsModel> sessionsModelMediatorLiveData;
+    private StarrSessionRepo starrSessionRepo;
+    private MediatorLiveData<String> booleanMediatorLiveData;
 
     public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
@@ -40,6 +43,8 @@ public class SessionDataViewModel extends ViewModel {
         starStatusMediatorLiveData = new MediatorLiveData<>();
         starSessionRepo= new StarSessionRepo();
         sessionsModelMediatorLiveData = new MediatorLiveData<>();
+        booleanMediatorLiveData = new MediatorLiveData<>();
+        starrSessionRepo = new StarrSessionRepo();
 
     }
 
@@ -57,8 +62,8 @@ public class SessionDataViewModel extends ViewModel {
         return roomStateMediatorLiveData;
     }
 
-    public LiveData<StarSessionState> getStarStatus(){
-        return starStatusMediatorLiveData;
+    public LiveData<String> getStarStatus(){
+        return booleanMediatorLiveData;
     }
     public LiveData<StarSessionState> starSessionResponse(){
         return starMediatorLiveData;
@@ -66,6 +71,7 @@ public class SessionDataViewModel extends ViewModel {
     public LiveData<StarSessionState> unstarSessionResponse(){
         return unStarMediatorLiveData;
     }
+
 
     public void fetchSpeakerDetails(int speakerId){
         final LiveData<SpeakersState> speakersStateLiveData= speakersRepo.getSpeakersInfo(speakerId);
@@ -129,5 +135,24 @@ public class SessionDataViewModel extends ViewModel {
             }
             this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData);
                 });
+    }
+
+    public void starrSessionInDb(int sessionId, String isStarred , String dayNumber){
+        starrSessionRepo.starrSession(sessionId,isStarred,dayNumber);
+    }
+
+    public void isSessionStarredInDb(int sessionId, String dayNumber){
+        LiveData<String> booleanLiveData = starrSessionRepo.isSessionStarred(sessionId, dayNumber);
+        booleanMediatorLiveData.addSource(booleanLiveData,
+                booleanMediatorLiveData ->{
+            if (this.booleanMediatorLiveData.hasActiveObservers()){
+                this.booleanMediatorLiveData.removeSource(booleanLiveData);
+            }
+            this.booleanMediatorLiveData.setValue(booleanMediatorLiveData);
+                });
+    }
+
+    public void unstarrSessionInDb(int sessionId, String isStarred , String dayNumber){
+        starrSessionRepo.unStarrSession(sessionId,isStarred,dayNumber);
     }
 }
