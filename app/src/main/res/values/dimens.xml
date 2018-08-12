@@ -10,4 +10,5 @@
     <dimen name="statusbar_size">24dp</dimen>
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="medium_margin">6dp</dimen>
 </resources>

@@ -14,11 +14,11 @@ import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.datastates.StarSessionState;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 
-public class StarSessionRepo {
+public class FirebaseStarSessionRepo {
     FirebaseFirestore firebaseFirestore;
     final MutableLiveData<StarSessionState> starSessionStateMutableLiveData;
 
-    public StarSessionRepo(){
+    public FirebaseStarSessionRepo(){
         firebaseFirestore = FirebaseFirestore.getInstance();
         starSessionStateMutableLiveData= new MutableLiveData<>();
 

@@ -4,20 +4,19 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 import droiddevelopers254.droidconke.datastates.SessionsState;
 import droiddevelopers254.droidconke.repository.DayTwoRepo;
-import droiddevelopers254.droidconke.repository.StarrSessionRepo;
+import droiddevelopers254.droidconke.repository.RoomStarrSessionRepo;
 
 public class DayTwoViewModel extends ViewModel{
     private MediatorLiveData<SessionsState> sessionsStateMediatorLiveData;
     private DayTwoRepo dayTwoRepo;
-    private StarrSessionRepo starrSessionRepo;
+    private RoomStarrSessionRepo roomStarrSessionRepo;
 
     public DayTwoViewModel(){
         dayTwoRepo = new DayTwoRepo();
         sessionsStateMediatorLiveData = new MediatorLiveData<>();
-        starrSessionRepo = new StarrSessionRepo();
+        roomStarrSessionRepo = new RoomStarrSessionRepo();
     }
 
     public LiveData<SessionsState> getSessions(){

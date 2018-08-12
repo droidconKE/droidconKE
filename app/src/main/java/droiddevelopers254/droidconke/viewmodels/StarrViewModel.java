@@ -2,13 +2,13 @@ package droiddevelopers254.droidconke.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 
-import droiddevelopers254.droidconke.repository.StarrSessionRepo;
+import droiddevelopers254.droidconke.repository.RoomStarrSessionRepo;
 
 public class StarrViewModel extends ViewModel {
-    private StarrSessionRepo starrSessionRepo;
+    private RoomStarrSessionRepo roomStarrSessionRepo;
 
     public StarrViewModel(){
-        starrSessionRepo = new StarrSessionRepo();
+        roomStarrSessionRepo = new RoomStarrSessionRepo();
     }
 
 }

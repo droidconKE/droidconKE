@@ -1,8 +1,12 @@
 
-Usquid:S1135!"2Complete the task associated to this TODO comment.(ÒÊˆ‰ûÿÿÿÿ8¸·ºéÌ,
-Psquid:S1068"2Remove this unused "starrViewModel" private field.(²­‰¯8Ä›“êÌ,
-Esquid:S1659"'Declare "dayNumber" on a separate line.(ªöÍ8¸·ºéÌ,
-Lsquid:S1068".Remove this unused "starStatus" private field.(ªöÍ8¸·ºéÌ,
-zsquid:S1450"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8¸·ºéÌ,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8¸·ºéÌ,
-Zsquid:S1068"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8¸·ºéÌ,
+Csquid:S1659"'Declare "dayNumber" on a separate line.(ªöÍ8‘í¨£Ò,
+Fsquid:S1068"+Remove this unused "context" private field.(êİç8‘í¨£Ò,
+Jsquid:S1068".Remove this unused "starStatus" private field.(ªöÍ8‘í¨£Ò,
+Isquid:S1068"-Remove this unused "dayNumber" private field.(ªöÍ8‘í¨£Ò,
+Xsquid:S1068"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8‘í¨£Ò,
+Nsquid:S1068"2Remove this unused "starrViewModel" private field.(²­‰¯8‘í¨£Ò,
+xsquid:S1450"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8‘í¨£Ò,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8‘í¨£Ò,
+[squid:UselessImportCheck"3Remove this unused import 'android.content.Intent'.(³ğ‹G8‘í¨£Ò,
+‡squid:UselessImportCheck"_Remove this unused import 'droiddevelopers254.droidconke.views.activities.SessionViewActivity'.(şÕ–f8‘í¨£Ò,
+hsquid:UselessImportCheck":Remove this unused import 'android.widget.RelativeLayout'.(ü¯ğõşÿÿÿÿ8‘í¨£Ò,

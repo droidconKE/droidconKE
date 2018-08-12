@@ -28,6 +28,8 @@ public class SessionsModel {
     private String documentId;
     private String timestamp;
     private String day_number;
+    private String time_in_am;
+    private String am_pm_label;
 
     public SessionsModel() {
     }
@@ -190,5 +192,21 @@ public class SessionsModel {
 
     public void setDay_number(String day_number) {
         this.day_number = day_number;
+    }
+
+    public String getTime_in_am() {
+        return time_in_am;
+    }
+
+    public void setTime_in_am(String time_in_am) {
+        this.time_in_am = time_in_am;
+    }
+
+    public String getAm_pm_label() {
+        return am_pm_label;
+    }
+
+    public void setAm_pm_label(String am_pm_label) {
+        this.am_pm_label = am_pm_label;
     }
 }

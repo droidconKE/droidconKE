@@ -1,2 +1,3 @@
 
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ
+squid:UselessImportCheck"aRemove this unused import 'droiddevelopers254.droidconke.database.entities.StarredSessionEntity'.(¢¡æâûÿÿÿÿ8Ş§Ò,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ8Ş§Ò,

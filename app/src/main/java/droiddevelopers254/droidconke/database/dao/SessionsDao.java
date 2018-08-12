@@ -26,13 +26,13 @@ public interface SessionsDao {
     @Query("SELECT * FROM sessionsList WHERE day_number =:dayNumber AND id =:sessionId")
     LiveData<SessionsModel> getSessionDetails(String dayNumber,int sessionId);
 
-    @Query("UPDATE sessionsList SET isStarred = :isStarred WHERE id=:sessionId AND day_number =:dayNumber")
+    @Query("UPDATE sessionsList SET isStarred = :isStarred WHERE id LIKE :sessionId AND day_number LIKE :dayNumber")
     void starSession(int sessionId,String isStarred,String dayNumber);
 
-    @Query("SELECT isStarred FROM sessionsList WHERE id=:sessionId AND day_number =:dayNumber")
-    LiveData<String> isSessionStarred(int sessionId,String dayNumber);
+    @Query("SELECT count(*) FROM sessionsList WHERE id=:sessionId AND day_number =:dayNumber")
+    LiveData<Integer> isSessionStarred(int sessionId,String dayNumber);
 
-    @Query("UPDATE sessionsList SET isStarred = :isStarred WHERE id=:sessionId AND day_number =:dayNumber")
+    @Query("UPDATE sessionsList SET isStarred = :isStarred WHERE id LIKE :sessionId AND day_number LIKE :dayNumber")
     void unStarSession(int sessionId,String isStarred,String dayNumber);
 
 }

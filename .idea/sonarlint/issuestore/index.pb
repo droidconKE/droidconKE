@@ -220,3 +220,5 @@ v
 Fapp/src/main/java/droiddevelopers254/droidconke/utils/SessionData.java,a/4/a45165d6dfe0c0883f3eb0aba64ec91e9577eb70
 W
 'app/src/main/res/menu/menu_sign_out.xml,6/1/6185ce5963d71c150535cfc4218ec1857e17b669
+•
+eapp/build/generated/source/apt/debug/droiddevelopers254/droidconke/database/dao/SessionsDao_Impl.java,5/6/5638bdb9dd7ff00cab7fa581b6d9a3a07e42c660

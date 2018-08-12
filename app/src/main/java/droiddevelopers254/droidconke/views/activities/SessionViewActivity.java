@@ -1,12 +1,10 @@
 package droiddevelopers254.droidconke.views.activities;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -16,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -188,19 +187,14 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         });
 
-        sessionDataViewModel.getStarStatus().observe(this, s -> {
-           if (s != null){
-               if (s.equals("0")){
-                   isStarred = "0";
-                   fab.setImageResource(R.drawable.ic_star_border_black_24dp);
+        sessionDataViewModel.getDbStarStatus().observe(this, s -> {
+            if (s >0){
+                isStarred = "1";
+                fab.setImageResource(R.drawable.ic_star_blue_24dp);
+               }else {
+                isStarred = "0";
+                fab.setImageResource(R.drawable.ic_star_border_black_24dp);
                }
-               if (s.equals("1")) {
-                   isStarred = "1";
-                   fab.setImageResource(R.drawable.ic_star_blue_24dp);
-               }
-           }else {
-               isStarred = "0";
-           }
 
         });
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
@@ -231,6 +225,8 @@ public class SessionViewActivity extends AppCompatActivity {
             if (isStarred.equals("0")) {
                 isStarred = "1";
                 sessionDataViewModel.starrSessionInDb(sessionId,isStarred,dayNumber);
+                Log.d("test",sessionId+isStarred+dayNumber);
+
                 Toast.makeText(getApplicationContext(),getString(R.string.starred_desc),Toast.LENGTH_SHORT).show();
 
                 fab.setImageResource(R.drawable.ic_star_blue_24dp);
@@ -249,8 +245,8 @@ public class SessionViewActivity extends AppCompatActivity {
 
                 //star a session
                 fab.setImageResource(R.drawable.ic_star_border_black_24dp);
-
                 sessionDataViewModel.unstarrSessionInDb(sessionId,isStarred,dayNumber);
+                Log.d("test",sessionId+isStarred+dayNumber);
                 //unstar session in starred_sessions collection
                 sessionDataViewModel.unStarSession(String.valueOf(sessionsModel1.getDocumentId()),FirebaseAuth.getInstance().getCurrentUser().getUid(),false);
 

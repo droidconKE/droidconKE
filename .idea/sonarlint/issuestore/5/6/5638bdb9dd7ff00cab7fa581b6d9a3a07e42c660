@@ -1,0 +1,59 @@
+
+gsquid:S1192"KDefine a constant instead of duplicating this literal "documentId" 3 times.(ã‚íĞ8Ğ‚Õ¢Ò,
+dsquid:S1192"HDefine a constant instead of duplicating this literal "room_id" 3 times.(ôûª¢8Ğ‚Õ¢Ò,
+bsquid:S1192"FDefine a constant instead of duplicating this literal "topic" 3 times.(à¸¶Ö8Ğ‚Õ¢Ò,
+nsquid:S1192"MDefine a constant instead of duplicating this literal "sessionsList" 3 times.(öíÀıùÿÿÿÿ8Ğ‚Õ¢Ò,
+jsquid:S1192"IDefine a constant instead of duplicating this literal "main_tag" 3 times.(êãÿÿÿÿÿ8Ğ‚Õ¢Ò,
+gsquid:S1192"FDefine a constant instead of duplicating this literal "title" 3 times.(Ş·®øÿÿÿÿ8Ğ‚Õ¢Ò,
+gsquid:S1192"LDefine a constant instead of duplicating this literal "description" 3 times.(ÈÅ„?8Ğ‚Õ¢Ò,
+gsquid:S1192"KDefine a constant instead of duplicating this literal "speaker_id" 3 times.(Š‰—«8Ğ‚Õ¢Ò,
+esquid:S1192"IDefine a constant instead of duplicating this literal "duration" 3 times.(ˆé¡Ë8Ğ‚Õ¢Ò,
+isquid:S1192"HDefine a constant instead of duplicating this literal "type_id" 3 times.(Æ·–øûÿÿÿÿ8Ğ‚Õ¢Ò,
+ksquid:S1192"JDefine a constant instead of duplicating this literal "timestamp" 3 times.( Ğ…Ãşÿÿÿÿ8Ğ‚Õ¢Ò,
+osquid:S1192"NDefine a constant instead of duplicating this literal "session_color" 3 times.(Ìò«êşÿÿÿÿ8Ğ‚Õ¢Ò,
+lsquid:S1192"KDefine a constant instead of duplicating this literal "day_number" 3 times.(ûµÜÛúÿÿÿÿ8Ğ‚Õ¢Ò,
+esquid:S1192"IDefine a constant instead of duplicating this literal "topic_id" 3 times.(èÏÑî8Ğ‚Õ¢Ò,
+fsquid:S1192"JDefine a constant instead of duplicating this literal "isStarred" 3 times.(üÌÃó8Ğ‚Õ¢Ò,
+jsquid:S1192"IDefine a constant instead of duplicating this literal "speakers" 3 times.(Ä™„¾øÿÿÿÿ8Ğ‚Õ¢Ò,
+usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ…ŞÇ8Ğ‚Õ¢Ò,
+usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ…ŞÇ8Ğ‚Õ¢Ò,
+squid:S1488"^Immediately return this expression instead of assigning it to the temporary variable "_query".(‘“‘øÿÿÿÿ8Ğ‚Õ¢Ò,
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.(§Ï–Çúÿÿÿÿ8Ğ‚Õ¢Ò,
+jsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÿœÕ«8Ğ‚Õ¢Ò,
+lsquid:S00116"ORename this field "__db" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àÛôÇ8Ğ‚Õ¢Ò,
+ˆsquid:S00116"lRename this field "__insertionAdapterOfSessionsModel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“Ê¬S8Ğ‚Õ¢Ò,
+…squid:S00116"hRename this field "__preparedStmtOfUpdateSession" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹Ç§ê8Ğ‚Õ¢Ò,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58Ğ‚Õ¢Ò,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58Ğ‚Õ¢Ò,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58Ğ‚Õ¢Ò,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Ï–Çúÿÿÿÿ8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öƒ‰ú8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ŞÇ8Ğ‚Õ¢Ò,
+msquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®•À[8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ŞÇ8Ğ‚Õ¢Ò,
+msquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®•À[8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8Ğ‚Õ¢Ò,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î«§üÿÿÿÿ8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕàğÇ8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8Ğ‚Õ¢Ò,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8Ğ‚Õ¢Ò,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ8Ğ‚Õ¢Ò,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(šÆ¿ˆıÿÿÿÿ8Ğ‚Õ¢Ò,
+zsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±8Ğ‚Õ¢Ò,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ôİÕıÿÿÿÿ8Ğ‚Õ¢Ò,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(¤î˜Óüÿÿÿÿ8Ğ‚Õ¢Ò,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8Ğ‚Õ¢Ò,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8Ğ‚Õ¢Ò,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8Ğ‚Õ¢Ò,

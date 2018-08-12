@@ -1,24 +1,35 @@
 
-Isquid:S1068V"+Remove this unused "builder" private field.(©Äç8é“õ©Å,
-usquid:UselessImportCheck$"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹8’™û©Å,
-usquid:UselessImportCheck%"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—8’™û©Å,
-Usquid:S1444U"2Make this "public static navItemIndex" field final(³’¯Æøÿÿÿÿ8é“õ©Å,
-wsquid:UselessImportCheck#"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8é“õ©Å,
-\"squid:SwitchLastCaseIsDefaultCheckk""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8é“õ©Å,
-Zsquid:S1854Ë"6Remove this useless assignment to local variable "id".(„™¥Ñúÿÿÿÿ8é“õ©Å,
-’"squid:ClassVariableVisibilityCheckU"XMake navItemIndex a static final constant or non-public and provide accessors if needed.(³’¯Æøÿÿÿÿ8é“õ©Å,
-lsquid:MaximumInheritanceDepth;"<This class has 7 parents which is greater than 5 authorized.(Æ¼¾Î8é“õ©Å,
-¥squid:S1186Ğ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ìó°şÿÿÿÿ8é“õ©Å,
-Lsquid:S1068\".Remove this unused "RC_SIGN_IN" private field.(ÃŒ“´8é“õ©Å,
-Ssquid:S1444["0Make this "public static fabVisible" field final(ÅËÔ›ıÿÿÿÿ8é“õ©Å,
-Hsquid:S1172Ñ")Remove this unused method parameter "id".(’’Ÿ²8é“õ©Å,
-…squid:S1450^"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8é“õ©Å,
-osquid:CommentedOutCodeLineÒ"<This block of commented-out lines of code should be removed.(–†§ûÿÿÿÿ8é“õ©Å,
-]squid:UnusedPrivateMethodÑ"0Remove this unused private "checkStatus" method.(’’Ÿ²8é“õ©Å,
-"squid:ClassVariableVisibilityCheck["VMake fabVisible a static final constant or non-public and provide accessors if needed.(ÅËÔ›ıÿÿÿÿ8é“õ©Å,
-osquid:CommentedOutCodeLineÌ"<This block of commented-out lines of code should be removed.(Şåºûÿÿÿÿ8é“õ©Å,
-vsquid:S3776¥"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(¨Œşÿÿÿÿ8é“õ©Å,
-Usquid:S2696«"6Make the enclosing method "static" or remove this set.(¿úŞ½8é“õ©Å,
-Ksquid:S1481Ë"'Remove this unused "id" local variable.(„™¥Ñúÿÿÿÿ8é“õ©Å,
-Gsquid:S1185±"(Remove this method to simply inherit it.(Ù«µ§8é“õ©Å,
-ysquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‚¥Äö8é“õ©Å,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Åíß¢Ò,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÙºßÃ8™Ëä¢Ò,
+"squid:ClassVariableVisibilityCheck"XMake navItemIndex a static final constant or non-public and provide accessors if needed.(³’¯Æøÿÿÿÿ8¼íŞ¢Ò,
+usquid:UselessImportCheck"GRemove this unused import 'com.google.firebase.database.DatabaseError'.(ˆÔµıÿÿÿÿ8¼íŞ¢Ò,
+ssquid:UselessImportCheck"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹8¼íŞ¢Ò,
+Wsquid:S1854"6Remove this useless assignment to local variable "id".(„™¥Ñúÿÿÿÿ8¼íŞ¢Ò,
+"squid:ClassVariableVisibilityCheck"VMake fabVisible a static final constant or non-public and provide accessors if needed.(ÅËÔ›ıÿÿÿÿ8¼íŞ¢Ò,
+ssquid:UselessImportCheck"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—8¼íŞ¢Ò,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‚¥Äö8¼íŞ¢Ò,
+Jsquid:S1068".Remove this unused "RC_SIGN_IN" private field.(ÃŒ“´8¼íŞ¢Ò,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(Æ¼¾Î8¼íŞ¢Ò,
+Zsquid:UnusedPrivateMethod"0Remove this unused private "checkStatus" method.(’’Ÿ²8¼íŞ¢Ò,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÙºßÃ8îÎã¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ŸÄˆØùÿÿÿÿ8Åíß¢Ò,
+ƒsquid:S1450"bRemove the "bottomSheetBehavior" field and declare it as a local variable in the relevant methods.(Ü¿ÜØûÿÿÿÿ8¼íŞ¢Ò,
+Ssquid:S1444"2Make this "public static navItemIndex" field final(³’¯Æøÿÿÿÿ8¼íŞ¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(á’›Üúÿÿÿÿ8ÉÀæ¢Ò,
+Hsquid:S1481"'Remove this unused "id" local variable.(„™¥Ñúÿÿÿÿ8¼íŞ¢Ò,
+Z"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8¼íŞ¢Ò,
+Gsquid:S1068"+Remove this unused "builder" private field.(©Äç8¼íŞ¢Ò,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¿úŞ½8¼íŞ¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Şåºûÿÿÿÿ8¼íŞ¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(–†§ûÿÿÿÿ8¼íŞ¢Ò,
+Dsquid:S1185"(Remove this method to simply inherit it.(Ù«µ§8¼íŞ¢Ò,
+Esquid:S1172")Remove this unused method parameter "id".(’’Ÿ²8¼íŞ¢Ò,
+Qsquid:S1444"0Make this "public static fabVisible" field final(ÅËÔ›ıÿÿÿÿ8¼íŞ¢Ò,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ª„Ö»8™…ä¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÂÖ¢üÿÿÿÿ8Åíß¢Ò,
+Xsquid:S1068"7Remove this unused "bottomSheetBehavior" private field.(Ü¿ÜØûÿÿÿÿ8Û¼ç¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(§¬´ûÿÿÿÿ8Û¼ç¢Ò,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(áæû8Û¼ç¢Ò,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(û™Ãœ8Û¼ç¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·Ÿ–‘ÿÿÿÿÿ8Û¼ç¢Ò,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8Û¼ç¢Ò,

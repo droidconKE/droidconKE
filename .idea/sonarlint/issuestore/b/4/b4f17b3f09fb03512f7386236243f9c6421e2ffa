@@ -1,7 +1,7 @@
 
-Rsquid:S2696)"6Make the enclosing method "static" or remove this set.(ù¯Úÿúÿÿÿÿ
-fsquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
-ssquid:UselessImportCheck"ORemove this unused import 'android.support.design.widget.FloatingActionButton'.(„Ÿ¹¼
-osquid:S1450"XRemove the "tabLayout" field and declare it as a local variable in the relevant methods.(¤×ä
-tsquid:S1450"XRemove the "viewPager" field and declare it as a local variable in the relevant methods.(åÙ¬Ïûÿÿÿÿ
+msquid:S1450"XRemove the "tabLayout" field and declare it as a local variable in the relevant methods.(¤×ä
+dsquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p
+rsquid:S1450"XRemove the "viewPager" field and declare it as a local variable in the relevant methods.(åÙ¬Ïûÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
+qsquid:UselessImportCheck"ORemove this unused import 'android.support.design.widget.FloatingActionButton'.(„Ÿ¹¼
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(ù¯Úÿúÿÿÿÿ
