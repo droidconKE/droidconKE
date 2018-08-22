@@ -165,8 +165,6 @@ Oapp/src/main/java/droiddevelopers254/droidconke/repository/UpdateTokenRepo.java
 Papp/src/main/java/droiddevelopers254/droidconke/datastates/StarSessionState.java,7/6/7652302148b30cea037a0bcff60959f95e7f6ac5
 
 Oapp/src/main/java/droiddevelopers254/droidconke/models/StarredSessionModel.java,6/1/612d8837d71617aa5cec8f0702b1ce747233e5e1
-
-Oapp/src/main/java/droiddevelopers254/droidconke/repository/StarSessionRepo.java,1/0/107fbbc04e6ff5a644f5f62a94d63a5da0c098b1
 =
 firebase.json,5/9/59951656e3803454427cfe9d761fed1df10b7528
 ]
@@ -212,8 +210,6 @@ g
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 x
 Happ/src/main/java/droiddevelopers254/droidconke/ui/DiffUtilCallback.java,1/0/106f5964502c7d5e6c01c801a37ff77a334ce848
-€
-Papp/src/main/java/droiddevelopers254/droidconke/repository/StarrSessionRepo.java,9/1/91640b259fb70583ee3735a50ae08632735c9a00
 ~
 Napp/src/main/java/droiddevelopers254/droidconke/viewmodels/StarrViewModel.java,6/1/61a76d562791e71a65f9c0019d1b35fb5c7ee281
 v
@@ -222,3 +218,5 @@ W
 'app/src/main/res/menu/menu_sign_out.xml,6/1/6185ce5963d71c150535cfc4218ec1857e17b669
 •
 eapp/build/generated/source/apt/debug/droiddevelopers254/droidconke/database/dao/SessionsDao_Impl.java,5/6/5638bdb9dd7ff00cab7fa581b6d9a3a07e42c660
+f
+6app/src/main/res/layout/activity_authenticate_user.xml,b/f/bf5c5396cac5a1322b6d82f6c5ef914bc646b3c4
