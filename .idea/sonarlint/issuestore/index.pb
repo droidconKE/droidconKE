@@ -187,8 +187,6 @@ Oapp/src/main/java/droiddevelopers254/droidconke/viewmodels/AgendaViewModel.java
 Rapp/src/main/java/droiddevelopers254/droidconke/database/converters/Converter.java,0/5/056f88b750d70502e741ff06a0db867a0b55d442
 z
 Japp/src/main/java/droiddevelopers254/droidconke/repository/DayTwoRepo.java,f/6/f6c2fd219fd2b7104231b315e0075dfcaa9e126b
-Å
-Qapp/src/main/java/droiddevelopers254/droidconke/adapters/AboutDetailsAdapter.java,0/c/0c8638594ed18d6915b6ee0f579142dde905c7f7
 z
 Japp/src/main/java/droiddevelopers254/droidconke/repository/DayOneRepo.java,e/d/ed008074002edac69fa05f1cb980aad827aa124e
 Ö
@@ -220,3 +218,5 @@ W
 eapp/build/generated/source/apt/debug/droiddevelopers254/droidconke/database/dao/SessionsDao_Impl.java,5/6/5638bdb9dd7ff00cab7fa581b6d9a3a07e42c660
 f
 6app/src/main/res/layout/activity_authenticate_user.xml,b/f/bf5c5396cac5a1322b6d82f6c5ef914bc646b3c4
+
+Oapp/src/main/java/droiddevelopers254/droidconke/adapters/AboutDetailsAdapter.kt,2/2/225aef4b8c292ba63af698ffbade6ed3738a4a3d

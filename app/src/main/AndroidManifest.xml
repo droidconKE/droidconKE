@@ -40,10 +40,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".views.activities.WelcomeActivity"
-            android:label="@string/title_activity_welcome"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".views.activities.AuthenticateUserActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
