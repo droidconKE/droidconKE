@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -19,7 +21,7 @@ import droiddevelopers254.droidconke.adapters.EventTypeAdapter
 import droiddevelopers254.droidconke.models.EventTypeModel
 import droiddevelopers254.droidconke.models.WifiDetailsModel
 import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
-import kotlinx.android.synthetic.main.fragment_event.*
+import kotlinx.android.synthetic.main.fragment_event.view.*
 
 class EventFragment : Fragment() {
     lateinit var eventTypeViewModel: EventTypeViewModel
@@ -30,6 +32,10 @@ class EventFragment : Fragment() {
 
         eventTypeViewModel = ViewModelProviders.of(this).get(EventTypeViewModel::class.java)
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+
+        val wifiSsidText = view.wifiSsidText
+        val wifiPasswordText = view.wifiPasswordText
+        val eventTypesRv= view.eventTypesRv
 
         // [START enable_dev_mode]
         val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -44,19 +50,19 @@ class EventFragment : Fragment() {
             if (it?.databaseError != null) {
                 handleDatabaseError(it.databaseError)
             } else {
-                handleFetchEventsResponse(it?.eventTypeModelList)
+                handleFetchEventsResponse(it?.eventTypeModelList,eventTypesRv)
             }
         })
         //fetch data from firebase
         eventTypeViewModel.fetchSessions()
 
         //get remote config values
-        getRemoteConfigValues()
+        getRemoteConfigValues(wifiSsidText,wifiPasswordText)
 
         return view
     }
 
-    private fun getRemoteConfigValues() {
+    private fun getRemoteConfigValues(wifiSsidText: TextView, wifiPasswordText: TextView) {
         var cacheExpiration: Long = 3600
 
         if (firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled) {
@@ -72,19 +78,19 @@ class EventFragment : Fragment() {
 
                     }
                     val wifiDetailsModel = WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"), firebaseRemoteConfig.getString("wifi_password"))
-                    updateViews(wifiDetailsModel)
+                    updateViews(wifiDetailsModel,wifiSsidText,wifiPasswordText)
 
                 }
     }
 
-    private fun updateViews(wifiDetailsModel: WifiDetailsModel) {
+    private fun updateViews(wifiDetailsModel: WifiDetailsModel, wifiSsidText: TextView, wifiPasswordText: TextView) {
         wifiSsidText.text = wifiDetailsModel.wifiSsid
         wifiPasswordText.text = wifiDetailsModel.wifiPassword
     }
 
-    private fun handleFetchEventsResponse(eventTypeModelList: List<EventTypeModel>?) {
+    private fun handleFetchEventsResponse(eventTypeModelList: List<EventTypeModel>?, eventTypesRv: RecyclerView) {
         if (eventTypeModelList != null) {
-            initView(eventTypeModelList)
+            initView(eventTypeModelList,eventTypesRv)
         }
     }
 
@@ -92,7 +98,7 @@ class EventFragment : Fragment() {
         Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
     }
 
-    private fun initView(eventTypeModelList: List<EventTypeModel>) {
+    private fun initView(eventTypeModelList: List<EventTypeModel>,eventTypesRv :RecyclerView) {
         val layoutManager = LinearLayoutManager(activity)
         eventTypesRv.layoutManager = layoutManager
         eventTypesRv.isNestedScrollingEnabled = false

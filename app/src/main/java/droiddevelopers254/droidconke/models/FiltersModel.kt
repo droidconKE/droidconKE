@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity
 data class FiltersModel (
         @PrimaryKey
-        val id: Int,
-        val isChecked: Boolean,
-        val name: String
+        val id: Int =0,
+        val isChecked: Boolean = false,
+        val name: String= ""
 )

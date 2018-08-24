@@ -28,12 +28,12 @@ class AuthenticateUserActivity : AppCompatActivity() {
     private var firebaseUser: FirebaseUser? = null
     lateinit var auth: FirebaseAuth
     private var pDialog: SweetAlertDialog? = null
-    lateinit var authenticateUserViewModel: AuthenticateUserViewModel
+    private lateinit var authenticateUserViewModel: AuthenticateUserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //set layout tu fullcreen
+        //set layout tu fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)

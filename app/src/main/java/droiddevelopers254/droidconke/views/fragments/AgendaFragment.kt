@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.AgendaAdapter
 import droiddevelopers254.droidconke.models.AgendaModel
 import droiddevelopers254.droidconke.viewmodels.AgendaViewModel
-import kotlinx.android.synthetic.main.fragment_agenda.*
+import kotlinx.android.synthetic.main.fragment_agenda.view.*
 import java.util.*
 
 class AgendaFragment : Fragment() {
@@ -26,6 +27,7 @@ class AgendaFragment : Fragment() {
 
         agendaViewModel = ViewModelProviders.of(this).get(AgendaViewModel::class.java)
 
+        val agendaRv = view.agendaRv
         //fetch agendas
         agendaViewModel.fetchAgendas()
 
@@ -34,23 +36,23 @@ class AgendaFragment : Fragment() {
             if (it?.databaseError != null) {
                 handleDatabaseError(it.databaseError)
             } else {
-                handleAgendaResponse(it?.agendaModelList)
+                handleAgendaResponse(it?.agendaModelList,agendaRv)
             }
         })
         return view
     }
 
-    private fun handleAgendaResponse(agendaList: List<AgendaModel>?) {
+    private fun handleAgendaResponse(agendaList: List<AgendaModel>?, agendaRv: RecyclerView) {
         if (agendaList != null) {
             agendaModelList = agendaList
-            initView()
+            initView(agendaRv)
         }
     }
     private fun handleDatabaseError(databaseError: String) {
         Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
     }
 
-    private fun initView() {
+    private fun initView(agendaRv: RecyclerView) {
         val agendaAdapter = AgendaAdapter(agendaModelList, context!!)
         val layoutManager = LinearLayoutManager(activity)
         agendaRv.layoutManager = layoutManager

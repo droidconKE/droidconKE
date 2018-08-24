@@ -16,9 +16,7 @@ class WifiDetailsRepo {
     val wifiDetails: LiveData<WifiDetailsModel>
         get() {
             val wifiDetailsModelMutableLiveData = MutableLiveData<WifiDetailsModel>()
-            val firebaseRemoteConfig: FirebaseRemoteConfig
-
-            firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+            val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
             return wifiDetailsModelMutableLiveData
         }

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.design.chip.Chip
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CoordinatorLayout
@@ -20,44 +19,32 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-
-import java.util.ArrayList
-
-import butterknife.BindView
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import droiddevelopers254.droidconke.adapters.ChipViewAdapter
 import droiddevelopers254.droidconke.models.FiltersModel
 import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour
+import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
+import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
+import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity
 import droiddevelopers254.droidconke.views.fragments.InfoFragment
 import droiddevelopers254.droidconke.views.fragments.MapFragment
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment
-
-import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
-import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
-import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.filters_bottom_sheet.*
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
-    private var refreshToken: String? = null
-    private val builder: AlertDialog.Builder? = null
-    internal var signInBtn: Button? = null
-    private var firebaseUser: FirebaseUser? = null
-    lateinit var auth: FirebaseAuth
     private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
-    private var tokenSent: Int = 0
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
-    internal var categoryChosen: Boolean = false
     private lateinit var params: AppBarLayout.LayoutParams
     lateinit var homeViewModel: HomeViewModel
     private var typeFilterList: List<FiltersModel> = ArrayList()
@@ -72,17 +59,16 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        auth = FirebaseAuth.getInstance()
         //setup defaults for remote config
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
         //check whether refresh token is sent to db
-        tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0)
+        val tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0)
         if (tokenSent == 0) {
-            refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
-            firebaseUser = auth.currentUser
+            val refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
             //update in firestore
-            homeViewModel.updateToken(firebaseUser!!.uid, refreshToken!!)
+            homeViewModel.updateToken(firebaseUser?.uid.toString(), refreshToken!!)
         }
         //get filters from firebase
         getTopicFilters()
@@ -110,10 +96,10 @@ class HomeActivity : AppCompatActivity() {
         //            }
         //        });
 
-        if (auth.currentUser != null) {
+        if (FirebaseAuth.getInstance().currentUser != null) {
             //load user profile image
-            Glide.with(applicationContext).load(auth.currentUser!!.photoUrl)
-                    .thumbnail(Glide.with(applicationContext).load(auth.currentUser!!.photoUrl))
+            Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                    .thumbnail(Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl))
                     .apply(RequestOptions()
                             .centerCrop()
                             .diskCacheStrategy(DiskCacheStrategy.ALL))
@@ -121,7 +107,6 @@ class HomeActivity : AppCompatActivity() {
                             .crossFade())
                     .into(accountImg)
         }
-
         navigation.setOnNavigationItemSelectedListener{
             when (it.itemId) {
                 R.id.navigation_home -> {
@@ -219,11 +204,9 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.updateTokenResponse.observe(this, Observer{
             if (it != null) {
                 if (it.isSuccess) {
-                    tokenSent = 1
-                    sharedPreferences.edit().putInt(TOKEN_SENT, tokenSent).apply()
+                    sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()
                 } else {
-                    tokenSent = 0
-                    sharedPreferences.edit().putInt(TOKEN_SENT, tokenSent).apply()
+                    sharedPreferences.edit().putInt(TOKEN_SENT, 0).apply()
                 }
             }
         })
@@ -282,6 +265,5 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         var navItemIndex = 1 //controls toolbar titles and icons
         var fabVisible = true
-        private val RC_SIGN_IN = 123
     }
 }

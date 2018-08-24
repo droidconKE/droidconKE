@@ -16,10 +16,10 @@ interface StarredSessionDao {
     @Insert(onConflict = REPLACE)
     fun starSession(starredSessionModel: StarredSessionModel)
 
-    @Query("UPDATE  starredSessions SET starred=:starred WHERE documentId =:documentId")
+    @Query("UPDATE  starredSessions SET isStarred=:starred WHERE documentId =:documentId")
     fun unStarSession(starred: Boolean, documentId: String)
 
-    @Query("SELECT starred FROM starredSessions WHERE documentId LIKE :documentId ")
+    @Query("SELECT isStarred FROM starredSessions WHERE documentId LIKE :documentId ")
     fun isSessionStarred(documentId: String): Boolean
 
 }

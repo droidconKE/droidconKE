@@ -18,7 +18,7 @@ class FirebaseStarSessionRepo {
                     //add session to user starred sessions
                     firebaseFirestore.collection("users").document(userId).collection("starred").document(starredSessionModel.documentId)
                             .set(starredSessionModel)
-                            .addOnSuccessListener { documentSnapshot ->
+                            .addOnSuccessListener { _ ->
                                 Log.d("star_response", "success")
                                 starSessionStateMutableLiveData.setValue(StarSessionState(true,null,null,0))
                             }
@@ -35,7 +35,7 @@ class FirebaseStarSessionRepo {
                     //change starred field in users starred sessions to false
                     firebaseFirestore.collection("users").document(userId).collection("starred").document(sessionId)
                             .update("starred", starred)
-                            .addOnSuccessListener { aVoid1 ->
+                            .addOnSuccessListener { _ ->
                                 Log.d("unstar_response", "success")
                                 starSessionStateMutableLiveData.setValue(StarSessionState(false,null,null,0))
                             }

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import droiddevelopers254.droidconke.R
-import kotlinx.android.synthetic.main.fragment_info.*
+import kotlinx.android.synthetic.main.fragment_schedule.view.*
 import java.util.*
 
 class InfoFragment : Fragment() {
@@ -17,10 +17,10 @@ class InfoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
         activity?.title = "Info"
 
-        val viewPager = viewpager
+        val viewPager = view.viewpager
         setupViewPager(viewPager)
 
-        val tabLayout = tabs
+        val tabLayout = view.tabs
         tabLayout.setupWithViewPager(viewPager)
 
         return view

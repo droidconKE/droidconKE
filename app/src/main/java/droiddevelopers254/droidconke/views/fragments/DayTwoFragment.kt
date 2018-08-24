@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity
-import kotlinx.android.synthetic.main.fragment_day_two.*
+import kotlinx.android.synthetic.main.fragment_day_two.view.*
 
 class DayTwoFragment : Fragment() {
     lateinit var dayTwoViewModel: DayTwoViewModel
@@ -28,12 +29,14 @@ class DayTwoFragment : Fragment() {
 
         dayTwoViewModel = ViewModelProviders.of(this).get(DayTwoViewModel::class.java)
 
+        val sessionsRv =view.sessionsRv
+
         dayTwoViewModel.getDayTwoSessions()
         //observe live data emitted by view model
         dayTwoViewModel.sessions.observe(this, Observer{
             if (it?.sessionsModelList != null) {
                 val sessionsModelList = it.sessionsModelList
-                initView(sessionsModelList)
+                initView(sessionsModelList,sessionsRv)
             } else {
                 handleError(it?.databaseError)
             }
@@ -45,7 +48,7 @@ class DayTwoFragment : Fragment() {
         Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
     }
 
-    private fun initView(sessionsModelList: List<SessionsModel>) {
+    private fun initView(sessionsModelList: List<SessionsModel>, sessionsRv: RecyclerView) {
         val sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_two")
         val layoutManager = LinearLayoutManager(activity)
         sessionsRv.layoutManager = layoutManager
@@ -56,7 +59,7 @@ class DayTwoFragment : Fragment() {
                 val intent = Intent(context, SessionViewActivity::class.java)
                 intent.putExtra("sessionId", sessionsModelList[position].id)
                 intent.putExtra("dayNumber", "day_two")
-                intent.putExtra("starred", sessionsModelList[position].isStarred)
+                intent.putExtra("starred", sessionsModelList[position].starred)
                 intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
                 intent.putExtra("roomId", sessionsModelList[position].room_id)
                 startActivity(intent)

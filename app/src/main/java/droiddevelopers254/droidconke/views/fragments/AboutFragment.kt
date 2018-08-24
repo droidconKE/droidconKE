@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.views.activities.AboutDetailsActivity
-import kotlinx.android.synthetic.main.fragment_about.*
+import kotlinx.android.synthetic.main.fragment_about.view.*
 
 class AboutFragment : Fragment() {
 
@@ -18,17 +18,17 @@ class AboutFragment : Fragment() {
         //load about details
         //about type is used to fetch for the specific clicked one
 
-        aboutDroidconText.setOnClickListener {
+        view.aboutDroidconText.setOnClickListener {
             val aboutDetailsIntent = Intent(activity, AboutDetailsActivity::class.java)
             aboutDetailsIntent.putExtra("aboutType",  "about_droidconKE")
             startActivity(aboutDetailsIntent)
         }
-        organizersText.setOnClickListener {
+        view.organizersText.setOnClickListener {
             val aboutDetailsIntent = Intent(activity, AboutDetailsActivity::class.java)
             aboutDetailsIntent.putExtra("aboutType", "organizers")
             startActivity(aboutDetailsIntent)
         }
-        sponsorsText.setOnClickListener {
+        view.sponsorsText.setOnClickListener {
             val aboutDetailsIntent = Intent(activity, AboutDetailsActivity::class.java)
             aboutDetailsIntent.putExtra("aboutType", "sponsors")
             startActivity(aboutDetailsIntent)

@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 
-object Converter {
+class Converter {
     @TypeConverter
     fun fromString(value: String): ArrayList<Int>? {
         val listType = object : TypeToken<ArrayList<Int>>() {

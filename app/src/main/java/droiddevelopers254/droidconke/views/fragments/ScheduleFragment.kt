@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
-import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.fragment_schedule.view.*
 import java.util.*
 
 class ScheduleFragment : Fragment() {
@@ -20,8 +20,8 @@ class ScheduleFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
         activity?.title = "Schedule"
 
-        val viewPager = viewpager
-        val tabLayout = tabs
+        val viewPager = view.viewpager
+        val tabLayout = view.tabs
 
         setupViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)

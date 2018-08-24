@@ -19,12 +19,12 @@ class AgendaRepo {
                     .addOnSuccessListener {
                         if (!it.isEmpty) {
                             val agendaModelList = it.toObjects(AgendaModel::class.java)
-                            sessionsModelMutableLiveData.setValue(AgendaState(agendaModelList))
+                            sessionsModelMutableLiveData.value = AgendaState(agendaModelList)
                         }
 
                     }
                     .addOnFailureListener {
-                        sessionsModelMutableLiveData.setValue(AgendaState(null,it.message)) }
+                        sessionsModelMutableLiveData.value = AgendaState(null,it.message) }
 
             return sessionsModelMutableLiveData
         }

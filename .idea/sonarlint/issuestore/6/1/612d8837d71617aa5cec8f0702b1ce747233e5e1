@@ -1,12 +1,0 @@
-
-ksquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä±Ìï8çî¶¨Ò,
-psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬İüÿÿÿÿ8çî¶¨Ò,
-ˆsquid:S2637"g"documentId" is marked "android.support.annotation.NonNull" but is not initialized in this constructor.( ÷Òüÿÿÿÿ8çî¶¨Ò,
-jsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã‹³.8çî¶¨Ò,
-osquid:S00116"RRename this field "user_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„¡Ü8çî¶¨Ò,
-psquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÅòùÿÿÿÿ8çî¶¨Ò,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÅòùÿÿÿÿ8çî¶¨Ò,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åµÕ—ıÿÿÿÿ8çî¶¨Ò,
-rsquid:S00116"URename this field "session_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ÉÅÏ8çî¶¨Ò,
-nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä±Ìï8çî¶¨Ò,
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.( ÷Òüÿÿÿÿ8çî¶¨Ò,

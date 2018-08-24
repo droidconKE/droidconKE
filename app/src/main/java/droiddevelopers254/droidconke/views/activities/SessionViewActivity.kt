@@ -197,9 +197,9 @@ class SessionViewActivity : AppCompatActivity() {
             }
         }
         //collapse bottom bar
-        collapseBottomImg!!.setOnClickListener { view ->
-            if (bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+        collapseBottomImg?.setOnClickListener {
+            if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
 

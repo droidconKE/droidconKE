@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentSender
 import android.content.SharedPreferences
@@ -12,35 +11,22 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.support.design.button.MaterialButton
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsResponse
-import com.google.android.gms.location.LocationSettingsStates
-import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.google.android.gms.location.SettingsClient
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -49,12 +35,9 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.tasks.Task
-
 import droiddevelopers254.droidconke.R
-
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
-import kotlinx.android.synthetic.main.map_bottom_sheet.*
+import kotlinx.android.synthetic.main.map_bottom_sheet.view.*
 
 class MapFragment : Fragment(), OnMapReadyCallback {
     private val senteuPlaza = LatLng(-1.289256, 36.783180)
@@ -70,7 +53,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     internal var sentToSettings = false
     lateinit var sharedPreferences: SharedPreferences
 
-    internal var mLocationCallback: LocationCallback = object : LocationCallback() {
+    private var mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             for (location in locationResult.locations) {
                 Log.i("MapsActivity", "Location: " + location.latitude + " " + location.longitude)
@@ -102,11 +85,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val builder = AlertDialog.Builder(activity!!)
                 builder.setTitle("Need Multiple Permissions")
                 builder.setMessage("This app needs Location and Storage permissions.")
-                builder.setPositiveButton("Grant") { dialog, which ->
+                builder.setPositiveButton("Grant") { dialog, _ ->
                     dialog.cancel()
                     ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
                 }
-                builder.setNegativeButton("Cancel") { dialog, which -> dialog.cancel() }
+                builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
                 builder.show()
             } else {
                 Toast.makeText(activity, "Unable to get Permission", Toast.LENGTH_LONG).show()
@@ -121,20 +104,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         sharedPreferences = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
         //show toolbar if its hidden
-        (activity as AppCompatActivity).supportActionBar!!.show()
+        (activity as AppCompatActivity).supportActionBar?.show()
         //bottom sheet view
-        val bottomSheetView = view.findViewById<View>(R.id.bottomSheetView)
+        val bottomSheetView = view.bottomSheetView
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView)
 
         //collapse bottom sheet
-        collapseBottomSheetImg.setOnClickListener {
-            if (bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+        view.collapseBottomSheetImg.setOnClickListener {
+            if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
 
         //open google maps intent to get directions
-        googleDirectionsBtn.setOnClickListener {
+        view.googleDirectionsBtn.setOnClickListener {
             if (currentLatLng != null) {
                 val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=" + currentLatLng!!.latitude + "," + currentLatLng!!.longitude + "&daddr=" + senteuPlaza.latitude + "," + senteuPlaza.longitude
                 val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri))
@@ -178,7 +161,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val task = client.checkLocationSettings(builder.build())
         task.addOnCompleteListener { task1 ->
             try {
-                val response = task1.getResult(ApiException::class.java)
+                task1.getResult(ApiException::class.java)
                 // All location settings are satisfied. The client can initialize location
                 // requests here.
 
@@ -271,7 +254,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val states = LocationSettingsStates.fromIntent(data!!)
+        LocationSettingsStates.fromIntent(data!!)
         when (requestCode) {
             REQUEST_CHECK_SETTINGS -> when (resultCode) {
                 Activity.RESULT_OK ->
