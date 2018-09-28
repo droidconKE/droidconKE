@@ -60,8 +60,6 @@ g
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 W
 'app/src/main/res/menu/menu_sign_out.xml,6/1/6185ce5963d71c150535cfc4218ec1857e17b669
-•
-eapp/build/generated/source/apt/debug/droiddevelopers254/droidconke/database/dao/SessionsDao_Impl.java,5/6/5638bdb9dd7ff00cab7fa581b6d9a3a07e42c660
 f
 6app/src/main/res/layout/activity_authenticate_user.xml,b/f/bf5c5396cac5a1322b6d82f6c5ef914bc646b3c4
 
@@ -248,3 +246,7 @@ Qapp/src/main/java/droiddevelopers254/droidconke/views/fragments/TravelFragment.
 Napp/src/main/java/droiddevelopers254/droidconke/views/fragments/MapFragment.kt,9/5/95b20b44b0d9e0dd06bce0917cde43e6a7c5be90
 Œ
 \app/src/main/java/droiddevelopers254/droidconke/views/activities/AuthenticateUserActivity.kt,b/1/b1a0ae6ad4ddabc9834c81026d05c1cfc546dbd6
+–
+fapp/build/generated/source/kapt/debug/droiddevelopers254/droidconke/database/dao/SessionsDao_Impl.java,8/6/866086c6459f8dc34a6020322c55a1587a5dc4e9
+X
+(gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e

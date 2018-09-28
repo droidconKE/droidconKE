@@ -1,0 +1,67 @@
+
+gsquid:S1192"KDefine a constant instead of duplicating this literal "documentId" 3 times.(ã‚íĞ8ÍãıÜÖ,
+dsquid:S1192"HDefine a constant instead of duplicating this literal "room_id" 3 times.(ôûª¢8ÍãıÜÖ,
+bsquid:S1192"FDefine a constant instead of duplicating this literal "topic" 3 times.(à¸¶Ö8ÍãıÜÖ,
+nsquid:S1192"MDefine a constant instead of duplicating this literal "sessionsList" 4 times.(öíÀıùÿÿÿÿ8ÍãıÜÖ,
+gsquid:S1192"KDefine a constant instead of duplicating this literal "time_in_am" 3 times.(Í¯—Ğ8ÍãıÜÖ,
+jsquid:S1192"IDefine a constant instead of duplicating this literal "main_tag" 3 times.(êãÿÿÿÿÿ8ÍãıÜÖ,
+gsquid:S1192"FDefine a constant instead of duplicating this literal "title" 3 times.(Ş·®øÿÿÿÿ8ÍãıÜÖ,
+gsquid:S1192"LDefine a constant instead of duplicating this literal "description" 3 times.(ÈÅ„?8ÍãıÜÖ,
+gsquid:S1192"KDefine a constant instead of duplicating this literal "speaker_id" 3 times.(Š‰—«8ÍãıÜÖ,
+esquid:S1192"IDefine a constant instead of duplicating this literal "duration" 3 times.(ˆé¡Ë8ÍãıÜÖ,
+isquid:S1192"HDefine a constant instead of duplicating this literal "type_id" 3 times.(Æ·–øûÿÿÿÿ8ÍãıÜÖ,
+ksquid:S1192"JDefine a constant instead of duplicating this literal "timestamp" 3 times.( Ğ…Ãşÿÿÿÿ8ÍãıÜÖ,
+osquid:S1192"NDefine a constant instead of duplicating this literal "session_color" 3 times.(Ìò«êşÿÿÿÿ8ÍãıÜÖ,
+msquid:S1192"LDefine a constant instead of duplicating this literal "am_pm_label" 3 times.(Ãè‹øùÿÿÿÿ8ÍãıÜÖ,
+lsquid:S1192"KDefine a constant instead of duplicating this literal "day_number" 3 times.(ûµÜÛúÿÿÿÿ8ÍãıÜÖ,
+esquid:S1192"IDefine a constant instead of duplicating this literal "topic_id" 3 times.(èÏÑî8ÍãıÜÖ,
+fsquid:S1192"JDefine a constant instead of duplicating this literal "isStarred" 3 times.(üÌÃó8ÍãıÜÖ,
+jsquid:S1192"IDefine a constant instead of duplicating this literal "speakers" 3 times.(Ä™„¾øÿÿÿÿ8ÍãıÜÖ,
+usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ…ŞÇ8ÍãıÜÖ,
+usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ…ŞÇ8ÍãıÜÖ,
+xsquid:S4144"\Update this method so that its implementation is not identical to "starSession" on line 162.(Å³Êõ8ÍãıÜÖ,
+zsquid:S1488"^Immediately return this expression instead of assigning it to the temporary variable "_query".(ßû¥Ê8ÍãıÜÖ,
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.(§Ï–Çúÿÿÿÿ8ÍãıÜÖ,
+jsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÿœÕ«8ÍãıÜÖ,
+lsquid:S00116"ORename this field "__db" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àÛôÇ8ÍãıÜÖ,
+ˆsquid:S00116"lRename this field "__insertionAdapterOfSessionsModel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“Ê¬S8ÍãıÜÖ,
+ssquid:S00116"VRename this field "__converter" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îˆ½8ÍãıÜÖ,
+ˆsquid:S00116"fRename this field "__preparedStmtOfStarSession" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹õ†ÿÿÿÿÿ8ÍãıÜÖ,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58ÍãıÜÖ,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58ÍãıÜÖ,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58ÍãıÜÖ,
+psquid:S00116"TRename this field "_observer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÛŸ58ÍãıÜÖ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Ï–Çúÿÿÿÿ8ÍãıÜÖ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃÊĞùÿÿÿÿ8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃÊĞùÿÿÿÿ8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ŞÇ8ÍãıÜÖ,
+msquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®•À[8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ŞÇ8ÍãıÜÖ,
+msquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®•À[8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8ÍãıÜÖ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î«§üÿÿÿÿ8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕàğÇ8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§úçü8ÍãıÜÖ,
+ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î«§üÿÿÿÿ8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€8ÍãıÜÖ,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äŠ•8ÍãıÜÖ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(½äÂÿÿÿÿÿ8ÍãıÜÖ,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(šÆ¿ˆıÿÿÿÿ8ÍãıÜÖ,
+zsquid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±8ÍãıÜÖ,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ôİÕıÿÿÿÿ8ÍãıÜÖ,
+squid:UselessImportCheck"QRemove this unnecessary import: java.lang classes are always implicitly imported.(¤î˜Óüÿÿÿÿ8ÍãıÜÖ,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8ÍãıÜÖ,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8ÍãıÜÖ,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8ÍãıÜÖ,
+e"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(œäºÒúÿÿÿÿ8ÍãıÜÖ,
