@@ -2,12 +2,7 @@ package droiddevelopers254.droidconke.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,11 +25,6 @@ public class AuthenticateUserRepo {
                             userStateMutableLiveData.setValue(new AuthenticateUserState(true));
                         }else {
                             UserModel user = new UserModel();
-                            user.setEmail(firebaseUser.getEmail());
-                            user.setUser_id(firebaseUser.getUid());
-                            user.setUser_name(firebaseUser.getDisplayName());
-                            user.setPhoto_url(String.valueOf(firebaseUser.getPhotoUrl()));
-                            user.setRefresh_token(null);
                             userStateMutableLiveData.setValue(new AuthenticateUserState(user));
 
                             //save user in firestore

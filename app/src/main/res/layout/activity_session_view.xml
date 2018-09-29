@@ -67,6 +67,6 @@
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorWhite"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_star_border_black_24dp" />
+        app:srcCompat="@drawable/ic_share_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

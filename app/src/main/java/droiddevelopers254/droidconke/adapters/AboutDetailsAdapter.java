@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -56,9 +58,11 @@ public class AboutDetailsAdapter extends RecyclerView.Adapter<AboutDetailsAdapte
         //load about  image
         Glide.with(context).load(aboutDetailsModel.getLogoUrl())
                 .thumbnail(Glide.with(context).load(aboutDetailsModel.getLogoUrl()))
+                .transition(new DrawableTransitionOptions()
+                .crossFade())
+                .apply(new RequestOptions()
                 .centerCrop()
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.aboutDetailsImg);
 
 

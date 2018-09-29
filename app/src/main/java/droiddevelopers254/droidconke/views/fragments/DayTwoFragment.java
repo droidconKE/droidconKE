@@ -75,6 +75,8 @@ public class DayTwoFragment extends Fragment {
                 intent.putExtra("starred", sessionsModelList.get(position).getIsStarred());
                 intent.putIntegerArrayListExtra("speakerId", sessionsModelList.get(position).getSpeaker_id());
                 intent.putExtra("roomId", sessionsModelList.get(position).getRoom_id());
+                intent.putExtra("sessionName",sessionsModelList.get(position).getTitle());
+                intent.putExtra("sessionUrl",sessionsModelList.get(position).getUrl());
                 startActivity(intent);
             }
 

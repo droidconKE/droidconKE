@@ -47,7 +47,6 @@
            android:layout_width="wrap_content"
            android:id="@+id/starredEventsChip"
            style="@style/Widget.MaterialComponents.Chip.Filter"
-           app:chipText="Your starred and reserved events"
            android:onClick="selectFilter"
            android:layout_height="wrap_content" />
         <TextView

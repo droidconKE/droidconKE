@@ -47,7 +47,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
-            <android.support.design.button.MaterialButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/googleDirectionsBtn"
                 android:layout_width="200dp"
                 android:layout_alignParentRight="true"

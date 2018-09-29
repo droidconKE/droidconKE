@@ -30,6 +30,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -58,10 +60,6 @@ import static droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT;
 
 public class HomeActivity extends AppCompatActivity {
 
-    @BindView(R.id.topicsChipsRv)
-    RecyclerView topicsChipsRv;
-    @BindView(R.id.typesChipRv)
-    RecyclerView typesChipRv;
     @BindView(R.id.accountImg)
     CircleImageView accountImg;
     @BindView(R.id.toolbarTitleText)
@@ -72,35 +70,15 @@ public class HomeActivity extends AppCompatActivity {
     ConstraintLayout container;
     @BindView(R.id.content_home)
     FrameLayout contentHome;
-    @BindView(R.id.collapseBottomImg)
-    ImageView collapseBottomImg;
-    @BindView(R.id.bottomSheetView)
-    MaterialCardView bottomSheetView;
-   // @BindView(R.id.fab)
-    //FloatingActionButton fab;
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     SharedPreferences sharedPreferences;
-    String refreshToken;
     public static int navItemIndex = 1; //controls toolbar titles and icons
-    private AlertDialog.Builder builder = null;
     Button signInBtn;
-    FirebaseUser firebaseUser;
     FirebaseAuth auth;
     FirebaseRemoteConfig firebaseRemoteConfig;
     public static boolean fabVisible = true;
-    private static final int RC_SIGN_IN = 123;
-    int tokenSent;
-    private BottomSheetBehavior bottomSheetBehavior;
-    @BindView(R.id.starredEventsChip)
-    Chip starredEventsChip;
-    boolean categoryChosen;
     AppBarLayout.LayoutParams params;
-    HomeViewModel homeViewModel;
-    ChipViewAdapter chipViewAdapter;
-    static RecyclerView.LayoutManager mLayoutManager;
-    List<FiltersModel> typeFilterList = new ArrayList<>();
-    List<FiltersModel> topicFilterList = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -110,7 +88,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 //hide views not required by these fragment
                 accountImg.setVisibility(View.GONE);
-                //fab.hide();
                 toolbarTitleText.setText(R.string.info_title);
 
                 //activate the hide toolbar
@@ -128,7 +105,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 //hide views not required by these fragment
                 accountImg.setVisibility(View.VISIBLE);
-               // fab.show();
                 toolbarTitleText.setText(R.string.schedule_title);
 
                 //activate the hide toolbar
@@ -169,137 +145,30 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         auth = FirebaseAuth.getInstance();
         //setup defaults for remote config
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
-        //check whether refresh token is sent to db
-        tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0);
-        if (tokenSent == 0) {
-            refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null);
-            firebaseUser = auth.getCurrentUser();
-            //update in firestore
-            homeViewModel.updateToken(firebaseUser.getUid(),refreshToken);
-        }
-        //get filters from firebase
-        getTopicFilters();
-        getTypeFilters();
-
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehaviour());
-
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
-//        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-//            @Override
-//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//                // this part hides the button immediately and waits bottom sheet
-//                // to collapse to show
-//                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-//                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
-//                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
-//                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
-//                }
-//            }
-//
-//            @Override
-//            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-//
-//            }
-//        });
 
         if (auth.getCurrentUser() != null) {
             //load user profile image
             Glide.with(getApplicationContext()).load(auth.getCurrentUser().getPhotoUrl())
                     .thumbnail(Glide.with(getApplicationContext()).load(auth.getCurrentUser().getPhotoUrl()))
-                    .centerCrop()
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .apply(new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL))
+                    .transition(new DrawableTransitionOptions()
+                    .crossFade())
                     .into(accountImg);
         }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_schedule);
 
-//        //open filters
-//        fab.setOnClickListener(view -> {
-//            if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//            } else {
-//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//
-//            }
-//        });
-//        //close filters
-//        collapseBottomImg.setOnClickListener(view -> {
-//            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//            }
-//        });
 
-        //check if the category was previously chosen
-
-        //observe livedata emitted by view model
-        homeViewModel.getTypeFiltersResponse().observe(this, filtersState -> {
-            assert filtersState != null;
-            if (filtersState.getDatabaseError() != null){
-                handleDatabaseError(filtersState.getDatabaseError());
-            }else{
-                if (filtersState.getFiltersModel() != null){
-                    handleFiltersResponse(filtersState.getFiltersModel());
-                }
-
-            }
-        });
-        homeViewModel.getTopicFiltersResponse().observe(this,filtersState -> {
-            assert filtersState != null;
-            if (filtersState.getDatabaseError() != null){
-                handleDatabaseError(filtersState.getDatabaseError());
-            }else {
-                handleTopicFilters(filtersState.getFiltersModel());
-            }
-        });
-        homeViewModel.getUpdateTokenResponse().observe(this,updateTokenState -> {
-            assert updateTokenState != null;
-            if (updateTokenState.isSuccess()){
-                tokenSent=1;
-                sharedPreferences.edit().putInt(TOKEN_SENT,tokenSent).apply();
-            }else {
-                tokenSent= 0;
-                sharedPreferences.edit().putInt(TOKEN_SENT,tokenSent).apply();
-            }
-        });
-
-    }
-    private void handleTopicFilters(List<FiltersModel> filtersModel) {
-        topicFilterList=filtersModel;
-        initView(topicsChipsRv,topicFilterList);
-    }
-
-    private void getTopicFilters() {
-        homeViewModel.getTopicFilters();
-    }
-
-    private void getTypeFilters() {
-        homeViewModel.getTypeFilters();
-    }
-
-    private void handleFiltersResponse(List<FiltersModel> filtersModel) {
-        typeFilterList =filtersModel;
-        initView(typesChipRv,typeFilterList);
-    }
-    private void handleDatabaseError(String databaseError) {
-        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
-    }
-
-    private void initView(RecyclerView recyclerView,List<FiltersModel> filtersModelList) {
-        chipViewAdapter = new ChipViewAdapter(filtersModelList, getApplicationContext());
-        mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(chipViewAdapter);
     }
     @Override
     protected void onResume() {
@@ -325,16 +194,5 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
 
-    }
-
-    public void selectFilter(View view) {
-        int id = view.getId();
-//        FiltersModel filtersModel= new FiltersModel(0,id,true);
-//        homeViewModel.saveFilter(filtersModel);
-
-    }
-
-    private void checkStatus(int id) {
-//        homeViewModel.checkFilterStatus(id);
     }
 }

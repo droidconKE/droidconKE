@@ -39,13 +39,11 @@ import droiddevelopers254.droidconke.viewmodels.AuthenticateUserViewModel;
 public class AuthenticateUserActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-    FirebaseUser firebaseUser;
     FirebaseAuth auth;
     SignInButton googleSignInBtn;
     private SweetAlertDialog pDialog;
     @BindView(R.id.coorAuthUser)
     CoordinatorLayout snackBarView;
-    AuthenticateUserViewModel authenticateUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,6 @@ public class AuthenticateUserActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_authenticate_user);
 
-        authenticateUserViewModel= ViewModelProviders.of(this).get(AuthenticateUserViewModel.class);
-
         // Progress dialog
         pDialog = new SweetAlertDialog(AuthenticateUserActivity.this,SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#863B96"));
@@ -83,23 +79,7 @@ public class AuthenticateUserActivity extends AppCompatActivity {
             // not signed in
            showUI();
         }
-        //observe livedata emitted by view model
-        authenticateUserViewModel.getAuthenticateResponse().observe(this,authenticateUserState -> {
-            if (authenticateUserState.isUserExists()){
-                navigateToHome();
-            }else{
-                if (authenticateUserState.getError() != null){
-                    handleError(authenticateUserState.getError());
-                }
-            }
-        });
-
     }
-
-    private void handleError(String error) {
-        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
-    }
-
     private void showUI() {
         googleSignInBtn.setOnClickListener(view -> {
             pDialog.setTitleText("Signing in");
@@ -118,13 +98,7 @@ public class AuthenticateUserActivity extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == RESULT_OK) {
                 //save the user now to db
-                firebaseUser = auth.getCurrentUser();
-                if(firebaseUser!=null){
-                   authenticateUserViewModel.authenticateUser(firebaseUser);
-
-                }else {
-                    Toast.makeText(getApplicationContext(),"User is null",Toast.LENGTH_LONG).show();
-                }
+                navigateToHome();
 
             } else {
                 // Sign in failed

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -54,9 +56,11 @@ public class SpeakersAdapter extends RecyclerView.Adapter<SpeakersAdapter.MyView
         //load speaker profile image
         Glide.with(context).load(speakersModel.getPhotoUrl())
                 .thumbnail(Glide.with(context).load(speakersModel.getPhotoUrl()))
-                .centerCrop()
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transition(new DrawableTransitionOptions()
+                        .crossFade())
+                .apply(new RequestOptions()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.speakerImg);
 
     }

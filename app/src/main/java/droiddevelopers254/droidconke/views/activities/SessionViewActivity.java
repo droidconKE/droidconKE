@@ -89,7 +89,7 @@ public class SessionViewActivity extends AppCompatActivity {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private static final String TAG = SessionViewActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
-    String isStarred;
+    String isStarred,sessionName,sessionUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +107,8 @@ public class SessionViewActivity extends AppCompatActivity {
         starStatus = extraIntent.getStringExtra("starred");
         speakerId = extraIntent.getIntegerArrayListExtra("speakerId");
         roomId = extraIntent.getIntExtra("roomId", 0);
+        sessionName = extraIntent.getStringExtra("sessionName");
+        sessionUrl = extraIntent.getStringExtra("sessionUrl");
 
         ButterKnife.bind(this);
 
@@ -205,7 +207,7 @@ public class SessionViewActivity extends AppCompatActivity {
             if (id == R.id.action_share) {
                 Intent shareSession = new Intent();
                 shareSession.setAction(Intent.ACTION_SEND);
-                shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" + sessionId + "' at " + getString(R.string.droidcoke_hashtag) + "\n" + getString(R.string.droidconke_site));
+                shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
                 shareSession.setType("text/plain");
                 startActivity(shareSession);
             }
@@ -279,7 +281,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
     private void handleFetchRoomDetails(RoomModel roomModel) {
         if (roomModel != null) {
-            roomDetailsText.setText(roomModel.getName() + "Room capacity is: " + String.valueOf(roomModel.getCapacity()));
+            roomDetailsText.setText(roomModel.getDescription() + "Room capacity is: " + String.valueOf(roomModel.getCapacity()));
         }
     }
 
