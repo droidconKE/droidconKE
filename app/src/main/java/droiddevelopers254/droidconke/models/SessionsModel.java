@@ -30,6 +30,7 @@ public class SessionsModel {
     private String day_number;
     private String time_in_am;
     private String am_pm_label;
+    private String photoUrl;
 
     public SessionsModel() {
     }
@@ -208,5 +209,13 @@ public class SessionsModel {
 
     public void setAm_pm_label(String am_pm_label) {
         this.am_pm_label = am_pm_label;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

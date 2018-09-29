@@ -17,12 +17,8 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.utils.DroidCoin;
 
 public class DayOneRepo {
-    private SessionsDao sessionsDao;
-    private Executor executor;
 
     public DayOneRepo(){
-        sessionsDao = AppDatabase.getDatabase(DroidCoin.context).sessionsDao();
-        executor = Executors.newSingleThreadExecutor();
 
     }
 
@@ -37,7 +33,6 @@ public class DayOneRepo {
                     if (!queryDocumentSnapshots.isEmpty()){
                         List<SessionsModel> sessionsModelList=queryDocumentSnapshots.toObjects(SessionsModel.class);
                         sessionsStateMutableLiveData.setValue(new SessionsState(sessionsModelList));
-                        executor.execute(()-> sessionsDao.saveSession(sessionsModelList));
                     }
 
                 })

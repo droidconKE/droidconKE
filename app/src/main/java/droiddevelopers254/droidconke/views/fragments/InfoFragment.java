@@ -39,7 +39,6 @@ public class InfoFragment extends Fragment {
         adapter.addFragment(new EventFragment(),"Event");
         adapter.addFragment(new TravelFragment(),"Travel");
         adapter.addFragment(new AboutFragment(),"About");
-        adapter.addFragment(new SettingsFragment(),"Settings");
         viewPager.setAdapter(adapter);
 
     }

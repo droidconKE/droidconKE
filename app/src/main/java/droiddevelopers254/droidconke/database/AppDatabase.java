@@ -13,7 +13,7 @@ import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 
-@Database(entities = {StarredSessionModel.class, SessionsModel.class},version = 3,exportSchema = false)
+@Database(entities = {StarredSessionModel.class, SessionsModel.class},version = 1,exportSchema = false)
 @TypeConverters(Converter.class)
 public abstract class AppDatabase extends RoomDatabase {
     //Singleton

@@ -13,7 +13,6 @@ import droiddevelopers254.droidconke.datastates.FiltersState;
 import droiddevelopers254.droidconke.models.FiltersModel;
 
 public class TopicFiltersRepo {
-    private Executor executor;
 
     public TopicFiltersRepo(){
     }

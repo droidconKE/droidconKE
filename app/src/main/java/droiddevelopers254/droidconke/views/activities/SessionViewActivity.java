@@ -97,7 +97,7 @@ public class SessionViewActivity extends AppCompatActivity {
     StarredSessionModel starredSessionModel;
     private static final String TAG = SessionViewActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
-    String sessionName,sessionUrl,sessionColor;
+    String sessionName,sessionUrl,sessionColor,photoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,7 @@ public class SessionViewActivity extends AppCompatActivity {
         sessionName = extraIntent.getStringExtra("sessionName");
         sessionUrl = extraIntent.getStringExtra("sessionUrl");
         sessionColor= extraIntent.getStringExtra("sessionColor");
+        photoUrl = extraIntent.getStringExtra("photoUrl");
 
         ButterKnife.bind(this);
 
@@ -199,19 +200,12 @@ public class SessionViewActivity extends AppCompatActivity {
             }
             return false;
         });
-        //star a session
+        //share a session
         fab.setOnClickListener(view -> {
 
-            String imageUrl = "https://firebasestorage.googleapis.com/v0/b/droidconke-70d60.appspot.com/o/android_architecture.png?alt=media&token=08e16574-eaa2-415e-9104-d3b16d1f997b";
+            String shareMessage = "Check out " + sessionName + " at "+ getString(R.string.droidcoke_hashtag) + " " +sessionUrl;
 
-            shareItem(imageUrl);
-
-            Intent shareSession = new Intent();
-            shareSession.setAction(Intent.ACTION_SEND);
-            shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
-           // shareSession.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareSession.setType("image/*");
-           // startActivity(shareSession);
+            shareItem(photoUrl,shareMessage);
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
@@ -286,11 +280,12 @@ public class SessionViewActivity extends AppCompatActivity {
         return bmpUri;
     }
 
-    public void shareItem(String url) {
-        Picasso.get().load(url).into(new Target() {
+    public void shareItem(String photoUrl, String shareMessage) {
+        Picasso.get().load(photoUrl).into(new Target() {
             @Override public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("image/*");
+                i.putExtra(Intent.EXTRA_TEXT,shareMessage);
                 i.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
                 startActivity(Intent.createChooser(i, "Share Session"));
             }
