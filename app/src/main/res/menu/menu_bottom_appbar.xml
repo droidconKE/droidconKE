@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="droiddevelopers254.droidconke.views.activities.SessionViewActivity">
     <item
-        android:id="@+id/action_share"
-        android:orderInCategory="100"
-        android:title="@string/action_share"
-        android:icon="@drawable/ic_share_black_24dp"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/action_map"
         android:orderInCategory="100"
         android:title="@string/action_map"

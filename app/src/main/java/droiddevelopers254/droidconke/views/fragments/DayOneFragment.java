@@ -83,6 +83,7 @@ public class DayOneFragment extends Fragment {
                 intent.putExtra("roomId", sessionsModelList.get(position).getRoom_id());
                 intent.putExtra("sessionName",sessionsModelList.get(position).getTitle());
                 intent.putExtra("sessionUrl",sessionsModelList.get(position).getUrl());
+                intent.putExtra("sessionColor",sessionsModelList.get(position).getSession_color());
                 startActivity(intent);
             }
 

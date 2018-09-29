@@ -3,6 +3,8 @@ package droiddevelopers254.droidconke.views.activities;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomappbar.BottomAppBar;
@@ -85,11 +87,9 @@ public class SessionViewActivity extends AppCompatActivity {
     SpeakersAdapter speakersAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
     StarredSessionModel starredSessionModel;
-    boolean starred = false;
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private static final String TAG = SessionViewActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
-    String isStarred,sessionName,sessionUrl;
+    String sessionName,sessionUrl,sessionColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +109,16 @@ public class SessionViewActivity extends AppCompatActivity {
         roomId = extraIntent.getIntExtra("roomId", 0);
         sessionName = extraIntent.getStringExtra("sessionName");
         sessionUrl = extraIntent.getStringExtra("sessionUrl");
+        sessionColor= extraIntent.getStringExtra("sessionColor");
 
         ButterKnife.bind(this);
 
         sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel.class);
 
         getSessionData(dayNumber, sessionId);
+
+        //show session color
+        sessionLabelText.setBackgroundColor(Color.parseColor(sessionColor));
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -170,47 +174,12 @@ public class SessionViewActivity extends AppCompatActivity {
                 handleFetchRoomDetails(roomState.getRoomModel());
             }
         });
-        sessionDataViewModel.starSessionResponse().observe(this, starSessionState -> {
-            assert starSessionState != null;
-            if (starSessionState.getError() != null) {
-                handleStarResponse(starSessionState.getError());
-            }
-            if (starSessionState.isStarred()){
 
-            }
-        });
-        sessionDataViewModel.unstarSessionResponse().observe(this, starSessionState -> {
-            assert starSessionState != null;
-            if (starSessionState.getError() != null) {
-                handleStarResponse(starSessionState.getError());
-            }
-            if (!starSessionState.isStarred()){
-
-            }
-        });
-
-        sessionDataViewModel.getDbStarStatus().observe(this, s -> {
-            if (s >0){
-                isStarred = "1";
-                fab.setImageResource(R.drawable.ic_star_blue_24dp);
-               }else {
-                isStarred = "0";
-                fab.setImageResource(R.drawable.ic_star_border_black_24dp);
-               }
-
-        });
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar);
 
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.action_share) {
-                Intent shareSession = new Intent();
-                shareSession.setAction(Intent.ACTION_SEND);
-                shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
-                shareSession.setType("text/plain");
-                startActivity(shareSession);
-            }
             if (id == R.id.action_map) {
 
                 if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
@@ -224,35 +193,14 @@ public class SessionViewActivity extends AppCompatActivity {
         });
         //star a session
         fab.setOnClickListener(view -> {
-            if (isStarred.equals("0")) {
-                isStarred = "1";
-                sessionDataViewModel.starrSessionInDb(sessionId,isStarred,dayNumber);
-                Log.d("test",sessionId+isStarred+dayNumber);
+            Uri imageUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/droidconke-70d60.appspot.com/o/android_architecture.png?alt=media&token=08e16574-eaa2-415e-9104-d3b16d1f997b");
 
-                Toast.makeText(getApplicationContext(),getString(R.string.starred_desc),Toast.LENGTH_SHORT).show();
-
-                fab.setImageResource(R.drawable.ic_star_blue_24dp);
-                starredSessionModel.setDay(dayNumber);
-                starredSessionModel.setSession_id(String.valueOf(sessionsModel1.getId()));
-                starredSessionModel.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                starredSessionModel.setStarred(true);
-                starredSessionModel.setDocumentId(sessionsModel1.getDocumentId());
-                //star session in starred_sessions collection
-                //this will aid in tracking every starred session and then send a push notification
-                sessionDataViewModel.starSession(starredSessionModel,FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-            }else if (isStarred.equals("1")){
-                isStarred = "0";
-                Toast.makeText(getApplicationContext(),getString(R.string.unstarred_desc),Toast.LENGTH_SHORT).show();
-
-                //star a session
-                fab.setImageResource(R.drawable.ic_star_border_black_24dp);
-                sessionDataViewModel.unstarrSessionInDb(sessionId,isStarred,dayNumber);
-                Log.d("test",sessionId+isStarred+dayNumber);
-                //unstar session in starred_sessions collection
-                sessionDataViewModel.unStarSession(String.valueOf(sessionsModel1.getDocumentId()),FirebaseAuth.getInstance().getCurrentUser().getUid(),false);
-
-            }
+            Intent shareSession = new Intent();
+            shareSession.setAction(Intent.ACTION_SEND);
+            shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
+            shareSession.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareSession.setType("image/*");
+            startActivity(shareSession);
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
@@ -266,25 +214,15 @@ public class SessionViewActivity extends AppCompatActivity {
     private void getSessionData(String dayNumber, int sessionId) {
         sessionDataViewModel.getSessionDetails(dayNumber, sessionId);
     }
-
-    private void handleStarUserSession(int starMessage) {
-       Toast.makeText(getApplicationContext(),getString(starMessage),Toast.LENGTH_SHORT).show();
-    }
-
-    private void handleStarResponse(String error) {
-        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
-    }
-
     private void getRoomDetails(int roomId) {
         sessionDataViewModel.fetchRoomDetails(roomId);
     }
 
     private void handleFetchRoomDetails(RoomModel roomModel) {
         if (roomModel != null) {
-            roomDetailsText.setText(roomModel.getDescription() + "Room capacity is: " + String.valueOf(roomModel.getCapacity()));
+            roomDetailsText.setText(roomModel.getDescription());
         }
     }
-
     private void getSpeakerDetails(int speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
@@ -309,9 +247,6 @@ public class SessionViewActivity extends AppCompatActivity {
     private void handleFetchSessionData(SessionsModel sessionsModel) {
         if (sessionsModel != null) {
             sessionsModel1 = sessionsModel;
-            //check star status
-            sessionDataViewModel.isSessionStarredInDb(sessionId,dayNumber);
-
             //set the data on the view
             txtSessionTime.setText(sessionsModel.getTime());
             txtSessionRoom.setText(sessionsModel.getRoom());

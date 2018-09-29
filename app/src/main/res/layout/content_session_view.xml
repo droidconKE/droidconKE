@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.activities.SessionViewActivity"
-    tools:showIn="@layout/activity_session_view">
+    tools:showIn="@layout/activity_session_view"
+    android:layout_marginBottom="60dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginStart="@dimen/fab_margin"

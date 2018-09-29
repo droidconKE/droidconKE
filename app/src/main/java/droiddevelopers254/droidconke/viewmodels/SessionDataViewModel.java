@@ -23,10 +23,6 @@ public class SessionDataViewModel extends ViewModel {
     private SpeakersRepo speakersRepo;
     private MediatorLiveData<RoomState> roomStateMediatorLiveData;
     private RoomRepo roomRepo;
-    private MediatorLiveData<StarSessionState> starMediatorLiveData;
-    private MediatorLiveData<StarSessionState> unStarMediatorLiveData;
-    private MediatorLiveData<StarSessionState> starStatusMediatorLiveData;
-    private FirebaseStarSessionRepo firebaseStarSessionRepo;
     private MediatorLiveData<SessionsModel> sessionsModelMediatorLiveData;
     private RoomStarrSessionRepo roomStarrSessionRepo;
     private MediatorLiveData<Integer> booleanMediatorLiveData;
@@ -38,18 +34,10 @@ public class SessionDataViewModel extends ViewModel {
         speakersRepo= new SpeakersRepo();
         roomStateMediatorLiveData= new MediatorLiveData<>();
         roomRepo= new RoomRepo();
-        starMediatorLiveData=new MediatorLiveData<>();
-        unStarMediatorLiveData = new MediatorLiveData<>();
-        starStatusMediatorLiveData = new MediatorLiveData<>();
-        firebaseStarSessionRepo = new FirebaseStarSessionRepo();
         sessionsModelMediatorLiveData = new MediatorLiveData<>();
         booleanMediatorLiveData = new MediatorLiveData<>();
         roomStarrSessionRepo = new RoomStarrSessionRepo();
 
-    }
-
-    public LiveData<SessionsModel> getSession(){
-        return  sessionsModelMediatorLiveData;
     }
 
     public LiveData<SessionDataState> getSessionData(){return sessionDataStateMediatorLiveData;}
@@ -60,16 +48,6 @@ public class SessionDataViewModel extends ViewModel {
 
     public LiveData<RoomState> getRoomInfo(){
         return roomStateMediatorLiveData;
-    }
-
-    public LiveData<Integer> getDbStarStatus(){
-        return booleanMediatorLiveData;
-    }
-    public LiveData<StarSessionState> starSessionResponse(){
-        return starMediatorLiveData;
-    }
-    public LiveData<StarSessionState> unstarSessionResponse(){
-        return unStarMediatorLiveData;
     }
 
 
@@ -94,36 +72,6 @@ public class SessionDataViewModel extends ViewModel {
             this.roomStateMediatorLiveData.setValue(roomStateMediatorLiveData);
                 });
     }
-    public void getStarStatus(String sessionId, String userId){
-        final LiveData<StarSessionState> starSessionStateLiveData= firebaseStarSessionRepo.checkStarStatus(sessionId,userId);
-        starStatusMediatorLiveData.addSource(starSessionStateLiveData,
-                starStatusMediatorLiveData->{
-            if (this.starStatusMediatorLiveData.hasActiveObservers()){
-                this.starStatusMediatorLiveData.removeSource(starSessionStateLiveData);
-            }
-            this.starStatusMediatorLiveData.setValue(starStatusMediatorLiveData);
-                });
-    }
-    public void starSession(StarredSessionModel starredSessionModel,String userId){
-        final LiveData<StarSessionState> starSessionStateLiveData= firebaseStarSessionRepo.starSession(starredSessionModel,userId);
-        starMediatorLiveData.addSource(starSessionStateLiveData,
-                starMediatorLiveData->{
-            if (this.starMediatorLiveData.hasActiveObservers()){
-                this.starMediatorLiveData.removeSource(starSessionStateLiveData);
-            }
-            this.starMediatorLiveData.setValue(starMediatorLiveData);
-                });
-    }
-    public void unStarSession(String sessionId,String userId,boolean starred){
-        final LiveData<StarSessionState> starSessionStateLiveData= firebaseStarSessionRepo.unStarSession(sessionId,userId,starred);
-        unStarMediatorLiveData.addSource(starSessionStateLiveData,
-                unStarMediatorLiveData->{
-            if (this.unStarMediatorLiveData.hasActiveObservers()){
-                this.unStarMediatorLiveData.removeSource(starSessionStateLiveData);
-            }
-            this.unStarMediatorLiveData.setValue(unStarMediatorLiveData);
-                });
-    }
 
     public void getSessionDetails(String dayNumber, int sessionId){
        final LiveData<SessionDataState>  sessionsModelLiveData = sessionDataRepo.getSessionData(dayNumber, sessionId);
@@ -135,24 +83,5 @@ public class SessionDataViewModel extends ViewModel {
             }
             this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData);
                 });
-    }
-
-    public void starrSessionInDb(int sessionId, String isStarred , String dayNumber){
-        roomStarrSessionRepo.starrSession(sessionId,isStarred,dayNumber);
-    }
-
-    public void isSessionStarredInDb(int sessionId, String dayNumber){
-        final LiveData<Integer> booleanLiveData = roomStarrSessionRepo.isSessionStarred(sessionId, dayNumber);
-        booleanMediatorLiveData.addSource(booleanLiveData,
-                booleanMediatorLiveData ->{
-            if (this.booleanMediatorLiveData.hasActiveObservers()){
-                this.booleanMediatorLiveData.removeSource(booleanLiveData);
-            }
-            this.booleanMediatorLiveData.setValue(booleanMediatorLiveData);
-                });
-    }
-
-    public void unstarrSessionInDb(int sessionId, String isStarred , String dayNumber){
-        roomStarrSessionRepo.unStarrSession(sessionId,isStarred,dayNumber);
     }
 }

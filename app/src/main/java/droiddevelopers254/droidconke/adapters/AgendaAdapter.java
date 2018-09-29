@@ -11,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
@@ -50,8 +55,17 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.MyViewHold
         AgendaModel agendaModel = agendaModelList.get(position);
         holder.agendaTitleText.setText(agendaModel.getTitle());
         holder.agendaTimelineText.setText(agendaModel.getTime());
-       //TODO add logic for changing agenda icon
         holder.agendaLinear.setBackgroundColor(Color.parseColor(agendaModel.getBackground_color()));
+
+        //load speaker profile image
+        Glide.with(context).load(agendaModel.getIconUrl())
+                .thumbnail(Glide.with(context).load(agendaModel.getIconUrl()))
+                .transition(new DrawableTransitionOptions()
+                        .crossFade())
+                .apply(new RequestOptions()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(holder.agendaImg);
     }
 
     @Override

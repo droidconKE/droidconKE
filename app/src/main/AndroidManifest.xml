@@ -70,6 +70,7 @@
             android:name=".views.activities.AboutDetailsActivity"
             android:label="@string/title_activity_about_details"
             android:parentActivityName=".HomeActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

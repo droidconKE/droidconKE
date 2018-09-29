@@ -5,6 +5,7 @@ public class AgendaModel {
     private String title;
     private String time;
     private String background_color;
+    private  String iconUrl;
 
     public AgendaModel() {
     }
@@ -39,5 +40,13 @@ public class AgendaModel {
 
     public void setBackground_color(String background_color) {
         this.background_color = background_color;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 }
