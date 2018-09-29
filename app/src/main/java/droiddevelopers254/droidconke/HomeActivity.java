@@ -30,6 +30,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -101,6 +106,9 @@ public class HomeActivity extends AppCompatActivity {
     static RecyclerView.LayoutManager mLayoutManager;
     List<FiltersModel> typeFilterList = new ArrayList<>();
     List<FiltersModel> topicFilterList = new ArrayList<>();
+
+    private GoogleSignInClient mGoogleSignInClient;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -175,6 +183,13 @@ public class HomeActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         //setup defaults for remote config
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //check whether refresh token is sent to db
         tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0);
@@ -317,9 +332,19 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+
             FirebaseAuth.getInstance().signOut();
+
+            //google sign out
+            mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                    new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                        }
+                    });
             startActivity(new Intent(this, AuthenticateUserActivity.class));
             finish();
+
             return true;
         }
 

@@ -78,4 +78,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.MyView
     }
 
 
+    //called when we get data back from adapter
+
+    public void setSessionsAdapter(List<SessionsModel> sessionsModelList){
+        this.sessionsModelList =sessionsModelList;
+        notifyDataSetChanged();
+    }
+
+
 }

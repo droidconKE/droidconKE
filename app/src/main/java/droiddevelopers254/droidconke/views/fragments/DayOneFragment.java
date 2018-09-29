@@ -48,12 +48,17 @@ public class DayOneFragment extends Fragment {
         dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel.class);
         unbinder = ButterKnife.bind(this, view);
 
+        initView();
+
         dayOneViewModel.getDayOneSessions();
         //observe live data emitted by view model
         dayOneViewModel.getSessions().observe(this,sessionsState -> {
             if(sessionsState.getSessionsModel() != null){
                 sessionsModelList= sessionsState.getSessionsModel();
-                initView();
+
+                //set the data on the adapter
+                sessionsAdapter.setSessionsAdapter(sessionsModelList);
+
             }else {
                 handleError(sessionsState.getDatabaseError());
             }
