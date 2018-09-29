@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            style="@style/CollapsibleCardTitle"
+            android:gravity="center"
+            android:text="@string/customize_schedule"
+            android:textSize="25sp"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="30dp"
+                android:id="@+id/starImg"
+                android:src="@drawable/ic_star_border_black_24dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/CollapsibleCardTitle"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/starImg"
+                android:text="@string/star_event"
+                android:textSize="16sp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="30dp"
+                android:id="@+id/mapImg"
+                android:src="@drawable/ic_location_on_grey_24dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/CollapsibleCardTitle"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/mapImg"
+                android:text="@string/see_event_map"
+                android:textSize="16sp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</android.support.design.card.MaterialCardView>

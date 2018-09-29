@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="droiddevelopers254.droidconke.views.activities.SessionViewActivity">
+    <item
+        android:id="@+id/action_map"
+        android:orderInCategory="100"
+        android:title="@string/action_map"
+        android:icon="@drawable/ic_location_on_grey_24dp"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sessionCoordinatorLayout"
+    android:fitsSystemWindows="true"
+    tools:context=".views.activities.SessionViewActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/main.backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/event_image"
+                app:layout_collapseMode="parallax"
+                />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" >
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_session_view" />
+    <include layout="@layout/room_bottom_sheet"/>
+
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:id="@+id/bottomAppBar"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/colorWhite"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:fabAttached="true"
+        app:fabAlignmentMode="end"
+        app:fabCradleVerticalOffset="6dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/bottomAppBar"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorWhite"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_share_black_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>

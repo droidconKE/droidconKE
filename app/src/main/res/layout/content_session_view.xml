@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".views.activities.SessionViewActivity"
+    tools:showIn="@layout/activity_session_view"
+    android:layout_marginBottom="60dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/sessionViewTitleText"
+            tools:text="@string/session_title"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            tools:text="@string/sessionview_time"
+            android:textSize="14sp"
+            android:id="@+id/txtSessionTime"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            android:id="@+id/txtSessionRoom"
+            tools:text="@string/session_room"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:lineSpacingExtra="8dp"
+            android:id="@+id/txtSessionDesc"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fab_margin"
+            tools:text="@string/large_text"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="15dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/sessionLabelText"
+                android:background="@drawable/circle_outline"
+                android:layout_height="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/txtSessionCategory"
+                tools:text="@string/session_category"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/sessionLabelText"
+                android:layout_marginStart="6dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="60dp"
+            android:id="@+id/speakersLinear"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:text="@string/speakers"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/speakersRV"
+                android:scrollbars="none"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
