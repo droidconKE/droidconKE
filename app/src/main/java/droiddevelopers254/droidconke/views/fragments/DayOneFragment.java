@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class DayOneFragment extends Fragment {
     Unbinder unbinder;
     SessionTimeAdapter sessionTimeAdapter;
     boolean isStarred;
+    @BindView(R.id.loginProgressBar)
+    ProgressBar loginProgressBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,15 +55,20 @@ public class DayOneFragment extends Fragment {
 
         dayOneViewModel.getDayOneSessions();
         //observe live data emitted by view model
-        dayOneViewModel.getSessions().observe(this,sessionsState -> {
-            if(sessionsState.getSessionsModel() != null){
-                sessionsModelList= sessionsState.getSessionsModel();
+        dayOneViewModel.getSessions().observe(this, sessionsState -> {
+            if (sessionsState.getSessionsModel() != null) {
+                sessionsModelList = sessionsState.getSessionsModel();
 
+                loginProgressBar.setVisibility(View.GONE);
                 //set the data on the adapter
                 sessionsAdapter.setSessionsAdapter(sessionsModelList);
 
-            }else {
+            } else {
+
+                loginProgressBar.setVisibility(View.GONE);
+
                 handleError(sessionsState.getDatabaseError());
+
             }
         });
 
@@ -68,7 +76,7 @@ public class DayOneFragment extends Fragment {
     }
 
     private void handleError(String databaseError) {
-        Toast.makeText(getActivity(),databaseError,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), databaseError, Toast.LENGTH_SHORT).show();
     }
 
     private void initView() {
@@ -86,9 +94,9 @@ public class DayOneFragment extends Fragment {
                 intent.putExtra("starred", sessionsModelList.get(position).getIsStarred());
                 intent.putIntegerArrayListExtra("speakerId", sessionsModelList.get(position).getSpeaker_id());
                 intent.putExtra("roomId", sessionsModelList.get(position).getRoom_id());
-                intent.putExtra("sessionName",sessionsModelList.get(position).getTitle());
-                intent.putExtra("sessionUrl",sessionsModelList.get(position).getUrl());
-                intent.putExtra("sessionColor",sessionsModelList.get(position).getSession_color());
+                intent.putExtra("sessionName", sessionsModelList.get(position).getTitle());
+                intent.putExtra("sessionUrl", sessionsModelList.get(position).getUrl());
+                intent.putExtra("sessionColor", sessionsModelList.get(position).getSession_color());
                 startActivity(intent);
             }
 
