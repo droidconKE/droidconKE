@@ -1,11 +1,0 @@
-
-Xsquid:S1068"7Remove this unused "starredSessionModel" private field.(§§îÁùÿÿÿÿ8‘í¨£Ò,
-xsquid:S1450"\Remove the "sessionsModel" field and declare it as a local variable in the relevant methods.(½„Ø8‘í¨£Ò,
-Fsquid:S1068"+Remove this unused "context" private field.(êİç8‘í¨£Ò,
-Nsquid:S1068"2Remove this unused "starrViewModel" private field.(²­‰¯8‘í¨£Ò,
-ksquid:UselessImportCheck"=Remove this unused import 'android.support.design.chip.Chip'.(É‘Êşÿÿÿÿ8°©æ‹â,
-Jsquid:S1068".Remove this unused "starStatus" private field.(ªöÍ8‘í¨£Ò,
-Isquid:S1068"-Remove this unused "dayNumber" private field.(ªöÍ8‘í¨£Ò,
-hsquid:UselessImportCheck"?Remove this unused import 'android.content.res.ColorStateList'.(Ç¦µ·8°©æ‹â,
-Csquid:S1659"'Declare "dayNumber" on a separate line.(ªöÍ8‘í¨£Ò,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ˆÁÀÿÿÿÿÿ8‘í¨£Ò,

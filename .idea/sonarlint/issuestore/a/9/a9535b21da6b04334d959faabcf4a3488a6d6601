@@ -1,11 +1,0 @@
-
-bsquid:CallToDeprecatedMethod"0Remove this use of "getToken"; it is deprecated.(ÈÓÛÿÿÿÿÿ8÷Šœ¯Ñ,
-hsquid:CallToDeprecatedMethod"6Remove this use of "onTokenRefresh"; it is deprecated.(¦ĞõÆûÿÿÿÿ8÷Šœ¯Ñ,
-psquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ß‡æ·
-ssquid:CallToDeprecatedMethod"ARemove this use of "FirebaseInstanceIdService"; it is deprecated.(ŸäåÖıÿÿÿÿ8÷Šœ¯Ñ,
-rsquid:UselessImportCheck"KRemove this unused import 'droiddevelopers254.droidconke.models.UserModel'.(Áö¼•ıÿÿÿÿ
-Xsquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
-nsquid:CallToDeprecatedMethod"ARemove this use of "FirebaseInstanceIdService"; it is deprecated.(áÁÄÆ8÷Šœ¯Ñ,
-|squid:CallToDeprecatedMethod"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ù´ ıÿÿÿÿ8÷Šœ¯Ñ,
-lsquid:UselessImportCheck"KRemove this unused import 'com.google.firebase.database.DatabaseReference'.(ÉÓ¹
-lsquid:UselessImportCheck"JRemove this unused import 'com.google.firebase.database.FirebaseDatabase'.(×Ë—

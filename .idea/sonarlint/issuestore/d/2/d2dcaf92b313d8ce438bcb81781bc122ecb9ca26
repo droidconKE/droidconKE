@@ -1,5 +1,0 @@
-
-Psquid:S1068"4Remove this unused "starrSessionRepo" private field.(·Âªª8òÂô¿Ò,
-}squid:HiddenFieldCheck"QRename "sessionsStateMediatorLiveData" which hides the field declared at line 13.(ƒ„šÿÿÿÿÿ8òÂô¿Ò,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ8òÂô¿Ò,
-squid:UselessImportCheck"aRemove this unused import 'droiddevelopers254.droidconke.database.entities.StarredSessionEntity'.(¢¡æâûÿÿÿÿ8òÂô¿Ò,

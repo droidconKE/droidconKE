@@ -1,21 +1,0 @@
-
-Osquid:S1854":Remove this useless assignment to local variable "states".(ÙªÙ…
-csquid:UselessImportCheck"<Remove this unused import 'android.content.DialogInterface'.(Š­›¨þÿÿÿÿ
-M"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(É¶Ü=
-S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(×ö³–úÿÿÿÿ
-`squid:S1192"FDefine a constant instead of duplicating this literal "Grant" 3 times.(Ûá”ñùÿÿÿÿ
-@squid:S1481"+Remove this unused "states" local variable.(ÙªÙ…
-asquid:S1192"GDefine a constant instead of duplicating this literal "Cancel" 3 times.(Ø¯“üÿÿÿÿ
-msquid:S1450"SRemove the "mMap" field and declare it as a local variable in the relevant methods.(—­ƒÌÿÿÿÿÿ
-usquid:S1450"[Remove the "senteuMarker" field and declare it as a local variable in the relevant methods.(°Ž¹þÿÿÿÿ
-_squid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(É¶Ü=
-Esquid:S1068"0Remove this unused "KEY_LOCATION" private field.(×Ü­¾
-esquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(×ö³–úÿÿÿÿ
-Lsquid:S1068"7Remove this unused "KEY_CAMERA_POSITION" private field.(“ôæä
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(óêæï
-Zsquid:S2147"ECombine this catch with the one at line 202, which has the same body.(ðýˆÒ
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
-Jsquid:S1068"0Remove this unused "senteuMarker" private field.(°Ž¹þÿÿÿÿ
-esquid:UselessImportCheck"DRemove this unused import 'android.support.v4.app.FragmentActivity'.(¸­¯D
-Psquid:S1068"6Remove this unused "mLastKnownLocation" private field.(¦´úþÿÿÿÿ
-Bsquid:S1481"-Remove this unused "response" local variable.(òÇÍ

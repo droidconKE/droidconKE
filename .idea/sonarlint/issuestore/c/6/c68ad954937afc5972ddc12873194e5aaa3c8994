@@ -1,7 +1,0 @@
-
-vsquid:UselessImportCheck"HRemove this unused import 'com.google.firebase.firestore.QuerySnapshot'.(Δ΅ή©ύÿÿÿÿ8οβΔ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ξ“¶‹ψÿÿÿÿ8οβΔ,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(°‚έ8οβΔ,
-gsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(ΌΕί8οβΔ,
-zsquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(ΗπΈÒÿÿÿÿÿ8οβΔ,
-gsquid:UselessImportCheck">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦βΟτ8οβΔ,
