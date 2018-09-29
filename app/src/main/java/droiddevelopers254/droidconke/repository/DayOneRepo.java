@@ -25,6 +25,8 @@ public class DayOneRepo {
         executor = Executors.newSingleThreadExecutor();
 
     }
+
+    //we using mutable live data to handle cases for both a success and failure case
     public LiveData<SessionsState> getDayOneSessions(){
         final MutableLiveData<SessionsState> sessionsStateMutableLiveData= new MutableLiveData<>();
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -43,5 +45,4 @@ public class DayOneRepo {
 
         return sessionsStateMutableLiveData;
     }
-
 }
