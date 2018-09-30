@@ -119,37 +119,25 @@ public class AuthenticateUserActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void showSnackbar(String message){
-        Snackbar.make(snackBarView,message,Snackbar.LENGTH_SHORT).show();
-
-    }
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
         showDialog();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        //no need to get users personal data navigate to home
+                        navigateToHome();
 
-                            //no need to get users personal data navigate to home
-                            navigateToHome();
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT).show();
-
-                        }
-
-                        hideDialog();
-
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT).show();
                     }
+                    hideDialog();
+
                 });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

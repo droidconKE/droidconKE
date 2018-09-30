@@ -2,6 +2,7 @@
 <android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="5dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
     android:id="@+id/bottomSheetView"
@@ -50,7 +51,7 @@
             android:id="@+id/roomDetailsText"
             android:lineSpacingExtra="8dp"
             android:layout_margin="@dimen/fab_margin"
-            android:text="@string/room_description"
+            tools:text="@string/room_description"
             android:textColor="@color/colorBlack"
             android:layout_height="match_parent" />
     </LinearLayout>
