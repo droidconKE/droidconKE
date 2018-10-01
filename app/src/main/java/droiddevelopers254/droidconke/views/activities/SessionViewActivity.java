@@ -3,9 +3,12 @@ package droiddevelopers254.droidconke.views.activities;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
@@ -26,7 +29,12 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,14 +201,18 @@ public class SessionViewActivity extends AppCompatActivity {
         });
         //star a session
         fab.setOnClickListener(view -> {
-            Uri imageUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/droidconke-70d60.appspot.com/o/android_architecture.png?alt=media&token=08e16574-eaa2-415e-9104-d3b16d1f997b");
 
-            Intent shareSession = new Intent();
+            String imageUrl = "https://firebasestorage.googleapis.com/v0/b/droidconke-70d60.appspot.com/o/android_architecture.png?alt=media&token=08e16574-eaa2-415e-9104-d3b16d1f997b";
+
+           shareItem(imageUrl);
+
+          /*  Intent shareSession = new Intent();
             shareSession.setAction(Intent.ACTION_SEND);
-            shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
-            shareSession.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareSession.setType("image/*");
-            startActivity(shareSession);
+           // shareSession.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareSession.setType("text/plain");
+            startActivity(Intent.createChooser(shareSession, "Share Session"));
+*/
+            // startActivity(shareSession);
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
@@ -259,6 +271,37 @@ public class SessionViewActivity extends AppCompatActivity {
     }
     private void handleDatabaseError(String databaseError) {
         Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
+    }
+
+    public Uri getLocalBitmapUri(Bitmap bmp) {
+        Uri bmpUri = null;
+        try {
+            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
+    }
+
+    public void shareItem(String url) {
+        Picasso.get().load(url).into(new Target() {
+            @Override public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                Intent shareSession = new Intent(Intent.ACTION_SEND);
+                shareSession.setType("image/*");
+               // shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
+                shareSession.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
+                startActivity(Intent.createChooser(shareSession, "Share Session"));
+            }
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+            @Override public void onPrepareLoad(Drawable placeHolderDrawable) { }
+        });
     }
 
 }

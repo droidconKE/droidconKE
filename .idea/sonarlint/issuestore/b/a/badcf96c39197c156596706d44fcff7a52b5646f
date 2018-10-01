@@ -1,14 +1,0 @@
-
-–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(´ÑÆ
-qsquid:UselessImportCheck"ORemove this unused import 'android.support.design.widget.FloatingActionButton'.(„Ÿ¹¼
-›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«şÿÿÿÿ
-usquid:UselessImportCheck"GRemove this unused import 'droiddevelopers254.droidconke.HomeActivity'.(º©Ö¼şÿÿÿÿ8î³™¸Â,
-S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(¼œóÛüÿÿÿÿ
-hsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(°ïÇåüÿÿÿÿ
-S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(¼œóÛüÿÿÿÿ
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñşÿÿÿÿ
-6squid:S1659"!Declare "two" on a separate line.(’Œ—–
-6squid:S1659"!Declare "one" on a separate line.(’Œ—–
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Â¦™ÿÿÿÿÿ
-dsquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p
-~squid:S1450"dRemove the "mSectionsPagerAdapter" field and declare it as a local variable in the relevant methods.(İÅışÿÿÿÿ

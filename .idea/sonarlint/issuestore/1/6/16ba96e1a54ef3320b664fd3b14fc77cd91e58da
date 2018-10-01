@@ -1,8 +1,0 @@
-
-<squid:S1068"'Remove this unused "TAG" private field.(ˆüéÉ
-?squid:S00108")Either remove or fill this block of code.(å¥ž‡
-usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(®ëòæûÿÿÿÿ
-msquid:UselessImportCheck"FRemove this unused import 'android.arch.lifecycle.ViewModelProviders'.(Èðõ©úÿÿÿÿ
-{squid:UselessImportCheck"YRemove this unused import 'droiddevelopers254.droidconke.viewmodels.TravelInfoViewModel'.(•¤†Ô
-ysquid:UselessImportCheck"RRemove this unused import 'droiddevelopers254.droidconke.models.WifiDetailsModel'.(âÒ•Íùÿÿÿÿ
-Tsquid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
