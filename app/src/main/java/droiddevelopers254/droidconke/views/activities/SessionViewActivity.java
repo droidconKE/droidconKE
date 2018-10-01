@@ -1,5 +1,7 @@
 package droiddevelopers254.droidconke.views.activities;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,13 +9,17 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUriExposedException;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +52,7 @@ import droiddevelopers254.droidconke.models.RoomModel;
 import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
+import droiddevelopers254.droidconke.utils.ItemClickListener;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -205,7 +212,12 @@ public class SessionViewActivity extends AppCompatActivity {
 
             String shareMessage = "Check out " + sessionName + " at "+ getString(R.string.droidcoke_hashtag) + " " +sessionUrl;
 
-            shareItem(photoUrl,shareMessage);
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,shareMessage);
+            startActivity(Intent.createChooser(i, "Share Session"));
+
+            //shareItem(photoUrl,shareMessage);
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
@@ -234,7 +246,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
     private void handleFetchSpeakerDetails(List<SpeakersModel> speakersModel) {
         if (speakersModel != null) {
-            speakersList = speakersModel;
+            speakersList.addAll(speakersModel);
             initView();
         } else {
             //if there are no speakers for this session hide views
@@ -248,6 +260,21 @@ public class SessionViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(speakersAdapter);
+        recyclerView.addOnItemTouchListener(new ItemClickListener(getApplicationContext(), recyclerView, new ItemClickListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                String webViewLink = "https://twitter.com/"+speakersList.get(position).getTwitterHandle();
+                CustomTabsIntent.Builder builder = new  CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                builder.setToolbarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary));
+                customTabsIntent.launchUrl(SessionViewActivity.this,Uri.parse(webViewLink));
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
     private void handleFetchSessionData(SessionsModel sessionsModel) {
         if (sessionsModel != null) {
@@ -266,6 +293,7 @@ public class SessionViewActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
     public Uri getLocalBitmapUri(Bitmap bmp) {
         Uri bmpUri = null;
         try {
@@ -274,7 +302,9 @@ public class SessionViewActivity extends AppCompatActivity {
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
             bmpUri = Uri.fromFile(file);
-        } catch (IOException e) {
+
+            Log.d("URIImage",bmpUri.toString());
+        } catch (IOException | FileUriExposedException e) {
             e.printStackTrace();
         }
         return bmpUri;

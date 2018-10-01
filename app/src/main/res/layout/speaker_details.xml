@@ -16,7 +16,7 @@
             android:layout_height="40dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="@dimen/medium_margin"
             android:layout_toEndOf="@id/speakerImg"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -25,16 +25,29 @@
                 android:id="@+id/speakerNameText"
                 tools:text="@string/speaker_name"
                 android:textSize="14sp"
-                android:textColor="@color/colorFavourite"
+                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/speakerCompanyText"
-                android:layout_marginTop="3dp"
-                tools:text="@string/speaker_company"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+                <ImageView
+                    android:id="@+id/twitterImg"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_twitter"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_toEndOf="@id/twitterImg"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/speakerCompanyText"
+                    tools:text="@string/speaker_company"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"/>
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 
