@@ -204,14 +204,15 @@ public class SessionViewActivity extends AppCompatActivity {
 
             String imageUrl = "https://firebasestorage.googleapis.com/v0/b/droidconke-70d60.appspot.com/o/android_architecture.png?alt=media&token=08e16574-eaa2-415e-9104-d3b16d1f997b";
 
-            shareItem(imageUrl);
+           shareItem(imageUrl);
 
-            Intent shareSession = new Intent();
+          /*  Intent shareSession = new Intent();
             shareSession.setAction(Intent.ACTION_SEND);
-            shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
            // shareSession.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareSession.setType("image/*");
-           // startActivity(shareSession);
+            shareSession.setType("text/plain");
+            startActivity(Intent.createChooser(shareSession, "Share Session"));
+*/
+            // startActivity(shareSession);
         });
         //collapse bottom bar
         collapseBottomImg.setOnClickListener(view -> {
@@ -289,10 +290,11 @@ public class SessionViewActivity extends AppCompatActivity {
     public void shareItem(String url) {
         Picasso.get().load(url).into(new Target() {
             @Override public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("image/*");
-                i.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
-                startActivity(Intent.createChooser(i, "Share Session"));
+                Intent shareSession = new Intent(Intent.ACTION_SEND);
+                shareSession.setType("image/*");
+               // shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
+                shareSession.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
+                startActivity(Intent.createChooser(shareSession, "Share Session"));
             }
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
