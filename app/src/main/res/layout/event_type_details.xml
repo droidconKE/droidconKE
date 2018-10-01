@@ -11,10 +11,10 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             android:id="@+id/eventImg"
-            android:src="@drawable/event_image"
-            android:layout_height="150dp" />
+            android:layout_height="200dp" />
         <TextView
             android:layout_width="wrap_content"
             android:lineSpacingExtra="6dp"

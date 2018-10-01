@@ -97,6 +97,10 @@ public class DayOneFragment extends Fragment {
                 intent.putExtra("sessionName", sessionsModelList.get(position).getTitle());
                 intent.putExtra("sessionUrl", sessionsModelList.get(position).getUrl());
                 intent.putExtra("sessionColor", sessionsModelList.get(position).getSession_color());
+                intent.putExtra("sessionName",sessionsModelList.get(position).getTitle());
+                intent.putExtra("sessionUrl",sessionsModelList.get(position).getUrl());
+                intent.putExtra("sessionColor",sessionsModelList.get(position).getSession_color());
+                intent.putExtra("photoUrl",sessionsModelList.get(position).getPhotoUrl());
                 startActivity(intent);
             }
 

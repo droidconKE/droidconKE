@@ -15,18 +15,9 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.utils.DroidCoin;
 
 public class SessionDataRepo {
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-    private SessionsDao sessionsDao;
-
     public SessionDataRepo(){
-        sessionsDao= AppDatabase.getDatabase(DroidCoin.context).sessionsDao();
 
     }
-//
-//    public LiveData<SessionsModel> getSessionDetails(String dayNumber, int sessionId){
-//        return sessionsDao.getSessionDetails(dayNumber, sessionId);
-//    }
 
     public LiveData<SessionDataState> getSessionData(String dayNumber, int sessionId){
         final MutableLiveData<SessionDataState> sessionsModelMutableLiveData= new MutableLiveData<>();

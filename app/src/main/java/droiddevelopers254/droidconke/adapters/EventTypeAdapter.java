@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import droiddevelopers254.droidconke.R;
@@ -45,8 +50,17 @@ public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull EventTypeAdapter.MyViewHolder holder, int position) {
         EventTypeModel eventTypes = eventTypesList.get(position);
-        holder.eventImg.setImageResource(R.drawable.event_image);
         holder.eventDescriptionText.setText(eventTypes.getDescription());
+
+        //load event  image
+        Glide.with(context).load(eventTypes.getEventImageUrl())
+                .thumbnail(Glide.with(context).load(eventTypes.getEventImageUrl()))
+                .transition(new DrawableTransitionOptions()
+                        .crossFade())
+                .apply(new RequestOptions()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(holder.eventImg);
 
     }
 
@@ -54,6 +68,5 @@ public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.MyVi
     public int getItemCount() {
         return eventTypesList.size();
     }
-
 
 }

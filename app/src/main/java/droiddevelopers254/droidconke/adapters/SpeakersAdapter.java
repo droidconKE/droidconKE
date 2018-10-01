@@ -51,7 +51,7 @@ public class SpeakersAdapter extends RecyclerView.Adapter<SpeakersAdapter.MyView
     public void onBindViewHolder(@NonNull SpeakersAdapter.MyViewHolder holder, int position) {
         SpeakersModel speakersModel=speakersList.get(position);
         holder.speakerNameText.setText(speakersModel.getName());
-        holder.speakerCompanyText.setText(speakersModel.getCompany());
+        holder.speakerCompanyText.setText(speakersModel.getTwitterHandle());
 
         //load speaker profile image
         Glide.with(context).load(speakersModel.getPhotoUrl())

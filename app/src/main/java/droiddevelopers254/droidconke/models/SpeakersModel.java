@@ -6,6 +6,7 @@ public class SpeakersModel {
     private String bio;
     private String company;
     private String photoUrl;
+    private String twitterHandle;
 
     public SpeakersModel() {
     }
@@ -48,5 +49,13 @@ public class SpeakersModel {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getTwitterHandle() {
+        return twitterHandle;
+    }
+
+    public void setTwitterHandle(String twitterHandle) {
+        this.twitterHandle = twitterHandle;
     }
 }
