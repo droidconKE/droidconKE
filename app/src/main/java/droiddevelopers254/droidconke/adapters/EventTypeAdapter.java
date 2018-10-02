@@ -55,10 +55,7 @@ public class EventTypeAdapter extends RecyclerView.Adapter<EventTypeAdapter.MyVi
         //load event  image
         Glide.with(context).load(eventTypes.getEventImageUrl())
                 .thumbnail(Glide.with(context).load(eventTypes.getEventImageUrl()))
-                .transition(new DrawableTransitionOptions()
-                        .crossFade())
                 .apply(new RequestOptions()
-                        .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.eventImg);
 

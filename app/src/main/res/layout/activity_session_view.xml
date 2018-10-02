@@ -25,12 +25,13 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:id="@+id/main.backdrop"
+                android:id="@+id/sessionImg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/event_image"
                 app:layout_collapseMode="parallax"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 />
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

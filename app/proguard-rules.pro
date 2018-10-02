@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file description.
 #-renamesourcefileattribute SourceFile
+-keep class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
+-keepclassmembers class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
+-keep class droiddevelopers254.droidconke.models.** { *; }
+-keep class android.support.v7.widget.RecyclerView { *; }
+-dontwarn okhttp3.internal.platform.*

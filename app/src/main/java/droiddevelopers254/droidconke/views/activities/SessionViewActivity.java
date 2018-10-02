@@ -1,6 +1,5 @@
 package droiddevelopers254.droidconke.views.activities;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -14,12 +13,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileUriExposedException;
 import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
 import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +29,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -54,7 +54,6 @@ import droiddevelopers254.droidconke.models.SpeakersModel;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.utils.ItemClickListener;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
-import io.reactivex.disposables.CompositeDisposable;
 
 import static droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME;
 
@@ -93,6 +92,8 @@ public class SessionViewActivity extends AppCompatActivity {
     ImageView rommLocationImg;
     @BindView(R.id.sessionCoordinatorLayout)
     CoordinatorLayout sessionCoordinatorLayout;
+    @BindView(R.id.sessionImg)
+    ImageView sessionImg;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
     SessionsModel sessionsModel1;
@@ -104,7 +105,7 @@ public class SessionViewActivity extends AppCompatActivity {
     StarredSessionModel starredSessionModel;
     private static final String TAG = SessionViewActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
-    String sessionName,sessionUrl,sessionColor,photoUrl;
+    String sessionName, sessionUrl, sessionColor, photoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         starredSessionModel = new StarredSessionModel();
-        sharedPreferences = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         //get extras
         Intent extraIntent = getIntent();
@@ -124,10 +125,16 @@ public class SessionViewActivity extends AppCompatActivity {
         roomId = extraIntent.getIntExtra("roomId", 0);
         sessionName = extraIntent.getStringExtra("sessionName");
         sessionUrl = extraIntent.getStringExtra("sessionUrl");
-        sessionColor= extraIntent.getStringExtra("sessionColor");
+        sessionColor = extraIntent.getStringExtra("sessionColor");
         photoUrl = extraIntent.getStringExtra("photoUrl");
 
         ButterKnife.bind(this);
+
+        Glide.with(getApplicationContext()).load(photoUrl)
+                .thumbnail(Glide.with(getApplicationContext()).load(photoUrl))
+                .apply(new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(sessionImg);
 
         sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel.class);
 
@@ -165,14 +172,14 @@ public class SessionViewActivity extends AppCompatActivity {
 
         getRoomDetails(roomId);
         //observe live data emitted by view model
-       sessionDataViewModel.getSessionData().observe(this,sessionDataState -> {
-           assert sessionDataState != null;
-           if (sessionDataState.getDatabaseError() != null){
-               handleDatabaseError(sessionDataState.getDatabaseError());
-           }else {
-               this.handleFetchSessionData(sessionDataState.getSessionsModel());
-           }
-       });
+        sessionDataViewModel.getSessionData().observe(this, sessionDataState -> {
+            assert sessionDataState != null;
+            if (sessionDataState.getDatabaseError() != null) {
+                handleDatabaseError(sessionDataState.getDatabaseError());
+            } else {
+                this.handleFetchSessionData(sessionDataState.getSessionsModel());
+            }
+        });
         sessionDataViewModel.getSpeakerInfo().observe(this, speakersState -> {
             assert speakersState != null;
             if (speakersState.getDatabaseError() != null) {
@@ -232,6 +239,7 @@ public class SessionViewActivity extends AppCompatActivity {
     private void getSessionData(String dayNumber, int sessionId) {
         sessionDataViewModel.getSessionDetails(dayNumber, sessionId);
     }
+
     private void getRoomDetails(int roomId) {
         sessionDataViewModel.fetchRoomDetails(roomId);
     }
@@ -241,6 +249,7 @@ public class SessionViewActivity extends AppCompatActivity {
             roomDetailsText.setText(roomModel.getDescription());
         }
     }
+
     private void getSpeakerDetails(int speakerId) {
         sessionDataViewModel.fetchSpeakerDetails(speakerId);
     }
@@ -264,9 +273,9 @@ public class SessionViewActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new ItemClickListener(getApplicationContext(), recyclerView, new ItemClickListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                String webViewLink = "https://twitter.com/"+speakersList.get(position).getTwitterHandle();
+                String webViewLink = "https://twitter.com/" + speakersList.get(position).getTwitterHandle();
 
-                Intent webIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(webViewLink));
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webViewLink));
                 startActivity(webIntent);
 
             }
@@ -277,6 +286,7 @@ public class SessionViewActivity extends AppCompatActivity {
             }
         }));
     }
+
     private void handleFetchSessionData(SessionsModel sessionsModel) {
         if (sessionsModel != null) {
             sessionsModel1 = sessionsModel;
@@ -290,21 +300,22 @@ public class SessionViewActivity extends AppCompatActivity {
 
         }
     }
+
     private void handleDatabaseError(String databaseError) {
-        Toast.makeText(getApplicationContext(),databaseError,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), databaseError, Toast.LENGTH_SHORT).show();
     }
 
     @TargetApi(Build.VERSION_CODES.N)
     public Uri getLocalBitmapUri(Bitmap bmp) {
         Uri bmpUri = null;
         try {
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
             bmpUri = Uri.fromFile(file);
 
-            Log.d("URIImage",bmpUri.toString());
+            Log.d("URIImage", bmpUri.toString());
         } catch (IOException | FileUriExposedException e) {
             e.printStackTrace();
         }
@@ -313,17 +324,22 @@ public class SessionViewActivity extends AppCompatActivity {
 
     public void shareItem(String photoUrl, String shareMessage) {
         Picasso.get().load(photoUrl).into(new Target() {
-            @Override public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 Intent shareSession = new Intent(Intent.ACTION_SEND);
                 shareSession.setType("image/*");
-               // shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
+                // shareSession.putExtra(Intent.EXTRA_TEXT, "Check out " + "'" +sessionName + "' at " + getString(R.string.droidcoke_hashtag) + "\n" +sessionUrl);
                 shareSession.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
             }
+
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
             }
-            @Override public void onPrepareLoad(Drawable placeHolderDrawable) { }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
         });
     }
 

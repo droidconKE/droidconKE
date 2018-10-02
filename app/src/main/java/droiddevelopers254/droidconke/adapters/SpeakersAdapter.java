@@ -59,7 +59,6 @@ public class SpeakersAdapter extends RecyclerView.Adapter<SpeakersAdapter.MyView
                 .transition(new DrawableTransitionOptions()
                         .crossFade())
                 .apply(new RequestOptions()
-                        .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.speakerImg);
 
