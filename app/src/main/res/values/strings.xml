@@ -148,4 +148,5 @@
     <string name="day_two_label">Oct 5</string>
     <string name="time_in_am">07:45</string>
     <string name="am_label">AM</string>
+    <string name="event_website">www.droidcon.co.ke</string>
 </resources>

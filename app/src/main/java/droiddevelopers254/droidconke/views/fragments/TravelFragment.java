@@ -22,7 +22,6 @@ import droiddevelopers254.droidconke.viewmodels.TravelInfoViewModel;
 public class TravelFragment extends Fragment{
     private static final String TAG = "TravelFragment";
 
-    private CollapsibleCard bikingCard;
     private CollapsibleCard shuttleServiceCard;
     private CollapsibleCard carpoolingParkingCard;
     private CollapsibleCard publicTransportationCard;
@@ -41,7 +40,6 @@ public class TravelFragment extends Fragment{
                 .build();
         firebaseRemoteConfig.setConfigSettings(configSettings);
 
-        bikingCard = view.findViewById(R.id.bikingCard);
         shuttleServiceCard = view.findViewById(R.id.shuttleInfoCard);
         carpoolingParkingCard = view.findViewById(R.id.carpoolingParkingCard);
         publicTransportationCard = view.findViewById(R.id.publicTransportationCard);
@@ -68,15 +66,15 @@ public class TravelFragment extends Fragment{
                     } else {
 
                     }
-                    TravelInfoModel travelInfoModel = new TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
-                            firebaseRemoteConfig.getString("biking"), firebaseRemoteConfig.getString("ride_sharing"));
+                    TravelInfoModel travelInfoModel = new TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info")
+                            ,firebaseRemoteConfig.getString("ride_sharing"));
                     showInfo(travelInfoModel);
 
                 });
     }
 
     private void showInfo(TravelInfoModel travelInfoModel) {
-            bikingCard.setCardDescription(travelInfoModel.getBikingInfo());
+
             shuttleServiceCard.setCardDescription(travelInfoModel.getShuttleInfo());
             carpoolingParkingCard.setCardDescription(travelInfoModel.getCarpoolingParkingInfo());
             publicTransportationCard.setCardDescription(travelInfoModel.getPublicTransportationInfo());

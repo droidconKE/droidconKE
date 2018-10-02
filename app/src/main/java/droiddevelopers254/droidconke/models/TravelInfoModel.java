@@ -53,15 +53,13 @@ public class TravelInfoModel {
                 "shuttleInfo='" + shuttleInfo + '\'' +
                 ", publicTransportationInfo='" + publicTransportationInfo + '\'' +
                 ", carpoolingParkingInfo='" + carpoolingParkingInfo + '\'' +
-                ", bikingInfo='" + bikingInfo + '\'' +
                 '}';
     }
 
-    public TravelInfoModel(String shuttleInfo, String publicTransportationInfo, String carpoolingParkingInfo, String bikingInfo, String rideSharingInfo) {
+    public TravelInfoModel(String shuttleInfo, String publicTransportationInfo, String carpoolingParkingInfo, String rideSharingInfo) {
         this.shuttleInfo = shuttleInfo;
         this.publicTransportationInfo = publicTransportationInfo;
         this.carpoolingParkingInfo = carpoolingParkingInfo;
-        this.bikingInfo = bikingInfo;
         this.rideSharingInfo = rideSharingInfo;
     }
 

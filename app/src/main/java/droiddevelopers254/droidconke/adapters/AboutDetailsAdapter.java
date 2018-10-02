@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -31,13 +31,17 @@ public class AboutDetailsAdapter extends RecyclerView.Adapter<AboutDetailsAdapte
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView aboutDetailsDescText,aboutDetailsTitleText;
-        ImageView aboutDetailsImg;
+        TextView aboutDetailsDescText,aboutDetailsTitleText,websiteText;
+        ImageView aboutDetailsImg,expandImg;
+        LinearLayout detailsLinear;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             aboutDetailsDescText=itemView.findViewById(R.id.aboutDetailsDescText);
             aboutDetailsTitleText=itemView.findViewById(R.id.aboutDetailsTitleText);
             aboutDetailsImg=itemView.findViewById(R.id.aboutDetailsImg);
+            detailsLinear = itemView.findViewById(R.id.detailsLinear);
+            websiteText=itemView.findViewById(R.id.websiteText);
+            expandImg = itemView.findViewById(R.id.expandImg);
         }
     }
 
@@ -54,17 +58,30 @@ public class AboutDetailsAdapter extends RecyclerView.Adapter<AboutDetailsAdapte
         AboutDetailsModel aboutDetailsModel=aboutDetailsModelList.get(position);
         holder.aboutDetailsTitleText.setText(aboutDetailsModel.getName());
         holder.aboutDetailsDescText.setText(aboutDetailsModel.getBio());
+        holder.websiteText.setText(aboutDetailsModel.getSite());
+
+        // Get the state
+        boolean expanded = aboutDetailsModel.isExpanded();
+        // Set the visibility based on state
+        holder.detailsLinear.setVisibility(expanded ? View.VISIBLE : View.GONE);
+        holder.expandImg.setImageResource(expanded ? R.drawable.ic_expand_less_black_24dp :R.drawable.ic_expand_more_black_24dp);
 
         //load about  image
         Glide.with(context).load(aboutDetailsModel.getLogoUrl())
                 .thumbnail(Glide.with(context).load(aboutDetailsModel.getLogoUrl()))
-                .transition(new DrawableTransitionOptions()
-                .crossFade())
                 .apply(new RequestOptions()
-                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.aboutDetailsImg);
 
+        holder.itemView.setOnClickListener(view -> {
+            // Get the current state of the item
+            boolean expand = aboutDetailsModel.isExpanded();
+            // Change the state
+            aboutDetailsModel.setExpanded(!expand);
+            // Notify the adapter that item has changed
+            notifyItemChanged(position);
+
+        });
 
     }
 

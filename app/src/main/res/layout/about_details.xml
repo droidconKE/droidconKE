@@ -2,41 +2,87 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="match_parent"
-            android:scaleType="centerCrop"
-            android:id="@+id/aboutDetailsImg"
-            android:src="@drawable/event_image"
-            android:layout_height="150dp" />
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        android:layout_marginTop="@dimen/spacing_micro"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_margin="@dimen/fab_margin"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/aboutDetailsTitleText"
-                tools:text="@string/about_detail_title"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_height="wrap_content" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/aboutDetailsDescText"
-                android:layout_marginTop="6dp"
-                tools:text="@string/event_description"
-                android:textSize="16sp"
-                android:lineSpacingExtra="8dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="centerInside"
+                    android:id="@+id/aboutDetailsImg"
+                    android:src="@drawable/event_image"
+                    android:layout_height="150dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    android:layout_marginEnd="@dimen/fab_margin">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/aboutDetailsTitleText"
+                        tools:text="@string/about_detail_title"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_height="wrap_content"
+                        />
+                    <ImageView
+                        android:id="@+id/expandImg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_expand_more_black_24dp"
+                        android:layout_alignParentEnd="true"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detailsLinear"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/aboutDetailsDescText"
+                    tools:text="@string/event_description"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="2dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/websiteText"
+                    tools:text="@string/event_website"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:textColor="@color/colorLightBlue"/>
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
-
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

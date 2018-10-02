@@ -31,12 +31,6 @@
             app:cardTitle="@string/travel_public_transportation_info_title" />
 
         <droiddevelopers254.droidconke.ui.CollapsibleCard
-            android:id="@+id/bikingCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardTitle="@string/travel_biking_info_title" />
-
-        <droiddevelopers254.droidconke.ui.CollapsibleCard
             android:id="@+id/rideSharingCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

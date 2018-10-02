@@ -5,6 +5,8 @@ public class AboutDetailsModel {
     private String name;
     private String bio;
     private String logoUrl;
+    private boolean expanded;
+    private String site;
 
     public AboutDetailsModel() {
     }
@@ -39,5 +41,21 @@ public class AboutDetailsModel {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 }
