@@ -45,7 +45,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
 import droiddevelopers254.droidconke.models.RoomModel;
@@ -92,8 +91,8 @@ public class SessionViewActivity extends AppCompatActivity {
     ImageView rommLocationImg;
     @BindView(R.id.sessionCoordinatorLayout)
     CoordinatorLayout sessionCoordinatorLayout;
-    @BindView(R.id.sessionImg)
-    ImageView sessionImg;
+    @BindView(R.id.sessionTitleText)
+    TextView sessionTitleText;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
     SessionsModel sessionsModel1;
@@ -130,11 +129,7 @@ public class SessionViewActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Glide.with(getApplicationContext()).load(photoUrl)
-                .thumbnail(Glide.with(getApplicationContext()).load(photoUrl))
-                .apply(new RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
-                .into(sessionImg);
+        sessionTitleText.setText(sessionName);
 
         sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel.class);
 
@@ -203,9 +198,9 @@ public class SessionViewActivity extends AppCompatActivity {
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.action_feedback){
-                Intent intent = new Intent(SessionViewActivity.this,FeedBack.class);
-                intent.putExtra("sessionId",sessionId);
+            if (id == R.id.action_feedback) {
+                Intent intent = new Intent(SessionViewActivity.this, FeedBack.class);
+                intent.putExtra("sessionId", sessionId);
                 intent.putExtra("dayNumber", dayNumber);
                 startActivity(intent);
             }
