@@ -151,10 +151,10 @@
     <string name="event_website">www.droidcon.co.ke</string>
     <string name="title_activity_feed_back">FeedBack</string>
     <string name="session_feedback">Kindly give us feedback about the session to better it.</string>
-    <string name="hintSessionFeedback">session feedback</string>
+    <string name="hintSessionFeedback">Session feedback</string>
     <string name="session_feedback_title">Session Title</string>
     <string name="action_feedback">Event Feedback</string>
     <string name="title_activity_event_feedback">EventFeedback</string>
     <string name="event_feedback">Kindly give us your general view of the event as a whole as well as any ideas to improve on it.</string>
-    <string name="hintEventFeedback">event feedback</string>
+    <string name="hintEventFeedback">Event feedback</string>
 </resources>

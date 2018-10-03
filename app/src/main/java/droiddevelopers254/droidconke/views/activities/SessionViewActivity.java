@@ -94,8 +94,6 @@ public class SessionViewActivity extends AppCompatActivity {
     CoordinatorLayout sessionCoordinatorLayout;
     @BindView(R.id.sessionImg)
     ImageView sessionImg;
-    @BindView(R.id.fabFeedback)
-    FloatingActionButton fabFeedback;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
     SessionsModel sessionsModel1;
@@ -205,6 +203,12 @@ public class SessionViewActivity extends AppCompatActivity {
         //handle menu items on material bottom bar
         bottomAppBar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
+            if (id == R.id.action_feedback){
+                Intent intent = new Intent(SessionViewActivity.this,FeedBack.class);
+                intent.putExtra("sessionId",sessionId);
+                intent.putExtra("dayNumber", dayNumber);
+                startActivity(intent);
+            }
             if (id == R.id.action_map) {
 
                 if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
@@ -343,14 +347,5 @@ public class SessionViewActivity extends AppCompatActivity {
             public void onPrepareLoad(Drawable placeHolderDrawable) {
             }
         });
-    }
-
-    @OnClick(R.id.fabFeedback)
-    public void onViewClicked() {
-
-        Intent intent = new Intent(SessionViewActivity.this,FeedBack.class);
-        intent.putExtra("sessionId",sessionId);
-        intent.putExtra("dayNumber", dayNumber);
-        startActivity(intent);
     }
 }

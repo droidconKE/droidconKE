@@ -8,4 +8,10 @@
         android:title="@string/action_map"
         android:icon="@drawable/ic_location_on_grey_24dp"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_feedback"
+        android:orderInCategory="100"
+        android:title="@string/action_map"
+        android:icon="@drawable/ic_feedback"
+        app:showAsAction="ifRoom" />
 </menu>
