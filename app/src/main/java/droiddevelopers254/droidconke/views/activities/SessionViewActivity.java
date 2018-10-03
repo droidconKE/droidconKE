@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,6 +45,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import droiddevelopers254.droidconke.R;
 import droiddevelopers254.droidconke.adapters.SpeakersAdapter;
 import droiddevelopers254.droidconke.models.RoomModel;
@@ -94,6 +94,8 @@ public class SessionViewActivity extends AppCompatActivity {
     CoordinatorLayout sessionCoordinatorLayout;
     @BindView(R.id.sessionImg)
     ImageView sessionImg;
+    @BindView(R.id.fabFeedback)
+    FloatingActionButton fabFeedback;
     private BottomSheetBehavior bottomSheetBehavior;
     String starStatus, dayNumber, documentId;
     SessionsModel sessionsModel1;
@@ -343,4 +345,12 @@ public class SessionViewActivity extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.fabFeedback)
+    public void onViewClicked() {
+
+        Intent intent = new Intent(SessionViewActivity.this,FeedBack.class);
+        intent.putExtra("sessionId",sessionId);
+        intent.putExtra("dayNumber", dayNumber);
+        startActivity(intent);
+    }
 }
