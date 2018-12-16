@@ -7,7 +7,7 @@ This project is the Android app for the conference. The app supports devices
 running Android 5.0+, and is optimized for phones and tablets of all shapes
 and sizes.
 
-<h2>Source</h2>
+# Source
 
 The source code in this repository reflects the app as of droidconKE 2018.
 
@@ -47,7 +47,7 @@ We observed data using
 [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 
 
-We used a Repository layer for handling data operations. .droidconKE's data comes
+We used a Repository layer for handling data operations.droidconKE's data comes
 from a few different sources -  user data is stored in
 [Cloud Firestore](https://firebase.google.com/docs/firestore/)
 (either remotely or in
@@ -81,7 +81,7 @@ to provide easy and secure authentification using email.
 * Rewriting .droidconKE app in Kotlin and taking advantage of kotlin features like coroutines,kotlin android extensions etc
 * Version 2.0 features writeup(UI Improvements, Event Reservation Feature,Starring Session Feature etc) 
 * CI/CD Setup
-
+* Offline First Architecture Improvements
 
 
 ### License
