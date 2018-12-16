@@ -15,7 +15,7 @@ The source code in this repository reflects the app as of droidconKE 2018.
 
 The app displays a list of conference events - sessions, office hours, app
 reviews, codelabs, etc. -  Users can see details about
-events, and they can star events that interest them. 
+events.
 
 The app also displays a map of the venue and shows informational pages to guide
 attendees during the conference.
@@ -77,7 +77,6 @@ to provide easy and secure authentification using email.
 
 # \[ 🚧 Work in progress 👷‍♀️⛏👷🔧️ 🚧 \]
 
-* Migrating to AndroidX
 * Rewriting .droidconKE app in Kotlin and taking advantage of kotlin features like coroutines,kotlin android extensions etc
 * Version 2.0 features writeup(UI Improvements, Event Reservation Feature,Starring Session Feature etc) 
 * CI/CD Setup
