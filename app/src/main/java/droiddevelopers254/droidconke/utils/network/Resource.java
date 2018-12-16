@@ -1,7 +1,7 @@
 package droiddevelopers254.droidconke.utils.network;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static droiddevelopers254.droidconke.utils.network.Status.ERROR;
 import static droiddevelopers254.droidconke.utils.network.Status.LOADING;

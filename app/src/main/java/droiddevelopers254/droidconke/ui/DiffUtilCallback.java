@@ -1,6 +1,6 @@
 package droiddevelopers254.droidconke.ui;
 
-import android.support.v7.util.DiffUtil;
+import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.List;
 

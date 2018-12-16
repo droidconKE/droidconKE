@@ -1,8 +1,8 @@
 package droiddevelopers254.droidconke.database.dao;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import droiddevelopers254.droidconke.database.entities.StarredSessionEntity;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import io.reactivex.Single;
 
-import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
+import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface StarredSessionDao {
