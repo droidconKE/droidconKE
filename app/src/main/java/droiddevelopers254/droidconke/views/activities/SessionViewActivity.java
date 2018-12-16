@@ -29,9 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -199,7 +196,7 @@ public class SessionViewActivity extends AppCompatActivity {
         bottomAppBar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.action_feedback) {
-                Intent intent = new Intent(SessionViewActivity.this, FeedBack.class);
+                Intent intent = new Intent(SessionViewActivity.this, SessionFeedBackActivity.class);
                 intent.putExtra("sessionId", sessionId);
                 intent.putExtra("dayNumber", dayNumber);
                 startActivity(intent);

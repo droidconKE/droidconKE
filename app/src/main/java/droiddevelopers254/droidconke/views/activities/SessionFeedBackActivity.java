@@ -26,7 +26,7 @@ import droiddevelopers254.droidconke.models.SessionsModel;
 import droiddevelopers254.droidconke.models.SessionsUserFeedback;
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel;
 
-public class FeedBack extends AppCompatActivity {
+public class SessionFeedBackActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -45,12 +45,10 @@ public class FeedBack extends AppCompatActivity {
     private String dayNumber,sessionFeedback;
     SessionsUserFeedback userFeedback;
 
-    FirebaseFirestore db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed_back);
+        setContentView(R.layout.activity_session_feed_back);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
@@ -59,8 +57,6 @@ public class FeedBack extends AppCompatActivity {
 
             getSupportActionBar().setTitle("Sessions Feedback");
         }
-
-        db = FirebaseFirestore.getInstance();
 
         //get extras
         Intent extraIntent = getIntent();
@@ -80,7 +76,21 @@ public class FeedBack extends AppCompatActivity {
                 this.handleFetchSessionData(sessionDataState.getSessionsModel());
             }
         });
+        sessionDataViewModel.getSessionFeedBackResponse().observe(this,feedBackState -> {
+            if (feedBackState.getFeedback() != null){
+                handleFeedbackResponse(feedBackState.getFeedback());
+            }
+        });
 
+    }
+
+    private void handleFeedbackResponse(String feedback) {
+        loginProgressBarFeedBack.setVisibility(View.GONE);
+
+        txtSessionUserFeedback.setText("");
+
+        Toast.makeText(getApplicationContext(),"Thank you for your feedback",
+                Toast.LENGTH_SHORT).show();
     }
 
     private void getSessionData(String dayNumber, int sessionId) {
@@ -105,7 +115,6 @@ public class FeedBack extends AppCompatActivity {
 
         //get data from user and post them
         if(isFeedbackValid()){
-
             postUserFeedback(userFeedback);
         }
 
@@ -136,28 +145,7 @@ public class FeedBack extends AppCompatActivity {
     private void postUserFeedback(SessionsUserFeedback userFeedback) {
 
         loginProgressBarFeedBack.setVisibility(View.VISIBLE);
-
-        db.collection("sessionsFeedback")
-                .add(userFeedback)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-
-                        loginProgressBarFeedBack.setVisibility(View.GONE);
-
-                        txtSessionUserFeedback.setText("");
-
-                        Toast.makeText(getApplicationContext(),"Thank you for your feedback",
-                                Toast.LENGTH_SHORT).show();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                loginProgressBarFeedBack.setVisibility(View.GONE);
-            }
-        });
+        sessionDataViewModel.sendSessionFeedBack(userFeedback);
 
     }
 }

@@ -4,14 +4,17 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import droiddevelopers254.droidconke.datastates.FeedBackState;
 import droiddevelopers254.droidconke.datastates.RoomState;
 import droiddevelopers254.droidconke.datastates.SessionDataState;
 import droiddevelopers254.droidconke.datastates.SpeakersState;
 import droiddevelopers254.droidconke.datastates.StarSessionState;
 import droiddevelopers254.droidconke.models.SessionsModel;
+import droiddevelopers254.droidconke.models.SessionsUserFeedback;
 import droiddevelopers254.droidconke.models.StarredSessionModel;
 import droiddevelopers254.droidconke.repository.RoomRepo;
 import droiddevelopers254.droidconke.repository.SessionDataRepo;
+import droiddevelopers254.droidconke.repository.SessionFeedbackRepo;
 import droiddevelopers254.droidconke.repository.SpeakersRepo;
 import droiddevelopers254.droidconke.repository.FirebaseStarSessionRepo;
 import droiddevelopers254.droidconke.repository.RoomStarrSessionRepo;
@@ -26,6 +29,8 @@ public class SessionDataViewModel extends ViewModel {
     private MediatorLiveData<SessionsModel> sessionsModelMediatorLiveData;
     private RoomStarrSessionRepo roomStarrSessionRepo;
     private MediatorLiveData<Integer> booleanMediatorLiveData;
+    private SessionFeedbackRepo sessionFeedbackRepo;
+    private MediatorLiveData<FeedBackState> sessionFeedBackMediatorLiveData;
 
     public SessionDataViewModel (){
         sessionDataStateMediatorLiveData= new MediatorLiveData<>();
@@ -37,6 +42,8 @@ public class SessionDataViewModel extends ViewModel {
         sessionsModelMediatorLiveData = new MediatorLiveData<>();
         booleanMediatorLiveData = new MediatorLiveData<>();
         roomStarrSessionRepo = new RoomStarrSessionRepo();
+        sessionFeedbackRepo =  new SessionFeedbackRepo();
+        sessionFeedBackMediatorLiveData = new MediatorLiveData<>();
 
     }
 
@@ -49,6 +56,8 @@ public class SessionDataViewModel extends ViewModel {
     public LiveData<RoomState> getRoomInfo(){
         return roomStateMediatorLiveData;
     }
+
+    public LiveData<FeedBackState> getSessionFeedBackResponse(){return sessionFeedBackMediatorLiveData; }
 
 
     public void fetchSpeakerDetails(int speakerId){
@@ -82,6 +91,16 @@ public class SessionDataViewModel extends ViewModel {
 
             }
             this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData);
+                });
+    }
+    public void sendSessionFeedBack(SessionsUserFeedback userEventFeedback){
+        final LiveData<FeedBackState> sessionFeedbackLiveData = sessionFeedbackRepo.sendFeedBack(userEventFeedback);
+        sessionFeedBackMediatorLiveData.addSource(sessionFeedbackLiveData,
+                sessionFeedBackMediatorLiveData ->{
+                    if (this.sessionFeedBackMediatorLiveData.hasActiveObservers()){
+                        this.sessionFeedBackMediatorLiveData.removeSource(sessionFeedbackLiveData);
+                    }
+                    this.sessionFeedBackMediatorLiveData.setValue(sessionFeedBackMediatorLiveData);
                 });
     }
 }

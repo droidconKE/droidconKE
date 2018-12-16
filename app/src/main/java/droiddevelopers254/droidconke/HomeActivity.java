@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour;
 import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity;
-import droiddevelopers254.droidconke.views.activities.EventFeedback;
+import droiddevelopers254.droidconke.views.activities.EventFeedbackActivity;
 import droiddevelopers254.droidconke.views.fragments.InfoFragment;
 import droiddevelopers254.droidconke.views.fragments.MapFragment;
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment;
@@ -188,7 +188,7 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         }else if(id==R.id.action_feedback){
 
-            startActivity(new Intent(this, EventFeedback.class));
+            startActivity(new Intent(this, EventFeedbackActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

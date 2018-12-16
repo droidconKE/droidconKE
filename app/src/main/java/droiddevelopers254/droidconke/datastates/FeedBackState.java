@@ -7,7 +7,7 @@ public class FeedBackState {
         this.response = response;
     }
 
-    public String getResponse() {
+    public String getFeedback() {
         return response;
     }
 }
