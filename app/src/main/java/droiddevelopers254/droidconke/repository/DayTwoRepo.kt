@@ -8,12 +8,12 @@ import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.models.SessionsModel
-import droiddevelopers254.droidconke.utils.DroidCoin
+import droiddevelopers254.droidconke.utils.DroidCon
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 class DayTwoRepo {
-    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCoin.context)!!.sessionsDao()
+    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCon.context)!!.sessionsDao()
     private val executor: Executor = Executors.newSingleThreadExecutor()
     val dayTwoSessions: LiveData<SessionsState>
         get() {

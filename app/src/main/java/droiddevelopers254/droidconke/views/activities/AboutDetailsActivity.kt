@@ -1,33 +1,31 @@
 package droiddevelopers254.droidconke.views.activities
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.AboutDetailsAdapter
 import droiddevelopers254.droidconke.models.AboutDetailsModel
+import droiddevelopers254.droidconke.utils.toast
 import droiddevelopers254.droidconke.viewmodels.AboutDetailsViewModel
 import kotlinx.android.synthetic.main.activity_about_details.*
 import kotlinx.android.synthetic.main.content_about_details.*
-import org.jetbrains.anko.toast
-import java.util.ArrayList
+import org.koin.android.ext.android.inject
+import java.util.*
 
 class AboutDetailsActivity : AppCompatActivity() {
     private var aboutDetailsList: List<AboutDetailsModel> = ArrayList()
-    lateinit var aboutDetailsViewModel: AboutDetailsViewModel
     lateinit var aboutType: String
+
+    private val aboutDetailsViewModel: AboutDetailsViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_details)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        aboutDetailsViewModel = ViewModelProviders.of(this).get(AboutDetailsViewModel::class.java)
 
         //get intent extras
         val extraIntent = intent
@@ -43,9 +41,9 @@ class AboutDetailsActivity : AppCompatActivity() {
         fetchAboutDetails(aboutType)
 
         //observe live data emitted by view model
-        aboutDetailsViewModel.aboutDetails.observe(this, Observer{
+        aboutDetailsViewModel.aboutDetails.observe(this, Observer {
             when {
-                it?.databaseError != null -> handleDatabaseError(it.databaseError)
+                it.databaseError != null -> handleDatabaseError(it.databaseError)
                 else -> handleFetchAboutDetails(it?.aboutDetailsModelList)
             }
         })
@@ -64,13 +62,14 @@ class AboutDetailsActivity : AppCompatActivity() {
     }
 
     private fun handleDatabaseError(databaseError: String?) {
-        toast(databaseError.toString())
+        this.toast(databaseError.toString())
     }
 
     private fun initView() {
-        val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, applicationContext){
+        val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, this) {
            //handle on click
         }
+
         val layoutManager = LinearLayoutManager(this)
         aboutDetailsRv.layoutManager = layoutManager
         aboutDetailsRv.itemAnimator = DefaultItemAnimator()

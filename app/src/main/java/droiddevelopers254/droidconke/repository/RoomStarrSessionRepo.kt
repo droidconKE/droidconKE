@@ -5,15 +5,15 @@ import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.database.dao.StarredSessionDao
 import droiddevelopers254.droidconke.models.StarredSessionModel
-import droiddevelopers254.droidconke.utils.DroidCoin
+import droiddevelopers254.droidconke.utils.DroidCon
 import io.reactivex.Single
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 class RoomStarrSessionRepo {
-    private val starredSessionDao: StarredSessionDao =AppDatabase.getDatabase(DroidCoin.context)!!.starredSessionDao()
+    private val starredSessionDao: StarredSessionDao = AppDatabase.getDatabase(DroidCon.context)!!.starredSessionDao()
     private val executor: Executor = Executors.newSingleThreadExecutor()
-    private val sessionsDao: SessionsDao =AppDatabase.getDatabase(DroidCoin.context)!!.sessionsDao()
+    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCon.context)!!.sessionsDao()
 
     val starredSessions: Single<List<StarredSessionModel>>
         get() = starredSessionDao.starredSessions
