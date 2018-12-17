@@ -4,7 +4,7 @@
 
 We'd love to accept your patches! 
 
-To contribute to droidconKE simply open a pull request against the [develop branch](https://github.com/droidconKE/droidconKE/tree/develop) or the [kotlin branch] (https://github.com/droidconKE/droidconKE/tree/kotlin)
+To contribute to droidconKE simply open a pull request against the [develop branch](https://github.com/droidconKE/droidconKE/tree/develop) or the [kotlin branch](https://github.com/droidconKE/droidconKE/tree/kotlin)
 
 
 
