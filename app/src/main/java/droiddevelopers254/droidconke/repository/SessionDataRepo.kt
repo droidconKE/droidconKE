@@ -1,7 +1,7 @@
 package droiddevelopers254.droidconke.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 import droiddevelopers254.droidconke.database.AppDatabase
@@ -21,14 +21,13 @@ class SessionDataRepo {
                 .whereEqualTo("id", sessionId)
                 .get()
                 .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        for (queryDocumentSnapshot in it.result) {
+                    when {
+                        it.isSuccessful -> for (queryDocumentSnapshot in it.result!!) {
                             val sessionsModel = queryDocumentSnapshot.toObject(SessionsModel::class.java)
                             val newSessionsModel= sessionsModel.copy(documentId = queryDocumentSnapshot.id)
                             sessionsModelMutableLiveData.value = SessionDataState(newSessionsModel,null)
                         }
-                    } else {
-                        sessionsModelMutableLiveData.value = SessionDataState(null,"Error getting session details")
+                        else -> sessionsModelMutableLiveData.value = SessionDataState(null,"Error getting session details")
                     }
                 }
 

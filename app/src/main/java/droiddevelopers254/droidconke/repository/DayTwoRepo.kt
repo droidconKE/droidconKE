@@ -1,7 +1,7 @@
 package droiddevelopers254.droidconke.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import droiddevelopers254.droidconke.database.AppDatabase
@@ -23,10 +23,12 @@ class DayTwoRepo {
                     .orderBy("id", Query.Direction.ASCENDING)
                     .get()
                     .addOnSuccessListener {
-                        if (!it.isEmpty) {
-                            val sessionsModelList = it.toObjects(SessionsModel::class.java)
-                            sessionsStateMutableLiveData.value = SessionsState(sessionsModelList)
-                            executor.execute { sessionsDao.saveSession(sessionsModelList) }
+                        when {
+                            !it.isEmpty -> {
+                                val sessionsModelList = it.toObjects(SessionsModel::class.java)
+                                sessionsStateMutableLiveData.value = SessionsState(sessionsModelList)
+                                executor.execute { sessionsDao.saveSession(sessionsModelList) }
+                            }
                         }
                     }
                     .addOnFailureListener {

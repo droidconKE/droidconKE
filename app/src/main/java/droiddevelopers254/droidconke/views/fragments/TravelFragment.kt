@@ -1,14 +1,12 @@
 package droiddevelopers254.droidconke.views.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-
 import droiddevelopers254.droidconke.BuildConfig
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.TravelInfoModel
@@ -30,41 +28,42 @@ class TravelFragment : Fragment() {
         firebaseRemoteConfig.setConfigSettings(configSettings)
 
         //get remote config values
-        val bikingCard = view.bikingCard
         val shuttleServiceCard = view.shuttleInfoCard
         val carpoolingParkingCard = view.carpoolingParkingCard
         val publicTransportationCard = view.publicTransportationCard
         val rideSharingCard = view.rideSharingCard
 
-        getRemoteConfigValues(bikingCard,shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
+        getRemoteConfigValues(shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
 
         return view
     }
 
-    private fun getRemoteConfigValues(bikingCard: CollapsibleCard, shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
+    private fun getRemoteConfigValues(shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
         var cacheExpiration: Long = 3600
 
-        if (firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled) {
-            cacheExpiration = 0
+        // After config data is successfully fetched, it must be activated before newly fetched
+        // values are returned.
+        when {
+            firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled -> cacheExpiration = 0
         }
         firebaseRemoteConfig.fetch(cacheExpiration)
                 .addOnCompleteListener(activity!!) { task ->
-                    if (task.isSuccessful) {
-                        // After config data is successfully fetched, it must be activated before newly fetched
-                        // values are returned.
-                        firebaseRemoteConfig.activateFetched()
-                    } else {
+                    when {
+                        task.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
+                            // values are returned.
+                            firebaseRemoteConfig.activateFetched()
+                        else -> {
 
+                        }
                     }
                     val travelInfoModel = TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
-                            firebaseRemoteConfig.getString("biking"), firebaseRemoteConfig.getString("ride_sharing"))
-                    showInfo(travelInfoModel,bikingCard,shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
+                            firebaseRemoteConfig.getString("ride_sharing"))
+                    showInfo(travelInfoModel,shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
 
                 }
     }
 
-    private fun showInfo(travelInfoModel: TravelInfoModel, bikingCard: CollapsibleCard, shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
-        bikingCard.setCardDescription(travelInfoModel.bikingInfo)
+    private fun showInfo(travelInfoModel: TravelInfoModel, shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
         shuttleServiceCard.setCardDescription(travelInfoModel.shuttleInfo)
         carpoolingParkingCard.setCardDescription(travelInfoModel.carpoolingParkingInfo)
         publicTransportationCard.setCardDescription(travelInfoModel.publicTransportationInfo)

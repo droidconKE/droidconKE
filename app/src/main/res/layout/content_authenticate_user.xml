@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -54,15 +54,15 @@
                 android:src="@drawable/ic_date_range_black_24dp"
                 android:layout_height="30dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_toEndOf="@id/dateRangeImg"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:text="@string/welcome_date"
-                    android:layout_marginStart="6dp"
-                    android:textColor="@color/colorBlack"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/dateRangeImg"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:text="@string/welcome_date"
+                android:layout_marginStart="6dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
         <TextView
@@ -84,7 +84,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-           android:layout_marginStart="@dimen/fab_margin"
+            android:layout_marginStart="@dimen/fab_margin"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_marginTop="36dp"
@@ -118,4 +118,4 @@
 
 
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,4 @@
+
+xsquid:HiddenFieldCheck"QRename "sessionsStateMediatorLiveData" which hides the field declared at line 12.(ƒ„šÿÿÿÿÿ
+Tsquid:S1068"8Remove this unused "roomStarrSessionRepo" private field.(ò¸ºıÿÿÿÿ
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÍÛ÷Ôıÿÿÿÿ

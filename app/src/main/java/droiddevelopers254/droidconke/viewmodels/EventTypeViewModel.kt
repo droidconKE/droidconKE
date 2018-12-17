@@ -1,8 +1,8 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.EventTypeState
 import droiddevelopers254.droidconke.models.WifiDetailsModel
 import droiddevelopers254.droidconke.repository.EventTypeRepo
@@ -23,8 +23,8 @@ class EventTypeViewModel : ViewModel() {
         val eventTypeModelLiveData = eventTypeRepo.sessionData
         eventTypeModelMediatorLiveData.addSource(eventTypeModelLiveData
         ) { sessionsModelMediatorLiveData ->
-            if (this.eventTypeModelMediatorLiveData.hasActiveObservers()) {
-                this.eventTypeModelMediatorLiveData.removeSource(eventTypeModelLiveData)
+            when {
+                this.eventTypeModelMediatorLiveData.hasActiveObservers() -> this.eventTypeModelMediatorLiveData.removeSource(eventTypeModelLiveData)
             }
             this.eventTypeModelMediatorLiveData.setValue(sessionsModelMediatorLiveData)
         }
@@ -34,8 +34,8 @@ class EventTypeViewModel : ViewModel() {
         val wifiDetailsModelLiveData = wifiDetailsRepo.wifiDetails
         wifiDetailsModelMediatorLiveData.addSource(wifiDetailsModelLiveData
         ) { wifiDetailsModelMediatorLiveData ->
-            if (this.wifiDetailsModelMediatorLiveData.hasActiveObservers()) {
-                this.wifiDetailsModelMediatorLiveData.removeSource(wifiDetailsModelLiveData)
+            when {
+                this.wifiDetailsModelMediatorLiveData.hasActiveObservers() -> this.wifiDetailsModelMediatorLiveData.removeSource(wifiDetailsModelLiveData)
             }
             this.wifiDetailsModelMediatorLiveData.setValue(wifiDetailsModelMediatorLiveData)
         }

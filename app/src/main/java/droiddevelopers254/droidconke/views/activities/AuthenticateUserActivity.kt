@@ -1,34 +1,34 @@
 package droiddevelopers254.droidconke.views.activities
 
-import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.ErrorCodes
-import com.firebase.ui.auth.IdpResponse
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
 import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.viewmodels.AuthenticateUserViewModel
 import kotlinx.android.synthetic.main.content_authenticate_user.*
+import org.jetbrains.anko.toast
 
 class AuthenticateUserActivity : AppCompatActivity() {
-    private var firebaseUser: FirebaseUser? = null
     lateinit var auth: FirebaseAuth
     private var pDialog: SweetAlertDialog? = null
     private lateinit var authenticateUserViewModel: AuthenticateUserViewModel
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +38,28 @@ class AuthenticateUserActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //transparent status bar
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            window.statusBarColor = ContextCompat.getColor(this, R.color.mdtp_transparent_black)
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                window.statusBarColor = ContextCompat.getColor(this, R.color.mdtp_transparent_black)
+            }
         }
 
         setContentView(R.layout.activity_authenticate_user)
+
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         authenticateUserViewModel = ViewModelProviders.of(this).get(AuthenticateUserViewModel::class.java)
 
         // Progress dialog
         pDialog = SweetAlertDialog(this@AuthenticateUserActivity, SweetAlertDialog.PROGRESS_TYPE)
-        pDialog!!.progressHelper.barColor = Color.parseColor("#863B96")
-        pDialog!!.setCancelable(false)
+        pDialog?.progressHelper?.barColor = Color.parseColor("#863B96")
+        pDialog?.setCancelable(false)
 
         //check whether the user is signed in first
         auth = FirebaseAuth.getInstance()
@@ -61,84 +70,53 @@ class AuthenticateUserActivity : AppCompatActivity() {
             // not signed in
             showUI()
         }
-        //observe livedata emitted by view model
-        authenticateUserViewModel.authenticateResponse.observe(this, Observer{
-            if (it != null) {
-                if (it.isUserExists) {
-                    navigateToHome()
-                } else {
-                    if (it.error != null) {
-                        handleError(it.error)
-                    }
-                }
-            }
-        })
-
     }
-
-    private fun handleError(error: String?) {
-        Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
-    }
-
     private fun showUI() {
         googleSignInBtn.setOnClickListener {
-            pDialog!!.titleText = "Signing in"
+            pDialog?.titleText = "Signing in"
             showDialog()
             signInUser()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
-        if (requestCode == RC_SIGN_IN) {
-            hideDialog()
-            val response = IdpResponse.fromResultIntent(data)
-
-            // Successfully signed in
-            if (resultCode == Activity.RESULT_OK) {
-                //save the user now to db
-                firebaseUser = auth.currentUser
-                if (firebaseUser != null) {
-                    authenticateUserViewModel.authenticateUser(firebaseUser!!)
-
-                } else {
-                    Toast.makeText(applicationContext, "User is null", Toast.LENGTH_LONG).show()
-                }
-
-            } else {
-                // Sign in failed
-                if (response == null) {
-                    // UserModel pressed back button
-                    Toast.makeText(applicationContext, "You pressed back button before log in", Toast.LENGTH_SHORT).show()
-                    return
-                }
-
-                if (response.errorCode == ErrorCodes.NO_NETWORK) {
-                    Toast.makeText(applicationContext, "Network Error", Toast.LENGTH_SHORT).show()
-                    return
-                }
-
-                if (response.errorCode == ErrorCodes.UNKNOWN_ERROR) {
-                    Toast.makeText(applicationContext, "Please try again", Toast.LENGTH_SHORT).show()
-
+        when (requestCode) {
+            RC_SIGN_IN -> {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    val account = task.getResult(ApiException::class.java)
+                    account?.let { firebaseAuthWithGoogle(it) }
+                } catch (e: ApiException) {
+                    // Google Sign In failed
+                    toast("Google sign in failed")
                 }
             }
-
         }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this) {
+                    when {
+                        it.isSuccessful -> {
+                            // Sign in success, update UI with the signed-in user's information
+                            val user = auth.currentUser
+                            navigateToHome()
+                        }
+                        else -> // If sign in fails, display a message to the user.
+                            toast("Authentication Failed.")
+                    }
+                    hideDialog()
+                }
     }
 
     //function to log in
     private fun signInUser() {
-
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setIsSmartLockEnabled(false)
-                        .setAvailableProviders(
-                                listOf(AuthUI.IdpConfig.GoogleBuilder().build()))
-                        .build(),
-                RC_SIGN_IN)
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
     private fun navigateToHome() {
         val intent = Intent(this@AuthenticateUserActivity, HomeActivity::class.java)
@@ -146,20 +124,19 @@ class AuthenticateUserActivity : AppCompatActivity() {
         finish()
 
     }
-
     private fun showDialog() {
-        if (!pDialog!!.isShowing)
-            pDialog!!.show()
+        when {
+            !pDialog!!.isShowing -> pDialog?.show()
+        }
     }
 
     private fun hideDialog() {
-        if (pDialog!!.isShowing)
-            pDialog!!.dismiss()
+        when {
+            pDialog!!.isShowing -> pDialog?.dismiss()
+        }
 
     }
-
     companion object {
-        private const val RC_SIGN_IN = 123
+        private const val RC_SIGN_IN = 9001
     }
-
 }

@@ -1,13 +1,13 @@
 package droiddevelopers254.droidconke.views.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
 import kotlinx.android.synthetic.main.fragment_schedule.view.*
@@ -27,9 +27,10 @@ class ScheduleFragment : Fragment() {
         tabLayout.setupWithViewPager(viewPager)
 
         val currentItem = viewPager.currentItem
-        if (currentItem == 2) {
-            HomeActivity.fabVisible = false
-            Toast.makeText(activity, "true", Toast.LENGTH_SHORT).show()
+        when (currentItem) {
+            2 -> {
+                HomeActivity.fabVisible = false
+            }
         }
         return view
     }
@@ -42,7 +43,7 @@ class ScheduleFragment : Fragment() {
         viewPager.adapter = adapter
     }
 
-     inner class ViewPagerAdapter(manager: FragmentManager) : android.support.v4.app.FragmentPagerAdapter(manager) {
+     inner class ViewPagerAdapter(manager: FragmentManager) :FragmentPagerAdapter(manager) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 

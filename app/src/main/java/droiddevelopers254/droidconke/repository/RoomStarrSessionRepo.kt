@@ -1,6 +1,6 @@
 package droiddevelopers254.droidconke.repository
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.database.dao.StarredSessionDao

@@ -1,9 +1,9 @@
 package droiddevelopers254.droidconke.ui
 
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.view.ViewCompat
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationBehaviour : CoordinatorLayout.Behavior<BottomNavigationView>() {
     private var height: Int = 0

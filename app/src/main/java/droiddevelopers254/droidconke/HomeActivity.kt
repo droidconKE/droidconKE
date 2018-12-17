@@ -1,55 +1,38 @@
 package droiddevelopers254.droidconke
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.CoordinatorLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import droiddevelopers254.droidconke.adapters.ChipViewAdapter
-import droiddevelopers254.droidconke.models.FiltersModel
-import droiddevelopers254.droidconke.ui.BottomNavigationBehaviour
 import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity
+import droiddevelopers254.droidconke.views.activities.EventFeedbackActivity
 import droiddevelopers254.droidconke.views.fragments.InfoFragment
 import droiddevelopers254.droidconke.views.fragments.MapFragment
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.filters_bottom_sheet.*
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
-    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
     private lateinit var params: AppBarLayout.LayoutParams
     lateinit var homeViewModel: HomeViewModel
-    private var typeFilterList: List<FiltersModel> = ArrayList()
-    private var topicFilterList: List<FiltersModel> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,48 +47,26 @@ class HomeActivity : AppCompatActivity() {
 
         //check whether refresh token is sent to db
         val tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0)
-        if (tokenSent == 0) {
-            val refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
-            val firebaseUser = FirebaseAuth.getInstance().currentUser
-            //update in firestore
-            homeViewModel.updateToken(firebaseUser?.uid.toString(), refreshToken!!)
+
+        when (tokenSent) {
+            0 -> {
+                val refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
+                val firebaseUser = FirebaseAuth.getInstance().currentUser
+                //update in firestore
+                homeViewModel.updateToken(firebaseUser?.uid.toString(), refreshToken!!)
+            }
         }
-        //get filters from firebase
-        getTopicFilters()
-        getTypeFilters()
 
-        val layoutParams = navigation.layoutParams as CoordinatorLayout.LayoutParams
-        layoutParams.behavior = BottomNavigationBehaviour()
-
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView!!)
-        //        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-        //            @Override
-        //            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-        //                // this part hides the button immediately and waits bottom sheet
-        //                // to collapse to show
-        //                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-        //                    fab.animate().scaleX(0).scaleY(0).setDuration(200).start();
-        //                } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
-        //                    fab.animate().scaleX(1).scaleY(1).setDuration(200).start();
-        //                }
-        //            }
-        //
-        //            @Override
-        //            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-        //
-        //            }
-        //        });
-
-        if (FirebaseAuth.getInstance().currentUser != null) {
-            //load user profile image
-            Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-                    .thumbnail(Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl))
-                    .apply(RequestOptions()
-                            .centerCrop()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .transition(DrawableTransitionOptions()
-                            .crossFade())
-                    .into(accountImg)
+        when {
+            FirebaseAuth.getInstance().currentUser != null -> //load user profile image
+                Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                        .thumbnail(Glide.with(applicationContext).load(FirebaseAuth.getInstance().currentUser?.photoUrl))
+                        .apply(RequestOptions()
+                                .centerCrop()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL))
+                        .transition(DrawableTransitionOptions()
+                                .crossFade())
+                        .into(accountImg)
         }
         navigation.setOnNavigationItemSelectedListener{
             when (it.itemId) {
@@ -115,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
                     //hide views not required by these fragment
                     accountImg.visibility = View.GONE
                     //fab.hide();
-                    toolbarTitleText!!.setText(R.string.info_title)
+                    toolbarTitleText.setText(R.string.info_title)
 
                     //activate the hide toolbar
                     params = toolbar.layoutParams as AppBarLayout.LayoutParams
@@ -130,9 +91,8 @@ class HomeActivity : AppCompatActivity() {
                     navItemIndex = 1
 
                     //hide views not required by these fragment
-                    accountImg!!.visibility = View.VISIBLE
-                    // fab.show();
-                    toolbarTitleText!!.setText(R.string.schedule_title)
+                    accountImg.visibility = View.VISIBLE
+                    toolbarTitleText.setText(R.string.schedule_title)
 
                     //activate the hide toolbar
                     params = toolbar.layoutParams as AppBarLayout.LayoutParams
@@ -150,7 +110,7 @@ class HomeActivity : AppCompatActivity() {
                     //hide views not required by these fragment
                     accountImg!!.visibility = View.GONE
                     // fab.hide();
-                    toolbarTitleText!!.setText(R.string.map_title)
+                    toolbarTitleText.setText(R.string.map_title)
 
                     //show toolbar if it was hidden
                     params = toolbar.layoutParams as AppBarLayout.LayoutParams
@@ -165,45 +125,10 @@ class HomeActivity : AppCompatActivity() {
         }
         navigation.selectedItemId = R.id.navigation_schedule
 
-        //        //open filters
-        //        fab.setOnClickListener(view -> {
-        //            if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-        //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        //            } else {
-        //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        //
-        //            }
-        //        });
-        //        //close filters
-        //        collapseBottomImg.setOnClickListener(view -> {
-        //            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-        //                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        //            }
-        //        });
-
-        //check if the category was previously chosen
-
-        //observe livedata emitted by view model
-        homeViewModel.typeFiltersResponse.observe(this, Observer{
-            if (it?.databaseError != null) {
-                handleDatabaseError(it.databaseError)
-            } else {
-                if (it?.filtersModelList != null) {
-                    handleFiltersResponse(it.filtersModelList)
-                }
-
-            }
-        })
-        homeViewModel.topicFiltersResponse.observe(this, Observer{
-            if (it?.databaseError != null) {
-                handleDatabaseError(it.databaseError)
-            } else {
-                handleTopicFilters(it?.filtersModelList)
-            }
-        })
+        //observe live data emitted by view model
         homeViewModel.updateTokenResponse.observe(this, Observer{
-            if (it != null) {
-                if (it.isSuccess) {
+            when {
+                it != null -> if (it.isSuccess) {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()
                 } else {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 0).apply()
@@ -213,36 +138,6 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun handleTopicFilters(filtersModel: List<FiltersModel>?) {
-        if (filtersModel != null){
-            topicFilterList = filtersModel
-            initView(topicsChipsRv!!, topicFilterList)
-        }
-    }
-
-    private fun getTopicFilters() {
-        homeViewModel.getTopicFilters()
-    }
-
-    private fun getTypeFilters() {
-        homeViewModel.getTypeFilters()
-    }
-
-    private fun handleFiltersResponse(filtersModel: List<FiltersModel>) {
-        typeFilterList = filtersModel
-        initView(typesChipRv!!, typeFilterList)
-    }
-
-    private fun handleDatabaseError(databaseError: String?) {
-        Toast.makeText(applicationContext, databaseError, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun initView(recyclerView: RecyclerView, filtersModelList: List<FiltersModel>) {
-        val layoutManager = GridLayoutManager(applicationContext, 2)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.adapter = ChipViewAdapter(filtersModelList, applicationContext)
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_sign_out, menu)
         return super.onCreateOptionsMenu(menu)
@@ -251,15 +146,19 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if (id == R.id.action_settings) {
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this, AuthenticateUserActivity::class.java))
-            finish()
-            return true
+        when (id) {
+            R.id.action_settings -> {
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(this, AuthenticateUserActivity::class.java))
+                finish()
+                return true
+            }
+            R.id.action_feedback ->{
+                startActivity(Intent(this,EventFeedbackActivity::class.java))
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
-
         return super.onOptionsItemSelected(item)
-
     }
 
     companion object {

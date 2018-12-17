@@ -1,0 +1,9 @@
+
+Z"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8Á«œ²û,
+Ssquid:S1444"2Make this "public static navItemIndex" field final(³’¯Æøÿÿÿÿ8Á«œ²û,
+Qsquid:S1444"0Make this "public static fabVisible" field final(ÅËÔ›ıÿÿÿÿ8Á«œ²û,
+"squid:ClassVariableVisibilityCheck"XMake navItemIndex a static final constant or non-public and provide accessors if needed.(³’¯Æøÿÿÿÿ8Á«œ²û,
+"squid:ClassVariableVisibilityCheck"VMake fabVisible a static final constant or non-public and provide accessors if needed.(ÅËÔ›ıÿÿÿÿ8Á«œ²û,
+Dsquid:S1185"(Remove this method to simply inherit it.(Ù«µ§8Á«œ²û,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‚¥Äö8Á«œ²û,
+jsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(Æ¼¾Î8Á«œ²û,

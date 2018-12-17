@@ -1,0 +1,6 @@
+
+qsquid:S1450"\Remove the "eventFeedback" field and declare it as a local variable in the relevant methods.(’ß—µ
+Dsquid:S1172"/Remove this unused method parameter "feedback".(×ý‘×
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Ø‘Ñþÿÿÿÿ
+nsquid:UselessImportCheck"LRemove this unused import 'com.google.firebase.firestore.FirebaseFirestore'.(§ä…ª
+bsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(¬ˆ­

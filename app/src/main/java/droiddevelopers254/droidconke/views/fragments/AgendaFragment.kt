@@ -1,21 +1,22 @@
 package droiddevelopers254.droidconke.views.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.AgendaAdapter
 import droiddevelopers254.droidconke.models.AgendaModel
 import droiddevelopers254.droidconke.viewmodels.AgendaViewModel
 import kotlinx.android.synthetic.main.fragment_agenda.view.*
+import org.jetbrains.anko.toast
 import java.util.*
 
 class AgendaFragment : Fragment() {
@@ -33,23 +34,24 @@ class AgendaFragment : Fragment() {
 
         //observe live data emitted by view model
         agendaViewModel.agendas.observe(this, Observer{
-            if (it?.databaseError != null) {
-                handleDatabaseError(it.databaseError)
-            } else {
-                handleAgendaResponse(it?.agendaModelList,agendaRv)
+            when {
+                it?.databaseError != null -> handleDatabaseError(it.databaseError)
+                else -> handleAgendaResponse(it?.agendaModelList,agendaRv)
             }
         })
         return view
     }
 
     private fun handleAgendaResponse(agendaList: List<AgendaModel>?, agendaRv: RecyclerView) {
-        if (agendaList != null) {
-            agendaModelList = agendaList
-            initView(agendaRv)
+        when {
+            agendaList != null -> {
+                agendaModelList = agendaList
+                initView(agendaRv)
+            }
         }
     }
     private fun handleDatabaseError(databaseError: String) {
-        Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
+      activity?.toast(databaseError)
     }
 
     private fun initView(agendaRv: RecyclerView) {

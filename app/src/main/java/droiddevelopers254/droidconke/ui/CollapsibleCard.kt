@@ -1,24 +1,20 @@
 package droiddevelopers254.droidconke.ui
 
 import android.content.Context
-import android.content.res.Resources
-import android.content.res.TypedArray
-import android.support.v7.content.res.AppCompatResources
-import android.transition.Transition
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.M
 import android.transition.TransitionInflater
 import android.transition.TransitionManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.appcompat.content.res.AppCompatResources
 import droiddevelopers254.droidconke.R
-
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.M
 
 class CollapsibleCard @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
     private var mExpanded = false
@@ -68,9 +64,9 @@ class CollapsibleCard @JvmOverloads constructor(context: Context, attrs: Attribu
     private fun setTitleContentDescription(cardTitle: String?) {
         val res = resources
         mCardTitle.contentDescription = "$cardTitle, " +
-                if (mExpanded)
-                    res.getString(R.string.expanded)
-                else
-                    res.getString(R.string.collapsed)
+                when {
+                    mExpanded -> res.getString(R.string.expanded)
+                    else -> res.getString(R.string.collapsed)
+                }
     }
 }

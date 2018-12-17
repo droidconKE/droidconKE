@@ -1,9 +1,8 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.AboutDetailsState
 import droiddevelopers254.droidconke.repository.AboutDetailsRepo
 
@@ -18,8 +17,8 @@ class AboutDetailsViewModel : ViewModel() {
         val aboutDetailsStateLiveData = aboutDetailsRepo.getAboutDetails(aboutType)
         detailsStateMediatorLiveData.addSource(aboutDetailsStateLiveData
         ) { detailsStateMediatorLiveData ->
-            if (this.detailsStateMediatorLiveData.hasActiveObservers()) {
-                this.detailsStateMediatorLiveData.removeSource(aboutDetailsStateLiveData)
+            when {
+                this.detailsStateMediatorLiveData.hasActiveObservers() -> this.detailsStateMediatorLiveData.removeSource(aboutDetailsStateLiveData)
             }
             this.detailsStateMediatorLiveData.setValue(detailsStateMediatorLiveData)
         }

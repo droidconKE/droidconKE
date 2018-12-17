@@ -1,8 +1,8 @@
 package droiddevelopers254.droidconke.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import droiddevelopers254.droidconke.datastates.StarSessionState
 import droiddevelopers254.droidconke.models.StarredSessionModel
@@ -49,14 +49,19 @@ class FirebaseStarSessionRepo {
         firebaseFirestore.collection("users").document(userId).collection("starred").document(sessionId)
                 .get()
                 .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val documentSnapshot = task.result
-                        if (documentSnapshot.exists()) {
-                            //session already starred, un star session
-                            val starredSessionModel = documentSnapshot.toObject(StarredSessionModel::class.java)
-                            starSessionStateMutableLiveData.setValue(StarSessionState(false,null,starredSessionModel,0))
-                        } else {
-                            starSessionStateMutableLiveData.setValue(StarSessionState(false,null,null,0))
+                    when {
+                        task.isSuccessful -> {
+                            val documentSnapshot = task.result
+                            if (documentSnapshot != null) {
+                                when {
+                                    documentSnapshot.exists() -> {
+                                        //session already starred, un star session
+                                        val starredSessionModel = documentSnapshot.toObject(StarredSessionModel::class.java)
+                                        starSessionStateMutableLiveData.setValue(StarSessionState(false,null,starredSessionModel,0))
+                                    }
+                                    else -> starSessionStateMutableLiveData.setValue(StarSessionState(false,null,null,0))
+                                }
+                            }
                         }
                     }
                 }

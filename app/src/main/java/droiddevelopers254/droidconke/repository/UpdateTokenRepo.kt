@@ -1,12 +1,8 @@
 package droiddevelopers254.droidconke.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-
 import droiddevelopers254.droidconke.datastates.UpdateTokenState
 
 class UpdateTokenRepo {

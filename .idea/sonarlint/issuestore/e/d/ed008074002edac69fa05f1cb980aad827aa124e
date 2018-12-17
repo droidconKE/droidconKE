@@ -1,0 +1,8 @@
+
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ
+asquid:UselessImportCheck":Remove this unused import 'java.util.concurrent.Executor'.(÷ı¶Œúÿÿÿÿ
+qsquid:UselessImportCheck"JRemove this unused import 'droiddevelopers254.droidconke.utils.DroidCoin'.(éšÄÿÿÿÿÿ
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‹åÓõşÿÿÿÿ
+usquid:UselessImportCheck"SRemove this unused import 'droiddevelopers254.droidconke.database.dao.SessionsDao'.(ªÅíâ
+qsquid:UselessImportCheck"ORemove this unused import 'droiddevelopers254.droidconke.database.AppDatabase'.(Ò±ä£
+bsquid:UselessImportCheck";Remove this unused import 'java.util.concurrent.Executors'.(äåÒÛÿÿÿÿÿ

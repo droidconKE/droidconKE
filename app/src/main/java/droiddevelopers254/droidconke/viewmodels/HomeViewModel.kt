@@ -1,9 +1,8 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.FiltersState
 import droiddevelopers254.droidconke.datastates.UpdateTokenState
 import droiddevelopers254.droidconke.models.FiltersModel
@@ -31,8 +30,8 @@ class HomeViewModel : ViewModel() {
         val filtersStateLiveData = typeFiltersRepo.filters
         filtersStateMediatorLiveData.addSource(filtersStateLiveData
         ) { filtersStateMediatorLiveData ->
-            if (this.filtersStateMediatorLiveData.hasActiveObservers()) {
-                this.filtersStateMediatorLiveData.removeSource(filtersStateLiveData)
+            when {
+                this.filtersStateMediatorLiveData.hasActiveObservers() -> this.filtersStateMediatorLiveData.removeSource(filtersStateLiveData)
             }
             this.filtersStateMediatorLiveData.setValue(filtersStateMediatorLiveData)
         }
@@ -42,8 +41,8 @@ class HomeViewModel : ViewModel() {
         val filtersStateLiveData = topicFiltersRepo.filters
         stateMediatorLiveData.addSource(filtersStateLiveData
         ) { stateMediatorLiveData ->
-            if (this.stateMediatorLiveData.hasActiveObservers()) {
-                this.stateMediatorLiveData.removeSource(filtersStateLiveData)
+            when {
+                this.stateMediatorLiveData.hasActiveObservers() -> this.stateMediatorLiveData.removeSource(filtersStateLiveData)
             }
             this.stateMediatorLiveData.setValue(stateMediatorLiveData)
         }
@@ -53,8 +52,8 @@ class HomeViewModel : ViewModel() {
         val updateTokenStateLiveData = updateTokenRepo.updateToken(userId, refreshToken)
         updateTokenStateMediatorLiveData.addSource(updateTokenStateLiveData
         ) { updateTokenStateMediatorLiveData ->
-            if (this.updateTokenStateMediatorLiveData.hasActiveObservers()) {
-                this.updateTokenStateMediatorLiveData.removeSource(updateTokenStateLiveData)
+            when {
+                this.updateTokenStateMediatorLiveData.hasActiveObservers() -> this.updateTokenStateMediatorLiveData.removeSource(updateTokenStateLiveData)
             }
             this.updateTokenStateMediatorLiveData.setValue(updateTokenStateMediatorLiveData)
         }

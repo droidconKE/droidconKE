@@ -11,4 +11,6 @@
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_micro">4dp</dimen>
     <dimen name="medium_margin">6dp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="spacing_agenda">9dp</dimen>
 </resources>

@@ -1,9 +1,8 @@
 package droiddevelopers254.droidconke.models
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-
-import java.util.ArrayList
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "sessionsList")
 data class SessionsModel (

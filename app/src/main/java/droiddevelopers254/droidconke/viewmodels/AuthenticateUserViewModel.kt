@@ -1,11 +1,9 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
-
 import droiddevelopers254.droidconke.datastates.AuthenticateUserState
 import droiddevelopers254.droidconke.repository.AuthenticateUserRepo
 
@@ -20,8 +18,8 @@ class AuthenticateUserViewModel : ViewModel() {
         val stateLiveData = authenticateUserRepo.checkUserExistence(firebaseUser)
         userStateMediatorLiveData.addSource(stateLiveData
         ) { userStateMediatorLiveData ->
-            if (this.userStateMediatorLiveData.hasActiveObservers()) {
-                this.userStateMediatorLiveData.removeSource(stateLiveData)
+            when {
+                this.userStateMediatorLiveData.hasActiveObservers() -> this.userStateMediatorLiveData.removeSource(stateLiveData)
             }
             this.userStateMediatorLiveData.setValue(userStateMediatorLiveData)
         }

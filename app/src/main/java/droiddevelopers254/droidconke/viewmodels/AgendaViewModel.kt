@@ -1,9 +1,8 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.AgendaState
 import droiddevelopers254.droidconke.repository.AgendaRepo
 
@@ -18,8 +17,8 @@ class AgendaViewModel : ViewModel() {
         val agendaStateLiveData = agendaRepo.agendaData
         agendaStateMediatorLiveData.addSource(agendaStateLiveData
         ) { agendaStateMediatorLiveData ->
-            if (this.agendaStateMediatorLiveData.hasActiveObservers()) {
-                this.agendaStateMediatorLiveData.removeSource(agendaStateLiveData)
+            when {
+                this.agendaStateMediatorLiveData.hasActiveObservers() -> this.agendaStateMediatorLiveData.removeSource(agendaStateLiveData)
             }
             this.agendaStateMediatorLiveData.setValue(agendaStateMediatorLiveData)
         }

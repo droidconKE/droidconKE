@@ -1,55 +1,62 @@
 package droiddevelopers254.droidconke.views.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.SessionsAdapter
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity
+import kotlinx.android.synthetic.main.fragment_day_two.*
 import kotlinx.android.synthetic.main.fragment_day_two.view.*
+import org.jetbrains.anko.toast
+import java.util.ArrayList
 
 class DayTwoFragment : Fragment() {
     lateinit var dayTwoViewModel: DayTwoViewModel
+    lateinit var sessionsAdapter: SessionsAdapter
+    internal var sessionsModelList: List<SessionsModel> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_day_two, container, false)
 
         dayTwoViewModel = ViewModelProviders.of(this).get(DayTwoViewModel::class.java)
+        sessionsAdapter= SessionsAdapter(activity!!,sessionsModelList,"day_two")
+        val sessionsRv = view.sessionsRv
+        initView(sessionsRv)
 
-        val sessionsRv =view.sessionsRv
 
         dayTwoViewModel.getDayTwoSessions()
         //observe live data emitted by view model
         dayTwoViewModel.sessions.observe(this, Observer{
-            if (it?.sessionsModelList != null) {
-                val sessionsModelList = it.sessionsModelList
-                initView(sessionsModelList,sessionsRv)
-            } else {
-                handleError(it?.databaseError)
+            when {
+                it?.sessionsModelList != null -> {
+                    sessionsModelList = it.sessionsModelList
+                    sessionsAdapter.setSessionsAdapter(sessionsModelList)
+
+
+                }
+                else -> handleError(it?.databaseError)
             }
         })
         return view
     }
 
     private fun handleError(databaseError: String?) {
-        Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
+       activity?.toast(databaseError.toString())
     }
 
-    private fun initView(sessionsModelList: List<SessionsModel>, sessionsRv: RecyclerView) {
-        val sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_two")
+    private fun initView(sessionsRv: RecyclerView) {
         val layoutManager = LinearLayoutManager(activity)
         sessionsRv.layoutManager = layoutManager
         sessionsRv.itemAnimator = DefaultItemAnimator()

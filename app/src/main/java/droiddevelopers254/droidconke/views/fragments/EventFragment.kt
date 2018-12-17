@@ -1,18 +1,17 @@
 package droiddevelopers254.droidconke.views.fragments
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import droiddevelopers254.droidconke.BuildConfig
@@ -22,6 +21,7 @@ import droiddevelopers254.droidconke.models.EventTypeModel
 import droiddevelopers254.droidconke.models.WifiDetailsModel
 import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import org.jetbrains.anko.toast
 
 class EventFragment : Fragment() {
     lateinit var eventTypeViewModel: EventTypeViewModel
@@ -47,10 +47,9 @@ class EventFragment : Fragment() {
 
         //observe live data emitted by view model
         eventTypeViewModel.sessions.observe(this, Observer{
-            if (it?.databaseError != null) {
-                handleDatabaseError(it.databaseError)
-            } else {
-                handleFetchEventsResponse(it?.eventTypeModelList,eventTypesRv)
+            when {
+                it?.databaseError != null -> handleDatabaseError(it.databaseError)
+                else -> handleFetchEventsResponse(it?.eventTypeModelList, eventTypesRv)
             }
         })
         //fetch data from firebase
@@ -65,17 +64,20 @@ class EventFragment : Fragment() {
     private fun getRemoteConfigValues(wifiSsidText: TextView, wifiPasswordText: TextView) {
         var cacheExpiration: Long = 3600
 
-        if (firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled) {
-            cacheExpiration = 0
+        // After config data is successfully fetched, it must be activated before newly fetched
+        // values are returned.
+        when {
+            firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled -> cacheExpiration = 0
         }
         firebaseRemoteConfig.fetch(cacheExpiration)
                 .addOnCompleteListener(activity!!) {
-                    if (it.isSuccessful) {
-                        // After config data is successfully fetched, it must be activated before newly fetched
-                        // values are returned.
-                        firebaseRemoteConfig.activateFetched()
-                    } else {
+                    when {
+                        it.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
+                            // values are returned.
+                            firebaseRemoteConfig.activateFetched()
+                        else -> {
 
+                        }
                     }
                     val wifiDetailsModel = WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"), firebaseRemoteConfig.getString("wifi_password"))
                     updateViews(wifiDetailsModel,wifiSsidText,wifiPasswordText)
@@ -89,13 +91,13 @@ class EventFragment : Fragment() {
     }
 
     private fun handleFetchEventsResponse(eventTypeModelList: List<EventTypeModel>?, eventTypesRv: RecyclerView) {
-        if (eventTypeModelList != null) {
-            initView(eventTypeModelList,eventTypesRv)
+        when {
+            eventTypeModelList != null -> initView(eventTypeModelList,eventTypesRv)
         }
     }
 
     private fun handleDatabaseError(databaseError: String?) {
-        Toast.makeText(activity, databaseError, Toast.LENGTH_SHORT).show()
+        activity?.toast(databaseError.toString())
     }
 
     private fun initView(eventTypeModelList: List<EventTypeModel>,eventTypesRv :RecyclerView) {

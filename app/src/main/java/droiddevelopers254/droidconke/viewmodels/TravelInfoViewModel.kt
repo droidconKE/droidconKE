@@ -1,11 +1,9 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
-
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import droiddevelopers254.droidconke.models.TravelInfoModel
 import droiddevelopers254.droidconke.repository.TravelInfoRepo
 
@@ -21,8 +19,8 @@ class TravelInfoViewModel(application: Application) : AndroidViewModel(applicati
         val travelInfoModelLiveData = travelInfoRepo.travelInfo
         infoViewModelMediatorLiveData.addSource(travelInfoModelLiveData
         ) { infoViewModelMediatorLiveData ->
-            if (this.infoViewModelMediatorLiveData.hasActiveObservers()) {
-                this.infoViewModelMediatorLiveData.removeSource(travelInfoModelLiveData)
+            when {
+                this.infoViewModelMediatorLiveData.hasActiveObservers() -> this.infoViewModelMediatorLiveData.removeSource(travelInfoModelLiveData)
             }
             this.infoViewModelMediatorLiveData.setValue(infoViewModelMediatorLiveData)
         }

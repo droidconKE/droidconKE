@@ -1,16 +1,17 @@
 package droiddevelopers254.droidconke.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
 import kotlinx.android.synthetic.main.session_details.view.*
 
-class SessionsAdapter(private val context: Context, private val sessionsModelList: List<SessionsModel>, private val dayNumber: String) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
+class SessionsAdapter(private val context: Context, private var sessionsModelList: List<SessionsModel>, private val dayNumber: String) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
 
      class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val sessionTitleText = itemView.sessionTitleText
@@ -19,6 +20,7 @@ class SessionsAdapter(private val context: Context, private val sessionsModelLis
         private val sessionLabelText = itemView.sessionLabelText
         private val sessionCategoryText = itemView.sessionCategoryText
 
+       @SuppressLint("Range")
        fun bindSession(sessionsModel: SessionsModel){
            with(sessionsModel){
                sessionTitleText.text = title
@@ -41,6 +43,11 @@ class SessionsAdapter(private val context: Context, private val sessionsModelLis
 
     override fun getItemCount(): Int {
         return sessionsModelList.size
+    }
+
+    fun setSessionsAdapter(sessionsModelList : List<SessionsModel>){
+        this.sessionsModelList = sessionsModelList
+        notifyDataSetChanged()
     }
 
 

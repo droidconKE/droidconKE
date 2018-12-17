@@ -1,15 +1,13 @@
 package droiddevelopers254.droidconke.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
 import android.content.Context
-
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import droiddevelopers254.droidconke.database.converters.Converter
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.database.dao.StarredSessionDao
-import droiddevelopers254.droidconke.database.entities.StarredSessionEntity
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.StarredSessionModel
 
@@ -28,8 +26,8 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase? {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "droidconKE_db")
+            when (INSTANCE) {
+                null -> INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "droidconKE_db")
                         .fallbackToDestructiveMigration()
                         .build()
             }

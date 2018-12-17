@@ -5,7 +5,7 @@
     android:background="@color/colorWhite"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginStart="@dimen/fab_margin"
@@ -15,7 +15,7 @@
         android:scrollbars="none"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

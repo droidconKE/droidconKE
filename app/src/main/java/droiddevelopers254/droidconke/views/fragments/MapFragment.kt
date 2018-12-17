@@ -14,16 +14,15 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -35,6 +34,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import kotlinx.android.synthetic.main.map_bottom_sheet.view.*
@@ -55,10 +55,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private var mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            for (location in locationResult.locations) {
+            locationResult.locations.forEach { location ->
                 Log.i("MapsActivity", "Location: " + location.latitude + " " + location.longitude)
                 currentLatLng = LatLng(location.latitude, location.longitude)
-
             }
         }
 
@@ -67,32 +66,34 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_CALLBACK_CONSTANT) {
-            //check if all permissions are granted
-            var allgranted = false
-            for (i in grantResults.indices) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    allgranted = true
-                } else {
-                    allgranted = false
-                    break
+        when (requestCode) {
+            PERMISSION_CALLBACK_CONSTANT -> {
+                //check if all permissions are granted
+                var allgranted = false
+                loop@ for (i in grantResults.indices) {
+                    when {
+                        grantResults[i] == PackageManager.PERMISSION_GRANTED -> allgranted = true
+                        else -> {
+                            allgranted = false
+                            break@loop
+                        }
+                    }
                 }
-            }
-            if (allgranted) {
-                mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
-
-            } else if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, permissionsRequired[0])) {
-                val builder = AlertDialog.Builder(activity!!)
-                builder.setTitle("Need Multiple Permissions")
-                builder.setMessage("This app needs Location and Storage permissions.")
-                builder.setPositiveButton("Grant") { dialog, _ ->
-                    dialog.cancel()
-                    ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+                when {
+                    allgranted -> mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+                    ActivityCompat.shouldShowRequestPermissionRationale(activity!!, permissionsRequired[0]) -> {
+                        val builder = AlertDialog.Builder(activity!!)
+                        builder.setTitle("Need Multiple Permissions")
+                        builder.setMessage("This app needs Location and Storage permissions.")
+                        builder.setPositiveButton("Grant") { dialog, _ ->
+                            dialog.cancel()
+                            ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+                        }
+                        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+                        builder.show()
+                    }
+                    else -> Toast.makeText(activity, "Unable to get Permission", Toast.LENGTH_LONG).show()
                 }
-                builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
-                builder.show()
-            } else {
-                Toast.makeText(activity, "Unable to get Permission", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -111,19 +112,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         //collapse bottom sheet
         view.collapseBottomSheetImg.setOnClickListener {
-            if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+            when {
+                bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
 
         //open google maps intent to get directions
         view.googleDirectionsBtn.setOnClickListener {
-            if (currentLatLng != null) {
-                val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=" + currentLatLng!!.latitude + "," + currentLatLng!!.longitude + "&daddr=" + senteuPlaza.latitude + "," + senteuPlaza.longitude
-                val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri))
-                startActivity(Intent.createChooser(intent, "Open with"))
-            } else {
-                Toast.makeText(activity, "A problem occured in getting your location", Toast.LENGTH_SHORT).show()
+            when {
+                currentLatLng != null -> {
+                    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=" + currentLatLng!!.latitude + "," + currentLatLng!!.longitude + "&daddr=" + senteuPlaza.latitude + "," + senteuPlaza.longitude
+                    val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri))
+                    startActivity(Intent.createChooser(intent, "Open with"))
+                }
+                else -> Toast.makeText(activity, "A problem occured in getting your location", Toast.LENGTH_SHORT).show()
             }
 
 
@@ -198,57 +200,58 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         senteuMarker = mMap!!.addMarker(MarkerOptions().position(senteuPlaza))
         mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(senteuPlaza, DEFAULT_ZOOM.toFloat()))
         mMap!!.setOnMarkerClickListener {
-            if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_EXPANDED)
-            } else {
-                bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            when {
+                bottomSheetBehavior?.state != BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_EXPANDED)
+                else -> bottomSheetBehavior?.setState(BottomSheetBehavior.STATE_COLLAPSED)
             }
             true
         }
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            checkLocationPermission()
-        } else {
-            mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+        when {
+            android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP -> checkLocationPermission()
+            else -> mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
         }
     }
 
     private fun checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(activity!!, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, permissionsRequired[0])) {
-                //Show Information about why you need the permission
-                val builder = AlertDialog.Builder(activity!!)
-                builder.setTitle("Need Multiple permissions")
-                builder.setMessage("This apps needs the Location and Storage permissions")
-                builder.setPositiveButton("Grant") { dialog, _ ->
-                    dialog.cancel()
-                    ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+        when {
+            ActivityCompat.checkSelfPermission(activity!!, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED -> {
+                when {
+                    ActivityCompat.shouldShowRequestPermissionRationale(activity!!, permissionsRequired[0]) -> {
+                        //Show Information about why you need the permission
+                        val builder = AlertDialog.Builder(activity!!)
+                        builder.setTitle("Need Multiple permissions")
+                        builder.setMessage("This apps needs the Location and Storage permissions")
+                        builder.setPositiveButton("Grant") { dialog, _ ->
+                            dialog.cancel()
+                            ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+                        }
+                        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+                        builder.show()
+                    }
+                    sharedPreferences.getBoolean(permissionsRequired[0], false) -> {
+                        //Previously Permission Request was cancelled with 'Dont Ask Again',
+                        // Redirect to Settings after showing Information about why you need the permission
+                        val builder = AlertDialog.Builder(activity!!)
+                        builder.setTitle("Need Multiple Permissions")
+                        builder.setMessage("This app needs Location and Storage permissions.")
+                        builder.setPositiveButton("Grant") { dialog, _ ->
+                            dialog.cancel()
+                            sentToSettings = true
+                            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            val uri = Uri.fromParts("package", activity!!.packageName, null)
+                            intent.data = uri
+                            startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
+                            Toast.makeText(activity, "Go to Permissions to Grant  Storage and Location", Toast.LENGTH_LONG).show()
+                        }
+                        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+                    }
+                    else -> //just request the permission
+                        ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
                 }
-                builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
-                builder.show()
-            } else if (sharedPreferences.getBoolean(permissionsRequired[0], false)) {
-                //Previously Permission Request was cancelled with 'Dont Ask Again',
-                // Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(activity!!)
-                builder.setTitle("Need Multiple Permissions")
-                builder.setMessage("This app needs Location and Storage permissions.")
-                builder.setPositiveButton("Grant") { dialog, _ ->
-                    dialog.cancel()
-                    sentToSettings = true
-                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    val uri = Uri.fromParts("package", activity!!.packageName, null)
-                    intent.data = uri
-                    startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
-                    Toast.makeText(activity, "Go to Permissions to Grant  Storage and Location", Toast.LENGTH_LONG).show()
-                }
-                builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
-            } else {
-                //just request the permission
-                ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+                sharedPreferences.edit().putBoolean(permissionsRequired[0], true).apply()
             }
-            sharedPreferences.edit().putBoolean(permissionsRequired[0], true).apply()
-        } else {
-            //You already have the permission, just go ahead.
-            mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+            else -> //You already have the permission, just go ahead.
+                mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
         }
     }
 

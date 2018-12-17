@@ -1,10 +1,10 @@
 package droiddevelopers254.droidconke.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionTimeModel
 import kotlinx.android.synthetic.main.session_time_details.view.*
