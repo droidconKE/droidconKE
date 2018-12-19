@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.AboutDetailsAdapter
 import droiddevelopers254.droidconke.models.AboutDetailsModel
@@ -27,6 +26,8 @@ class AboutDetailsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        initView()
+
         //get intent extras
         val extraIntent = intent
         aboutType = extraIntent.getStringExtra("aboutType")
@@ -37,16 +38,17 @@ class AboutDetailsActivity : AppCompatActivity() {
             "sponsors" ->  supportActionBar?.title = "Sponsors"
         }
 
-        //fetch about details
-        fetchAboutDetails(aboutType)
-
         //observe live data emitted by view model
         aboutDetailsViewModel.aboutDetails.observe(this, Observer {
+            println(it)
             when {
                 it.databaseError != null -> handleDatabaseError(it.databaseError)
                 else -> handleFetchAboutDetails(it?.aboutDetailsModelList)
             }
         })
+
+        //fetch about details
+        fetchAboutDetails(aboutType)
     }
     private fun fetchAboutDetails(aboutType: String) {
         aboutDetailsViewModel.fetchAboutDetails(aboutType)
@@ -66,13 +68,10 @@ class AboutDetailsActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, this) {
-           //handle on click
-        }
-
-        val layoutManager = LinearLayoutManager(this)
-        aboutDetailsRv.layoutManager = layoutManager
         aboutDetailsRv.itemAnimator = DefaultItemAnimator()
+        val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, this) {
+            //handle on click
+        }
         aboutDetailsRv.adapter = aboutDetailsAdapter
     }
 

@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.1.1'
 
     //butter knife dep
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -94,11 +95,15 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.0.0"
     testImplementation 'androidx.test.ext:junit:1.1.0'
     testImplementation 'androidx.test:rules:1.1.1'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.0"
+    androidTestImplementation 'com.bartoszlipinski:disable-animations-rule:1.0.0'
     implementation group: 'androidx.appcompat', name: 'appcompat', version: '1.1.0-alpha01'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
