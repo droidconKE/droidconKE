@@ -172,8 +172,6 @@ y
 Iapp/src/main/java/droiddevelopers254/droidconke/utils/network/Resource.kt,5/f/5ffda6d8b605942efd3eeec40e53bdd4d03033bf
 w
 Gapp/src/main/java/droiddevelopers254/droidconke/utils/network/Status.kt,a/5/a53fc83bb062011579ac4e335c535cfe9a4b1e10
-r
-Bapp/src/main/java/droiddevelopers254/droidconke/utils/DroidCoin.kt,0/e/0e5777695b9296d7ecaebafcfb3096cb57a7f8ef
 s
 Capp/src/main/java/droiddevelopers254/droidconke/utils/SharedPref.kt,1/7/1774db2e4e8c8eb0fcf34c41a5e6e9495137c2f3
 ƒ
@@ -290,3 +288,15 @@ h
 8app/src/main/res/drawable-v24/ic_launcher_foreground.xml,0/7/078508c831007ccb3938b355f0d30a8368f99a8d
 [
 +app/src/main/res/drawable-v21/ic_expand.xml,e/0/e0c7ee4dc942f5dafb01939b11000707a724148c
+[
++app/src/main/res/menu/menu_session_view.xml,d/6/d65aa408ca776802c4fc207c4a81488030cd3462
+f
+6app/src/main/res/drawable/ic_restaurant_black_24dp.xml,3/5/35e5defccf001f5693dcdfab2059d0032c9ea853
+Y
+)app/src/main/res/drawable/ic_feedback.xml,7/9/7947551103384aeec05e60e1583534297c718399
+c
+3app/src/main/res/layout/activity_event_feedback.xml,e/4/e440a0025a79cb310ebb3b71e651bc7b84b5ce22
+f
+6app/src/main/res/layout/activity_session_feed_back.xml,c/5/c5513bdd3846f1de8f62a15e930b736a1641b30e
+w
+Gapp/src/main/java/droiddevelopers254/droidconke/repository/firestore.kt,c/e/ce7de840872b92a26fddf5dba252c032bca79697
