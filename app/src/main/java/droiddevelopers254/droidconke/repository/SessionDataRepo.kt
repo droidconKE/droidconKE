@@ -8,11 +8,11 @@ import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.datastates.SessionDataState
 import droiddevelopers254.droidconke.models.SessionsModel
-import droiddevelopers254.droidconke.utils.DroidCoin
+import droiddevelopers254.droidconke.utils.DroidCon
 
 class SessionDataRepo {
     internal var databaseReference: DatabaseReference? = null
-    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCoin.context)!!.sessionsDao()
+    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCon.context)!!.sessionsDao()
 
     fun getSessionData(dayNumber: String, sessionId: Int): LiveData<SessionDataState> {
         val sessionsModelMutableLiveData = MutableLiveData<SessionDataState>()
