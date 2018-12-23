@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.AboutDetailsState
 import droiddevelopers254.droidconke.repository.AboutDetailsRepo
-import droiddevelopers254.droidconke.utils.EspressoIdlingResource
+import droiddevelopers254.droidconke.utils.launchIdling
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class AboutDetailsViewModel(private val aboutDetailsRepo: AboutDetailsRepo) : ViewModel() {
     private val detailsStateMediatorLiveData: MutableLiveData<AboutDetailsState> = MutableLiveData()
@@ -16,11 +15,9 @@ class AboutDetailsViewModel(private val aboutDetailsRepo: AboutDetailsRepo) : Vi
         get() = detailsStateMediatorLiveData
 
     fun fetchAboutDetails(aboutType: String) {
-        EspressoIdlingResource.increment()
-        val job = GlobalScope.launch {
+        GlobalScope.launchIdling {
             val state = aboutDetailsRepo.getAboutDetails(aboutType)
             detailsStateMediatorLiveData.postValue(state)
         }
-        job.invokeOnCompletion { EspressoIdlingResource.decrement() }
     }
 }
