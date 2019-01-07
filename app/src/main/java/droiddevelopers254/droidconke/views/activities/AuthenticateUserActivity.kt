@@ -31,6 +31,7 @@ class AuthenticateUserActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
 
         //set layout tu fullscreen
