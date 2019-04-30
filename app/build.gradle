@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 28
     defaultConfig {
         applicationId "droiddevelopers254.droidconke"
         minSdkVersion 21
