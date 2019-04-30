@@ -12,7 +12,8 @@
     android:clickable="true"
     app:cardCornerRadius="5dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -39,6 +40,7 @@
                     android:layout_width="30dp"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/collapseBottomImg"
+                    android:contentDescription="TODO"
                     android:src="@drawable/ic_expand"
                     android:layout_height="30dp" />
             </RelativeLayout>
@@ -47,7 +49,6 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/starredEventsChip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:onClick="selectFilter"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="match_parent"

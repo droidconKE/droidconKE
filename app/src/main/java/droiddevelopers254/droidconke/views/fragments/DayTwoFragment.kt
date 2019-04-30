@@ -17,10 +17,9 @@ import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity
-import kotlinx.android.synthetic.main.fragment_day_two.*
 import kotlinx.android.synthetic.main.fragment_day_two.view.*
 import org.jetbrains.anko.toast
-import java.util.ArrayList
+import java.util.*
 
 class DayTwoFragment : Fragment() {
     lateinit var dayTwoViewModel: DayTwoViewModel
@@ -61,7 +60,7 @@ class DayTwoFragment : Fragment() {
         sessionsRv.layoutManager = layoutManager
         sessionsRv.itemAnimator = DefaultItemAnimator()
         sessionsRv.adapter = sessionsAdapter
-        sessionsRv.addOnItemTouchListener(ItemClickListener(activity, sessionsRv, object : ItemClickListener.ClickListener {
+        sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(context, SessionViewActivity::class.java)
                 intent.putExtra("sessionId", sessionsModelList[position].id)
@@ -71,7 +70,8 @@ class DayTwoFragment : Fragment() {
                 intent.putExtra("roomId", sessionsModelList[position].room_id)
                 startActivity(intent)
             }
-            override fun onLongClick(view: View, position: Int) {
+
+            override fun onLongClick(view: View?, position: Int) {
 
             }
         }))

@@ -30,14 +30,12 @@ class EventFeedbackActivity : AppCompatActivity() {
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            supportActionBar?.setTitle("Event Feedback")
+            supportActionBar?.title = "Event Feedback"
         }
 
         //observe live data emitted by view model
         feedBackViewModel.getEventFeedBackResponse().observe(this, Observer{
-            if (it.responseString != null) {
-                handleFeedbackResponse(it.responseString)
-            }
+            handleFeedbackResponse(it.responseString)
         })
 
         fab.setOnClickListener {
@@ -48,8 +46,8 @@ class EventFeedbackActivity : AppCompatActivity() {
 
     }
 
-    private fun handleFeedbackResponse(feedback: String) {
-        progressBarEventFeedBack.setVisibility(View.GONE)
+    private fun handleFeedbackResponse(@Suppress("UNUSED_PARAMETER") feedback: String) {
+        progressBarEventFeedBack.visibility = View.GONE
         txtEventFeedback.setText("")
         toast("Thank you for your feedback")
 
@@ -57,12 +55,12 @@ class EventFeedbackActivity : AppCompatActivity() {
 
     private fun isFeedbackValid(): Boolean {
 
-        eventFeedback = txtEventFeedback.getText().toString().trim()
+        eventFeedback = txtEventFeedback.text.toString().trim()
         val isValid: Boolean
 
         when {
             eventFeedback.isEmpty() -> {
-                txtEventFeedback.setError("Event feedback cannot be empty")
+                txtEventFeedback.error = "Event feedback cannot be empty"
                 isValid = false
             }
             else -> {
@@ -79,7 +77,7 @@ class EventFeedbackActivity : AppCompatActivity() {
 
     private fun postUserFeedback(userEventFeedback: UserEventFeedback) {
 
-        progressBarEventFeedBack.setVisibility(View.VISIBLE)
+        progressBarEventFeedBack.visibility = View.VISIBLE
         feedBackViewModel.sendEventFeedBack(userEventFeedback)
 
     }

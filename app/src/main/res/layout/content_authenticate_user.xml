@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:id="@+id/welcomeImg"
             android:layout_margin="@dimen/fab_margin"
+            android:contentDescription="TODO"
             android:src="@drawable/main_logo"
             android:layout_height="100dp" />
         <TextView
@@ -51,6 +52,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:id="@+id/dateRangeImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_date_range_black_24dp"
                 android:layout_height="30dp" />
 

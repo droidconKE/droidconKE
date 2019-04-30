@@ -17,7 +17,7 @@ import org.jetbrains.anko.toast
 
 
 class SessionFeedBackActivity : AppCompatActivity() {
-    var sessionId:Int = 0;
+    var sessionId: Int = 0
     private var dayNumber :String = ""
     private lateinit var sessionDataViewModel : SessionDataViewModel
     private lateinit var sessionsModel1 : SessionsModel
@@ -34,7 +34,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
        supportActionBar?.let {
            with(it) {
                setDisplayHomeAsUpEnabled(true)
-               setTitle("Sessions Feedback")
+               title = "Sessions Feedback"
            }
        }
 
@@ -56,9 +56,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
             }
         })
         sessionDataViewModel.getSessionFeedBackResponse().observe(this, Observer{
-            when {
-                it.responseString != null -> handleFeedbackResponse(it.responseString)
-            }
+            handleFeedbackResponse(it.responseString)
         })
 
         fab.setOnClickListener {
@@ -70,7 +68,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
 
     }
 
-    private fun handleFeedbackResponse(feedback: String) {
+    private fun handleFeedbackResponse(@Suppress("UNUSED_PARAMETER") feedback: String) {
         loginProgressBarFeedBack.visibility = View.GONE
 
         txtSessionUserFeedback.setText("")
@@ -86,7 +84,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
         if (sessionsModel != null) {
             sessionsModel1 = sessionsModel
             //set the data on the view
-            txtSessionFeedbackTitle.setText(sessionsModel.title)
+            txtSessionFeedbackTitle.text = sessionsModel.title
 
         }
     }
@@ -97,18 +95,18 @@ class SessionFeedBackActivity : AppCompatActivity() {
 
     private fun isFeedbackValid(): Boolean {
 
-        sessionFeedback = txtSessionUserFeedback.getText().toString().trim()
+        sessionFeedback = txtSessionUserFeedback.text.toString().trim()
         val isValid: Boolean
 
         when {
             sessionFeedback.isEmpty() -> {
-                txtSessionUserFeedback.setError("Session feedback cannot be empty")
+                txtSessionUserFeedback.error = "Session feedback cannot be empty"
                 isValid = false
             }
             else -> {
 
                 isValid = true
-                txtSessionUserFeedback.setError(null)
+                txtSessionUserFeedback.error = null
 
                 userFeedback = SessionsUserFeedback(
                         user_id = "",
@@ -124,7 +122,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
 
     private fun postUserFeedback(userFeedback: SessionsUserFeedback) {
 
-        loginProgressBarFeedBack.setVisibility(View.VISIBLE)
+        loginProgressBarFeedBack.visibility = View.VISIBLE
         sessionDataViewModel.sendSessionFeedBack(userFeedback)
 
     }
