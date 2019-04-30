@@ -1,10 +1,0 @@
-
-`squid:UselessImportCheck"<Remove this unused import 'droiddevelopers254.droidconke.R'.(ôßõÜ
-Csquid:S1602",Remove useless curly braces around statement(§ÀÇ
-bsquid:UselessImportCheck"?Remove this unused import 'android.support.annotation.NonNull'.(¼Åß
-bsquid:UselessImportCheck	">Remove this unused import 'com.google.android.gms.tasks.Task'.(¦âÏô
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(î“¶‹øÿÿÿÿ
-usquid:UselessImportCheck"LRemove this unused import 'com.google.android.gms.tasks.OnCompleteListener'.(Çğ¸Òÿÿÿÿÿ
-_squid:S1192 "HDefine a constant instead of duplicating this literal "starred" 4 times.(ëøçì
-Csquid:S1602/",Remove useless curly braces around statement(§ÀÇ
-]squid:S1192 "FDefine a constant instead of duplicating this literal "users" 3 times.(ëøçì
