@@ -27,6 +27,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:id="@+id/starImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_star_border_black_24dp"
                 android:layout_height="30dp" />
             <TextView
@@ -49,6 +50,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:id="@+id/mapImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_location_on_grey_24dp"
                 android:layout_height="30dp" />
             <TextView

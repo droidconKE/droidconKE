@@ -33,6 +33,11 @@ android {
             includeAndroidResources = true
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -105,7 +110,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
     androidTestImplementation 'com.bartoszlipinski:disable-animations-rule:1.0.0'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true
     }
 

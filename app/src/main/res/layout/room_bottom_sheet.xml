@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:focusable="true"
     app:cardCornerRadius="5dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
     android:id="@+id/bottomSheetView"
@@ -23,6 +24,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:id="@+id/rommLocationImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_location_on_grey_24dp"
                 android:layout_height="30dp" />
             <TextView
@@ -37,6 +39,7 @@
                 android:layout_width="30dp"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/collapseBottomImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_expand"
                 android:layout_height="30dp" />
         </RelativeLayout>

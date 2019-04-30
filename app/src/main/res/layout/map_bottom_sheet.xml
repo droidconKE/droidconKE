@@ -29,6 +29,7 @@
                 android:layout_width="30dp"
                 android:id="@+id/collapseBottomSheetImg"
                 android:layout_alignParentEnd="true"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_expand"
                 android:layout_height="30dp" />
         </RelativeLayout>

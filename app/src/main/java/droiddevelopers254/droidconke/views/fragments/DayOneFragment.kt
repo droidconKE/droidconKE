@@ -36,14 +36,14 @@ class DayOneFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_day_one, container, false)
 
         dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel::class.java)
-        sessionsAdapter= SessionsAdapter(activity!!,sessionsModelList,"day_one")
+        sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_one")
         val sessionsRv = view.sessionsRv
 
         initView(sessionsRv)
 
         dayOneViewModel.getDayOneSessions()
         //observe live data emitted by view model
-        dayOneViewModel.sessions.observe(this, Observer{
+        dayOneViewModel.sessions.observe(this, Observer {
             when {
                 it?.sessionsModelList != null -> {
                     sessionsModelList = it.sessionsModelList
@@ -61,7 +61,7 @@ class DayOneFragment : Fragment() {
     }
 
     private fun handleError(databaseError: String?) {
-      activity?.toast(databaseError.toString())
+        activity?.toast(databaseError.toString())
     }
 
     private fun initView(sessionsRv: RecyclerView) {
@@ -69,8 +69,13 @@ class DayOneFragment : Fragment() {
         sessionsRv.layoutManager = layoutManager
         sessionsRv.itemAnimator = DefaultItemAnimator()
         sessionsRv.adapter = sessionsAdapter
-        sessionsRv.addOnItemTouchListener(ItemClickListener(context,sessionsRv, object : ItemClickListener.ClickListener {
-           override fun onClick(view: View, position: Int) {
+        sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
+
+            override fun onLongClick(view: View?, position: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onClick(view: View, position: Int) {
                 val intent = Intent(context, SessionViewActivity::class.java)
                 intent.putExtra("sessionId", sessionsModelList[position].id)
                 intent.putExtra("dayNumber", "day_one")
@@ -80,9 +85,7 @@ class DayOneFragment : Fragment() {
                 startActivity(intent)
             }
 
-            override fun onLongClick(view: View, position: Int) {
 
-            }
         }))
 
     }

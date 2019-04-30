@@ -51,7 +51,7 @@ class TravelFragment : Fragment() {
                     when {
                         task.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
                             // values are returned.
-                            firebaseRemoteConfig.activateFetched()
+                            firebaseRemoteConfig.activate()
                         else -> {
 
                         }
