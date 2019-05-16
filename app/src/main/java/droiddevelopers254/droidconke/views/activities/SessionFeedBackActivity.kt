@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
@@ -14,16 +13,17 @@ import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel
 import kotlinx.android.synthetic.main.activity_session_feed_back.*
 import kotlinx.android.synthetic.main.content_session_feed_back.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 
 
 class SessionFeedBackActivity : AppCompatActivity() {
     var sessionId: Int = 0
     private var dayNumber :String = ""
-    private lateinit var sessionDataViewModel : SessionDataViewModel
     private lateinit var sessionsModel1 : SessionsModel
     private lateinit var userFeedback : SessionsUserFeedback
     private var sessionFeedback : String = ""
 
+    private val sessionDataViewModel: SessionDataViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +42,6 @@ class SessionFeedBackActivity : AppCompatActivity() {
         val extraIntent = intent
         sessionId = extraIntent.getIntExtra("sessionId", 0)
         dayNumber = extraIntent.getStringExtra("dayNumber")
-
-        sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel::class.java)
 
         getSessionData(dayNumber, sessionId)
 
