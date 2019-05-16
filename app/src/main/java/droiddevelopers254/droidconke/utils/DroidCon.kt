@@ -1,7 +1,6 @@
 package droiddevelopers254.droidconke.utils
 
 import android.app.Application
-import android.content.Context
 import com.google.firebase.database.FirebaseDatabase
 import droiddevelopers254.droidconke.BuildConfig
 import droiddevelopers254.droidconke.di.appModule
@@ -20,11 +19,5 @@ class DroidCon : Application() {
             modules(appModule, dataModule)
         }
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-        context = applicationContext
     }
-
-    companion object {
-       lateinit var context: Context
-    }
-
 }
