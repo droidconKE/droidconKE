@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +20,7 @@ import droiddevelopers254.droidconke.views.activities.SessionViewActivity
 import kotlinx.android.synthetic.main.fragment_day_one.*
 import kotlinx.android.synthetic.main.fragment_day_one.view.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class DayOneFragment : Fragment() {
@@ -28,14 +28,14 @@ class DayOneFragment : Fragment() {
     internal var sessionsModelList: List<SessionsModel> = ArrayList()
     internal var sessionTimeModelList: List<SessionTimeModel> = ArrayList()
     internal var sessionIds: List<String> = ArrayList()
-    lateinit var dayOneViewModel: DayOneViewModel
     internal var isStarred: Boolean = false
     lateinit var sessionsAdapter: SessionsAdapter
+
+    private val dayOneViewModel: DayOneViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_day_one, container, false)
 
-        dayOneViewModel = ViewModelProviders.of(this).get(DayOneViewModel::class.java)
         sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_one")
         val sessionsRv = view.sessionsRv
 

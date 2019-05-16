@@ -43,6 +43,7 @@ android {
 dependencies {
     def coroutines_version = '1.2.1'
     def koin_version = '2.0.0-GA4'
+    def room_version = '2.1.0-beta01'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
@@ -79,12 +80,12 @@ dependencies {
     implementation "com.firebaseui:firebase-ui-firestore:3.3.0"
 
     //architecture components dependencies
-    implementation 'androidx.room:room-runtime:2.1.0-alpha07'
-    kapt "androidx.room:room-compiler:2.1.0-alpha07"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.room:room-rxjava2:2.1.0-alpha07'
+    implementation "androidx.room:room-rxjava2:$room_version"
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
-    implementation 'androidx.room:room-rxjava2:2.1.0-alpha07'
+    implementation "androidx.room:room-rxjava2:$room_version"
 
     //rx java dep
     implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
@@ -106,6 +107,7 @@ dependencies {
     testImplementation 'androidx.test:rules:1.1.1'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.1'
