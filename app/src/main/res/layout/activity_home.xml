@@ -53,6 +53,7 @@
         app:itemIconTint="@color/colorWhite"
         app:itemTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         app:menu="@menu/navigation" />
 
 
