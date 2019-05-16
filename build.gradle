@@ -38,8 +38,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    coroutines_version = '1.0.1'
-    koin_version = '1.0.1'
-}

@@ -3,21 +3,23 @@ package droiddevelopers254.droidconke.viewmodels
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
+import droiddevelopers254.droidconke.CoroutinesRule
 import droiddevelopers254.droidconke.datastates.AboutDetailsState
-import droiddevelopers254.droidconke.di.appModule
-import droiddevelopers254.droidconke.di.dataModule
 import droiddevelopers254.droidconke.repository.AboutDetailsRepo
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.inject
 import org.koin.test.KoinTest
-import org.koin.test.declareMock
+import org.koin.test.inject
+import org.koin.test.mock.declareMock
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class AboutDetailsViewModelTest : KoinTest {
 
     private val aboutDetailsRepo: AboutDetailsRepo by inject()
@@ -26,9 +28,11 @@ class AboutDetailsViewModelTest : KoinTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @get:Rule
+    val coroutinesRule = CoroutinesRule()
+
     @Before
     fun setup() {
-        startKoin(listOf(appModule, dataModule))
         declareMock<AboutDetailsRepo>()
     }
 
