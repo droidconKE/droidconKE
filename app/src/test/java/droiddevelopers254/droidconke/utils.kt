@@ -1,6 +1,7 @@
 package droiddevelopers254.droidconke
 
 import android.content.Context
+import androidx.lifecycle.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nhaarman.mockitokotlin2.mock
 import droiddevelopers254.droidconke.di.appModule
@@ -35,7 +36,7 @@ class CoroutinesRule : TestRule {
 
             override fun evaluate() {
                 Dispatchers.setMain(mainThreadSurrogate)
-                startKoin { modules(testContext, appModule, dataModule) }
+                startKoin { modules(testContext, appModule, dataModule, testFirebase) }
                 base?.evaluate()
                 Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
                 mainThreadSurrogate.close()
@@ -43,4 +44,25 @@ class CoroutinesRule : TestRule {
             }
         }
     }
+}
+
+
+class OneTimeObserver<T>(private val handler: (T) -> Unit) : Observer<T>, LifecycleOwner {
+    private val lifecycle = LifecycleRegistry(this)
+
+    init {
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    }
+
+    override fun getLifecycle(): Lifecycle = lifecycle
+
+    override fun onChanged(t: T) {
+        handler(t)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    }
+}
+
+fun <T> LiveData<T>.observeOnce(onChangeHandler: (T) -> Unit) {
+    val observer = OneTimeObserver(handler = onChangeHandler)
+    observe(observer, observer)
 }

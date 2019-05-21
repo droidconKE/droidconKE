@@ -1,11 +1,11 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.any
+import androidx.lifecycle.MutableLiveData
 import droiddevelopers254.droidconke.CoroutinesRule
-import droiddevelopers254.droidconke.datastates.AboutDetailsState
+import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.observeOnce
-import droiddevelopers254.droidconke.repository.AboutDetailsRepo
+import droiddevelopers254.droidconke.repository.DayOneRepo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -20,10 +20,10 @@ import org.mockito.Mockito.`when`
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class AboutDetailsViewModelTest : KoinTest {
+class DayOneViewModelTest : KoinTest {
 
-    private val aboutDetailsRepo: AboutDetailsRepo by inject()
-    private val aboutDetailsViewModel: AboutDetailsViewModel by inject()
+    private val dayOneRepo: DayOneRepo by inject()
+    private val dayOneViewModel: DayOneViewModel by inject()
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -33,18 +33,18 @@ class AboutDetailsViewModelTest : KoinTest {
 
     @Before
     fun setup() {
-        declareMock<AboutDetailsRepo>()
+        declareMock<DayOneRepo>()
     }
 
     @Test
-    fun `test fetchAboutDetails`() = runBlocking {
-        val state = AboutDetailsState(emptyList())
-        `when`(aboutDetailsRepo.getAboutDetails(any())).thenReturn(state)
+    fun `test getDayOneSessions`() = runBlocking {
+        val state = SessionsState(emptyList())
+        `when`(dayOneRepo.getSessions()).thenReturn(MutableLiveData<SessionsState>().apply { value = state })
 
-        aboutDetailsViewModel.fetchAboutDetails("value")
+        dayOneViewModel.getDayOneSessions()
 
-        aboutDetailsViewModel.aboutDetails.observeOnce {
-            Assert.assertTrue(it.aboutDetailsModelList?.isEmpty() ?: false)
+        dayOneViewModel.sessions.observeOnce {
+            Assert.assertTrue(it.sessionsModelList?.isEmpty() ?: false)
         }
 
     }
