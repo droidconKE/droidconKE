@@ -6,21 +6,20 @@ import com.google.firebase.firestore.FirebaseFirestore
 import droiddevelopers254.droidconke.datastates.SpeakersState
 import droiddevelopers254.droidconke.models.SpeakersModel
 
-class SpeakersRepo {
+class SpeakersRepo(private val firestore: FirebaseFirestore) {
 
-    fun getSpeakersInfo(speakerId: Int): LiveData<SpeakersState> {
+    suspend fun getSpeakersInfo(speakerId: Int): LiveData<SpeakersState> {
         val speakersStateMutableLiveData = MutableLiveData<SpeakersState>()
-        val firebaseFirestore = FirebaseFirestore.getInstance()
-        firebaseFirestore.collection("speakers")
-                .whereEqualTo("id", speakerId)
-                .get()
-                .addOnSuccessListener {
-                    val speakersModel = it.toObjects(SpeakersModel::class.java)
-                    speakersStateMutableLiveData.value = SpeakersState(speakersModel,null)
-                }
-                .addOnFailureListener {
-                    speakersStateMutableLiveData.value =SpeakersState(null,it.message) }
-
+        try {
+            val snapshot = firestore.collection("speakers")
+                    .whereEqualTo("id", speakerId)
+                    .get()
+                    .await()
+            val speakersModel = snapshot.toObjects(SpeakersModel::class.java)
+            speakersStateMutableLiveData.value = SpeakersState(speakersModel, null)
+        } catch (e: Exception) {
+            speakersStateMutableLiveData.value = SpeakersState(null, e.message)
+        }
         return speakersStateMutableLiveData
     }
 }

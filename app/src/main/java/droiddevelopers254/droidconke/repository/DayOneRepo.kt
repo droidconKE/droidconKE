@@ -8,36 +8,30 @@ import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.models.SessionsModel
-import droiddevelopers254.droidconke.utils.DroidCon
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class DayOneRepo {
-    private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCon.context)!!.sessionsDao()
-    private val executor: Executor =  Executors.newSingleThreadExecutor()
+class DayOneRepo(db: AppDatabase, private val firestore: FirebaseFirestore) {
+    private val sessionsDao: SessionsDao = db.sessionsDao()
 
-    val dayOneSessions: LiveData<SessionsState>
-        get() {
-            val sessionsStateMutableLiveData = MutableLiveData<SessionsState>()
-            val firebaseFirestore = FirebaseFirestore.getInstance()
-            firebaseFirestore.collection("day_one")
+    suspend fun getSessions(): LiveData<SessionsState> {
+        val sessionsStateMutableLiveData = MutableLiveData<SessionsState>()
+        try {
+            val snapshot = firestore.collection("day_one")
                     .orderBy("id", Query.Direction.ASCENDING)
                     .get()
-                    .addOnSuccessListener {
-                        when {
-                            !it.isEmpty -> {
-                                val sessionsModelList = it.toObjects(SessionsModel::class.java)
-                                sessionsStateMutableLiveData.value = SessionsState(sessionsModelList)
-                                executor.execute { sessionsDao.saveSession(sessionsModelList) }
-                            }
-                        }
-
-                    }
-                    .addOnFailureListener {
-                        sessionsStateMutableLiveData.value = SessionsState(null,it.message)}
-
-            return sessionsStateMutableLiveData
+                    .await()
+            if (!snapshot.isEmpty) {
+                val sessionsModelList = snapshot.toObjects(SessionsModel::class.java)
+                sessionsStateMutableLiveData.value = SessionsState(sessionsModelList)
+                withContext(Dispatchers.IO) {
+                    sessionsDao.saveSession(sessionsModelList)
+                }
+            }
+        } catch (e: Exception) {
+            sessionsStateMutableLiveData.value = SessionsState(null, e.message)
         }
-
+        return sessionsStateMutableLiveData
+    }
 
 }

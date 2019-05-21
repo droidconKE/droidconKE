@@ -6,25 +6,22 @@ import com.google.firebase.firestore.FirebaseFirestore
 import droiddevelopers254.droidconke.datastates.RoomState
 import droiddevelopers254.droidconke.models.RoomModel
 
-class RoomRepo {
+class RoomRepo(private val firestore: FirebaseFirestore) {
 
-    fun getRoomDetails(roomId: Int): LiveData<RoomState> {
+    suspend fun getRoomDetails(roomId: Int): LiveData<RoomState> {
         val roomStateLiveData = MutableLiveData<RoomState>()
-        val firebaseFirestore = FirebaseFirestore.getInstance()
-        firebaseFirestore.collection("rooms")
-                .whereEqualTo("id", roomId)
-                .get()
-                .addOnCompleteListener {
-                    when {
-                        it.isSuccessful -> for (queryDocumentSnapshot in it.result!!) {
-                            val roomModel = queryDocumentSnapshot.toObject(RoomModel::class.java)
-                            roomStateLiveData.value = RoomState(roomModel,null)
+        try {
+            val snapshot = firestore.collection("rooms")
+                    .whereEqualTo("id", roomId)
+                    .get()
+                    .await()
+            val doc = snapshot.documents.first()
+            val roomModel = doc.toObject(RoomModel::class.java)
+            roomStateLiveData.value = RoomState(roomModel, null)
 
-                        }
-                        else -> roomStateLiveData.value= RoomState(null,"Error getting room details")
-                    }
-
-                }
+        } catch (e: Exception) {
+            roomStateLiveData.value = RoomState(null, "Error getting room details")
+        }
         return roomStateLiveData
     }
 }

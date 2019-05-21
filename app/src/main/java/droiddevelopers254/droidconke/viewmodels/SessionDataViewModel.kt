@@ -2,7 +2,6 @@ package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
 import droiddevelopers254.droidconke.datastates.FeedBackState
 import droiddevelopers254.droidconke.datastates.RoomState
 import droiddevelopers254.droidconke.datastates.SessionDataState
@@ -13,17 +12,19 @@ import droiddevelopers254.droidconke.repository.RoomRepo
 import droiddevelopers254.droidconke.repository.SessionDataRepo
 import droiddevelopers254.droidconke.repository.SessionFeedbackRepo
 import droiddevelopers254.droidconke.repository.SpeakersRepo
+import droiddevelopers254.droidconke.utils.launchIdling
 
 
-class SessionDataViewModel : ViewModel() {
+class SessionDataViewModel(
+        private val sessionDataRepo: SessionDataRepo,
+        private val speakersRepo: SpeakersRepo,
+        private val roomRepo: RoomRepo,
+        private val sessionFeedbackRepo: SessionFeedbackRepo
+) : BaseViewModel() {
     private val sessionDataStateMediatorLiveData: MediatorLiveData<SessionDataState> = MediatorLiveData()
-    private val sessionDataRepo: SessionDataRepo = SessionDataRepo()
     private val speakersStateMediatorLiveData: MediatorLiveData<SpeakersState> = MediatorLiveData()
-    private val speakersRepo: SpeakersRepo = SpeakersRepo()
     private val roomStateMediatorLiveData: MediatorLiveData<RoomState> = MediatorLiveData()
-    private val roomRepo: RoomRepo = RoomRepo()
     private val sessionsModelMediatorLiveData: MediatorLiveData<SessionsModel> = MediatorLiveData()
-    private val sessionFeedbackRepo :SessionFeedbackRepo = SessionFeedbackRepo()
     private val sessionFeedBackMediatorLiveData = MediatorLiveData<FeedBackState>()
 
     val session: LiveData<SessionsModel>
@@ -42,47 +43,49 @@ class SessionDataViewModel : ViewModel() {
     fun getSessionFeedBackResponse(): LiveData<FeedBackState> = sessionFeedBackMediatorLiveData
 
 
-    fun fetchSpeakerDetails(speakerId: Int) {
+    fun fetchSpeakerDetails(speakerId: Int) = launchIdling {
         val speakersStateLiveData = speakersRepo.getSpeakersInfo(speakerId)
         speakersStateMediatorLiveData.addSource(speakersStateLiveData
-        ) { speakersStateMediatorLiveData ->
+        ) {
             when {
-                this.speakersStateMediatorLiveData.hasActiveObservers() -> this.speakersStateMediatorLiveData.removeSource(speakersStateLiveData)
+                speakersStateMediatorLiveData.hasActiveObservers() -> speakersStateMediatorLiveData.removeSource(speakersStateLiveData)
             }
-            this.speakersStateMediatorLiveData.setValue(speakersStateMediatorLiveData)
+            speakersStateMediatorLiveData.setValue(it)
         }
     }
 
-    fun fetchRoomDetails(roomId: Int) {
+    fun fetchRoomDetails(roomId: Int) = launchIdling {
         val roomStateLiveData = roomRepo.getRoomDetails(roomId)
         roomStateMediatorLiveData.addSource(roomStateLiveData
-        ) { roomStateMediatorLiveData ->
+        ) {
             when {
-                this.roomStateMediatorLiveData.hasActiveObservers() -> this.roomStateMediatorLiveData.removeSource(roomStateLiveData)
+                roomStateMediatorLiveData.hasActiveObservers() -> roomStateMediatorLiveData.removeSource(roomStateLiveData)
             }
-            this.roomStateMediatorLiveData.setValue(roomStateMediatorLiveData)
+            roomStateMediatorLiveData.setValue(it)
         }
     }
 
-    fun getSessionDetails(dayNumber: String, sessionId: Int) {
+    fun getSessionDetails(dayNumber: String, sessionId: Int) = launchIdling {
         val sessionsModelLiveData = sessionDataRepo.getSessionData(dayNumber, sessionId)
         sessionDataStateMediatorLiveData.addSource(sessionsModelLiveData
-        ) { sessionDataStateMediatorLiveData ->
+        ) { it ->
             when {
-                this.sessionDataStateMediatorLiveData.hasActiveObservers() -> this.sessionDataStateMediatorLiveData.removeSource(sessionsModelLiveData)
+                sessionDataStateMediatorLiveData.hasActiveObservers() -> sessionDataStateMediatorLiveData.removeSource(sessionsModelLiveData)
             }
-            this.sessionDataStateMediatorLiveData.setValue(sessionDataStateMediatorLiveData)
+            sessionDataStateMediatorLiveData.setValue(it)
         }
+
+
     }
 
-    fun sendSessionFeedBack(userEventFeedback: SessionsUserFeedback) {
+    fun sendSessionFeedBack(userEventFeedback: SessionsUserFeedback) = launchIdling {
         val sessionFeedbackLiveData = sessionFeedbackRepo.sendFeedBack(userEventFeedback)
         sessionFeedBackMediatorLiveData.addSource(sessionFeedbackLiveData
-        ) { sessionFeedBackMediatorLiveData ->
+        ) {
             when {
-                this.sessionFeedBackMediatorLiveData.hasActiveObservers() -> this.sessionFeedBackMediatorLiveData.removeSource(sessionFeedbackLiveData)
+                sessionFeedBackMediatorLiveData.hasActiveObservers() -> sessionFeedBackMediatorLiveData.removeSource(sessionFeedbackLiveData)
             }
-            this.sessionFeedBackMediatorLiveData.setValue(sessionFeedBackMediatorLiveData)
+            sessionFeedBackMediatorLiveData.setValue(it)
         }
     }
 }

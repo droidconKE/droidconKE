@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import droiddevelopers254.droidconke.datastates.FeedBackState
 import droiddevelopers254.droidconke.models.SessionsUserFeedback
-import droiddevelopers254.droidconke.models.UserEventFeedback
 
-class SessionFeedbackRepo{
-    fun sendFeedBack(userSessionFeedback: SessionsUserFeedback): LiveData<FeedBackState> {
+class SessionFeedbackRepo(private val firestore: FirebaseFirestore) {
+    suspend fun sendFeedBack(userSessionFeedback: SessionsUserFeedback): LiveData<FeedBackState> {
         val feedBackStateMutableLiveData = MutableLiveData<FeedBackState>()
-        val firebaseFirestore = FirebaseFirestore.getInstance()
-        firebaseFirestore.collection("sessionsFeedback")
-                .add(userSessionFeedback)
-                .addOnSuccessListener { documentReference -> feedBackStateMutableLiveData.setValue(FeedBackState("Thank you for your feedback")) }
-                .addOnFailureListener { error -> feedBackStateMutableLiveData.setValue(FeedBackState(error.message.toString())) }
+        try {
+            firestore.collection("sessionsFeedback").add(userSessionFeedback).awaitRef()
+            feedBackStateMutableLiveData.value = FeedBackState("Thank you for your feedback")
+        } catch (e: Exception) {
+            feedBackStateMutableLiveData.value = FeedBackState(e.message.toString())
+        }
 
         return feedBackStateMutableLiveData
     }

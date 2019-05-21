@@ -1,11 +1,11 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.any
+import androidx.lifecycle.MutableLiveData
 import droiddevelopers254.droidconke.CoroutinesRule
-import droiddevelopers254.droidconke.datastates.AboutDetailsState
+import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.observeOnce
-import droiddevelopers254.droidconke.repository.AboutDetailsRepo
+import droiddevelopers254.droidconke.repository.DayTwoRepo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -16,14 +16,14 @@ import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class AboutDetailsViewModelTest : KoinTest {
+class DayTwoViewModelTest : KoinTest {
 
-    private val aboutDetailsRepo: AboutDetailsRepo by inject()
-    private val aboutDetailsViewModel: AboutDetailsViewModel by inject()
+    private val dayTwoRepo: DayTwoRepo by inject()
+    private val dayTwoViewModel: DayTwoViewModel by inject()
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -33,18 +33,18 @@ class AboutDetailsViewModelTest : KoinTest {
 
     @Before
     fun setup() {
-        declareMock<AboutDetailsRepo>()
+        declareMock<DayTwoRepo>()
     }
 
     @Test
-    fun `test fetchAboutDetails`() = runBlocking {
-        val state = AboutDetailsState(emptyList())
-        `when`(aboutDetailsRepo.getAboutDetails(any())).thenReturn(state)
+    fun `test getDayTwoSessions`() = runBlocking {
+        val state = SessionsState(emptyList())
+        Mockito.`when`(dayTwoRepo.getSessions()).thenReturn(MutableLiveData<SessionsState>().apply { value = state })
 
-        aboutDetailsViewModel.fetchAboutDetails("value")
+        dayTwoViewModel.getDayTwoSessions()
 
-        aboutDetailsViewModel.aboutDetails.observeOnce {
-            Assert.assertTrue(it.aboutDetailsModelList?.isEmpty() ?: false)
+        dayTwoViewModel.sessions.observeOnce {
+            Assert.assertTrue(it.sessionsModelList?.isEmpty() ?: false)
         }
 
     }
