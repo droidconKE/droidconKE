@@ -74,6 +74,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
     implementation "com.firebaseui:firebase-ui-firestore:3.3.0"
+    implementation 'com.google.firebase:firebase-common-ktx:17.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:19.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.2.0'
 
     //architecture components dependencies
     implementation 'androidx.room:room-runtime:2.1.0-beta01'
