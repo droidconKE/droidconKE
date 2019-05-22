@@ -126,7 +126,7 @@ class HomeActivity : AppCompatActivity() {
         navigation.selectedItemId = R.id.navigation_schedule
 
         //observe live data emitted by view model
-        homeViewModel.updateTokenResponse.observe(this, Observer{
+        homeViewModel.getUpdateTokenResponse.observe(this, Observer{
             when {
                 it != null -> if (it.isSuccess) {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()

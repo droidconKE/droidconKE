@@ -3,11 +3,12 @@ package droiddevelopers254.droidconke.views.activities
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.UserEventFeedback
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.FeedBackViewModel
 import kotlinx.android.synthetic.main.activity_event_feedback.*
 import kotlinx.android.synthetic.main.content_event_feedback.*
@@ -15,9 +16,9 @@ import org.jetbrains.anko.toast
 
 
 class EventFeedbackActivity : AppCompatActivity() {
-    lateinit var feedBackViewModel : FeedBackViewModel
-    private var eventFeedback : String = ""
-    lateinit var userEventFeedback : UserEventFeedback
+    lateinit var feedBackViewModel: FeedBackViewModel
+    private var eventFeedback: String = ""
+    lateinit var userEventFeedback: UserEventFeedback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +28,12 @@ class EventFeedbackActivity : AppCompatActivity() {
 
         feedBackViewModel = ViewModelProviders.of(this).get(FeedBackViewModel::class.java)
 
-        if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Event Feedback"
 
-            supportActionBar?.title = "Event Feedback"
-        }
 
         //observe live data emitted by view model
-        feedBackViewModel.getEventFeedBackResponse().observe(this, Observer{
-            handleFeedbackResponse(it.responseString)
-        })
+        observeLiveData()
 
         fab.setOnClickListener {
             when {
@@ -44,6 +41,19 @@ class EventFeedbackActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun observeLiveData() {
+        feedBackViewModel.getEventFeedBackResponse().nonNull().observe(this) {
+            handleFeedbackResponse(it)
+        }
+        feedBackViewModel.getEventFeedbackError().nonNull().observe(this) {
+            handleDataError(it)
+        }
+    }
+
+    private fun handleDataError(it: String) {
+        toast(it)
     }
 
     private fun handleFeedbackResponse(@Suppress("UNUSED_PARAMETER") feedback: String) {

@@ -1,15 +1,12 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import droiddevelopers254.droidconke.datastates.Result
-import droiddevelopers254.droidconke.datastates.SpeakersState
 import droiddevelopers254.droidconke.models.SpeakersModel
+import droiddevelopers254.droidconke.utils.await
 
 class SpeakersRepo {
 

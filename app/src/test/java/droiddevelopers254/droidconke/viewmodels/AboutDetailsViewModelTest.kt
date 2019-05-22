@@ -41,7 +41,7 @@ class AboutDetailsViewModelTest : KoinTest {
 
         delay(1000)
 
-        Assert.assertTrue(aboutDetailsViewModel.aboutDetails.value?.aboutDetailsModelList?.isEmpty()
+        Assert.assertTrue(aboutDetailsViewModel.getAboutDetailsResponse.value?.aboutDetailsModelList?.isEmpty()
                 ?: false)
     }
 }

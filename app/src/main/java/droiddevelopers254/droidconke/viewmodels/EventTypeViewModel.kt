@@ -1,30 +1,32 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import droiddevelopers254.droidconke.datastates.EventTypeState
-import droiddevelopers254.droidconke.models.WifiDetailsModel
+import androidx.lifecycle.viewModelScope
+import droiddevelopers254.droidconke.datastates.Result
+import droiddevelopers254.droidconke.models.EventTypeModel
 import droiddevelopers254.droidconke.repository.EventTypeRepo
+import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
+import kotlinx.coroutines.launch
 
 class EventTypeViewModel : ViewModel() {
-    private val eventTypeModelMediatorLiveData: MediatorLiveData<EventTypeState> = MediatorLiveData()
+    private val eventTypeModelMediatorLiveData = NonNullMediatorLiveData<List<EventTypeModel>>()
+    private val eventDetailsError = NonNullMediatorLiveData<String>()
     private val eventTypeRepo: EventTypeRepo = EventTypeRepo()
-    private val wifiDetailsModelMediatorLiveData: MediatorLiveData<WifiDetailsModel> = MediatorLiveData()
-    val sessions: LiveData<EventTypeState>
-        get() = eventTypeModelMediatorLiveData
 
-    val wifiDetails: LiveData<WifiDetailsModel>
-        get() = wifiDetailsModelMediatorLiveData
+
+    fun getWifiDetailsResponse(): LiveData<List<EventTypeModel>> = eventTypeModelMediatorLiveData
+
+    fun getWifiDetailsError(): LiveData<String> = eventDetailsError
+
 
     fun fetchSessions() {
-        val eventTypeModelLiveData = eventTypeRepo.sessionData
-        eventTypeModelMediatorLiveData.addSource(eventTypeModelLiveData
-        ) { sessionsModelMediatorLiveData ->
-            when {
-                this.eventTypeModelMediatorLiveData.hasActiveObservers() -> this.eventTypeModelMediatorLiveData.removeSource(eventTypeModelLiveData)
+        viewModelScope.launch {
+            when (val value = eventTypeRepo.getSessionData()) {
+                is Result.Success -> eventTypeModelMediatorLiveData.postValue(value.data)
+                is Result.Error -> eventDetailsError.postValue(value.exception)
             }
-            this.eventTypeModelMediatorLiveData.setValue(sessionsModelMediatorLiveData)
         }
+
     }
 }

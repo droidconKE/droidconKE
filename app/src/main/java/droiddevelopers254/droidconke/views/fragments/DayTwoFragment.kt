@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +14,8 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.SessionsAdapter
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity
 import kotlinx.android.synthetic.main.fragment_day_two.view.*
@@ -30,29 +31,29 @@ class DayTwoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_day_two, container, false)
 
         dayTwoViewModel = ViewModelProviders.of(this).get(DayTwoViewModel::class.java)
-        sessionsAdapter= SessionsAdapter(activity!!,sessionsModelList,"day_two")
+        sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_two")
         val sessionsRv = view.sessionsRv
         initView(sessionsRv)
 
 
         dayTwoViewModel.getDayTwoSessions()
         //observe live data emitted by view model
-        dayTwoViewModel.sessions.observe(this, Observer{
-            when {
-                it?.sessionsModelList != null -> {
-                    sessionsModelList = it.sessionsModelList
-                    sessionsAdapter.setSessionsAdapter(sessionsModelList)
-
-
-                }
-                else -> handleError(it?.databaseError)
-            }
-        })
+        observerLiveData()
         return view
     }
 
-    private fun handleError(databaseError: String?) {
-       activity?.toast(databaseError.toString())
+    private fun observerLiveData() {
+        dayTwoViewModel.getSessionsResponse().nonNull().observe(this) {
+            sessionsModelList = it
+            sessionsAdapter.setSessionsAdapter(sessionsModelList)
+        }
+        dayTwoViewModel.getSessionsError().nonNull().observe(this) {
+            handleError(it)
+        }
+    }
+
+    private fun handleError(databaseError: String) {
+        activity?.toast(databaseError)
     }
 
     private fun initView(sessionsRv: RecyclerView) {
@@ -72,7 +73,6 @@ class DayTwoFragment : Fragment() {
             }
 
             override fun onLongClick(view: View?, position: Int) {
-
             }
         }))
     }

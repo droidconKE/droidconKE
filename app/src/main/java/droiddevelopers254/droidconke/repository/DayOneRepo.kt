@@ -1,8 +1,5 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -11,16 +8,14 @@ import com.google.firebase.ktx.Firebase
 import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.datastates.Result
-import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.DroidCon
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
+import droiddevelopers254.droidconke.utils.await
 
 class DayOneRepo {
     private val sessionsDao: SessionsDao = AppDatabase.getDatabase(DroidCon.context)!!.sessionsDao()
 
-    suspend fun getDayOneSessions(): Result<List<SessionsModel>>{
+    suspend fun getDayOneSessions(): Result<List<SessionsModel>> {
         return try {
             val firebaseFirestore = Firebase.firestore
             val snapshots = firebaseFirestore.collection("day_one")
@@ -28,12 +23,12 @@ class DayOneRepo {
                     .get().await()
             saveSession(snapshots.toObjects())
             Result.Success(snapshots.toObjects())
-        }catch (e : FirebaseFirestoreException){
+        } catch (e: FirebaseFirestoreException) {
             Result.Error(e.message)
         }
     }
 
-    suspend fun saveSession(sessionsModelList : List<SessionsModel>){
+    suspend fun saveSession(sessionsModelList: List<SessionsModel>) {
         sessionsDao.saveSession(sessionsModelList)
     }
 }

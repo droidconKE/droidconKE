@@ -6,11 +6,12 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.RoomModel
+import droiddevelopers254.droidconke.utils.await
 
 class RoomRepo {
-    var roomModel : RoomModel= RoomModel()
+    var roomModel: RoomModel = RoomModel()
 
-    suspend fun getRoomDetails(roomId: Int) : Result<RoomModel>{
+    suspend fun getRoomDetails(roomId: Int): Result<RoomModel> {
         return try {
             val firebaseFirestore = Firebase.firestore
             val snapshot = firebaseFirestore.collection("rooms")
@@ -24,7 +25,7 @@ class RoomRepo {
             }
             Result.Success(roomModel)
 
-        }catch (e : FirebaseFirestoreException){
+        } catch (e: FirebaseFirestoreException) {
             Result.Error(e.message)
         }
 

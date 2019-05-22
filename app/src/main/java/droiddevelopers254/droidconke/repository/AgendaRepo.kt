@@ -7,17 +7,17 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.AgendaModel
-import droiddevelopers254.droidconke.utils.safeFirebaseCall
+import droiddevelopers254.droidconke.utils.await
 
 class AgendaRepo {
 
-    suspend fun agendaData() : Result<List<AgendaModel>>{
+    suspend fun agendaData(): Result<List<AgendaModel>> {
         return try {
             val firebaseFirestore = Firebase.firestore
             val snapshot = firebaseFirestore.collection("agenda").orderBy("id", Query.Direction.ASCENDING).get().await()
             return Result.Success(snapshot.toObjects())
 
-        }catch (e : FirebaseFirestoreException){
+        } catch (e: FirebaseFirestoreException) {
             Result.Error(e.message)
         }
 

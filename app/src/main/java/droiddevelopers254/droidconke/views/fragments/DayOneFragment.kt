@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.SessionsAdapter
-import droiddevelopers254.droidconke.models.SessionTimeModel
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel
 import droiddevelopers254.droidconke.views.activities.SessionViewActivity
 import kotlinx.android.synthetic.main.fragment_day_one.*
@@ -26,10 +26,7 @@ import java.util.*
 class DayOneFragment : Fragment() {
 
     internal var sessionsModelList: List<SessionsModel> = ArrayList()
-    internal var sessionTimeModelList: List<SessionTimeModel> = ArrayList()
-    internal var sessionIds: List<String> = ArrayList()
     lateinit var dayOneViewModel: DayOneViewModel
-    internal var isStarred: Boolean = false
     lateinit var sessionsAdapter: SessionsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,22 +39,22 @@ class DayOneFragment : Fragment() {
         initView(sessionsRv)
 
         dayOneViewModel.getDayOneSessions()
-        //observe live data emitted by view model
-        dayOneViewModel.sessions.observe(this, Observer {
-            when {
-                it?.sessionsModelList != null -> {
-                    sessionsModelList = it.sessionsModelList
-                    sessionsAdapter.setSessionsAdapter(sessionsModelList)
-                    loginProgressBar.visibility = View.GONE
-                }
-                else -> {
-                    loginProgressBar.visibility = View.GONE
-                    handleError(it?.databaseError)
-                }
-            }
-        })
 
+        //observe live data emitted by view model
+        observeLiveData()
         return view
+    }
+
+    private fun observeLiveData() {
+        dayOneViewModel.getSessionsResponse().nonNull().observe(this){
+            sessionsModelList = it
+            sessionsAdapter.setSessionsAdapter(sessionsModelList)
+            loginProgressBar.visibility = View.GONE
+
+        }
+        dayOneViewModel.getSessionsError().nonNull().observe(this){
+            handleError(it)
+        }
     }
 
     private fun handleError(databaseError: String?) {
@@ -72,7 +69,6 @@ class DayOneFragment : Fragment() {
         sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
 
             override fun onLongClick(view: View?, position: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onClick(view: View, position: Int) {

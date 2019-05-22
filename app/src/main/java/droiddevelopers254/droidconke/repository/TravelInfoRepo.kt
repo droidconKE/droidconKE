@@ -1,14 +1,9 @@
 package droiddevelopers254.droidconke.repository
 
-import android.app.Activity
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigException
 import droiddevelopers254.droidconke.datastates.Result
-import droiddevelopers254.droidconke.models.TravelInfoModel
 import kotlinx.coroutines.tasks.await
 
 class TravelInfoRepo(internal var context: Context) {

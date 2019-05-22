@@ -9,7 +9,6 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -69,6 +68,7 @@ class AuthenticateUserActivity : AppCompatActivity() {
             showUI()
         }
     }
+
     private fun showUI() {
         googleSignInBtn.setOnClickListener {
             pDialog?.titleText = "Signing in"
@@ -116,12 +116,14 @@ class AuthenticateUserActivity : AppCompatActivity() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+
     private fun navigateToHome() {
         val intent = Intent(this@AuthenticateUserActivity, HomeActivity::class.java)
         startActivity(intent)
         finish()
 
     }
+
     private fun showDialog() {
         when {
             !pDialog!!.isShowing -> pDialog?.show()
@@ -134,6 +136,7 @@ class AuthenticateUserActivity : AppCompatActivity() {
         }
 
     }
+
     companion object {
         private const val RC_SIGN_IN = 9001
     }

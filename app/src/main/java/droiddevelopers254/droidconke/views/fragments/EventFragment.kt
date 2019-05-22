@@ -19,7 +19,10 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.adapters.EventTypeAdapter
 import droiddevelopers254.droidconke.models.EventTypeModel
 import droiddevelopers254.droidconke.models.WifiDetailsModel
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
+import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_event.view.*
 import org.jetbrains.anko.toast
 
@@ -46,12 +49,7 @@ class EventFragment : Fragment() {
         firebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults)
 
         //observe live data emitted by view model
-        eventTypeViewModel.sessions.observe(this, Observer{
-            when {
-                it?.databaseError != null -> handleDatabaseError(it.databaseError)
-                else -> handleFetchEventsResponse(it?.eventTypeModelList, eventTypesRv)
-            }
-        })
+        observeLiveData()
         //fetch data from firebase
         eventTypeViewModel.fetchSessions()
 
@@ -59,6 +57,15 @@ class EventFragment : Fragment() {
         getRemoteConfigValues(wifiSsidText,wifiPasswordText)
 
         return view
+    }
+
+    private fun observeLiveData() {
+        eventTypeViewModel.getWifiDetailsResponse().nonNull().observe(this){
+            handleFetchEventsResponse(it, eventTypesRv)
+        }
+        eventTypeViewModel.getWifiDetailsError().nonNull().observe(this){
+            handleDatabaseError(it)
+        }
     }
 
     private fun getRemoteConfigValues(wifiSsidText: TextView, wifiPasswordText: TextView) {
@@ -75,9 +82,7 @@ class EventFragment : Fragment() {
                         it.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
                             // values are returned.
                             firebaseRemoteConfig.activate()
-                        else -> {
-
-                        }
+                        else -> { }
                     }
                     val wifiDetailsModel = WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"), firebaseRemoteConfig.getString("wifi_password"))
                     updateViews(wifiDetailsModel,wifiSsidText,wifiPasswordText)

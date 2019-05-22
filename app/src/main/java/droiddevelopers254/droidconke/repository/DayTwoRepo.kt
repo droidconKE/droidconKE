@@ -1,8 +1,5 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -11,9 +8,9 @@ import com.google.firebase.ktx.Firebase
 import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.database.dao.SessionsDao
 import droiddevelopers254.droidconke.datastates.Result
-import droiddevelopers254.droidconke.datastates.SessionsState
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.DroidCon
+import droiddevelopers254.droidconke.utils.await
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 

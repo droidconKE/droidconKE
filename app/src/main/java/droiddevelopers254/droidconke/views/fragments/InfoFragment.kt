@@ -37,7 +37,7 @@ class InfoFragment : Fragment() {
 
     }
 
-     inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+    inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 

@@ -1,26 +1,29 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import droiddevelopers254.droidconke.datastates.SessionsState
+import androidx.lifecycle.viewModelScope
+import droiddevelopers254.droidconke.datastates.Result
+import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.repository.DayOneRepo
+import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
+import kotlinx.coroutines.launch
 
 class DayOneViewModel : ViewModel() {
-    private val sessionsStateMediatorLiveData: MediatorLiveData<SessionsState> = MediatorLiveData()
+    private val sessionsStateMediatorLiveData = NonNullMediatorLiveData<List<SessionsModel>>()
+    private val sessionError = NonNullMediatorLiveData<String>()
     private val dayOneRepo: DayOneRepo = DayOneRepo()
 
-    val sessions: LiveData<SessionsState>
-        get() = sessionsStateMediatorLiveData
+    fun getSessionsResponse(): LiveData<List<SessionsModel>> = sessionsStateMediatorLiveData
+
+    fun getSessionsError(): LiveData<String> = sessionError
 
     fun getDayOneSessions() {
-        val sessionsStateLiveData = dayOneRepo.dayOneSessions
-        sessionsStateMediatorLiveData.addSource(sessionsStateLiveData
-        ) { sessionsStateMediatorLiveData ->
-            when {
-                this.sessionsStateMediatorLiveData.hasActiveObservers() -> this.sessionsStateMediatorLiveData.removeSource(sessionsStateLiveData)
+        viewModelScope.launch {
+            when (val value = dayOneRepo.getDayOneSessions()) {
+                is Result.Success -> sessionsStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> sessionError.postValue(value.exception)
             }
-            this.sessionsStateMediatorLiveData.setValue(sessionsStateMediatorLiveData)
         }
     }
 }

@@ -87,20 +87,20 @@ class SessionViewActivity : AppCompatActivity() {
 
         getRoomDetails(roomId)
         //observe live data emitted by view model
-        sessionDataViewModel.sessionData.observe(this, Observer{
+        sessionDataViewModel.getSessionDataResponse.observe(this, Observer{
             when {
                 it?.databaseError != null -> handleDatabaseError(it.databaseError)
                 else -> this.handleFetchSessionData(it?.sessionsModel)
             }
         })
-        sessionDataViewModel.speakerInfo.observe(this, Observer{
+        sessionDataViewModel.getSpeakerInfoResponse.observe(this, Observer{
             when {
                 it?.databaseError != null -> handleDatabaseError(it.databaseError)
                 else -> handleFetchSpeakerDetails(it?.speakerModelList)
             }
         })
 
-        sessionDataViewModel.roomInfo.observe(this, Observer{
+        sessionDataViewModel.`getRoomInfoResponse()`.observe(this, Observer{
             when {
                 it?.databaseError != null -> handleDatabaseError(it.databaseError)
                 else -> handleFetchRoomDetails(it?.roomModel)
