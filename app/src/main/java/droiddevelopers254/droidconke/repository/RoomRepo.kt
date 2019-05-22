@@ -1,30 +1,32 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.FirebaseFirestore
-import droiddevelopers254.droidconke.datastates.RoomState
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.ktx.Firebase
+import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.RoomModel
 
 class RoomRepo {
+    var roomModel : RoomModel= RoomModel()
 
-    fun getRoomDetails(roomId: Int): LiveData<RoomState> {
-        val roomStateLiveData = MutableLiveData<RoomState>()
-        val firebaseFirestore = FirebaseFirestore.getInstance()
-        firebaseFirestore.collection("rooms")
-                .whereEqualTo("id", roomId)
-                .get()
-                .addOnCompleteListener {
-                    when {
-                        it.isSuccessful -> for (queryDocumentSnapshot in it.result!!) {
-                            val roomModel = queryDocumentSnapshot.toObject(RoomModel::class.java)
-                            roomStateLiveData.value = RoomState(roomModel,null)
+    suspend fun getRoomDetails(roomId: Int) : Result<RoomModel>{
+        return try {
+            val firebaseFirestore = Firebase.firestore
+            val snapshot = firebaseFirestore.collection("rooms")
+                    .whereEqualTo("id", roomId)
+                    .get()
+                    .await()
+            val snap = snapshot.toObjects<RoomModel>()
 
-                        }
-                        else -> roomStateLiveData.value= RoomState(null,"Error getting room details")
-                    }
+            snap.forEach {
+                roomModel = it
+            }
+            Result.Success(roomModel)
 
-                }
-        return roomStateLiveData
+        }catch (e : FirebaseFirestoreException){
+            Result.Error(e.message)
+        }
+
     }
 }

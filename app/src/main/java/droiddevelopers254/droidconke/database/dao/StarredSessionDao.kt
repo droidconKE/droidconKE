@@ -10,8 +10,8 @@ import io.reactivex.Single
 @Dao
 interface StarredSessionDao {
 
-    @get:Query("SELECT * FROM starredSessions")
-    val starredSessions: Single<List<StarredSessionModel>>
+    @Query("SELECT * FROM starredSessions")
+    suspend fun starredSessions(): List<StarredSessionModel>
 
     @Insert(onConflict = REPLACE)
     fun starSession(starredSessionModel: StarredSessionModel)

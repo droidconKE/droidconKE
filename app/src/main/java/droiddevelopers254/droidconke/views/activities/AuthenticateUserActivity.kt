@@ -20,14 +20,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog
 import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
-import droiddevelopers254.droidconke.viewmodels.AuthenticateUserViewModel
 import kotlinx.android.synthetic.main.content_authenticate_user.*
 import org.jetbrains.anko.toast
 
 class AuthenticateUserActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     private var pDialog: SweetAlertDialog? = null
-    private lateinit var authenticateUserViewModel: AuthenticateUserViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +53,6 @@ class AuthenticateUserActivity : AppCompatActivity() {
                 .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        authenticateUserViewModel = ViewModelProviders.of(this).get(AuthenticateUserViewModel::class.java)
 
         // Progress dialog
         pDialog = SweetAlertDialog(this@AuthenticateUserActivity, SweetAlertDialog.PROGRESS_TYPE)
