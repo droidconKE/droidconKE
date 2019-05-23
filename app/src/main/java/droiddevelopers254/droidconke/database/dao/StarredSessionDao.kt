@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import droiddevelopers254.droidconke.models.StarredSessionModel
-import io.reactivex.Single
 
 @Dao
 interface StarredSessionDao {

@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -27,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_session_view.*
 import kotlinx.android.synthetic.main.content_session_view.*
 import kotlinx.android.synthetic.main.room_bottom_sheet.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class SessionViewActivity : AppCompatActivity() {
@@ -34,7 +34,8 @@ class SessionViewActivity : AppCompatActivity() {
     private var roomId: Int = 0
 
 
-    lateinit var sessionDataViewModel: SessionDataViewModel
+    private val sessionDataViewModel: SessionDataViewModel by inject()
+
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
     lateinit var starStatus: String
     lateinit var dayNumber: String
@@ -61,8 +62,6 @@ class SessionViewActivity : AppCompatActivity() {
         starStatus = extraIntent.getStringExtra("starred")
         speakerId = extraIntent.getIntegerArrayListExtra("speakerId")
         roomId = extraIntent.getIntExtra("roomId", 0)
-
-        sessionDataViewModel = ViewModelProviders.of(this).get(SessionDataViewModel::class.java)
 
         getSessionData(dayNumber, sessionId)
 

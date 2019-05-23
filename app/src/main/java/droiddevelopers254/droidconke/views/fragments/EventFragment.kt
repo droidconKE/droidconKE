@@ -25,15 +25,15 @@ import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_event.view.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 
 class EventFragment : Fragment() {
-    lateinit var eventTypeViewModel: EventTypeViewModel
+    private val eventTypeViewModel: EventTypeViewModel by inject()
     lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_event, container, false)
 
-        eventTypeViewModel = ViewModelProviders.of(this).get(EventTypeViewModel::class.java)
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
         val wifiSsidText = view.wifiSsidText

@@ -9,10 +9,10 @@ import droiddevelopers254.droidconke.repository.DayOneRepo
 import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
-class DayOneViewModel : ViewModel() {
+class DayOneViewModel(private val dayOneRepo: DayOneRepo) : ViewModel() {
     private val sessionsStateMediatorLiveData = NonNullMediatorLiveData<List<SessionsModel>>()
     private val sessionError = NonNullMediatorLiveData<String>()
-    private val dayOneRepo: DayOneRepo = DayOneRepo()
+
 
     fun getSessionsResponse(): LiveData<List<SessionsModel>> = sessionsStateMediatorLiveData
 

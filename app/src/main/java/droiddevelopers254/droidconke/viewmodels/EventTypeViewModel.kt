@@ -9,10 +9,9 @@ import droiddevelopers254.droidconke.repository.EventTypeRepo
 import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
-class EventTypeViewModel : ViewModel() {
+class EventTypeViewModel( private val eventTypeRepo: EventTypeRepo) : ViewModel() {
     private val eventTypeModelMediatorLiveData = NonNullMediatorLiveData<List<EventTypeModel>>()
     private val eventDetailsError = NonNullMediatorLiveData<String>()
-    private val eventTypeRepo: EventTypeRepo = EventTypeRepo()
 
 
     fun getWifiDetailsResponse(): LiveData<List<EventTypeModel>> = eventTypeModelMediatorLiveData

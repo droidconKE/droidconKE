@@ -10,10 +10,9 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 
-class FeedBackViewModel : ViewModel() {
+class FeedBackViewModel(private val eventFeedBackRepo : EventFeedbackRepo) : ViewModel() {
     private val feedBackStateMediatorLiveData = NonNullMediatorLiveData<String>()
     private val eventFeedbackError = NonNullMediatorLiveData<String>()
-    private val eventFeedBackRepo = EventFeedbackRepo()
 
     fun getEventFeedBackResponse(): LiveData<String> = feedBackStateMediatorLiveData
 

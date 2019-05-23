@@ -9,10 +9,9 @@ import droiddevelopers254.droidconke.repository.AgendaRepo
 import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
-class AgendaViewModel : ViewModel() {
+class AgendaViewModel(private val agendaRepo: AgendaRepo) : ViewModel() {
     private val agendaStateMediatorLiveData = NonNullMediatorLiveData<List<AgendaModel>>()
     private val agendaError = NonNullMediatorLiveData<String>()
-    private val agendaRepo: AgendaRepo = AgendaRepo()
 
     fun getAgendasResponse(): LiveData<List<AgendaModel>> = agendaStateMediatorLiveData
 

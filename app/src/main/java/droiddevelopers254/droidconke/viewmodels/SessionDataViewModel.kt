@@ -16,17 +16,13 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 
-class SessionDataViewModel : ViewModel() {
+class SessionDataViewModel(private val sessionDataRepo: SessionDataRepo, private val speakersRepo: SpeakersRepo, private val roomRepo: RoomRepo, private val sessionFeedbackRepo: SessionFeedbackRepo) : ViewModel() {
     private val sessionDataStateMediatorLiveData = NonNullMediatorLiveData<SessionsModel>()
     private val sessionDataError = NonNullMediatorLiveData<String>()
-    private val sessionDataRepo: SessionDataRepo = SessionDataRepo()
     private val speakersStateMediatorLiveData = NonNullMediatorLiveData<List<SpeakersModel>>()
     private val speakersError = NonNullMediatorLiveData<String>()
-    private val speakersRepo: SpeakersRepo = SpeakersRepo()
     private val roomStateMediatorLiveData = NonNullMediatorLiveData<RoomModel>()
     private val roomError = NonNullMediatorLiveData<String>()
-    private val roomRepo: RoomRepo = RoomRepo()
-    private val sessionFeedbackRepo: SessionFeedbackRepo = SessionFeedbackRepo()
     private val sessionFeedBackMediatorLiveData = NonNullMediatorLiveData<String>()
     private val sessionFeedbackError = NonNullMediatorLiveData<String>()
 
@@ -76,12 +72,14 @@ class SessionDataViewModel : ViewModel() {
         }
     }
 
+
     fun sendSessionFeedBack(userEventFeedback: SessionsUserFeedback) {
         viewModelScope.launch {
             when (val value = sessionFeedbackRepo.sendFeedBack(userEventFeedback)) {
                 is Result.Success -> sessionFeedBackMediatorLiveData.postValue(value.data)
                 is Result.Error -> sessionFeedbackError.postValue(value.exception)
             }
+
         }
     }
 }

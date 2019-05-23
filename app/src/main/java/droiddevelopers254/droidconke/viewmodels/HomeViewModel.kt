@@ -8,10 +8,9 @@ import droiddevelopers254.droidconke.repository.UpdateTokenRepo
 import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val updateTokenRepo: UpdateTokenRepo) : ViewModel() {
     private val updateTokenStateMediatorLiveData = NonNullMediatorLiveData<Boolean>()
     private val updateTokenError = NonNullMediatorLiveData<String>()
-    private val updateTokenRepo: UpdateTokenRepo = UpdateTokenRepo()
 
     fun getUpdateTokenResponse(): LiveData<Boolean> = updateTokenStateMediatorLiveData
 

@@ -17,16 +17,15 @@ import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.AgendaViewModel
 import kotlinx.android.synthetic.main.fragment_agenda.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class AgendaFragment : Fragment() {
     private var agendaModelList: List<AgendaModel> = ArrayList()
-    lateinit var agendaViewModel: AgendaViewModel
+    private val agendaViewModel: AgendaViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_agenda, container, false)
-
-        agendaViewModel = ViewModelProviders.of(this).get(AgendaViewModel::class.java)
 
         //fetch agendas
         agendaViewModel.fetchAgendas()
@@ -40,7 +39,7 @@ class AgendaFragment : Fragment() {
         agendaViewModel.getAgendasResponse().nonNull().observe(this) {
             handleAgendaResponse(it, agendaRv)
         }
-        agendaViewModel.getAgendaError().nonNull().observe(this){
+        agendaViewModel.getAgendaError().nonNull().observe(this) {
             handleDatabaseError(it)
         }
     }

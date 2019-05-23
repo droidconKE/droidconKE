@@ -29,19 +29,18 @@ import droiddevelopers254.droidconke.views.fragments.InfoFragment
 import droiddevelopers254.droidconke.views.fragments.MapFragment
 import droiddevelopers254.droidconke.views.fragments.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
     private lateinit var params: AppBarLayout.LayoutParams
-    lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
-
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         //setup defaults for remote config
