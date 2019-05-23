@@ -1,13 +1,19 @@
 package droiddevelopers254.droidconke;
 
 import android.content.Context;
+<<<<<<< HEAD
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
+=======
+>>>>>>> 8e03877197044ef2e2a2b65ef3818a292f4818fb
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -19,7 +25,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         assertEquals("droiddevelopers254.droidconke", appContext.getPackageName());
     }

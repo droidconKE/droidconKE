@@ -11,38 +11,39 @@
         android:id="@+id/agendaLinear"
         android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/spacing_agenda"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="45dp"
-            android:id="@+id/agendaImg"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_restaurant_black_24dp"
-            android:layout_height="45dp" />
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_toEndOf="@id/agendaImg"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:orientation="vertical"
+            android:layout_margin="@dimen/spacing_agenda"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/CollapsibleCardTitle"
-                android:id="@+id/agendaTitleText"
-                android:text="@string/agenda_title"
-                android:textSize="@dimen/text_size_small"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/agendaTimelineText"
-                android:layout_marginTop="6dp"
-                android:text="@string/agenda_time"
-                android:textSize="18sp"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="45dp"
+                android:id="@+id/agendaImg"
+                android:layout_centerVertical="true"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/ic_restaurant_black_24dp"
+                android:layout_height="45dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_toEndOf="@id/agendaImg"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/CollapsibleCardTitle"
+                    android:id="@+id/agendaTitleText"
+                    android:text="@string/agenda_title"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/agendaTimelineText"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/agenda_time"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

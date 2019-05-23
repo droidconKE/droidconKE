@@ -7,7 +7,7 @@
     android:background="@color/colorYellow"
     android:scrollbarThumbVertical="@android:color/transparent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".views.activities.AuthenticateUserActivity"
+    tools:context=".ui.authentication.AuthenticateUserActivity"
     android:fillViewport="true"
     tools:showIn="@layout/activity_authenticate_user">
 
@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:id="@+id/welcomeImg"
             android:layout_margin="@dimen/fab_margin"
+            android:contentDescription="TODO"
             android:src="@drawable/main_logo"
             android:layout_height="100dp" />
         <TextView
@@ -51,18 +52,19 @@
             <ImageView
                 android:layout_width="30dp"
                 android:id="@+id/dateRangeImg"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_date_range_black_24dp"
                 android:layout_height="30dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_toEndOf="@id/dateRangeImg"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:text="@string/welcome_date"
-                    android:layout_marginStart="6dp"
-                    android:textColor="@color/colorBlack"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/dateRangeImg"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:text="@string/welcome_date"
+                android:layout_marginStart="6dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
         <TextView
@@ -84,7 +86,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-           android:layout_marginStart="@dimen/fab_margin"
+            android:layout_marginStart="@dimen/fab_margin"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_marginTop="36dp"

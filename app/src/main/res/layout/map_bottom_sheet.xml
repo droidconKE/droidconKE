@@ -29,6 +29,7 @@
                 android:layout_width="30dp"
                 android:id="@+id/collapseBottomSheetImg"
                 android:layout_alignParentEnd="true"
+                android:contentDescription="TODO"
                 android:src="@drawable/ic_expand"
                 android:layout_height="30dp" />
         </RelativeLayout>
@@ -49,11 +50,11 @@
                 android:layout_height="wrap_content" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/googleDirectionsBtn"
-                android:layout_width="200dp"
-                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:text="Get directions"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textAlignment="center"
                 app:icon="@drawable/ic_directions_black_24dp"
                 app:backgroundTint="@color/colorLightBlue"

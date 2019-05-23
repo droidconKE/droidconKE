@@ -13,4 +13,5 @@
     <dimen name="medium_margin">6dp</dimen>
     <dimen name="spacing_agenda">9dp</dimen>
     <dimen name="text_size_small">16sp</dimen>
+
 </resources>

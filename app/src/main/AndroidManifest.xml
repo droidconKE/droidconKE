@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="droiddevelopers254.droidconke">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".utils.DroidCoin"
+        android:name=".utils.DroidCon"
         android:allowBackup="true"
-        android:appComponentFactory="@string/action_settings"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        tools:replace="android:appComponentFactory">
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".HomeActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".views.activities.SessionViewActivity"
+            android:name=".ui.sessiondetails.SessionViewActivity"
             android:label="@string/title_activity_session_view"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -43,22 +37,17 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".views.activities.WelcomeActivity"
-            android:label="@string/title_activity_welcome"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".views.activities.AuthenticateUserActivity"
+            android:name=".ui.authentication.AuthenticateUserActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Launch">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -67,37 +56,29 @@
 
         <service
             android:name=".firebase.InstanceIdService"
+            android:permission=""
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <activity
-            android:name=".views.activities.AboutDetailsActivity"
+            android:name=".ui.about.AboutDetailsActivity"
             android:label="@string/title_activity_about_details"
-            android:launchMode="singleTask"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".views.activities.SessionFeedBackActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".ui.feedback.SessionFeedBackActivity"
             android:label="@string/title_activity_feed_back"
-            android:parentActivityName=".views.activities.SessionViewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="droiddevelopers254.droidconke.views.activities.SessionViewActivity" />
-        </activity>
-        <activity
-            android:name=".views.activities.EventFeedbackActivity"
+            android:parentActivityName=".ui.sessiondetails.SessionViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".ui.feedback.EventFeedbackActivity"
             android:label="@string/title_activity_event_feedback"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="droiddevelopers254.droidconke.HomeActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

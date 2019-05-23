@@ -24,6 +24,7 @@
                 android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
+                    android:contentDescription="TODO"
                     android:scaleType="centerInside"
                     android:id="@+id/aboutDetailsImg"
                     android:src="@drawable/event_image"
@@ -46,7 +47,8 @@
                         android:id="@+id/expandImg"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_expand_more_black_24dp"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_expand_more_blak_24dp"
                         android:layout_alignParentEnd="true"/>
 
 

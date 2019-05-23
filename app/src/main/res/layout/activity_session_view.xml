@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/sessionCoordinatorLayout"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.SessionViewActivity">
+    tools:context=".ui.sessiondetails.SessionViewActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

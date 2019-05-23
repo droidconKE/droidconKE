@@ -11,7 +11,7 @@
     <string name="session_category">Firebase</string>
     <string name="agenda_title">Breakfast</string>
     <string name="agenda_time">7:00 AM - 9:30 AM</string>
-    <string name="title_activity_session_view"></string>
+    <string name="title_activity_session_view"/>
     <string name="large_text">
         "Material is the metaphor"
 
@@ -148,7 +148,6 @@
     <string name="day_two_label">Oct 5</string>
     <string name="time_in_am">07:45</string>
     <string name="am_label">AM</string>
-    <string name="event_website">www.droidcon.co.ke</string>
     <string name="title_activity_feed_back">FeedBack</string>
     <string name="session_feedback">Kindly give us feedback about the session to better it.</string>
     <string name="hintSessionFeedback">Session feedback</string>
@@ -157,4 +156,6 @@
     <string name="title_activity_event_feedback">EventFeedback</string>
     <string name="event_feedback">Kindly give us your general view of the event as a whole as well as any ideas to improve on it.</string>
     <string name="hintEventFeedback">Event feedback</string>
+    <string name="schedule_label">Schedule</string>
+    <string name="event_website">www.droidcon.co.ke</string>
 </resources>

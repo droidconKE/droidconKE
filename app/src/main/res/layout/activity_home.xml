@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:id="@+id/toolbarTitleText"
-                    android:text="Schedule"
+                    android:text="@string/schedule_label"
                     android:textSize="22sp"
                     android:textColor="@color/colorBlack"
                     android:layout_centerInParent="true"
@@ -43,16 +44,6 @@
     <include layout="@layout/content_home" />
     <include layout="@layout/home_fragment_content"/>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:id="@+id/fab"-->
-        <!--app:layout_anchor="@id/navigation"-->
-        <!--app:layout_anchorGravity="top|end"-->
-        <!--app:useCompatPadding="true"-->
-        <!--android:src="@drawable/ic_filter_list_black_24dp"-->
-        <!--android:layout_gravity="top"-->
-        <!--android:layout_height="wrap_content" />-->
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
@@ -62,6 +53,7 @@
         app:itemIconTint="@color/colorWhite"
         app:itemTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         app:menu="@menu/navigation" />
 
 

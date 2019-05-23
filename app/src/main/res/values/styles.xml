@@ -26,5 +26,8 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="AppTheme.Launch">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 
 </resources>
