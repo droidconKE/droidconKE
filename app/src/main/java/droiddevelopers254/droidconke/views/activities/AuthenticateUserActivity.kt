@@ -88,6 +88,7 @@ class AuthenticateUserActivity : AppCompatActivity() {
                     account?.let { firebaseAuthWithGoogle(it) }
                 } catch (e: ApiException) {
                     // Google Sign In failed
+                    hideDialog()
                     toast("Google sign in failed")
                 }
             }

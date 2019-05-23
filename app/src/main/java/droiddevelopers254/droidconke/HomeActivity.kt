@@ -20,6 +20,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity
 import droiddevelopers254.droidconke.views.activities.EventFeedbackActivity
@@ -68,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
                                 .crossFade())
                         .into(accountImg)
         }
-        navigation.setOnNavigationItemSelectedListener{
+        navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     navItemIndex = 0
@@ -126,16 +128,22 @@ class HomeActivity : AppCompatActivity() {
         navigation.selectedItemId = R.id.navigation_schedule
 
         //observe live data emitted by view model
-        homeViewModel.getUpdateTokenResponse.observe(this, Observer{
+        observeLiveData()
+
+    }
+
+    private fun observeLiveData() {
+        homeViewModel.getUpdateTokenResponse().nonNull().observe(this) {
             when {
-                it != null -> if (it.isSuccess) {
+                it -> {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()
-                } else {
+                }
+                else -> {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 0).apply()
                 }
             }
-        })
 
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -153,8 +161,8 @@ class HomeActivity : AppCompatActivity() {
                 finish()
                 return true
             }
-            R.id.action_feedback ->{
-                startActivity(Intent(this,EventFeedbackActivity::class.java))
+            R.id.action_feedback -> {
+                startActivity(Intent(this, EventFeedbackActivity::class.java))
             }
             else -> return super.onOptionsItemSelected(item)
         }

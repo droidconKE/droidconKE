@@ -20,6 +20,8 @@ import droiddevelopers254.droidconke.models.RoomModel
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.SpeakersModel
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
+import droiddevelopers254.droidconke.utils.nonNull
+import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel
 import kotlinx.android.synthetic.main.activity_session_view.*
 import kotlinx.android.synthetic.main.content_session_view.*
@@ -39,8 +41,8 @@ class SessionViewActivity : AppCompatActivity() {
     internal var documentId: String? = null
     lateinit var sessionsModel1: SessionsModel
     private var databaseReference: DatabaseReference? = null
-    internal var speakersList: List<SpeakersModel> = ArrayList()
-    internal var speakerId: List<Int> = ArrayList()
+    private var speakersList: List<SpeakersModel> = ArrayList()
+    private var speakerId: List<Int> = ArrayList()
     internal var starred = false
     lateinit var sharedPreferences: SharedPreferences
     lateinit var isStarred: String
@@ -72,6 +74,7 @@ class SessionViewActivity : AppCompatActivity() {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) fab.animate().scaleX(0f).scaleY(0f).setDuration(200).start()
                 else if (newState == BottomSheetBehavior.STATE_COLLAPSED) fab.animate().scaleX(1f).scaleY(1f).setDuration(200).start()
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
@@ -87,25 +90,7 @@ class SessionViewActivity : AppCompatActivity() {
 
         getRoomDetails(roomId)
         //observe live data emitted by view model
-        sessionDataViewModel.getSessionDataResponse.observe(this, Observer{
-            when {
-                it?.databaseError != null -> handleDatabaseError(it.databaseError)
-                else -> this.handleFetchSessionData(it?.sessionsModel)
-            }
-        })
-        sessionDataViewModel.getSpeakerInfoResponse.observe(this, Observer{
-            when {
-                it?.databaseError != null -> handleDatabaseError(it.databaseError)
-                else -> handleFetchSpeakerDetails(it?.speakerModelList)
-            }
-        })
-
-        sessionDataViewModel.`getRoomInfoResponse()`.observe(this, Observer{
-            when {
-                it?.databaseError != null -> handleDatabaseError(it.databaseError)
-                else -> handleFetchRoomDetails(it?.roomModel)
-            }
-        })
+        observeLiveData()
 
         bottomAppBar.replaceMenu(R.menu.menu_bottom_appbar)
 
@@ -114,9 +99,9 @@ class SessionViewActivity : AppCompatActivity() {
             val id = item.itemId
             when (id) {
                 R.id.action_feedback -> {
-                    val sessionFeedbackIntent = Intent(this,SessionFeedBackActivity::class.java)
-                    sessionFeedbackIntent.putExtra("sessionId",sessionId)
-                    sessionFeedbackIntent.putExtra("dayNumber",dayNumber)
+                    val sessionFeedbackIntent = Intent(this, SessionFeedBackActivity::class.java)
+                    sessionFeedbackIntent.putExtra("sessionId", sessionId)
+                    sessionFeedbackIntent.putExtra("dayNumber", dayNumber)
                     startActivity(sessionFeedbackIntent)
                 }
             }
@@ -141,6 +126,28 @@ class SessionViewActivity : AppCompatActivity() {
             when {
                 bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
             }
+        }
+
+    }
+
+    private fun observeLiveData() {
+        sessionDataViewModel.getSessionDataResponse().nonNull().observe(this) {
+            handleFetchSessionData(it)
+        }
+        sessionDataViewModel.getSessionDataError().nonNull().observe(this) {
+            handleDatabaseError(it)
+        }
+        sessionDataViewModel.getSpeakerInfoResponse().nonNull().observe(this) {
+            handleFetchSpeakerDetails(it)
+        }
+        sessionDataViewModel.getSpeakerError().nonNull().observe(this) {
+            handleDatabaseError(it)
+        }
+        sessionDataViewModel.getRoomInfoResponse().nonNull().observe(this) {
+            handleFetchRoomDetails(it)
+        }
+        sessionDataViewModel.getRoomInfoError().nonNull().observe(this) {
+            handleDatabaseError(it)
         }
 
     }
@@ -181,20 +188,16 @@ class SessionViewActivity : AppCompatActivity() {
         speakersRV.adapter = speakersAdapter
     }
 
-    private fun handleFetchSessionData(sessionsModel: SessionsModel?) {
-        when {
-            sessionsModel != null -> {
-                sessionsModel1 = sessionsModel
+    private fun handleFetchSessionData(sessionsModel: SessionsModel) {
 
-                //set the data on the view
-                txtSessionTime.text = sessionsModel.time
-                txtSessionRoom.text = sessionsModel.room
-                txtSessionDesc.text = sessionsModel.description
-                txtSessionCategory.text = sessionsModel.topic
-                sessionViewTitleText.text = sessionsModel.title
+        sessionsModel1 = sessionsModel
+        //set the data on the view
+        txtSessionTime.text = sessionsModel.time
+        txtSessionRoom.text = sessionsModel.room
+        txtSessionDesc.text = sessionsModel.description
+        txtSessionCategory.text = sessionsModel.topic
+        sessionViewTitleText.text = sessionsModel.title
 
-            }
-        }
     }
 
     private fun handleDatabaseError(databaseError: String?) {
