@@ -8,8 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -23,11 +21,11 @@ import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
-import droiddevelopers254.droidconke.views.activities.AuthenticateUserActivity
-import droiddevelopers254.droidconke.views.activities.EventFeedbackActivity
-import droiddevelopers254.droidconke.views.fragments.InfoFragment
-import droiddevelopers254.droidconke.views.fragments.MapFragment
-import droiddevelopers254.droidconke.views.fragments.ScheduleFragment
+import droiddevelopers254.droidconke.ui.authentication.AuthenticateUserActivity
+import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
+import droiddevelopers254.droidconke.ui.info.InfoFragment
+import droiddevelopers254.droidconke.ui.venuemap.MapFragment
+import droiddevelopers254.droidconke.ui.schedule.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.ext.android.inject
 

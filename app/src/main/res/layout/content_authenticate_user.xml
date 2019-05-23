@@ -7,7 +7,7 @@
     android:background="@color/colorYellow"
     android:scrollbarThumbVertical="@android:color/transparent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".views.activities.AuthenticateUserActivity"
+    tools:context=".ui.authentication.AuthenticateUserActivity"
     android:fillViewport="true"
     tools:showIn="@layout/activity_authenticate_user">
 

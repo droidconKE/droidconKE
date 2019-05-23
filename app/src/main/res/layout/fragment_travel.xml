@@ -18,25 +18,25 @@
         android:paddingTop="@dimen/fab_margin"
         android:showDividers="middle">
 
-        <droiddevelopers254.droidconke.ui.CollapsibleCard
+        <droiddevelopers254.droidconke.utils.CollapsibleCard
             android:id="@+id/shuttleInfoCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardTitle="@string/travel_shuttle_info_title" />
 
-        <droiddevelopers254.droidconke.ui.CollapsibleCard
+        <droiddevelopers254.droidconke.utils.CollapsibleCard
             android:id="@+id/publicTransportationCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardTitle="@string/travel_public_transportation_info_title" />
 
-        <droiddevelopers254.droidconke.ui.CollapsibleCard
+        <droiddevelopers254.droidconke.utils.CollapsibleCard
             android:id="@+id/rideSharingCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardTitle="@string/travel_ride_sharing_info_title" />
 
-        <droiddevelopers254.droidconke.ui.CollapsibleCard
+        <droiddevelopers254.droidconke.utils.CollapsibleCard
             android:id="@+id/carpoolingParkingCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
