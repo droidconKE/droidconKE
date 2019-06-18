@@ -18,8 +18,8 @@ class EventTypeAdapter(private val eventTypesList: List<EventTypeModel>, private
         private val eventDescriptionText = itemView.eventDescriptionText
         private val eventImg = itemView.eventImg
 
-        fun bindEvents(eventTypeModel: EventTypeModel){
-            with(eventTypeModel){
+        fun bindEvents(eventTypeModel: EventTypeModel) {
+            with(eventTypeModel) {
 
                 Glide.with(itemView.context).load(eventImageUrl)
                         .thumbnail(Glide.with(itemView.context).load(eventImageUrl))
@@ -38,7 +38,7 @@ class EventTypeAdapter(private val eventTypesList: List<EventTypeModel>, private
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-      holder.bindEvents(eventTypesList[position])
+        holder.bindEvents(eventTypesList[position])
     }
 
     override fun getItemCount(): Int {

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -20,22 +19,19 @@ import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
-import kotlinx.android.synthetic.main.fragment_event.view.*
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
 class EventFragment : Fragment() {
     private val eventTypeViewModel: EventTypeViewModel by inject()
-    lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
+    private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_event, container, false)
+        return inflater.inflate(R.layout.fragment_event, container, false)
+    }
 
-        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
-
-        val wifiSsidText = view.wifiSsidText
-        val wifiPasswordText = view.wifiPasswordText
-        val eventTypesRv= view.eventTypesRv
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // [START enable_dev_mode]
         val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -51,16 +47,14 @@ class EventFragment : Fragment() {
         eventTypeViewModel.fetchSessions()
 
         //get remote config values
-        getRemoteConfigValues(wifiSsidText,wifiPasswordText)
-
-        return view
+        getRemoteConfigValues(wifiSsidText, wifiPasswordText)
     }
 
     private fun observeLiveData() {
-        eventTypeViewModel.getWifiDetailsResponse().nonNull().observe(this){
+        eventTypeViewModel.getWifiDetailsResponse().nonNull().observe(this) {
             handleFetchEventsResponse(it, eventTypesRv)
         }
-        eventTypeViewModel.getWifiDetailsError().nonNull().observe(this){
+        eventTypeViewModel.getWifiDetailsError().nonNull().observe(this) {
             handleDatabaseError(it)
         }
     }
@@ -79,10 +73,11 @@ class EventFragment : Fragment() {
                         it.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
                             // values are returned.
                             firebaseRemoteConfig.activate()
-                        else -> { }
+                        else -> {
+                        }
                     }
                     val wifiDetailsModel = WifiDetailsModel(firebaseRemoteConfig.getString("wifi_ssid"), firebaseRemoteConfig.getString("wifi_password"))
-                    updateViews(wifiDetailsModel,wifiSsidText,wifiPasswordText)
+                    updateViews(wifiDetailsModel, wifiSsidText, wifiPasswordText)
 
                 }
     }
@@ -94,7 +89,7 @@ class EventFragment : Fragment() {
 
     private fun handleFetchEventsResponse(eventTypeModelList: List<EventTypeModel>?, eventTypesRv: RecyclerView) {
         when {
-            eventTypeModelList != null -> initView(eventTypeModelList,eventTypesRv)
+            eventTypeModelList != null -> initView(eventTypeModelList, eventTypesRv)
         }
     }
 
@@ -102,11 +97,10 @@ class EventFragment : Fragment() {
         activity?.toast(databaseError.toString())
     }
 
-    private fun initView(eventTypeModelList: List<EventTypeModel>,eventTypesRv :RecyclerView) {
+    private fun initView(eventTypeModelList: List<EventTypeModel>, eventTypesRv: RecyclerView) {
         val layoutManager = LinearLayoutManager(activity)
         eventTypesRv.layoutManager = layoutManager
         eventTypesRv.isNestedScrollingEnabled = false
-        eventTypesRv.itemAnimator = DefaultItemAnimator()
         eventTypesRv.adapter = EventTypeAdapter(eventTypeModelList, activity!!)
 
     }

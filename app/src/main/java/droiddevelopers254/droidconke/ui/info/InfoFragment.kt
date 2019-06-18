@@ -12,22 +12,21 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.ui.about.AboutFragment
 import droiddevelopers254.droidconke.ui.events.EventFragment
 import droiddevelopers254.droidconke.ui.traveldetails.TravelFragment
-import kotlinx.android.synthetic.main.fragment_info.view.*
+import kotlinx.android.synthetic.main.fragment_info.*
 import java.util.*
 
 class InfoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_info, container, false)
-        activity?.title = "Info"
+        return inflater.inflate(R.layout.fragment_info, container, false)
 
-        val viewPager = view.viewpager
-        setupViewPager(viewPager)
+    }
 
-        val tabLayout = view.tabs
-        tabLayout.setupWithViewPager(viewPager)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return view
+        setupViewPager(viewpager)
+        tabLayout.setupWithViewPager(viewpager)
 
     }
 

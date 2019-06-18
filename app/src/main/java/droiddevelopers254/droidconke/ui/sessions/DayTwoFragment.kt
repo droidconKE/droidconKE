@@ -16,7 +16,7 @@ import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.ui.sessiondetails.SessionViewActivity
-import kotlinx.android.synthetic.main.fragment_day_two.view.*
+import kotlinx.android.synthetic.main.fragment_day_two.*
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -27,17 +27,17 @@ class DayTwoFragment : Fragment() {
     private val dayTwoViewModel: DayTwoViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_day_two, container, false)
+        return inflater.inflate(R.layout.fragment_day_two, container, false)
+    }
 
-        sessionsAdapter= SessionsAdapter(activity!!, sessionsModelList, "day_two")
-        val sessionsRv = view.sessionsRv
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_two")
         initView(sessionsRv)
-
-
         dayTwoViewModel.getDayTwoSessions()
         //observe live data emitted by view model
         observerLiveData()
-        return view
     }
 
     private fun observerLiveData() {

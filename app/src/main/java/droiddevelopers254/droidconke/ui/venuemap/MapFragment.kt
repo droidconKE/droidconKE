@@ -139,16 +139,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -207,7 +197,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             true
         }
         when {
-            android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP -> checkLocationPermission()
+            Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP -> checkLocationPermission()
             else -> mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
         }
     }
@@ -277,7 +267,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         private const val DEFAULT_ZOOM = 17
         private const val KEY_CAMERA_POSITION = "camera_position"
         private const val KEY_LOCATION = "location"
-        protected const val REQUEST_CHECK_SETTINGS = 0x1
+        private const val REQUEST_CHECK_SETTINGS = 0x1
         private const val PERMISSION_CALLBACK_CONSTANT = 100
         private const val REQUEST_PERMISSION_SETTING = 101
     }

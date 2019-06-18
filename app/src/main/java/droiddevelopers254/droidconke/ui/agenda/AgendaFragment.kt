@@ -23,14 +23,16 @@ class AgendaFragment : Fragment() {
     private val agendaViewModel: AgendaViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_agenda, container, false)
+        return inflater.inflate(R.layout.fragment_agenda, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         //fetch agendas
         agendaViewModel.fetchAgendas()
-
         //observe live data emitted by view model
         observeLiveData()
-        return view
     }
 
     private fun observeLiveData() {
@@ -59,7 +61,6 @@ class AgendaFragment : Fragment() {
         val agendaAdapter = AgendaAdapter(agendaModelList, context!!)
         val layoutManager = LinearLayoutManager(activity)
         agendaRv.layoutManager = layoutManager
-        agendaRv.itemAnimator = DefaultItemAnimator()
         agendaRv.adapter = agendaAdapter
     }
 

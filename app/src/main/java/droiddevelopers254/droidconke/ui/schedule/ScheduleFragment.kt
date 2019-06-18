@@ -8,34 +8,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.ui.agenda.AgendaFragment
 import droiddevelopers254.droidconke.ui.sessions.DayOneFragment
 import droiddevelopers254.droidconke.ui.sessions.DayTwoFragment
-import kotlinx.android.synthetic.main.fragment_schedule.view.*
+import kotlinx.android.synthetic.main.fragment_schedule.*
 import java.util.*
 
 class ScheduleFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_schedule, container, false)
-        activity?.title = "Schedule"
+        return inflater.inflate(R.layout.fragment_schedule, container, false)
+    }
 
-        val viewPager = view.viewpager
-        val tabLayout = view.tabs
-
-        setupViewPager(viewPager)
-        tabLayout.setupWithViewPager(viewPager)
-
-        val currentItem = viewPager.currentItem
-        when (currentItem) {
-            2 -> {
-                HomeActivity.fabVisible = false
-            }
-        }
-        return view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager(viewpager)
+        tabLayout.setupWithViewPager(viewpager)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

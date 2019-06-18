@@ -11,15 +11,17 @@ import droiddevelopers254.droidconke.BuildConfig
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.TravelInfoModel
 import droiddevelopers254.droidconke.utils.CollapsibleCard
-import kotlinx.android.synthetic.main.fragment_travel.view.*
+import kotlinx.android.synthetic.main.fragment_travel.*
 
 class TravelFragment : Fragment() {
-    private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
+    private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_travel, container, false)
+        return inflater.inflate(R.layout.fragment_travel, container, false)
+    }
 
-        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // [START enable_dev_mode]
         val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -27,15 +29,7 @@ class TravelFragment : Fragment() {
                 .build()
         firebaseRemoteConfig.setConfigSettings(configSettings)
 
-        //get remote config values
-        val shuttleServiceCard = view.shuttleInfoCard
-        val carpoolingParkingCard = view.carpoolingParkingCard
-        val publicTransportationCard = view.publicTransportationCard
-        val rideSharingCard = view.rideSharingCard
-
-        getRemoteConfigValues(shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
-
-        return view
+        getRemoteConfigValues(shuttleInfoCard, carpoolingParkingCard, publicTransportationCard, rideSharingCard)
     }
 
     private fun getRemoteConfigValues(shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
@@ -58,7 +52,7 @@ class TravelFragment : Fragment() {
                     }
                     val travelInfoModel = TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
                             firebaseRemoteConfig.getString("ride_sharing"))
-                    showInfo(travelInfoModel,shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
+                    showInfo(travelInfoModel, shuttleServiceCard, carpoolingParkingCard, publicTransportationCard, rideSharingCard)
 
                 }
     }
