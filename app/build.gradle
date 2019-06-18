@@ -43,18 +43,18 @@ android {
 dependencies {
     def coroutines_version = '1.2.1'
     def koin_version = '2.0.0-GA4'
-    def room_version = '2.1.0-beta01'
+    def room_version = '2.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
     // Maintain version 2.0.0-alpha2 till issue is resolved (https://issuetracker.google.com/issues/121395935)
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta01'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta02'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation "org.apache.commons:commons-lang3:3.5"
-    implementation 'androidx.media:media:1.1.0-beta01'
+    implementation 'androidx.media:media:1.1.0-rc01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.browser:browser:1.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
-    implementation 'androidx.test.espresso:espresso-idling-resource:3.1.1'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
 
     //butter knife dep
     implementation 'com.jakewharton:butterknife:10.1.0'
@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:17.0.0'
     implementation 'com.google.firebase:firebase-crash:16.2.1'
     implementation 'com.google.firebase:firebase-messaging:18.0.0'
-    implementation 'com.google.firebase:firebase-firestore:19.0.0'
+    implementation 'com.google.firebase:firebase-firestore:19.0.2'
     implementation "com.firebaseui:firebase-ui-firestore:3.3.0"
     implementation 'com.google.firebase:firebase-common-ktx:17.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:19.0.0'
@@ -109,17 +109,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation "org.koin:koin-test:$koin_version"
     testImplementation "androidx.arch.core:core-testing:2.0.1"
-    testImplementation 'androidx.test.ext:junit:1.1.0'
-    testImplementation 'androidx.test:rules:1.1.1'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test:rules:1.2.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test:rules:1.1.1'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
     androidTestImplementation 'com.bartoszlipinski:disable-animations-rule:1.0.0'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
