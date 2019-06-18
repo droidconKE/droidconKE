@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/scheduleFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/schedule_label" />
+        <item
+            android:id="@+id/agendaFragment"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/agenda_label" />
+        <item
+            android:id="@+id/announcementFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/announcements_label" />
+        <item
+            android:id="@+id/mapFragment"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/map_label" />
+
+        <item
+            android:id="@+id/infoFragment"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/info_label" />
+    </group>
+
+</menu>

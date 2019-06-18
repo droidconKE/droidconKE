@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     style="@style/CollapsibleCardTitle"
                     android:id="@+id/agendaTitleText"
-                    android:text="@string/agenda_title"
+                    android:text="@string/agenda_label"
                     android:textSize="@dimen/text_size_small"
                     android:layout_height="wrap_content" />
                 <TextView

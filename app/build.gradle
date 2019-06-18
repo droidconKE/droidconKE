@@ -42,7 +42,7 @@ android {
 
 dependencies {
     def coroutines_version = '1.2.1'
-    def koin_version = '2.0.0-GA4'
+    def koin_version = '2.0.1'
     def room_version = '2.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -83,8 +83,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.2.0'
 
     //architecture components dependencies
-    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha01"
     implementation "androidx.room:room-runtime:$room_version"
@@ -92,6 +93,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05"
+    implementation "androidx.navigation:navigation-ui-ktx:2.1.0-alpha05"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05"
 
     //rx java dep
     implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
@@ -125,6 +129,8 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true
     }
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

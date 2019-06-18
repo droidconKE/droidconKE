@@ -9,9 +9,9 @@
     <string name="session_time">1 hour</string>
     <string name="session_room">6th Floor,Senteu Plaza</string>
     <string name="session_category">Firebase</string>
-    <string name="agenda_title">Breakfast</string>
+    <string name="agenda_label">Breakfast</string>
     <string name="agenda_time">7:00 AM - 9:30 AM</string>
-    <string name="title_activity_session_view"/>
+    <string name="title_activity_session_view" />
     <string name="large_text">
         "Material is the metaphor"
 
@@ -56,8 +56,8 @@
         Never miss a session as we \n
         will notify you before the sessionsModel start</string>
     <string name="schedule_title">Schedule</string>
-    <string name="info_title">Info</string>
-    <string name="map_title">Map</string>
+    <string name="info_label">Info</string>
+    <string name="map_label">Map</string>
     <string name="settings_east_african_time">Events in East African Zone</string>
     <string name="settings_enable_notifications">Enable notifications</string>
     <string name="settings_send_statistics">Send anonymous usage statistics</string>
@@ -158,4 +158,16 @@
     <string name="hintEventFeedback">Event feedback</string>
     <string name="schedule_label">Schedule</string>
     <string name="event_website">www.droidcon.co.ke</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_sessions">Home</string>
+    <string name="menu_agenda">Gallery</string>
+    <string name="menu_announcements">Slideshow</string>
+    <string name="menu_map">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_info">Send</string>
+    <string name="announcements_label">Announcements</string>
 </resources>

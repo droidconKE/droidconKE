@@ -49,8 +49,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     lateinit var mLocationRequest: LocationRequest
     internal var currentLatLng: LatLng? = null
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
-    internal var permissionsRequired = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-    internal var sentToSettings = false
+    private var permissionsRequired = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    private var sentToSettings = false
     lateinit var sharedPreferences: SharedPreferences
 
     private var mLocationCallback: LocationCallback = object : LocationCallback() {
@@ -99,7 +99,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.activity_map, container, false)
+        val view = inflater.inflate(R.layout.fragment_map, container, false)
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity!!)
         sharedPreferences = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
