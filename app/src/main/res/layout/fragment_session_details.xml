@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+
+        <io.github.droidkaigi.confsched2019.session.ui.widget.CollapsibleToolbar
+            android:id="@+id/content_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:fitsSystemWindows="false"
+            android:minHeight="?attr/actionBarSize"
+            app:layoutDescription="@xml/motion_session_detail"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:progress="0"
+            >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/session_toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/abc_ic_ab_back_material"
+                tools:ignore="PrivateResource"
+                />
+
+            <androidx.emoji.widget.EmojiAppCompatTextView
+                android:id="@+id/session_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:minHeight="?attr/actionBarSize"
+                android:textAppearance="@style/TextAppearance.App.Headline5"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/session_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text=""
+                />
+
+        </io.github.droidkaigi.confsched2019.session.ui.widget.CollapsibleToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/session_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="24dp"
+            >
+
+            <TextView
+                android:id="@+id/session_time_and_room"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="20min / Hall"
+                />
+
+
+            <ImageView
+                android:id="@+id/session_time_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/session_description_time_image"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/session_time_and_room"
+                app:srcCompat="@drawable/ic_access_time_black_24dp"
+                />
+
+            <TextView
+                android:id="@+id/session_start_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{session.timeSummary(lang, timeZoneOffset)}"
+                android:textAppearance="@style/TextAppearance.App.Body1"
+                app:layout_constraintBottom_toBottomOf="@id/session_time_image"
+                app:layout_constraintStart_toEndOf="@id/session_time_image"
+                app:layout_constraintTop_toTopOf="@id/session_time_image"
+                tools:text="2月2日 10:20-10:40"
+                />
+
+
+            <ImageView
+                android:id="@+id/divider_top_description"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_time_image"
+                app:layout_goneMarginTop="32dp"
+                />
+
+            <androidx.emoji.widget.EmojiAppCompatTextView
+                android:id="@+id/session_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="2dp"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.App.Body1"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_description"
+                tools:text="@string/event_description"
+                />
+
+            <ImageView
+                android:id="@+id/divider_top_intended_audience"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_description"
+                />
+
+            <TextView
+                android:id="@+id/session_intended_audience_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/session_detail_intended_audience"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_intended_audience"
+                />
+
+            <androidx.emoji.widget.EmojiAppCompatTextView
+                android:id="@+id/session_intended_audience_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="2dp"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.App.Body1"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/session_intended_audience_title"
+                app:visibleGone="@{speechSession != null}"
+                tools:text="@string/session_audience"
+                />
+
+            <ImageView
+                android:id="@+id/divider_top_tags"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_intended_audience_description"
+                />
+
+            <TextView
+                android:id="@+id/session_tag_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/session_detail_tag"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_tags"
+                />
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/session_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                app:chipSpacing="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/session_tag_title"
+                app:visibleGone="@{speechSession != null}"
+                >
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/language_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/session_category"
+                    android:textAppearance="@style/TextAppearance.App.Body1"
+                    app:chipMinTouchTargetSize="0dp"
+                    tools:text="Japanese"
+                    />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/for_beginners_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/session_audience"
+                    android:textAppearance="@style/TextAppearance.App.Body1"
+                    android:textColor="@color/tag_text_green"
+                    app:chipBackgroundColor="@color/tag_bg_green"
+                    app:chipMinTouchTargetSize="0dp"
+                    app:visibleGone="@{speechSession.forBeginners}"
+                    />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <ImageView
+                android:id="@+id/divider_top_survey"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_tags"
+                />
+
+
+            <TextView
+                android:id="@+id/session_survey_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="@string/session_feedback"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_survey"
+                />
+
+            <TextView
+                android:id="@+id/session_go_to_survey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="?selectableItemBackground"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:text="@string/session_feedback"
+                android:textAppearance="@style/TextAppearance.Lekton.Body1"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBaseline_toBaselineOf="@id/session_survey_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/divider_top_speakers"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="26dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_survey_title"
+                />
+
+            <TextView
+                android:id="@+id/session_speaker_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/session_detail_speaker"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_speakers"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/session_speakers"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_speaker_title"
+                app:visibleGone="@{speechSession != null}"
+                tools:listitem="@layout/item_speaker"
+                />
+
+            <ImageView
+                android:id="@+id/divider_top_resource"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@null"
+                android:layerType="software"
+                android:src="@drawable/shape_dashed_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_speakers"
+                />
+
+            <TextView
+                android:id="@+id/session_resource_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/session_detail_resource"
+                android:textAppearance="@style/TextAppearance.Lekton.Subtitle1"
+                app:layout_constraintStart_toStartOf="@id/session_time_and_room"
+                app:layout_constraintTop_toBottomOf="@id/divider_top_resource"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/session_video_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_local_movies_outline_gray2_24dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/session_detail_resource_video"
+                android:textAppearance="@style/TextAppearance.Lekton.Body1"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_resource_title"
+                app:visibleGone="@{speechSession.hasVideo}"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/session_slide_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_file_copy_outline_gray2_24dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/session_detail_resource_slide"
+                android:textAppearance="@style/TextAppearance.Lekton.Body1"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_video_button"
+                app:layout_goneMarginTop="8dp"
+                app:visibleGone="@{speechSession.hasSlide}"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabAlignmentMode="end"
+        app:hideOnScroll="true"
+        app:layout_behavior="@string/session_bottom_appbar_behavior"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/session_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bookmark_border_black_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_anchor="@id/bottom_app_bar"
+        app:tint="@color/colorWhite"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -171,4 +171,16 @@
     <string name="menu_info">Send</string>
     <string name="announcements_label">Announcements</string>
     <string name="event_types">Event types</string>
+    <string name="session_detail_speaker" translatable="false">Speaker</string>
+    <string name="session_description_favorite_image" translatable="false">favorite image</string>
+    <string name="session_go_to_feedback">Go to Feedback</string>
+    <string name="speaker_label" translatable="false">Speaker</string>
+    <string name="session_description_time_image" translatable="false">time image</string>
+    <string name="session_detail_intended_audience">Intended Audience</string>
+    <string name="session_detail_tag">Tags</string>
+    <string name="session_detail_resource">Resources</string>
+    <string name="session_detail_resource_video">Video</string>
+    <string name="session_detail_resource_slide">Slides</string>
+    <string name="session_bottom_appbar_behavior" translatable="false">droiddevelopers254.droidconke.ui.widget.SessionBottomAppBarBehavior</string>
+    <string name="session_audience">Beginner session</string>
 </resources>
