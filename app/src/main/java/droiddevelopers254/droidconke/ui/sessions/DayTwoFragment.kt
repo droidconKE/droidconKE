@@ -23,7 +23,7 @@ import java.util.*
 
 class DayTwoFragment : Fragment() {
     lateinit var sessionsAdapter: SessionsAdapter
-    internal var sessionsModelList: List<SessionsModel> = ArrayList()
+    private var sessionsModelList: List<SessionsModel> = ArrayList()
     private val dayTwoViewModel: DayTwoViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,11 +33,17 @@ class DayTwoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_two")
+        sessionsAdapter = SessionsAdapter(sessionsModelList){
+            redirectToSessionDetails()
+        }
         initView(sessionsRv)
         dayTwoViewModel.getDayTwoSessions()
         //observe live data emitted by view model
         observerLiveData()
+    }
+
+    private fun redirectToSessionDetails() {
+
     }
 
     private fun observerLiveData() {
@@ -55,24 +61,8 @@ class DayTwoFragment : Fragment() {
     }
 
     private fun initView(sessionsRv: RecyclerView) {
-        val layoutManager = LinearLayoutManager(activity)
-        sessionsRv.layoutManager = layoutManager
-        sessionsRv.itemAnimator = DefaultItemAnimator()
+        sessionsRv.layoutManager = LinearLayoutManager(activity)
         sessionsRv.adapter = sessionsAdapter
-        sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
-            override fun onClick(view: View, position: Int) {
-                val intent = Intent(context, SessionViewActivity::class.java)
-                intent.putExtra("sessionId", sessionsModelList[position].id)
-                intent.putExtra("dayNumber", "day_two")
-                intent.putExtra("starred", sessionsModelList[position].starred)
-                intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
-                intent.putExtra("roomId", sessionsModelList[position].room_id)
-                startActivity(intent)
-            }
-
-            override fun onLongClick(view: View?, position: Int) {
-            }
-        }))
     }
 
 }

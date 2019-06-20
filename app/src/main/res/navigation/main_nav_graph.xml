@@ -30,4 +30,18 @@
         android:name="droiddevelopers254.droidconke.ui.announcements.AnnouncementFragment"
         android:label="@string/announcements_label"
         tools:layout="@layout/fragment_announcements"/>
+    <fragment
+        android:id="@+id/sessionDetailsFragment"
+        android:name="droiddevelopers254.droidconke.ui.sessiondetails.SessionDetailsFragment"
+        android:label="@string/session_details_label"
+        tools:layout="@layout/fragment_session_details"/>
+    <fragment
+        android:id="@+id/dayOneFragment"
+        android:name="droiddevelopers254.droidconke.ui.sessions.DayOneFragment"
+        android:label="@string/day_one_label"
+        tools:layout="@layout/fragment_day_one">
+        <action
+            android:id="@+id/action_dayOneFragment_to_sessionDetailsFragment"
+            app:destination="@id/sessionDetailsFragment" />
+    </fragment>
 </navigation>

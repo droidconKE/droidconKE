@@ -9,32 +9,32 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
-import kotlinx.android.synthetic.main.session_details.view.*
+import kotlinx.android.synthetic.main.item_session.view.*
 
-class SessionsAdapter(private val context: Context, private var sessionsModelList: List<SessionsModel>, private val dayNumber: String) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
+class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, private val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val sessionTitleText = itemView.sessionTitleText
-        private val sessionDetailsLinear = itemView.sessionDetailsLinear
-        private val sessionRoomText = itemView.sessionRoomText
-        private val sessionLabelText = itemView.sessionLabelText
-        private val sessionCategoryText = itemView.sessionCategoryText
+    class MyViewHolder(itemView: View, val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
+        private val sessionTitleText = itemView.title
+        private val sessionRoomText = itemView.time_and_room
 
         @SuppressLint("Range")
         fun bindSession(sessionsModel: SessionsModel) {
             with(sessionsModel) {
                 sessionTitleText.text = title
-                sessionLabelText.setBackgroundColor(Color.parseColor(session_color))
-                sessionCategoryText.text = topic
                 sessionRoomText.text = "$duration / $room / $time_in_am $am_pm_label"
+
+                itemView.setOnClickListener {
+                    itemClickListener(this)
+                }
             }
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.session_details, parent, false)
-        return MyViewHolder(itemView)
+                .inflate(R.layout.item_session, parent, false)
+        return MyViewHolder(itemView, itemClickListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

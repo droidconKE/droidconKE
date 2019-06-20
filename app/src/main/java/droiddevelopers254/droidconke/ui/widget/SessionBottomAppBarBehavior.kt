@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.children
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomappbar.BottomAppBar
+
 
 class SessionBottomAppBarBehavior(
         context: Context? = null,

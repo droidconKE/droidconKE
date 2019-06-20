@@ -20,11 +20,11 @@
         android:layout_height="150dp"
         >
 
-        <io.github.droidkaigi.confsched2019.session.ui.widget.CollapsibleToolbar
+        <droiddevelopers254.droidconke.ui.widget.CollapsibleToolbar
             android:id="@+id/content_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
+            android:background="@color/colorWhite"
             android:fitsSystemWindows="false"
             android:minHeight="?attr/actionBarSize"
             app:layoutDescription="@xml/motion_session_detail"
@@ -60,7 +60,7 @@
                 tools:text=""
                 />
 
-        </io.github.droidkaigi.confsched2019.session.ui.widget.CollapsibleToolbar>
+        </droiddevelopers254.droidconke.ui.widget.CollapsibleToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -194,7 +194,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/session_time_and_room"
                 app:layout_constraintTop_toBottomOf="@id/session_intended_audience_title"
-                app:visibleGone="@{speechSession != null}"
                 tools:text="@string/session_audience"
                 />
 
@@ -235,7 +234,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/session_time_and_room"
                 app:layout_constraintTop_toBottomOf="@id/session_tag_title"
-                app:visibleGone="@{speechSession != null}"
                 >
 
                 <com.google.android.material.chip.Chip
@@ -268,7 +266,6 @@
                     android:textColor="@color/tag_text_green"
                     app:chipBackgroundColor="@color/tag_bg_green"
                     app:chipMinTouchTargetSize="0dp"
-                    app:visibleGone="@{speechSession.forBeginners}"
                     />
 
             </com.google.android.material.chip.ChipGroup>
@@ -352,7 +349,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/session_speaker_title"
-                app:visibleGone="@{speechSession != null}"
                 tools:listitem="@layout/item_speaker"
                 />
 
@@ -403,7 +399,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/session_resource_title"
-                app:visibleGone="@{speechSession.hasVideo}"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -428,7 +423,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/session_video_button"
                 app:layout_goneMarginTop="8dp"
-                app:visibleGone="@{speechSession.hasSlide}"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
