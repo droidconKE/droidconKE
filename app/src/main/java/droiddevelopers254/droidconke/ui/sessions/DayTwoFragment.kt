@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,7 @@ class DayTwoFragment : Fragment() {
     }
 
     private fun redirectToSessionDetails() {
-
+        findNavController().navigate(R.id.action_dayTwoFragment_to_sessionDetailsFragment)
     }
 
     private fun observerLiveData() {
