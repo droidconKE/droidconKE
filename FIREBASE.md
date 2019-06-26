@@ -1,4 +1,4 @@
-In the .droidconKE app we have used the following Firebase SDKs
+In the .droidconKE app we are using the following Firebase SDKs
 1. Cloud Firestore
 2. Cloud Messaging
 3. Crashlytics
@@ -11,11 +11,11 @@ For those who want to run the code for the .droidconKE app, follow the setup ste
 
 ### Authentication Setup
 
-The .droidconKE uses Google sign up for users to easily sign up/in to the app. Firebase has a couple of authentication methods but we used only Google Sign in. In your Firebase Console, Go to Authentication and click on the **Sign-in method and enable Google.**
+The .droidconKE uses Google sign up for users to easily sign up/in to the app. Firebase has a couple of authentication methods but are only using Google Sign in. In your Firebase Console, Go to Authentication and click on the **Sign-in method tab and enable Google.**
 
 
 ### Cloud Storage Setup
-All the images for the .droidconKE app were stored in Cloud Storage. The images are grouped into folders for easier identification. The following are the folders in the cloud storage.
+All the images for the .droidconKE app are stored in Cloud Storage. The images are grouped into folders for easier identification. The following are the folders in the cloud storage.
 
 **1. agenda_icons/** - This contains icons for the conference agenda. Example of the agendas include lunch, after hours, codelabs etc. You can have your own icons and place them in these folder and add their names as:
    1. codelabs.png
@@ -40,7 +40,7 @@ All the images for the .droidconKE app were stored in Cloud Storage. The images 
    1. speaker_one.png
    2. speaker_two.png
    
-**6. sponsors/** - This folder contains the logos for the companies that sponsored the conference. Example images in this folder are: 
+**6. sponsors/** - This folder contains the logos for the companies that sponsor the conference. Example images in this folder are: 
    1. sponsor_one.png
    2. sponsor_two.png
    
@@ -48,23 +48,23 @@ All the images for the .droidconKE app were stored in Cloud Storage. The images 
   
 ### Cloud Functions
   
-Cloud Functions were used to listen to when a user "stars" or favourites a session. When a favourited session is about to begin, the cloud functions will trigger cloud messaging to send notifications to all users who have starred/favourited the session. The code for the cloud functions can be found [here](https://github.com/droidconKE/droidconKE/blob/master/functions/index.js)
+Cloud Functions are for listening when a user "stars" or favourites a session. When a favourited session is about to begin, the cloud functions will trigger cloud messaging to send notifications to all users who have starred/favourited the session. The code for the cloud functions can be found [here](https://github.com/droidconKE/droidconKE/blob/master/functions/index.js)
 
 ### Cloud Messaging
 
-For Cloud Mesaging, no additional configurations were made. The default console settings are good to go with.
+For Cloud Mesaging, no additional configurations are needed. The default console settings are good to go with.
 
 ### Crashlytics
 
-The Crashlytics setup has already been done in gradle files according to the following [instructions](https://firebase.google.com/docs/crashlytics/get-started) to setup crashlytics. 
+The Crashlytics setup has already been done in gradle files according to the following [instructions](https://firebase.google.com/docs/crashlytics/get-started). 
 
 ### Remote Config
 
-We used Remote Config for the data which would change during the conference and the data that we wanted the changes t quickly reflect to the users upon change. The remote config defaults can be found in [this](https://github.com/droidconKE/droidconKE/blob/master/app/src/main/res/xml/remote_config_defaults.xml) file. Add the parameters according to their `key` in the file in the Remote Config section of Firebase Console.
+We depend on Remote Config for the data which can change during the conference and the data that is required to change  quickly and reflect to the users upon change. The remote config defaults can be found in [this](https://github.com/droidconKE/droidconKE/blob/master/app/src/main/res/xml/remote_config_defaults.xml) file. Add the parameters according to their `key` in the file in the Remote Config section of Firebase Console.
 
 ### Cloud Firestore
 
-Data for that app was stored in Cloud Firestore. We have collections and in each collection, there is a couple of documents related to that document. The following are the collections for the .droidconKE app:
+Data for that app is stored in Cloud Firestore. There are collections and in each collection, there is a couple of documents related to that document. The following are the collections for the .droidconKE app:
 
 * about_droidconKE - This collection has a document that has details about **.droidconKE** in general. The document has the following key fields:
   * bio - string description of the **.droidconKE** conference
@@ -154,7 +154,7 @@ Data for that app was stored in Cloud Firestore. We have collections and in each
   ```
   * Make sure all field names in cloud firestore are as in the Cloud firestore section to avoid exceptions in the app.
   * Ensure that the type of the field is maintained
-  * The Cloud Firestore data model tends to follow a kind of relational database to avoid repetition of data . This however does not mean that this is the go-to approach, You can come up with a more efficient data model structure a feel free to open a Pull Request. We always :heart:  a Pull Request
+  * The Cloud Firestore data model tends to follow a kind of relational database to avoid repetition of data . This however does not mean that this is the go-to approach, You can come up with a more efficient data model structure a feel free to open a Pull Request. We always Love  a Pull Request
   * The data model structure can be changed depending on your use case
   
   ```
