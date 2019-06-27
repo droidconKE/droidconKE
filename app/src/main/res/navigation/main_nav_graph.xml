@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/scheduleFragment">
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="droiddevelopers254.droidconke.ui.schedule.ScheduleFragment"
+        android:label="@string/schedule_label"
+        tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/agendaFragment"
+        android:name="droiddevelopers254.droidconke.ui.agenda.AgendaFragment"
+        android:label="@string/agenda_label"
+        tools:layout="@layout/fragment_agenda"/>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="droiddevelopers254.droidconke.ui.info.InfoFragment"
+        android:label="@string/info_label"
+        tools:layout="@layout/fragment_info"/>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="droiddevelopers254.droidconke.ui.venuemap.MapFragment"
+        android:label="@string/map_label"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/announcementFragment"
+        android:name="droiddevelopers254.droidconke.ui.announcements.AnnouncementFragment"
+        android:label="@string/announcements_label"
+        tools:layout="@layout/fragment_announcements"/>
+    <fragment
+        android:id="@+id/dayOneFragment"
+        android:name="droiddevelopers254.droidconke.ui.sessions.DayOneFragment"
+        android:label="@string/day_one_label"
+        tools:layout="@layout/fragment_day_one">
+        <action
+            android:id="@+id/action_dayOneFragment_to_sessionDetailsFragment"
+            app:destination="@id/sessionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayTwoFragment"
+        android:name="droiddevelopers254.droidconke.ui.sessions.DayTwoFragment"
+        android:label="@string/day_two_label"
+        tools:layout="@layout/fragment_day_two">
+        <action
+            android:id="@+id/action_dayTwoFragment_to_sessionDetailsFragment"
+            app:destination="@id/sessionDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sessionDetailsFragment"
+        android:name="droiddevelopers254.droidconke.ui.sessiondetails.SessionDetailsFragment"
+        android:label="@string/session_details_label"
+        tools:layout="@layout/fragment_session_details"/>
+</navigation>

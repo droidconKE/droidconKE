@@ -6,11 +6,11 @@
     android:background="@color/colorWhite"
     android:id="@+id/fragment_home"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="60dp">
+  >
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:id="@+id/tabs"
+        android:id="@+id/tabLayout"
         app:tabMode="fixed"
         app:tabGravity="fill"
         android:background="@color/colorWhite"

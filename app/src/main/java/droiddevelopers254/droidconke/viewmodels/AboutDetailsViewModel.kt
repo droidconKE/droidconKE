@@ -1,21 +1,31 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import droiddevelopers254.droidconke.datastates.AboutDetailsState
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import droiddevelopers254.droidconke.datastates.Result
+import droiddevelopers254.droidconke.models.AboutDetailsModel
 import droiddevelopers254.droidconke.repository.AboutDetailsRepo
-import droiddevelopers254.droidconke.utils.launchIdling
+import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
+import kotlinx.coroutines.launch
 
-class AboutDetailsViewModel(private val aboutDetailsRepo: AboutDetailsRepo) : BaseViewModel() {
-    private val detailsStateMediatorLiveData: MutableLiveData<AboutDetailsState> = MutableLiveData()
+class AboutDetailsViewModel(private val aboutDetailsRepo: AboutDetailsRepo) : ViewModel() {
+    private val detailsStateMediatorLiveData = NonNullMediatorLiveData<List<AboutDetailsModel>>()
+    private val detailsError = NonNullMediatorLiveData<String>()
 
-    val aboutDetails: LiveData<AboutDetailsState>
-        get() = detailsStateMediatorLiveData
+
+    fun getAboutDetailsResponse(): LiveData<List<AboutDetailsModel>> = detailsStateMediatorLiveData
+
+    fun getAboutDetailsError(): LiveData<String> = detailsError
 
     fun fetchAboutDetails(aboutType: String) {
-        launchIdling {
-            val state = aboutDetailsRepo.getAboutDetails(aboutType)
-            detailsStateMediatorLiveData.postValue(state)
+
+        viewModelScope.launch {
+            when (val value = aboutDetailsRepo.getAboutDetails(aboutType)) {
+                is Result.Success -> detailsStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> detailsError.postValue(value.exception)
+            }
         }
     }
+
 }

@@ -1,21 +1,22 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import droiddevelopers254.droidconke.datastates.UpdateTokenState
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import droiddevelopers254.droidconke.datastates.Result
+import kotlinx.coroutines.tasks.await
 
-class UpdateTokenRepo {
+class UpdateTokenRepo(val firestore: FirebaseFirestore) {
 
-    fun updateToken(userId: String, refreshToken: String): LiveData<UpdateTokenState> {
-        val updateTokenStateMutableLiveData = MutableLiveData<UpdateTokenState>()
-        val firebaseFirestore = FirebaseFirestore.getInstance()
-        firebaseFirestore.collection("users").document(userId)
-                .update("refresh_token", refreshToken)
-                .addOnSuccessListener {
-                    updateTokenStateMutableLiveData.value =UpdateTokenState(true,null) }
-                .addOnFailureListener {
-                    updateTokenStateMutableLiveData.value =UpdateTokenState(false,it.message) }
-        return updateTokenStateMutableLiveData
+    suspend fun updateToken(userId: String, refreshToken: String): Result<Boolean> {
+        return try {
+            firestore.collection("users").document(userId).update("refresh_token", refreshToken).await()
+            Result.Success(true)
+        } catch (e: FirebaseFirestoreException) {
+            Result.Error(e.message)
+        }
+
+
     }
 }

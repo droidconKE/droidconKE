@@ -84,7 +84,7 @@
                 style="@style/CollapsibleCardTitle"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/fab_margin"
-                android:text="Event types"
+                android:text="@string/event_types"
                 android:textAllCaps="true"
                 android:textSize="17sp"
                 android:layout_height="wrap_content" />

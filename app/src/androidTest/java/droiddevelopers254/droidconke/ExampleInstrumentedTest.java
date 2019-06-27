@@ -1,6 +1,11 @@
 package droiddevelopers254.droidconke;
 
 import android.content.Context;
+<<<<<<< HEAD
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+=======
+>>>>>>> 8e03877197044ef2e2a2b65ef3818a292f4818fb
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

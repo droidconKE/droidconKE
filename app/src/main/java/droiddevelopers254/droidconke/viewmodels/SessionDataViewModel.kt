@@ -1,91 +1,85 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import droiddevelopers254.droidconke.datastates.FeedBackState
-import droiddevelopers254.droidconke.datastates.RoomState
-import droiddevelopers254.droidconke.datastates.SessionDataState
-import droiddevelopers254.droidconke.datastates.SpeakersState
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import droiddevelopers254.droidconke.datastates.Result
+import droiddevelopers254.droidconke.models.RoomModel
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.SessionsUserFeedback
+import droiddevelopers254.droidconke.models.SpeakersModel
 import droiddevelopers254.droidconke.repository.RoomRepo
 import droiddevelopers254.droidconke.repository.SessionDataRepo
 import droiddevelopers254.droidconke.repository.SessionFeedbackRepo
 import droiddevelopers254.droidconke.repository.SpeakersRepo
-import droiddevelopers254.droidconke.utils.launchIdling
+import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
+import kotlinx.coroutines.launch
 
 
-class SessionDataViewModel(
-        private val sessionDataRepo: SessionDataRepo,
-        private val speakersRepo: SpeakersRepo,
-        private val roomRepo: RoomRepo,
-        private val sessionFeedbackRepo: SessionFeedbackRepo
-) : BaseViewModel() {
-    private val sessionDataStateMediatorLiveData: MediatorLiveData<SessionDataState> = MediatorLiveData()
-    private val speakersStateMediatorLiveData: MediatorLiveData<SpeakersState> = MediatorLiveData()
-    private val roomStateMediatorLiveData: MediatorLiveData<RoomState> = MediatorLiveData()
-    private val sessionsModelMediatorLiveData: MediatorLiveData<SessionsModel> = MediatorLiveData()
-    private val sessionFeedBackMediatorLiveData = MediatorLiveData<FeedBackState>()
-
-    val session: LiveData<SessionsModel>
-        get() = sessionsModelMediatorLiveData
-
-    val sessionData: LiveData<SessionDataState>
-        get() = sessionDataStateMediatorLiveData
-
-    val speakerInfo: LiveData<SpeakersState>
-        get() = speakersStateMediatorLiveData
-
-    val roomInfo: LiveData<RoomState>
-        get() = roomStateMediatorLiveData
+class SessionDataViewModel(private val sessionDataRepo: SessionDataRepo, private val speakersRepo: SpeakersRepo, private val roomRepo: RoomRepo, private val sessionFeedbackRepo: SessionFeedbackRepo) : ViewModel() {
+    private val sessionDataStateMediatorLiveData = NonNullMediatorLiveData<SessionsModel>()
+    private val sessionDataError = NonNullMediatorLiveData<String>()
+    private val speakersStateMediatorLiveData = NonNullMediatorLiveData<List<SpeakersModel>>()
+    private val speakersError = NonNullMediatorLiveData<String>()
+    private val roomStateMediatorLiveData = NonNullMediatorLiveData<RoomModel>()
+    private val roomError = NonNullMediatorLiveData<String>()
+    private val sessionFeedBackMediatorLiveData = NonNullMediatorLiveData<String>()
+    private val sessionFeedbackError = NonNullMediatorLiveData<String>()
 
 
-    fun getSessionFeedBackResponse(): LiveData<FeedBackState> = sessionFeedBackMediatorLiveData
+    fun getSessionDataResponse(): LiveData<SessionsModel> = sessionDataStateMediatorLiveData
+
+    fun getSessionDataError(): LiveData<String> = sessionDataError
+
+    fun getSpeakerInfoResponse(): LiveData<List<SpeakersModel>> = speakersStateMediatorLiveData
+
+    fun getSpeakerError(): LiveData<String> = speakersError
+
+    fun getRoomInfoResponse(): LiveData<RoomModel> = roomStateMediatorLiveData
+
+    fun getRoomInfoError(): LiveData<String> = roomError
 
 
-    fun fetchSpeakerDetails(speakerId: Int) = launchIdling {
-        val speakersStateLiveData = speakersRepo.getSpeakersInfo(speakerId)
-        speakersStateMediatorLiveData.addSource(speakersStateLiveData
-        ) {
-            when {
-                speakersStateMediatorLiveData.hasActiveObservers() -> speakersStateMediatorLiveData.removeSource(speakersStateLiveData)
+    fun getSessionFeedBackResponse(): LiveData<String> = sessionFeedBackMediatorLiveData
+
+    fun getSessionFeedbackError(): LiveData<String> = sessionFeedbackError
+
+
+    fun fetchSpeakerDetails(speakerId: Int) {
+        viewModelScope.launch {
+            when (val value = speakersRepo.getSpeakersInfo(speakerId)) {
+                is Result.Success -> speakersStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> speakersError.postValue(value.exception)
             }
-            speakersStateMediatorLiveData.setValue(it)
         }
     }
 
-    fun fetchRoomDetails(roomId: Int) = launchIdling {
-        val roomStateLiveData = roomRepo.getRoomDetails(roomId)
-        roomStateMediatorLiveData.addSource(roomStateLiveData
-        ) {
-            when {
-                roomStateMediatorLiveData.hasActiveObservers() -> roomStateMediatorLiveData.removeSource(roomStateLiveData)
+    fun fetchRoomDetails(roomId: Int) {
+        viewModelScope.launch {
+            when (val value = roomRepo.getRoomDetails(roomId)) {
+                is Result.Success -> roomStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> roomError.postValue(value.exception)
             }
-            roomStateMediatorLiveData.setValue(it)
         }
     }
 
-    fun getSessionDetails(dayNumber: String, sessionId: Int) = launchIdling {
-        val sessionsModelLiveData = sessionDataRepo.getSessionData(dayNumber, sessionId)
-        sessionDataStateMediatorLiveData.addSource(sessionsModelLiveData
-        ) { it ->
-            when {
-                sessionDataStateMediatorLiveData.hasActiveObservers() -> sessionDataStateMediatorLiveData.removeSource(sessionsModelLiveData)
+    fun getSessionDetails(dayNumber: String, sessionId: Int) {
+        viewModelScope.launch {
+            when (val value = sessionDataRepo.getSessionData(dayNumber, sessionId)) {
+                is Result.Success -> sessionDataStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> sessionDataError.postValue(value.exception)
             }
-            sessionDataStateMediatorLiveData.setValue(it)
         }
-
-
     }
 
-    fun sendSessionFeedBack(userEventFeedback: SessionsUserFeedback) = launchIdling {
-        val sessionFeedbackLiveData = sessionFeedbackRepo.sendFeedBack(userEventFeedback)
-        sessionFeedBackMediatorLiveData.addSource(sessionFeedbackLiveData
-        ) {
-            when {
-                sessionFeedBackMediatorLiveData.hasActiveObservers() -> sessionFeedBackMediatorLiveData.removeSource(sessionFeedbackLiveData)
+
+    fun sendSessionFeedBack(userEventFeedback: SessionsUserFeedback) {
+        viewModelScope.launch {
+            when (val value = sessionFeedbackRepo.sendFeedBack(userEventFeedback)) {
+                is Result.Success -> sessionFeedBackMediatorLiveData.postValue(value.data)
+                is Result.Error -> sessionFeedbackError.postValue(value.exception)
             }
-            sessionFeedBackMediatorLiveData.setValue(it)
+
         }
     }
 }

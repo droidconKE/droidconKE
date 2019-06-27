@@ -12,9 +12,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.bartoszlipinski.disableanimationsrule.DisableAnimationsRule
 import droiddevelopers254.droidconke.R
-import droiddevelopers254.droidconke.adapters.AboutDetailsAdapter
+import droiddevelopers254.droidconke.ui.about.AboutDetailsAdapter
 import droiddevelopers254.droidconke.utils.EspressoIdlingResource
-import droiddevelopers254.droidconke.views.activities.AboutDetailsActivity
+import droiddevelopers254.droidconke.ui.about.AboutDetailsActivity
 import org.hamcrest.CoreMatchers.*
 import org.junit.*
 import org.junit.runner.RunWith

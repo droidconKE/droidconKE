@@ -6,7 +6,7 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
+# and specify the fully qualified class description to the JavaScript interface
 # class:
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
@@ -17,5 +17,10 @@
 #-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
-# hide the original source file name.
+# hide the original source file description.
 #-renamesourcefileattribute SourceFile
+-keep class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
+-keepclassmembers class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
+-keep class droiddevelopers254.droidconke.models.** { *; }
+-keep class android.support.v7.widget.RecyclerView { *; }
+-dontwarn okhttp3.internal.platform.*

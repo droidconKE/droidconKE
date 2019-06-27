@@ -1,33 +1,25 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
-import droiddevelopers254.droidconke.datastates.AgendaState
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.ktx.Firebase
+import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.AgendaModel
+import droiddevelopers254.droidconke.utils.await
 
-class AgendaRepo {
+class AgendaRepo(val firestore: FirebaseFirestore) {
 
-    val agendaData: LiveData<AgendaState>
-        get() {
-            val sessionsModelMutableLiveData = MutableLiveData<AgendaState>()
-            val firebaseFirestore = FirebaseFirestore.getInstance()
-            firebaseFirestore.collection("agenda")
-                    .orderBy("id", Query.Direction.ASCENDING)
-                    .get()
-                    .addOnSuccessListener {
-                        when {
-                            !it.isEmpty -> {
-                                val agendaModelList = it.toObjects(AgendaModel::class.java)
-                                sessionsModelMutableLiveData.value = AgendaState(agendaModelList)
-                            }
-                        }
+    suspend fun agendaData(): Result<List<AgendaModel>> {
+        return try {
+            val snapshot = firestore.collection("agenda").orderBy("id", Query.Direction.ASCENDING).get().await()
+            return Result.Success(snapshot.toObjects())
 
-                    }
-                    .addOnFailureListener {
-                        sessionsModelMutableLiveData.value = AgendaState(null,it.message) }
-
-            return sessionsModelMutableLiveData
+        } catch (e: FirebaseFirestoreException) {
+            Result.Error(e.message)
         }
+
+    }
 }

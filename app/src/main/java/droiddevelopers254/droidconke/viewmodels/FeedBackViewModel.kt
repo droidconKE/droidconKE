@@ -1,29 +1,30 @@
 package droiddevelopers254.droidconke.viewmodels
 
-import droiddevelopers254.droidconke.datastates.FeedBackState
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.UserEventFeedback
 import droiddevelopers254.droidconke.repository.EventFeedbackRepo
+import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
+import kotlinx.coroutines.launch
 
 
-class FeedBackViewModel : ViewModel(){
-    private val feedBackStateMediatorLiveData = MediatorLiveData<FeedBackState>()
-    private val eventFeedBackRepo = EventFeedbackRepo()
+class FeedBackViewModel(private val eventFeedBackRepo : EventFeedbackRepo) : ViewModel() {
+    private val feedBackStateMediatorLiveData = NonNullMediatorLiveData<String>()
+    private val eventFeedbackError = NonNullMediatorLiveData<String>()
 
-    fun getEventFeedBackResponse(): LiveData<FeedBackState> {
-        return feedBackStateMediatorLiveData
-    }
+    fun getEventFeedBackResponse(): LiveData<String> = feedBackStateMediatorLiveData
+
+    fun getEventFeedbackError(): LiveData<String> = eventFeedbackError
+
 
     fun sendEventFeedBack(userEventFeedback: UserEventFeedback) {
-        val feedBackStateLiveData = eventFeedBackRepo.sendFeedBack(userEventFeedback)
-        feedBackStateMediatorLiveData.addSource(feedBackStateLiveData
-        ) { feedBackStateMediatorLiveData ->
-            when {
-                this.feedBackStateMediatorLiveData.hasActiveObservers() -> this.feedBackStateMediatorLiveData.removeSource(feedBackStateLiveData)
+        viewModelScope.launch {
+            when (val value = eventFeedBackRepo.sendFeedBack(userEventFeedback)) {
+                is Result.Success -> feedBackStateMediatorLiveData.postValue(value.data)
+                is Result.Error -> eventFeedbackError.postValue(value.exception)
             }
-            this.feedBackStateMediatorLiveData.setValue(feedBackStateMediatorLiveData)
         }
     }
 }

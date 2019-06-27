@@ -1,6 +1,5 @@
 package droiddevelopers254.droidconke.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
@@ -10,8 +9,8 @@ import droiddevelopers254.droidconke.models.StarredSessionModel
 @Dao
 interface StarredSessionDao {
 
-    @get:Query("SELECT * FROM starredSessions")
-    val starredSessions: LiveData<List<StarredSessionModel>>
+    @Query("SELECT * FROM starredSessions")
+    suspend fun starredSessions(): List<StarredSessionModel>
 
     @Insert(onConflict = REPLACE)
     fun starSession(starredSessionModel: StarredSessionModel)

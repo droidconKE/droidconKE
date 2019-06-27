@@ -1,0 +1,84 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:paddingBottom="@dimen/session_item_padding"
+    android:paddingEnd="0dp"
+    android:paddingStart="@dimen/session_item_padding"
+    android:paddingTop="@dimen/session_item_padding"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <androidx.emoji.widget.EmojiTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/notosans_medium"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.App.Subtitle1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favorite"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/session_title"
+        />
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="4dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/session_description_favorite_image"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title"
+        />
+
+    <LinearLayout
+        android:id="@+id/speakers"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        />
+
+    <TextView
+        android:id="@+id/time_and_room"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?textAppearanceCaption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/speakers"
+        tools:text="@string/session_title"
+        />
+
+    <TextView
+        android:id="@+id/survey"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="?selectableItemBackground"
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/ic_rate_review_border_orange_18dp"
+        android:ellipsize="end"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/session_go_to_feedback"
+        android:textAppearance="@style/TextAppearance.App.Caption"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/time_and_room"
+        tools:visibility="gone"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

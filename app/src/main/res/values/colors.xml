@@ -23,4 +23,24 @@
     <color name="colorDroidBug">#6ADEA3</color>
     <color name="colorTextViewDark">#606674</color>
     <color name="colorTextViewLight">#adb3c0</color>
+
+    <!-- Gray scale -->
+    <color name="gray1">#353435</color>
+    <color name="gray2">#95959C</color>
+    <color name="gray3">#D8D7DC</color>
+    <color name="gray4">#F4F4F4</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Components -->
+    <color name="tag_text_red">#F63529</color>
+    <color name="tag_bg_red">#FDD7D4</color>
+    <color name="tag_text_blue">#190089</color>
+    <color name="tag_bg_blue">#E8E6F3</color>
+    <color name="tag_text_green">#00BE80</color>
+    <color name="tag_bg_green">#C1EBDD</color>
+    <color name="tag_text_gray">@color/gray1</color>
+    <color name="tag_bg_gray">#E5E8EA</color>
+
+    <color name="colorOnBackground">@color/gray1</color>
+    <color name="colorSessionDashedLine">@color/gray3</color>
 </resources>

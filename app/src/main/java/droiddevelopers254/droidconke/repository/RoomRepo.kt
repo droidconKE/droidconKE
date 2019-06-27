@@ -1,27 +1,26 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import droiddevelopers254.droidconke.datastates.RoomState
+import com.google.firebase.firestore.FirebaseFirestoreException
+import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.RoomModel
+import droiddevelopers254.droidconke.utils.await
 
 class RoomRepo(private val firestore: FirebaseFirestore) {
 
-    suspend fun getRoomDetails(roomId: Int): LiveData<RoomState> {
-        val roomStateLiveData = MutableLiveData<RoomState>()
-        try {
+    suspend fun getRoomDetails(roomId: Int): Result<RoomModel> {
+        return try {
             val snapshot = firestore.collection("rooms")
                     .whereEqualTo("id", roomId)
                     .get()
                     .await()
             val doc = snapshot.documents.first()
             val roomModel = doc.toObject(RoomModel::class.java)
-            roomStateLiveData.value = RoomState(roomModel, null)
+            Result.Success(roomModel!!)
 
-        } catch (e: Exception) {
-            roomStateLiveData.value = RoomState(null, "Error getting room details")
+        } catch (e: FirebaseFirestoreException) {
+            Result.Error(e.message)
         }
-        return roomStateLiveData
+
     }
 }

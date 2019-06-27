@@ -1,3 +1,0 @@
-package droiddevelopers254.droidconke.viewmodels
-
-class SortViewModel

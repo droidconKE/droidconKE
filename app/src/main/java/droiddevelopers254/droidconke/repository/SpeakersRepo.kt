@@ -1,25 +1,23 @@
 package droiddevelopers254.droidconke.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import droiddevelopers254.droidconke.datastates.SpeakersState
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.toObjects
+import droiddevelopers254.droidconke.datastates.Result
 import droiddevelopers254.droidconke.models.SpeakersModel
+import droiddevelopers254.droidconke.utils.await
 
 class SpeakersRepo(private val firestore: FirebaseFirestore) {
 
-    suspend fun getSpeakersInfo(speakerId: Int): LiveData<SpeakersState> {
-        val speakersStateMutableLiveData = MutableLiveData<SpeakersState>()
-        try {
+    suspend fun getSpeakersInfo(speakerId: Int): Result<List<SpeakersModel>> {
+        return try {
             val snapshot = firestore.collection("speakers")
                     .whereEqualTo("id", speakerId)
                     .get()
                     .await()
-            val speakersModel = snapshot.toObjects(SpeakersModel::class.java)
-            speakersStateMutableLiveData.value = SpeakersState(speakersModel, null)
-        } catch (e: Exception) {
-            speakersStateMutableLiveData.value = SpeakersState(null, e.message)
+            Result.Success(snapshot.toObjects<SpeakersModel>())
+        } catch (e: FirebaseFirestoreException) {
+            Result.Error(e.message)
         }
-        return speakersStateMutableLiveData
     }
 }
