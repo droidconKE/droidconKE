@@ -36,7 +36,7 @@ class CoroutinesRule : TestRule {
 
             override fun evaluate() {
                 Dispatchers.setMain(mainThreadSurrogate)
-                startKoin { modules(testContext, appModule, dataModule, testFirebase) }
+                startKoin { modules(listOf(testContext, appModule, dataModule, testFirebase)) }
                 base?.evaluate()
                 Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
                 mainThreadSurrogate.close()
