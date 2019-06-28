@@ -33,7 +33,7 @@ class DayTwoViewModelTest : KoinTest {
 
     @Test
     fun `test getDayTwoSessions`() = runBlocking {
-        val state = SessionsState(emptyList())
+//        val state = SessionsState(emptyList())
 //        Mockito.`when`(dayTwoRepo.getSessions()).thenReturn(MutableLiveData<SessionsState>().apply { value = state })
 //
 //        dayTwoViewModel.getDayTwoSessions()
