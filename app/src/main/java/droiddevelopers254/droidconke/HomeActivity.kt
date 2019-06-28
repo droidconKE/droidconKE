@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeActivity : AppCompatActivity(){
+class HomeActivity : AppCompatActivity() {
     private val sharedPreferences: SharedPreferences by lazy { getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE) }
     private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
     private lateinit var params: AppBarLayout.LayoutParams
@@ -51,8 +51,8 @@ class HomeActivity : AppCompatActivity(){
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
 
-        setupActionBarWithNavController(findNavController(R.id.navHostFragment), drawer_layout)
         setupNavigation()
+        setupActionBarWithNavController(findNavController(R.id.navHostFragment), drawer_layout)
 
         //observe live data emitted by view model
         observeLiveData()
@@ -64,6 +64,14 @@ class HomeActivity : AppCompatActivity(){
         // Update action bar to reflect navigation
         NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
         NavigationUI.setupWithNavController(nav_view, navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.sessionDetailsFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+                else -> toolbar.visibility = View.VISIBLE
+            }
+        }
 
     }
 

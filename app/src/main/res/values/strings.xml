@@ -184,4 +184,5 @@
     <string name="session_bottom_appbar_behavior" translatable="false">droiddevelopers254.droidconke.ui.widget.SessionBottomAppBarBehavior</string>
     <string name="session_audience">Beginner session</string>
     <string name="session_details_label">Session Details</string>
+    <string name="session_feed_back_label">Feedback</string>
 </resources>
