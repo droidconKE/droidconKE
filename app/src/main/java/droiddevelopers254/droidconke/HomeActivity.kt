@@ -6,43 +6,36 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
+import droiddevelopers254.droidconke.ui.authentication.AuthenticateUserActivity
+import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
-import droiddevelopers254.droidconke.ui.authentication.AuthenticateUserActivity
-import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
-import droiddevelopers254.droidconke.ui.info.InfoFragment
-import droiddevelopers254.droidconke.ui.venuemap.MapFragment
-import droiddevelopers254.droidconke.ui.schedule.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity(){
     private val sharedPreferences: SharedPreferences by lazy { getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE) }
-    private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    private val firebaseRemoteConfig: FirebaseRemoteConfig by inject()
+    private val firebaseMessaging: FirebaseMessaging by inject()
+    private val firebaseAuth: FirebaseAuth by inject()
     private lateinit var params: AppBarLayout.LayoutParams
     private val homeViewModel: HomeViewModel by viewModel()
 
@@ -54,9 +47,19 @@ class HomeActivity : AppCompatActivity(){
         setupActionBarWithNavController(findNavController(R.id.navHostFragment), drawer_layout)
         setupNavigation()
 
+        setupNotifications()
+
         //observe live data emitted by view model
         observeLiveData()
 
+    }
+
+    private fun setupNotifications() {
+        firebaseMessaging.subscribeToTopic("all")
+
+        if (BuildConfig.DEBUG) {
+            firebaseMessaging.subscribeToTopic("debug")
+        }
     }
 
     private fun setupNavigation() {
@@ -89,7 +92,8 @@ class HomeActivity : AppCompatActivity(){
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
-                FirebaseAuth.getInstance().signOut()
+                unsubscribeNotifications()
+                firebaseAuth.signOut()
                 startActivity(Intent(this, AuthenticateUserActivity::class.java))
                 finish()
                 return true
@@ -100,6 +104,15 @@ class HomeActivity : AppCompatActivity(){
             else -> return super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun unsubscribeNotifications() = lifecycleScope.launch {
+        firebaseMessaging.unsubscribeFromTopic("all").await()
+        if (BuildConfig.DEBUG) {
+            firebaseMessaging.unsubscribeFromTopic("debug").await()
+        }
+
+        // TODO Add unsubscription from favourites
     }
 
     override fun onBackPressed() {

@@ -12,9 +12,10 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.TravelInfoModel
 import droiddevelopers254.droidconke.utils.CollapsibleCard
 import kotlinx.android.synthetic.main.fragment_travel.*
+import org.koin.android.ext.android.inject
 
 class TravelFragment : Fragment() {
-    private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    private val firebaseRemoteConfig: FirebaseRemoteConfig by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_travel, container, false)

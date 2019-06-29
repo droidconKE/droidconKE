@@ -21,9 +21,10 @@ import droiddevelopers254.droidconke.HomeActivity
 import droiddevelopers254.droidconke.R
 import kotlinx.android.synthetic.main.content_authenticate_user.*
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 
 class AuthenticateUserActivity : AppCompatActivity() {
-    lateinit var auth: FirebaseAuth
+    private val auth: FirebaseAuth by inject()
     private var pDialog: SweetAlertDialog? = null
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -59,7 +60,6 @@ class AuthenticateUserActivity : AppCompatActivity() {
         pDialog?.setCancelable(false)
 
         //check whether the user is signed in first
-        auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
             // already signed in
             navigateToHome()
