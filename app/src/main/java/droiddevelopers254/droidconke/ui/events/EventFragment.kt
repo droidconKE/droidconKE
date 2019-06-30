@@ -24,7 +24,7 @@ import org.koin.android.ext.android.inject
 
 class EventFragment : Fragment() {
     private val eventTypeViewModel: EventTypeViewModel by inject()
-    private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    private val firebaseRemoteConfig: FirebaseRemoteConfig by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_event, container, false)

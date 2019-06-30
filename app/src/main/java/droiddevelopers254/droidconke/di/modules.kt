@@ -1,9 +1,12 @@
 package droiddevelopers254.droidconke.di
 
 import androidx.room.Room
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import droiddevelopers254.droidconke.database.AppDatabase
 import droiddevelopers254.droidconke.repository.*
 import droiddevelopers254.droidconke.viewmodels.*
@@ -13,6 +16,14 @@ import org.koin.dsl.module
 val appModule = module {
     // Firebase dependencies
     single { Firebase.firestore }
+    single { FirebaseAuth.getInstance() }
+    single { FirebaseRemoteConfig.getInstance() }
+    single { FirebaseMessaging.getInstance() }
+    single {
+        val db = FirebaseDatabase.getInstance()
+        db.setPersistenceEnabled(true)
+        db
+    }
 
     // ViewModels
     viewModel { AboutDetailsViewModel(get()) }
