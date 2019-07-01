@@ -85,7 +85,7 @@ dependencies {
 
     //architecture components dependencies
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-livedata:2.2.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha01"

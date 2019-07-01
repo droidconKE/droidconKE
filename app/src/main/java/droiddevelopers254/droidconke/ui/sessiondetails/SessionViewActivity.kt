@@ -13,11 +13,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import droiddevelopers254.droidconke.R
-import droiddevelopers254.droidconke.ui.speakers.SpeakersAdapter
 import droiddevelopers254.droidconke.models.RoomModel
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.SpeakersModel
 import droiddevelopers254.droidconke.ui.feedback.SessionFeedBackActivity
+import droiddevelopers254.droidconke.ui.speakers.SpeakersAdapter
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
@@ -30,6 +30,7 @@ import org.koin.android.ext.android.inject
 import java.util.*
 
 class SessionViewActivity : AppCompatActivity() {
+    private val db: FirebaseDatabase by inject()
     private var sessionId: Int = 0
     private var roomId: Int = 0
 
@@ -52,7 +53,7 @@ class SessionViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session_view)
 
-        databaseReference = FirebaseDatabase.getInstance().reference
+        databaseReference = db.reference
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
         //get extras

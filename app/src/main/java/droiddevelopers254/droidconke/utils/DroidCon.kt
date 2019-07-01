@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
-import com.google.firebase.database.FirebaseDatabase
 import droiddevelopers254.droidconke.BuildConfig
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.di.appModule
@@ -25,7 +24,6 @@ class DroidCon : Application() {
             androidContext(this@DroidCon)
             modules(listOf(appModule, dataModule))
         }
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
     }
 
     private fun setupEmojiCompat() {
