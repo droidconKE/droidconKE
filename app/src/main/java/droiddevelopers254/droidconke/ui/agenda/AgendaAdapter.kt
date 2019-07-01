@@ -19,8 +19,7 @@ class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val 
         private val agendaTitleText = itemView.agendaTitleText
         private val agendaTimelineText = itemView.agendaTimelineText
         private val agendaImg = itemView.agendaImg
-        private val agendaLinear = itemView.agendaLinear
-
+    
         @SuppressLint("Range")
         fun bindAgendas(agendaModel: AgendaModel) {
             with(agendaModel) {
@@ -31,7 +30,6 @@ class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val 
                         .into(agendaImg)
                 agendaTitleText.text = title
                 agendaTimelineText.text = time
-                agendaLinear.setBackgroundColor(Color.parseColor(background_color))
             }
         }
 
@@ -39,7 +37,7 @@ class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.agenda_details, parent, false)
+                .inflate(R.layout.item_agenda, parent, false)
         return MyViewHolder(itemView)
     }
 

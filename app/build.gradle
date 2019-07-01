@@ -47,7 +47,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
     // Maintain version 2.0.0-alpha2 till issue is resolved (https://issuetracker.google.com/issues/121395935)
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta02'
@@ -57,7 +57,6 @@ dependencies {
     implementation 'androidx.media:media:1.1.0-rc01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.browser:browser:1.0.0'
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'

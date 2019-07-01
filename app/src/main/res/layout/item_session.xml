@@ -1,84 +1,112 @@
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:paddingBottom="@dimen/session_item_padding"
-    android:paddingEnd="0dp"
-    android:paddingStart="@dimen/session_item_padding"
-    android:paddingTop="@dimen/session_item_padding"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/medium_margin"
+    android:layout_marginEnd="@dimen/medium_margin"
+    android:layout_marginStart="@dimen/medium_margin"
+    >
 
-
-    <androidx.emoji.widget.EmojiTextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+        style="?attr/materialCardViewStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/notosans_medium"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.App.Subtitle1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/favorite"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/session_title"
-        />
+        app:contentPadding="@dimen/fab_margin"
+        app:cardCornerRadius="@dimen/card_radius">
 
-    <ImageView
-        android:id="@+id/favorite"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="4dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/session_description_favorite_image"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_star_border_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/speakers"
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/speakerLinear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/time_and_room"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textAppearance="?textAppearanceCaption"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/speakers"
-        tools:text="@string/session_title"
-        />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/profile"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/speaker_name"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/colorBlack"/>
 
-    <TextView
-        android:id="@+id/survey"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="?selectableItemBackground"
-        android:drawablePadding="6dp"
-        android:drawableStart="@drawable/ic_rate_review_border_orange_18dp"
-        android:ellipsize="end"
-        android:gravity="start|center_vertical"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/session_go_to_feedback"
-        android:textAppearance="@style/TextAppearance.App.Caption"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/time_and_room"
-        tools:visibility="gone"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/session_audience"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorDroidBug"
+                    android:paddingStart="@dimen/medium_margin"
+                    android:paddingEnd="@dimen/medium_margin"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/sessionTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/session_title"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_small"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+                <TextView
+                    android:id="@+id/sessionInAmPmText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:text="@string/session_time_in_am_pm"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/medium_margin"/>
+
+                <TextView
+                    android:id="@+id/timeSeparatorText"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:background="@drawable/circle_black_outline"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_toEndOf="@id/sessionInAmPmText"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/medium_margin"/>
+
+                <TextView
+                    android:id="@+id/sessionRoomText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:text="@string/session_room_name"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_toEndOf="@id/timeSeparatorText"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/medium_margin"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

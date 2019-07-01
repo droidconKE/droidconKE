@@ -43,4 +43,5 @@
 
     <color name="colorOnBackground">@color/gray1</color>
     <color name="colorSessionDashedLine">@color/gray3</color>
+
 </resources>

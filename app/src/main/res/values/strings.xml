@@ -9,7 +9,7 @@
     <string name="session_time">1 hour</string>
     <string name="session_room">6th Floor,Senteu Plaza</string>
     <string name="session_category">Firebase</string>
-    <string name="agenda_label">Breakfast</string>
+    <string name="agenda_label">Agenda</string>
     <string name="agenda_time">7:00 AM - 9:30 AM</string>
     <string name="title_activity_session_view" />
     <string name="large_text">
@@ -182,7 +182,10 @@
     <string name="session_detail_resource_video">Video</string>
     <string name="session_detail_resource_slide">Slides</string>
     <string name="session_bottom_appbar_behavior" translatable="false">droiddevelopers254.droidconke.ui.widget.SessionBottomAppBarBehavior</string>
-    <string name="session_audience">Beginner session</string>
+    <string name="session_audience">beginner session</string>
     <string name="session_details_label">Session Details</string>
     <string name="session_feed_back_label">Feedback</string>
+    <string name="session_time_in_am_pm">9.00 AM</string>
+    <string name="session_room_name">Main Stage</string>
+    <string name="agenda_image_description">Agenda Image</string>
 </resources>

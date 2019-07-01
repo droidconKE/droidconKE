@@ -14,14 +14,16 @@ import kotlinx.android.synthetic.main.item_session.view.*
 class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, private val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View, val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        private val sessionTitleText = itemView.title
-        private val sessionRoomText = itemView.time_and_room
+        private val sessionTitleText = itemView.sessionTitleText
+        private val sessionRoomText = itemView.sessionRoomText
+        private val sessionInAmPmText = itemView.sessionInAmPmText
 
         @SuppressLint("Range")
         fun bindSession(sessionsModel: SessionsModel) {
             with(sessionsModel) {
                 sessionTitleText.text = title
-                sessionRoomText.text = "$duration / $room / $time_in_am $am_pm_label"
+                sessionRoomText.text = "$room"
+                sessionInAmPmText.text ="$time_in_am $am_pm_label"
 
                 itemView.setOnClickListener {
                     itemClickListener(this)

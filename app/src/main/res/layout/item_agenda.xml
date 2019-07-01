@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/medium_margin"
+    android:layout_marginEnd="@dimen/medium_margin"
+    android:layout_marginStart="@dimen/medium_margin"
+    >
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/fab_margin"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="@dimen/card_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/agendaTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agenda_label"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/agendaTimelineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:text="@string/session_time_in_am_pm"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginEnd="@dimen/medium_margin"/>
+
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/agendaImg"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/agenda_image_description"
+                app:srcCompat="@drawable/ic_restaurant_black_24dp"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
