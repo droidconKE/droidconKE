@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -23,7 +24,6 @@ import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
 import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.coroutines.launch
