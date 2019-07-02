@@ -6,9 +6,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -22,8 +24,6 @@ import droiddevelopers254.droidconke.ui.authentication.AuthenticateUserActivity
 import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.coroutines.launch
@@ -79,17 +79,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData() {
-        homeViewModel.getUpdateTokenResponse().nonNull().observe(this) { tokenSent ->
+        homeViewModel.getUpdateTokenResponse().observe(this, Observer {
             when {
-                tokenSent -> {
+                it -> {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()
                 }
                 else -> {
                     sharedPreferences.edit().putInt(TOKEN_SENT, 0).apply()
                 }
             }
-
-        }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
