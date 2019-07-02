@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
@@ -17,13 +18,22 @@ class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, privat
         private val sessionTitleText = itemView.sessionTitleText
         private val sessionRoomText = itemView.sessionRoomText
         private val sessionInAmPmText = itemView.sessionInAmPmText
+        private val sessionAudienceText = itemView.sessionAudienceText
 
         @SuppressLint("Range")
         fun bindSession(sessionsModel: SessionsModel) {
             with(sessionsModel) {
                 sessionTitleText.text = title
                 sessionRoomText.text = "$room"
-                sessionInAmPmText.text ="$time_in_am $am_pm_label"
+                sessionInAmPmText.text = "$time_in_am $am_pm_label"
+                sessionAudienceText.text = session_audience
+
+                when (session_audience) {
+                    "intermediate" -> sessionAudienceText.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorDeepOrange))
+                    "advanced" -> sessionAudienceText.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.tag_text_red))
+                    "beginner" -> sessionAudienceText.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorGreen))
+                    "general" -> sessionAudienceText.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorLightBlue))
+                }
 
                 itemView.setOnClickListener {
                     itemClickListener(this)

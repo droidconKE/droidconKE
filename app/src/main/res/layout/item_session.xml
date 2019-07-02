@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="@dimen/medium_margin"
-    android:layout_marginEnd="@dimen/medium_margin"
-    android:layout_marginStart="@dimen/medium_margin"
+    android:layout_marginBottom="@dimen/appbar_padding_top"
+    android:layout_marginEnd="@dimen/appbar_padding_top"
+    android:layout_marginStart="@dimen/appbar_padding_top"
     >
 
     <com.google.android.material.card.MaterialCardView
@@ -30,8 +30,8 @@
                     android:orientation="vertical">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:src="@drawable/profile"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -39,13 +39,15 @@
                         android:text="@string/speaker_name"
                         android:textSize="@dimen/text_size_extra_small"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:textColor="@color/colorBlack"/>
+                       />
 
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/sessionAudienceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/session_audience"
+                    android:textSize="@dimen/text_size_extra_small"
                     android:layout_alignParentEnd="true"
                     android:textColor="@color/colorWhite"
                     android:background="@color/colorDroidBug"
@@ -65,7 +67,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin">
+                android:layout_marginTop="@dimen/small_margin">
 
                 <TextView
                     android:id="@+id/sessionInAmPmText"
@@ -74,22 +76,22 @@
                     android:layout_marginTop="@dimen/medium_margin"
                     android:text="@string/session_time_in_am_pm"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_extra_small"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/medium_margin"/>
+                    android:layout_marginEnd="@dimen/small_margin"/>
 
                 <TextView
                     android:id="@+id/timeSeparatorText"
-                    android:layout_width="5dp"
-                    android:layout_height="5dp"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/circle_black_outline"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_toEndOf="@id/sessionInAmPmText"
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:textAlignment="center"
-                    android:layout_marginStart="@dimen/medium_margin"
-                    android:layout_marginEnd="@dimen/medium_margin"/>
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/small_margin"/>
 
                 <TextView
                     android:id="@+id/sessionRoomText"
@@ -97,11 +99,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:text="@string/session_room_name"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_extra_small"
                     android:layout_toEndOf="@id/timeSeparatorText"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/medium_margin"/>
+                    android:layout_marginStart="@dimen/small_margin"/>
 
             </RelativeLayout>
 

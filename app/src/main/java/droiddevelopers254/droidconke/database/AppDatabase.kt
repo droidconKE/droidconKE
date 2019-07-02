@@ -11,7 +11,7 @@ import droiddevelopers254.droidconke.database.dao.StarredSessionDao
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.StarredSessionModel
 
-@Database(entities = [StarredSessionModel::class, SessionsModel::class], version = 3, exportSchema = false)
+@Database(entities = [StarredSessionModel::class, SessionsModel::class], version = 4, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 

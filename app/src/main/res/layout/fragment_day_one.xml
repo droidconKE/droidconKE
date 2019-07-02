@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:background="@color/gray4">
+    android:background="@color/gray3">
 
     <ProgressBar
         android:id="@+id/loginProgressBar"
@@ -20,7 +20,9 @@
         android:scrollbars="none"
         android:layout_below="@+id/loginProgressBar"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_session">
+        tools:listitem="@layout/item_session"
+        android:layout_marginTop="@dimen/medium_margin"
+        >
     </androidx.recyclerview.widget.RecyclerView>
 
 

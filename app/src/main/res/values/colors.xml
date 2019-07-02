@@ -43,5 +43,7 @@
 
     <color name="colorOnBackground">@color/gray1</color>
     <color name="colorSessionDashedLine">@color/gray3</color>
+    <color name="colorDeepOrange">#ff9100</color>
+    <color name="colorGreen">#aed581</color>
 
 </resources>
