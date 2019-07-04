@@ -44,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
 
+
         setupNavigation()
         setupActionBarWithNavController(findNavController(R.id.navHostFragment), drawer_layout)
 

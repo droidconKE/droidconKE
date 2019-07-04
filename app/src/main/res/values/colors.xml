@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#863B96</color>
-    <color name="colorPrimaryDark">#660a79</color>
+    <color name="colorPrimaryDark">#560768</color>
     <color name="colorAccent">#863B96</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite">@color/white</color>
     <color name="colorBlack">#1B1E1E</color>
     <color name="colorFavourite">#3F51B5</color>
     <color name="colorGrey">#e5e9ec</color>
@@ -40,10 +40,24 @@
     <color name="tag_bg_green">#C1EBDD</color>
     <color name="tag_text_gray">@color/gray1</color>
     <color name="tag_bg_gray">#E5E8EA</color>
-
-    <color name="colorOnBackground">@color/gray1</color>
     <color name="colorSessionDashedLine">@color/gray3</color>
     <color name="colorDeepOrange">#ff9100</color>
     <color name="colorGreen">#aed581</color>
+    <color name="colorOnBackground">@color/gray1</color>
+
+    <!--Theme Colors -->
+    <color name="color_primary_variant">#000000</color>
+    <color name="color_on_primary">#FFFFFF</color>
+    <color name="color_secondary">#b869c7</color>
+    <color name="color_secondary_variant">#560768</color>
+    <color name="color_on_secondary">#FFFFFF</color>
+    <color name="color_error">#C51162</color>
+    <color name="color_on_error">#FFFFFF</color>
+    <color name="color_surface">#FFFFFF</color>
+    <color name="color_on_surface">#000000</color>
+    <color name="color_background">#FAFAFA</color>
+    <color name="color_on_background">#000000</color>
+    <color name="color_status_bar">#000000</color>
+    <color name="colorOnPrimary">@color/white</color>
 
 </resources>

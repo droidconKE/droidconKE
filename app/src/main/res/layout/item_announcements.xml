@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/appbar_padding_top"
     android:layout_marginStart="@dimen/appbar_padding_top"
     android:layout_marginEnd="@dimen/appbar_padding_top">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/fab_margin"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="@dimen/card_radius">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/announcementTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/session_detail_tag"
+                android:textAppearance="@style/TextAppearance.Roboto.Subtitle1"
+                />
+
+
+            <androidx.emoji.widget.EmojiAppCompatTextView
+                android:id="@+id/session_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/event_description"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="2dp"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.App.Body1"
+                tools:text="@string/event_description"
+                android:layout_marginTop="@dimen/fab_margin"
+                />
+
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

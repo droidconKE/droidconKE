@@ -40,7 +40,7 @@
     <style name="TextAppearance.App.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:textColor">@color/color_on_background</item>
     </style>
 
     <!-- Roboto Regular 12sp -->

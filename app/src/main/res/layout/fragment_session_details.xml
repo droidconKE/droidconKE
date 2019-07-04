@@ -20,11 +20,12 @@
         android:layout_height="150dp"
         >
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+
+        <droiddevelopers254.droidconke.ui.widget.CollapsibleToolbar
             android:id="@+id/content_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
+            android:background="@color/color_background"
             android:fitsSystemWindows="false"
             android:minHeight="?attr/actionBarSize"
             app:layoutDescription="@xml/motion_session_detail"
@@ -61,7 +62,7 @@
                 tools:text="@string/session_title"
                 />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </droiddevelopers254.droidconke.ui.widget.CollapsibleToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
