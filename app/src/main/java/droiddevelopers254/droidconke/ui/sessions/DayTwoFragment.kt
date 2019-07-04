@@ -62,7 +62,6 @@ class DayTwoFragment : Fragment() {
     }
 
     private fun initView(sessionsRv: RecyclerView) {
-        sessionsRv.layoutManager = LinearLayoutManager(activity)
         sessionsRv.adapter = sessionsAdapter
     }
 

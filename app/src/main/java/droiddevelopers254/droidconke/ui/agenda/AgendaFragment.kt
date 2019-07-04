@@ -59,8 +59,6 @@ class AgendaFragment : Fragment() {
 
     private fun initView(agendaRv: RecyclerView) {
         val agendaAdapter = AgendaAdapter(agendaModelList, context!!)
-        val layoutManager = LinearLayoutManager(activity)
-        agendaRv.layoutManager = layoutManager
         agendaRv.adapter = agendaAdapter
     }
 

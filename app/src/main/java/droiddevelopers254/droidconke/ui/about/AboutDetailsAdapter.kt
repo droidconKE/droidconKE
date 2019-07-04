@@ -13,9 +13,9 @@ import droiddevelopers254.droidconke.models.AboutDetailsModel
 import kotlinx.android.synthetic.main.about_details.view.*
 
 
-class AboutDetailsAdapter(private val aboutDetailsModelList: List<AboutDetailsModel>, private val context: Context, private val itemClick: (AboutDetailsModel) -> Unit) : RecyclerView.Adapter<AboutDetailsAdapter.MyViewHolder>() {
+class AboutDetailsAdapter(private val aboutDetailsModelList: List<AboutDetailsModel>, private val context: Context, private val itemClick: (AboutDetailsModel) -> Unit) : RecyclerView.Adapter<AboutDetailsAdapter.AboutDetailsViewHolder>() {
 
-    class MyViewHolder(itemView: View, private val itemClick: (AboutDetailsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class AboutDetailsViewHolder(itemView: View, private val itemClick: (AboutDetailsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val aboutDetailsDescText = itemView.aboutDetailsDescText
         private val aboutDetailsTitleText = itemView.aboutDetailsTitleText
         private val aboutDetailsImg = itemView.aboutDetailsImg
@@ -53,13 +53,13 @@ class AboutDetailsAdapter(private val aboutDetailsModelList: List<AboutDetailsMo
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AboutDetailsViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.about_details, parent, false)
-        return MyViewHolder(itemView, itemClick)
+        return AboutDetailsViewHolder(itemView, itemClick)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AboutDetailsViewHolder, position: Int) {
         holder.bindAboutDetails(aboutDetailsModelList[position])
         val aboutDetailsModel = aboutDetailsModelList.get(position)
         holder.itemView.setOnClickListener {
@@ -72,9 +72,7 @@ class AboutDetailsAdapter(private val aboutDetailsModelList: List<AboutDetailsMo
         }
     }
 
-    override fun getItemCount(): Int {
-        return aboutDetailsModelList.size
+    override fun getItemCount(): Int = aboutDetailsModelList.size
 
-    }
 
 }

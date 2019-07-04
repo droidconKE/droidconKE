@@ -94,7 +94,9 @@
             android:layout_width="match_parent"
             android:id="@+id/eventTypesRv"
             android:scrollbars="none"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tool:listitem="@layout/event_type_details">
 
         </androidx.recyclerview.widget.RecyclerView>
 

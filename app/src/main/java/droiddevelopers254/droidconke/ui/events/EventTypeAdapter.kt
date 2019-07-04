@@ -12,9 +12,9 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.EventTypeModel
 import kotlinx.android.synthetic.main.event_type_details.view.*
 
-class EventTypeAdapter(private val eventTypesList: List<EventTypeModel>, private val context: Context) : RecyclerView.Adapter<EventTypeAdapter.MyViewHolder>() {
+class EventTypeAdapter(private val eventTypesList: List<EventTypeModel>, private val context: Context) : RecyclerView.Adapter<EventTypeAdapter.EventViewHolder>() {
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val eventDescriptionText = itemView.eventDescriptionText
         private val eventImg = itemView.eventImg
 
@@ -31,19 +31,17 @@ class EventTypeAdapter(private val eventTypesList: List<EventTypeModel>, private
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.event_type_details, parent, false)
-        return MyViewHolder(itemView)
+        return EventViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.bindEvents(eventTypesList[position])
     }
 
-    override fun getItemCount(): Int {
-        return eventTypesList.size
-    }
+    override fun getItemCount(): Int = eventTypesList.size
 
 
 }

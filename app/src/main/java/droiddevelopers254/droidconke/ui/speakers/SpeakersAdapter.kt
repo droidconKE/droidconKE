@@ -12,9 +12,9 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SpeakersModel
 import kotlinx.android.synthetic.main.speaker_details.view.*
 
-class SpeakersAdapter(private val speakersList: List<SpeakersModel>, private val context: Context) : RecyclerView.Adapter<SpeakersAdapter.MyViewHolder>() {
+class SpeakersAdapter(private val speakersList: List<SpeakersModel>, private val context: Context) : RecyclerView.Adapter<SpeakersAdapter.SpeakersViewHolder>() {
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SpeakersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var speakerNameText = itemView.speakerNameText
         private var speakerCompanyText = itemView.speakerCompanyText
         private var speakerImg = itemView.speakerImg
@@ -34,18 +34,16 @@ class SpeakersAdapter(private val speakersList: List<SpeakersModel>, private val
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpeakersViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.speaker_details, parent, false)
-        return MyViewHolder(itemView)
+        return SpeakersViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SpeakersViewHolder, position: Int) {
         holder.bindSpeakerDetails(speakersList[position])
     }
 
-    override fun getItemCount(): Int {
-        return speakersList.size
-    }
+    override fun getItemCount(): Int = speakersList.size
 
 }

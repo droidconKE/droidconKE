@@ -2,7 +2,6 @@ package droiddevelopers254.droidconke.ui.agenda
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,12 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.AgendaModel
 import kotlinx.android.synthetic.main.agenda_details.view.*
 
-class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val context: Context) : RecyclerView.Adapter<AgendaAdapter.MyViewHolder>() {
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val context: Context) : RecyclerView.Adapter<AgendaAdapter.AgendaViewHolder>() {
+    inner class AgendaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val agendaTitleText = itemView.agendaTitleText
         private val agendaTimelineText = itemView.agendaTimelineText
         private val agendaImg = itemView.agendaImg
-    
+
         @SuppressLint("Range")
         fun bindAgendas(agendaModel: AgendaModel) {
             with(agendaModel) {
@@ -35,19 +34,17 @@ class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val 
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgendaViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_agenda, parent, false)
-        return MyViewHolder(itemView)
+        return AgendaViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AgendaViewHolder, position: Int) {
         holder.bindAgendas(agendaModelList[position])
     }
 
-    override fun getItemCount(): Int {
-        return agendaModelList.size
-    }
+    override fun getItemCount(): Int = agendaModelList.size
 
 
 }

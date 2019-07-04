@@ -60,7 +60,7 @@ class AboutDetailsActivityTest {
         activityTestRule.launchActivity(intent)
 
         onView(withId(R.id.aboutDetailsRv))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<AboutDetailsAdapter.MyViewHolder>(0, click()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<AboutDetailsAdapter.AboutDetailsViewHolder>(0, click()))
 
         onView(allOf(withId(R.id.aboutDetailsDescText),
                 withText(containsString("is held annually by the Android254 community."))))

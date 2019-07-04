@@ -12,6 +12,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:scrollbars="none"
         android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/agenda_details"
         android:layout_marginTop="@dimen/medium_margin"
       >

@@ -34,6 +34,7 @@ val appModule = module {
     viewModel { EventTypeViewModel(get()) }
     viewModel { FeedBackViewModel(get()) }
     viewModel { HomeViewModel(get()) }
+    viewModel { AnnouncementViewModel(get()) }
 }
 
 val dataModule = module {
@@ -49,6 +50,7 @@ val dataModule = module {
     single { EventFeedbackRepo(get()) }
     single { EventTypeRepo(get()) }
     single { AgendaRepo(get()) }
+    single { AnnouncementRepo(get()) }
 
     // Database
     single { Room.databaseBuilder(get(), AppDatabase::class.java, "droidconKE_db").build() }

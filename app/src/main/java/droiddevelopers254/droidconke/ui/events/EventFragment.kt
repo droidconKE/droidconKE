@@ -98,8 +98,6 @@ class EventFragment : Fragment() {
     }
 
     private fun initView(eventTypeModelList: List<EventTypeModel>, eventTypesRv: RecyclerView) {
-        val layoutManager = LinearLayoutManager(activity)
-        eventTypesRv.layoutManager = layoutManager
         eventTypesRv.isNestedScrollingEnabled = false
         eventTypesRv.adapter = EventTypeAdapter(eventTypeModelList, activity!!)
 

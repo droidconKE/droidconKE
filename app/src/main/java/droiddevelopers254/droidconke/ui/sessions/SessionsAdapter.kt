@@ -1,8 +1,6 @@
 package droiddevelopers254.droidconke.ui.sessions
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +10,9 @@ import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
 import kotlinx.android.synthetic.main.item_session.view.*
 
-class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, private val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.Adapter<SessionsAdapter.MyViewHolder>() {
+class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, private val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.Adapter<SessionsAdapter.SessionsViewHolder>() {
 
-    class MyViewHolder(itemView: View, val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class SessionsViewHolder(itemView: View, val itemClickListener: (SessionsModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val sessionTitleText = itemView.sessionTitleText
         private val sessionRoomText = itemView.sessionRoomText
         private val sessionInAmPmText = itemView.sessionInAmPmText
@@ -43,13 +41,13 @@ class SessionsAdapter(private var sessionsModelList: List<SessionsModel>, privat
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionsViewHolder {
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_session, parent, false)
-        return MyViewHolder(itemView, itemClickListener)
+        return SessionsViewHolder(itemView, itemClickListener)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SessionsViewHolder, position: Int) {
         holder.bindSession(sessionsModelList[position])
     }
 
