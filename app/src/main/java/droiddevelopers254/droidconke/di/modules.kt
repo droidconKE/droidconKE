@@ -53,5 +53,5 @@ val dataModule = module {
     single { AnnouncementRepo(get()) }
 
     // Database
-    single { Room.databaseBuilder(get(), AppDatabase::class.java, "droidconKE_db").build() }
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "droidconKE_db").fallbackToDestructiveMigration().build() }
 }

@@ -44,7 +44,6 @@ class DayTwoFragment : Fragment() {
     }
 
     private fun redirectToSessionDetails() {
-        findNavController().navigate(R.id.action_dayTwoFragment_to_sessionDetailsFragment)
     }
 
     private fun observerLiveData() {
