@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionTimeModel
 import droiddevelopers254.droidconke.models.SessionsModel
+import droiddevelopers254.droidconke.ui.schedule.ScheduleFragmentDirections
 import droiddevelopers254.droidconke.utils.nonNull
 import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.DayOneViewModel
@@ -47,7 +46,7 @@ class DayOneFragment : Fragment() {
     }
 
     private fun redirectToSessionDetails() {
-        findNavController().navigate(R.id.action_dayOneFragment_to_sessionDetailsFragment)
+        findNavController().navigate(ScheduleFragmentDirections.actionScheduleFragmentToSessionDetailsFragment())
     }
 
     private fun observeLiveData() {

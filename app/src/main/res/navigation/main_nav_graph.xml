@@ -9,7 +9,11 @@
         android:id="@+id/scheduleFragment"
         android:name="droiddevelopers254.droidconke.ui.schedule.ScheduleFragment"
         android:label="@string/schedule_label"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_scheduleFragment_to_sessionDetailsFragment"
+            app:destination="@id/sessionDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/agendaFragment"
         android:name="droiddevelopers254.droidconke.ui.agenda.AgendaFragment"
@@ -37,13 +41,4 @@
         android:label="@string/session_details_label"
         tools:layout="@layout/fragment_session_details"/>
 
-    <fragment
-        android:id="@+id/dayOneFragment"
-        android:name="droiddevelopers254.droidconke.ui.sessions.DayOneFragment"
-        android:label="DayOneFragment"
-        tools:layout="@layout/fragment_day_one">
-        <action
-            android:id="@+id/action_dayOneFragment_to_sessionDetailsFragment"
-            app:destination="@id/sessionDetailsFragment" />
-    </fragment>
 </navigation>
