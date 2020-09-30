@@ -24,68 +24,67 @@ import org.koin.android.ext.android.inject
 import java.util.*
 
 class DayOneFragment : Fragment() {
+  internal var sessionsModelList: List<SessionsModel> = ArrayList()
+  internal var sessionTimeModelList: List<SessionTimeModel> = ArrayList()
+  internal var sessionIds: List<String> = ArrayList()
+  internal var isStarred: Boolean = false
+  lateinit var sessionsAdapter: SessionsAdapter
+  private val dayOneViewModel: DayOneViewModel by inject()
 
-    internal var sessionsModelList: List<SessionsModel> = ArrayList()
-    internal var sessionTimeModelList: List<SessionTimeModel> = ArrayList()
-    internal var sessionIds: List<String> = ArrayList()
-    internal var isStarred: Boolean = false
-    lateinit var sessionsAdapter: SessionsAdapter
-    private val dayOneViewModel: DayOneViewModel by inject()
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val view = inflater.inflate(R.layout.fragment_day_one, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_day_one, container, false)
+    sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_one")
+    val sessionsRv = view.sessionsRv
 
-        sessionsAdapter = SessionsAdapter(activity!!, sessionsModelList, "day_one")
-        val sessionsRv = view.sessionsRv
+    initView(sessionsRv)
 
-        initView(sessionsRv)
+    dayOneViewModel.getDayOneSessions()
 
-        dayOneViewModel.getDayOneSessions()
+    //observe live data emitted by view model
+    observeLiveData()
+    return view
+  }
 
-        //observe live data emitted by view model
-        observeLiveData()
-        return view
+  private fun observeLiveData() {
+    dayOneViewModel.getSessionsResponse().nonNull().observe(this) {
+      sessionsModelList = it
+      sessionsAdapter.setSessionsAdapter(sessionsModelList)
+      loginProgressBar.visibility = View.GONE
+
     }
+    dayOneViewModel.getSessionsError().nonNull().observe(this) {
+      handleError(it)
+    }
+  }
 
-    private fun observeLiveData() {
-        dayOneViewModel.getSessionsResponse().nonNull().observe(this){
-            sessionsModelList = it
-            sessionsAdapter.setSessionsAdapter(sessionsModelList)
-            loginProgressBar.visibility = View.GONE
+  private fun handleError(databaseError: String?) {
+    activity?.toast(databaseError.toString())
+  }
 
+  private fun initView(sessionsRv: RecyclerView) {
+    val layoutManager = LinearLayoutManager(activity)
+    sessionsRv.layoutManager = layoutManager
+    sessionsRv.itemAnimator = DefaultItemAnimator()
+    sessionsRv.adapter = sessionsAdapter
+    sessionsRv.addOnItemTouchListener(ItemClickListener(requireContext(), sessionsRv, object : ItemClickListener.ClickListener {
+
+        override fun onLongClick(view: View?, position: Int) {
         }
-        dayOneViewModel.getSessionsError().nonNull().observe(this){
-            handleError(it)
+
+        override fun onClick(view: View, position: Int) {
+            val intent = Intent(context, SessionViewActivity::class.java)
+            intent.putExtra("sessionId", sessionsModelList[position].id)
+            intent.putExtra("dayNumber", "day_one")
+            intent.putExtra("starred", sessionsModelList[position].starred)
+            intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
+            intent.putExtra("roomId", sessionsModelList[position].room_id)
+            startActivity(intent)
         }
-    }
-
-    private fun handleError(databaseError: String?) {
-        activity?.toast(databaseError.toString())
-    }
-
-    private fun initView(sessionsRv: RecyclerView) {
-        val layoutManager = LinearLayoutManager(activity)
-        sessionsRv.layoutManager = layoutManager
-        sessionsRv.itemAnimator = DefaultItemAnimator()
-        sessionsRv.adapter = sessionsAdapter
-        sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
-
-            override fun onLongClick(view: View?, position: Int) {
-            }
-
-            override fun onClick(view: View, position: Int) {
-                val intent = Intent(context, SessionViewActivity::class.java)
-                intent.putExtra("sessionId", sessionsModelList[position].id)
-                intent.putExtra("dayNumber", "day_one")
-                intent.putExtra("starred", sessionsModelList[position].starred)
-                intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
-                intent.putExtra("roomId", sessionsModelList[position].room_id)
-                startActivity(intent)
-            }
 
 
-        }))
+    }))
 
-    }
+  }
 
 }

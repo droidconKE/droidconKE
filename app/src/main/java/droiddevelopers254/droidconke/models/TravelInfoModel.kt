@@ -1,19 +1,19 @@
 package droiddevelopers254.droidconke.models
 
-data class TravelInfoModel (
-        val shuttleInfo: String,
-        val publicTransportationInfo: String,
-        val carpoolingParkingInfo: String,
-        val rideSharingInfo: String
+data class TravelInfoModel(
+    val shuttleInfo: String,
+    val publicTransportationInfo: String,
+    val carpoolingParkingInfo: String,
+    val rideSharingInfo: String
 
-){
-    override fun toString(): String {
-        return "TravelInfoModel{" +
-                "shuttleInfo='" + shuttleInfo + '\''.toString() +
-                ", publicTransportationInfo='" + publicTransportationInfo + '\''.toString() +
-                ", carpoolingParkingInfo='" + carpoolingParkingInfo + '\''.toString() +
-                '}'.toString()
-    }
+) {
+  override fun toString(): String {
+    return "TravelInfoModel{" +
+        "shuttleInfo='" + shuttleInfo + '\''.toString() +
+        ", publicTransportationInfo='" + publicTransportationInfo + '\''.toString() +
+        ", carpoolingParkingInfo='" + carpoolingParkingInfo + '\''.toString() +
+        '}'.toString()
+  }
 }
 
 

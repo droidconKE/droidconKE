@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "starredSessions")
-data class StarredSessionEntity (
+data class StarredSessionEntity(
     @PrimaryKey
     var id: Int = 0,
     var speaker_id: ArrayList<Int>? = null,

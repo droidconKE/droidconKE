@@ -9,17 +9,17 @@ import kotlin.coroutines.resumeWithException
 
 // private suspended function that converts firestore Tasks to coroutines
 private suspend fun awaitData(task: Task<QuerySnapshot>): QuerySnapshot = suspendCancellableCoroutine { continuation ->
-    task
-            .addOnCanceledListener { continuation.cancel() }
-            .addOnSuccessListener { continuation.resume(it) }
-            .addOnFailureListener { continuation.resumeWithException(it) }
+  task
+      .addOnCanceledListener { continuation.cancel() }
+      .addOnSuccessListener { continuation.resume(it) }
+      .addOnFailureListener { continuation.resumeWithException(it) }
 }
 
 private suspend fun awaitData2(task: Task<DocumentReference>): DocumentReference = suspendCancellableCoroutine { continuation ->
-    task
-            .addOnCanceledListener { continuation.cancel() }
-            .addOnSuccessListener { continuation.resume(it) }
-            .addOnFailureListener { continuation.resumeWithException(it) }
+  task
+      .addOnCanceledListener { continuation.cancel() }
+      .addOnSuccessListener { continuation.resume(it) }
+      .addOnFailureListener { continuation.resumeWithException(it) }
 }
 
 suspend fun Task<QuerySnapshot>.await() = awaitData(this)

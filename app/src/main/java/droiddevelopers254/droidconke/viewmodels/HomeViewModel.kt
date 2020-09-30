@@ -9,21 +9,21 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val updateTokenRepo: UpdateTokenRepo) : ViewModel() {
-    private val updateTokenStateMediatorLiveData = NonNullMediatorLiveData<Boolean>()
-    private val updateTokenError = NonNullMediatorLiveData<String>()
+  private val updateTokenStateMediatorLiveData = NonNullMediatorLiveData<Boolean>()
+  private val updateTokenError = NonNullMediatorLiveData<String>()
 
-    fun getUpdateTokenResponse(): LiveData<Boolean> = updateTokenStateMediatorLiveData
+  fun getUpdateTokenResponse(): LiveData<Boolean> = updateTokenStateMediatorLiveData
 
-    fun getUpdateTokenError(): LiveData<String> = updateTokenError
+  fun getUpdateTokenError(): LiveData<String> = updateTokenError
 
 
-    fun updateToken(userId: String, refreshToken: String) {
-        viewModelScope.launch {
-            when (val value = updateTokenRepo.updateToken(userId, refreshToken)) {
-                is Result.Success -> updateTokenStateMediatorLiveData.postValue(value.data)
-                is Result.Error -> updateTokenError.postValue(value.exception)
-            }
-        }
-
+  fun updateToken(userId: String, refreshToken: String) {
+    viewModelScope.launch {
+      when (val value = updateTokenRepo.updateToken(userId, refreshToken)) {
+          is Result.Success -> updateTokenStateMediatorLiveData.postValue(value.data)
+          is Result.Error -> updateTokenError.postValue(value.exception)
+      }
     }
+
+  }
 }

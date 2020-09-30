@@ -19,48 +19,48 @@ import org.koin.android.ext.android.inject
 import java.util.*
 
 class AgendaFragment : Fragment() {
-    private var agendaModelList: List<AgendaModel> = ArrayList()
-    private val agendaViewModel: AgendaViewModel by inject()
+  private var agendaModelList: List<AgendaModel> = ArrayList()
+  private val agendaViewModel: AgendaViewModel by inject()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_agenda, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val view = inflater.inflate(R.layout.fragment_agenda, container, false)
 
-        //fetch agendas
-        agendaViewModel.fetchAgendas()
+    //fetch agendas
+    agendaViewModel.fetchAgendas()
 
-        //observe live data emitted by view model
-        observeLiveData()
-        return view
+    //observe live data emitted by view model
+    observeLiveData()
+    return view
+  }
+
+  private fun observeLiveData() {
+    agendaViewModel.getAgendasResponse().nonNull().observe(this) {
+      handleAgendaResponse(it, agendaRv)
     }
-
-    private fun observeLiveData() {
-        agendaViewModel.getAgendasResponse().nonNull().observe(this) {
-            handleAgendaResponse(it, agendaRv)
-        }
-        agendaViewModel.getAgendaError().nonNull().observe(this) {
-            handleDatabaseError(it)
-        }
+    agendaViewModel.getAgendaError().nonNull().observe(this) {
+      handleDatabaseError(it)
     }
+  }
 
-    private fun handleAgendaResponse(agendaList: List<AgendaModel>?, agendaRv: RecyclerView) {
-        when {
-            agendaList != null -> {
-                agendaModelList = agendaList
-                initView(agendaRv)
-            }
-        }
+  private fun handleAgendaResponse(agendaList: List<AgendaModel>?, agendaRv: RecyclerView) {
+    when {
+      agendaList != null -> {
+        agendaModelList = agendaList
+        initView(agendaRv)
+      }
     }
+  }
 
-    private fun handleDatabaseError(databaseError: String) {
-        activity?.toast(databaseError)
-    }
+  private fun handleDatabaseError(databaseError: String) {
+    activity?.toast(databaseError)
+  }
 
-    private fun initView(agendaRv: RecyclerView) {
-        val agendaAdapter = AgendaAdapter(agendaModelList, context!!)
-        val layoutManager = LinearLayoutManager(activity)
-        agendaRv.layoutManager = layoutManager
-        agendaRv.itemAnimator = DefaultItemAnimator()
-        agendaRv.adapter = agendaAdapter
-    }
+  private fun initView(agendaRv: RecyclerView) {
+    val agendaAdapter = AgendaAdapter(agendaModelList, requireContext())
+    val layoutManager = LinearLayoutManager(activity)
+    agendaRv.layoutManager = layoutManager
+    agendaRv.itemAnimator = DefaultItemAnimator()
+    agendaRv.adapter = agendaAdapter
+  }
 
 }

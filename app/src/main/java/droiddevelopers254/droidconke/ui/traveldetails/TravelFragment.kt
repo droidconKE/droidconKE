@@ -14,59 +14,59 @@ import droiddevelopers254.droidconke.utils.CollapsibleCard
 import kotlinx.android.synthetic.main.fragment_travel.view.*
 
 class TravelFragment : Fragment() {
-    private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
+  private lateinit var firebaseRemoteConfig: FirebaseRemoteConfig
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_travel, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val view = inflater.inflate(R.layout.fragment_travel, container, false)
 
-        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
-        // [START enable_dev_mode]
-        val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.DEBUG)
-                .build()
-        firebaseRemoteConfig.setConfigSettings(configSettings)
+    // [START enable_dev_mode]
+    val configSettings = FirebaseRemoteConfigSettings.Builder()
+        .setDeveloperModeEnabled(BuildConfig.DEBUG)
+        .build()
+    firebaseRemoteConfig.setConfigSettings(configSettings)
 
-        //get remote config values
-        val shuttleServiceCard = view.shuttleInfoCard
-        val carpoolingParkingCard = view.carpoolingParkingCard
-        val publicTransportationCard = view.publicTransportationCard
-        val rideSharingCard = view.rideSharingCard
+    //get remote config values
+    val shuttleServiceCard = view.shuttleInfoCard
+    val carpoolingParkingCard = view.carpoolingParkingCard
+    val publicTransportationCard = view.publicTransportationCard
+    val rideSharingCard = view.rideSharingCard
 
-        getRemoteConfigValues(shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
+    getRemoteConfigValues(shuttleServiceCard, carpoolingParkingCard, publicTransportationCard, rideSharingCard)
 
-        return view
+    return view
+  }
+
+  private fun getRemoteConfigValues(shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
+    var cacheExpiration: Long = 3600
+
+    // After config data is successfully fetched, it must be activated before newly fetched
+    // values are returned.
+    when {
+      firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled -> cacheExpiration = 0
     }
+    firebaseRemoteConfig.fetch(cacheExpiration)
+        .addOnCompleteListener(requireActivity()) { task ->
+          when {
+            task.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
+              // values are returned.
+              firebaseRemoteConfig.activate()
+            else -> {
 
-    private fun getRemoteConfigValues(shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
-        var cacheExpiration: Long = 3600
+            }
+          }
+          val travelInfoModel = TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
+              firebaseRemoteConfig.getString("ride_sharing"))
+          showInfo(travelInfoModel, shuttleServiceCard, carpoolingParkingCard, publicTransportationCard, rideSharingCard)
 
-        // After config data is successfully fetched, it must be activated before newly fetched
-        // values are returned.
-        when {
-            firebaseRemoteConfig.info.configSettings.isDeveloperModeEnabled -> cacheExpiration = 0
         }
-        firebaseRemoteConfig.fetch(cacheExpiration)
-                .addOnCompleteListener(activity!!) { task ->
-                    when {
-                        task.isSuccessful -> // After config data is successfully fetched, it must be activated before newly fetched
-                            // values are returned.
-                            firebaseRemoteConfig.activate()
-                        else -> {
+  }
 
-                        }
-                    }
-                    val travelInfoModel = TravelInfoModel(firebaseRemoteConfig.getString("driving_directions"), firebaseRemoteConfig.getString("public_transportation"), firebaseRemoteConfig.getString("car_pooling_parking_info"),
-                            firebaseRemoteConfig.getString("ride_sharing"))
-                    showInfo(travelInfoModel,shuttleServiceCard,carpoolingParkingCard,publicTransportationCard,rideSharingCard)
-
-                }
-    }
-
-    private fun showInfo(travelInfoModel: TravelInfoModel, shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
-        shuttleServiceCard.setCardDescription(travelInfoModel.shuttleInfo)
-        carpoolingParkingCard.setCardDescription(travelInfoModel.carpoolingParkingInfo)
-        publicTransportationCard.setCardDescription(travelInfoModel.publicTransportationInfo)
-        rideSharingCard.setCardDescription(travelInfoModel.rideSharingInfo)
-    }
+  private fun showInfo(travelInfoModel: TravelInfoModel, shuttleServiceCard: CollapsibleCard, carpoolingParkingCard: CollapsibleCard, publicTransportationCard: CollapsibleCard, rideSharingCard: CollapsibleCard) {
+    shuttleServiceCard.setCardDescription(travelInfoModel.shuttleInfo)
+    carpoolingParkingCard.setCardDescription(travelInfoModel.carpoolingParkingInfo)
+    publicTransportationCard.setCardDescription(travelInfoModel.publicTransportationInfo)
+    rideSharingCard.setCardDescription(travelInfoModel.rideSharingInfo)
+  }
 }

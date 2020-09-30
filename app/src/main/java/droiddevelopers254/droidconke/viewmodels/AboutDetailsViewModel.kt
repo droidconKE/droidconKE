@@ -10,22 +10,22 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 class AboutDetailsViewModel(private val aboutDetailsRepo: AboutDetailsRepo) : ViewModel() {
-    private val detailsStateMediatorLiveData = NonNullMediatorLiveData<List<AboutDetailsModel>>()
-    private val detailsError = NonNullMediatorLiveData<String>()
+  private val detailsStateMediatorLiveData = NonNullMediatorLiveData<List<AboutDetailsModel>>()
+  private val detailsError = NonNullMediatorLiveData<String>()
 
 
-    fun getAboutDetailsResponse(): LiveData<List<AboutDetailsModel>> = detailsStateMediatorLiveData
+  fun getAboutDetailsResponse(): LiveData<List<AboutDetailsModel>> = detailsStateMediatorLiveData
 
-    fun getAboutDetailsError(): LiveData<String> = detailsError
+  fun getAboutDetailsError(): LiveData<String> = detailsError
 
-    fun fetchAboutDetails(aboutType: String) {
+  fun fetchAboutDetails(aboutType: String) {
 
-        viewModelScope.launch {
-            when (val value = aboutDetailsRepo.getAboutDetails(aboutType)) {
-                is Result.Success -> detailsStateMediatorLiveData.postValue(value.data)
-                is Result.Error -> detailsError.postValue(value.exception)
-            }
-        }
+    viewModelScope.launch {
+      when (val value = aboutDetailsRepo.getAboutDetails(aboutType)) {
+          is Result.Success -> detailsStateMediatorLiveData.postValue(value.data)
+          is Result.Error -> detailsError.postValue(value.exception)
+      }
     }
+  }
 
 }

@@ -11,13 +11,13 @@ import kotlinx.coroutines.tasks.await
 
 class EventFeedbackRepo(val firestore: FirebaseFirestore) {
 
-    suspend fun sendFeedBack(userEventFeedback: UserEventFeedback): Result<String> {
-        return try {
-            firestore.collection("").add(userEventFeedback).await()
-            Result.Success("Thank you for your feedback")
+  suspend fun sendFeedBack(userEventFeedback: UserEventFeedback): Result<String> {
+    return try {
+      firestore.collection("").add(userEventFeedback).await()
+      Result.Success("Thank you for your feedback")
 
-        } catch (e: FirebaseFirestoreException) {
-            Result.Error(e.message)
-        }
+    } catch (e: FirebaseFirestoreException) {
+      Result.Error(e.message)
     }
+  }
 }

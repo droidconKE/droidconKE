@@ -12,15 +12,15 @@ import droiddevelopers254.droidconke.utils.await
 
 class EventTypeRepo(val firestore: FirebaseFirestore) {
 
-    suspend fun getSessionData(): Result<List<EventTypeModel>> {
-        return try {
-            val snapshots = firestore.collection("event_types")
-                    .orderBy("id", Query.Direction.ASCENDING)
-                    .get()
-                    .await()
-            Result.Success(snapshots.toObjects())
-        } catch (e: FirebaseFirestoreException) {
-            Result.Error(e.message)
-        }
+  suspend fun getSessionData(): Result<List<EventTypeModel>> {
+    return try {
+      val snapshots = firestore.collection("event_types")
+          .orderBy("id", Query.Direction.ASCENDING)
+          .get()
+          .await()
+      Result.Success(snapshots.toObjects())
+    } catch (e: FirebaseFirestoreException) {
+      Result.Error(e.message)
     }
+  }
 }

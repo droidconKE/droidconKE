@@ -11,22 +11,22 @@ import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.await
 
 class DayTwoRepo(db: AppDatabase, private val firestore: FirebaseFirestore) {
-    private val sessionsDao: SessionsDao = db.sessionsDao()
+  private val sessionsDao: SessionsDao = db.sessionsDao()
 
-    suspend fun getDayTwoSessions(): Result<List<SessionsModel>> {
-        return try {
-            val snapshots = firestore.collection("day_two")
-                    .orderBy("id", Query.Direction.ASCENDING)
-                    .get().await()
-            saveSession(snapshots.toObjects())
-            Result.Success(snapshots.toObjects())
-        } catch (e: FirebaseFirestoreException) {
-            Result.Error(e.message)
-        }
+  suspend fun getDayTwoSessions(): Result<List<SessionsModel>> {
+    return try {
+      val snapshots = firestore.collection("day_two")
+          .orderBy("id", Query.Direction.ASCENDING)
+          .get().await()
+      saveSession(snapshots.toObjects())
+      Result.Success(snapshots.toObjects())
+    } catch (e: FirebaseFirestoreException) {
+      Result.Error(e.message)
     }
+  }
 
-    suspend fun saveSession(sessionsModelList: List<SessionsModel>) {
-        sessionsDao.saveSession(sessionsModelList)
+  suspend fun saveSession(sessionsModelList: List<SessionsModel>) {
+    sessionsDao.saveSession(sessionsModelList)
 
-    }
+  }
 }

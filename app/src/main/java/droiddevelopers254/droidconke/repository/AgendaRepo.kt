@@ -12,14 +12,14 @@ import droiddevelopers254.droidconke.utils.await
 
 class AgendaRepo(val firestore: FirebaseFirestore) {
 
-    suspend fun agendaData(): Result<List<AgendaModel>> {
-        return try {
-            val snapshot = firestore.collection("agenda").orderBy("id", Query.Direction.ASCENDING).get().await()
-            return Result.Success(snapshot.toObjects())
+  suspend fun agendaData(): Result<List<AgendaModel>> {
+    return try {
+      val snapshot = firestore.collection("agenda").orderBy("id", Query.Direction.ASCENDING).get().await()
+      return Result.Success(snapshot.toObjects())
 
-        } catch (e: FirebaseFirestoreException) {
-            Result.Error(e.message)
-        }
-
+    } catch (e: FirebaseFirestoreException) {
+      Result.Error(e.message)
     }
+
+  }
 }

@@ -16,79 +16,79 @@ import org.jetbrains.anko.toast
 
 
 class EventFeedbackActivity : AppCompatActivity() {
-    lateinit var feedBackViewModel: FeedBackViewModel
-    private var eventFeedback: String = ""
-    lateinit var userEventFeedback: UserEventFeedback
+  private lateinit var feedBackViewModel: FeedBackViewModel
+  private var eventFeedback: String = ""
+  lateinit var userEventFeedback: UserEventFeedback
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_feedback)
-        ButterKnife.bind(this)
-        setSupportActionBar(toolbar)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_event_feedback)
+    ButterKnife.bind(this)
+    setSupportActionBar(toolbar)
 
-        feedBackViewModel = ViewModelProviders.of(this).get(FeedBackViewModel::class.java)
+    feedBackViewModel = ViewModelProviders.of(this).get(FeedBackViewModel::class.java)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Event Feedback"
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    supportActionBar?.title = "Event Feedback"
 
 
-        //observe live data emitted by view model
-        observeLiveData()
+    //observe live data emitted by view model
+    observeLiveData()
 
-        fab.setOnClickListener {
-            when {
-                isFeedbackValid() -> postUserFeedback(userEventFeedback)
-            }
-        }
-
+    fab.setOnClickListener {
+      when {
+        isFeedbackValid() -> postUserFeedback(userEventFeedback)
+      }
     }
 
-    private fun observeLiveData() {
-        feedBackViewModel.getEventFeedBackResponse().nonNull().observe(this) {
-            handleFeedbackResponse(it)
-        }
-        feedBackViewModel.getEventFeedbackError().nonNull().observe(this) {
-            handleDataError(it)
-        }
+  }
+
+  private fun observeLiveData() {
+    feedBackViewModel.getEventFeedBackResponse().nonNull().observe(this) {
+      handleFeedbackResponse(it)
     }
-
-    private fun handleDataError(it: String) {
-        toast(it)
+    feedBackViewModel.getEventFeedbackError().nonNull().observe(this) {
+      handleDataError(it)
     }
+  }
 
-    private fun handleFeedbackResponse(@Suppress("UNUSED_PARAMETER") feedback: String) {
-        progressBarEventFeedBack.visibility = View.GONE
-        txtEventFeedback.setText("")
-        toast("Thank you for your feedback")
+  private fun handleDataError(it: String) {
+    toast(it)
+  }
 
+  private fun handleFeedbackResponse(@Suppress("UNUSED_PARAMETER") feedback: String) {
+    progressBarEventFeedBack.visibility = View.GONE
+    txtEventFeedback.setText("")
+    toast("Thank you for your feedback")
+
+  }
+
+  private fun isFeedbackValid(): Boolean {
+
+    eventFeedback = txtEventFeedback.text.toString().trim()
+    val isValid: Boolean
+
+    when {
+      eventFeedback.isEmpty() -> {
+        txtEventFeedback.error = "Event feedback cannot be empty"
+        isValid = false
+      }
+      else -> {
+
+        isValid = true
+        txtEventFeedback.error = null
+
+        userEventFeedback = UserEventFeedback(eventFeedback)
+
+      }
     }
+    return isValid
+  }
 
-    private fun isFeedbackValid(): Boolean {
+  private fun postUserFeedback(userEventFeedback: UserEventFeedback) {
 
-        eventFeedback = txtEventFeedback.text.toString().trim()
-        val isValid: Boolean
+    progressBarEventFeedBack.visibility = View.VISIBLE
+    feedBackViewModel.sendEventFeedBack(userEventFeedback)
 
-        when {
-            eventFeedback.isEmpty() -> {
-                txtEventFeedback.error = "Event feedback cannot be empty"
-                isValid = false
-            }
-            else -> {
-
-                isValid = true
-                txtEventFeedback.error = null
-
-                userEventFeedback = UserEventFeedback(eventFeedback)
-
-            }
-        }
-        return isValid
-    }
-
-    private fun postUserFeedback(userEventFeedback: UserEventFeedback) {
-
-        progressBarEventFeedBack.visibility = View.VISIBLE
-        feedBackViewModel.sendEventFeedBack(userEventFeedback)
-
-    }
+  }
 }

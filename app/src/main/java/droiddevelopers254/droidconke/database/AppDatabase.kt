@@ -14,29 +14,28 @@ import droiddevelopers254.droidconke.models.StarredSessionModel
 @Database(entities = [StarredSessionModel::class, SessionsModel::class], version = 3, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
+  //dao
+  abstract fun sessionsDao(): SessionsDao
 
-    //dao
-    abstract fun sessionsDao(): SessionsDao
+  abstract fun starredSessionDao(): StarredSessionDao
 
-    abstract fun starredSessionDao(): StarredSessionDao
+  companion object {
+    //Singleton
+    @Volatile
+    private var INSTANCE: AppDatabase? = null
 
-    companion object {
-        //Singleton
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase? {
-            when (INSTANCE) {
-                null -> INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "droidconKE_db")
-                        .fallbackToDestructiveMigration()
-                        .build()
-            }
-            return INSTANCE
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
+    fun getDatabase(context: Context): AppDatabase? {
+      when (INSTANCE) {
+          null -> INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "droidconKE_db")
+              .fallbackToDestructiveMigration()
+              .build()
+      }
+      return INSTANCE
     }
+
+    fun destroyInstance() {
+      INSTANCE = null
+    }
+  }
 
 }

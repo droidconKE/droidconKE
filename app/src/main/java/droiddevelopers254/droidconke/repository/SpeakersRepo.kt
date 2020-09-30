@@ -9,15 +9,15 @@ import droiddevelopers254.droidconke.utils.await
 
 class SpeakersRepo(private val firestore: FirebaseFirestore) {
 
-    suspend fun getSpeakersInfo(speakerId: Int): Result<List<SpeakersModel>> {
-        return try {
-            val snapshot = firestore.collection("speakers")
-                    .whereEqualTo("id", speakerId)
-                    .get()
-                    .await()
-            Result.Success(snapshot.toObjects<SpeakersModel>())
-        } catch (e: FirebaseFirestoreException) {
-            Result.Error(e.message)
-        }
+  suspend fun getSpeakersInfo(speakerId: Int): Result<List<SpeakersModel>> {
+    return try {
+      val snapshot = firestore.collection("speakers")
+          .whereEqualTo("id", speakerId)
+          .get()
+          .await()
+      Result.Success(snapshot.toObjects<SpeakersModel>())
+    } catch (e: FirebaseFirestoreException) {
+      Result.Error(e.message)
     }
+  }
 }

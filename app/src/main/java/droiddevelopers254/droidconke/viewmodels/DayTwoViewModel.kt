@@ -10,21 +10,21 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 class DayTwoViewModel(private val dayTwoRepo: DayTwoRepo) : ViewModel() {
-    private val sessionsStateMediatorLiveData = NonNullMediatorLiveData<List<SessionsModel>>()
-    private val sessionError = NonNullMediatorLiveData<String>()
+  private val sessionsStateMediatorLiveData = NonNullMediatorLiveData<List<SessionsModel>>()
+  private val sessionError = NonNullMediatorLiveData<String>()
 
-    fun getSessionsResponse(): LiveData<List<SessionsModel>> = sessionsStateMediatorLiveData
+  fun getSessionsResponse(): LiveData<List<SessionsModel>> = sessionsStateMediatorLiveData
 
-    fun getSessionsError(): LiveData<String> = sessionError
+  fun getSessionsError(): LiveData<String> = sessionError
 
-    fun getDayTwoSessions() {
-        viewModelScope.launch {
-            when (val value = dayTwoRepo.getDayTwoSessions()) {
-                is Result.Success -> sessionsStateMediatorLiveData.postValue(value.data)
-                is Result.Error -> sessionError.postValue(value.exception)
-            }
-        }
-
-
+  fun getDayTwoSessions() {
+    viewModelScope.launch {
+      when (val value = dayTwoRepo.getDayTwoSessions()) {
+          is Result.Success -> sessionsStateMediatorLiveData.postValue(value.data)
+          is Result.Error -> sessionError.postValue(value.exception)
+      }
     }
+
+
+  }
 }

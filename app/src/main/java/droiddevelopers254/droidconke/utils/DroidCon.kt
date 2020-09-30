@@ -11,13 +11,13 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.EmptyLogger
 
 class DroidCon : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        startKoin {
-            if (BuildConfig.DEBUG) androidLogger() else EmptyLogger()
-            androidContext(this@DroidCon)
-            modules(appModule, dataModule)
-        }
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+  override fun onCreate() {
+    super.onCreate()
+    startKoin {
+      if (BuildConfig.DEBUG) androidLogger() else EmptyLogger()
+      androidContext(this@DroidCon)
+      modules(appModule, dataModule)
     }
+    FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+  }
 }

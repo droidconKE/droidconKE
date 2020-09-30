@@ -15,41 +15,41 @@ import droiddevelopers254.droidconke.models.AgendaModel
 import kotlinx.android.synthetic.main.agenda_details.view.*
 
 class AgendaAdapter(private val agendaModelList: List<AgendaModel>, private val context: Context) : RecyclerView.Adapter<AgendaAdapter.MyViewHolder>() {
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val agendaTitleText = itemView.agendaTitleText
-        private val agendaTimelineText = itemView.agendaTimelineText
-        private val agendaImg = itemView.agendaImg
-        private val agendaLinear = itemView.agendaLinear
+  inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val agendaTitleText = itemView.agendaTitleText
+    private val agendaTimelineText = itemView.agendaTimelineText
+    private val agendaImg = itemView.agendaImg
+    private val agendaLinear = itemView.agendaLinear
 
-        @SuppressLint("Range")
-        fun bindAgendas(agendaModel: AgendaModel) {
-            with(agendaModel) {
-                Glide.with(itemView.context).load(iconUrl)
-                        .thumbnail(Glide.with(itemView.context).load(iconUrl))
-                        .apply(RequestOptions()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL))
-                        .into(agendaImg)
-                agendaTitleText.text = title
-                agendaTimelineText.text = time
-                agendaLinear.setBackgroundColor(Color.parseColor(background_color))
-            }
-        }
-
+    @SuppressLint("Range")
+    fun bindAgendas(agendaModel: AgendaModel) {
+      with(agendaModel) {
+        Glide.with(itemView.context).load(iconUrl)
+            .thumbnail(Glide.with(itemView.context).load(iconUrl))
+            .apply(RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.ALL))
+            .into(agendaImg)
+        agendaTitleText.text = title
+        agendaTimelineText.text = time
+        agendaLinear.setBackgroundColor(Color.parseColor(background_color))
+      }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.agenda_details, parent, false)
-        return MyViewHolder(itemView)
-    }
+  }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindAgendas(agendaModelList[position])
-    }
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    val itemView = LayoutInflater.from(parent.context)
+        .inflate(R.layout.agenda_details, parent, false)
+    return MyViewHolder(itemView)
+  }
 
-    override fun getItemCount(): Int {
-        return agendaModelList.size
-    }
+  override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    holder.bindAgendas(agendaModelList[position])
+  }
+
+  override fun getItemCount(): Int {
+    return agendaModelList.size
+  }
 
 
 }

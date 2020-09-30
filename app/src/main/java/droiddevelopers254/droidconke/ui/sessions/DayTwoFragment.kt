@@ -22,57 +22,57 @@ import org.koin.android.ext.android.inject
 import java.util.*
 
 class DayTwoFragment : Fragment() {
-    lateinit var sessionsAdapter: SessionsAdapter
-    internal var sessionsModelList: List<SessionsModel> = ArrayList()
-    private val dayTwoViewModel: DayTwoViewModel by inject()
+  lateinit var sessionsAdapter: SessionsAdapter
+  internal var sessionsModelList: List<SessionsModel> = ArrayList()
+  private val dayTwoViewModel: DayTwoViewModel by inject()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_day_two, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val view = inflater.inflate(R.layout.fragment_day_two, container, false)
 
-        sessionsAdapter= SessionsAdapter(activity!!, sessionsModelList, "day_two")
-        val sessionsRv = view.sessionsRv
-        initView(sessionsRv)
+    sessionsAdapter = SessionsAdapter(requireContext(), sessionsModelList, "day_two")
+    val sessionsRv = view.sessionsRv
+    initView(sessionsRv)
 
 
-        dayTwoViewModel.getDayTwoSessions()
-        //observe live data emitted by view model
-        observerLiveData()
-        return view
+    dayTwoViewModel.getDayTwoSessions()
+    //observe live data emitted by view model
+    observerLiveData()
+    return view
+  }
+
+  private fun observerLiveData() {
+    dayTwoViewModel.getSessionsResponse().nonNull().observe(this) {
+      sessionsModelList = it
+      sessionsAdapter.setSessionsAdapter(sessionsModelList)
     }
+    dayTwoViewModel.getSessionsError().nonNull().observe(this) {
+      handleError(it)
+    }
+  }
 
-    private fun observerLiveData() {
-        dayTwoViewModel.getSessionsResponse().nonNull().observe(this) {
-            sessionsModelList = it
-            sessionsAdapter.setSessionsAdapter(sessionsModelList)
+  private fun handleError(databaseError: String) {
+    activity?.toast(databaseError)
+  }
+
+  private fun initView(sessionsRv: RecyclerView) {
+    val layoutManager = LinearLayoutManager(activity)
+    sessionsRv.layoutManager = layoutManager
+    sessionsRv.itemAnimator = DefaultItemAnimator()
+    sessionsRv.adapter = sessionsAdapter
+    sessionsRv.addOnItemTouchListener(ItemClickListener(requireContext(), sessionsRv, object : ItemClickListener.ClickListener {
+        override fun onClick(view: View, position: Int) {
+            val intent = Intent(context, SessionViewActivity::class.java)
+            intent.putExtra("sessionId", sessionsModelList[position].id)
+            intent.putExtra("dayNumber", "day_two")
+            intent.putExtra("starred", sessionsModelList[position].starred)
+            intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
+            intent.putExtra("roomId", sessionsModelList[position].room_id)
+            startActivity(intent)
         }
-        dayTwoViewModel.getSessionsError().nonNull().observe(this) {
-            handleError(it)
+
+        override fun onLongClick(view: View?, position: Int) {
         }
-    }
-
-    private fun handleError(databaseError: String) {
-        activity?.toast(databaseError)
-    }
-
-    private fun initView(sessionsRv: RecyclerView) {
-        val layoutManager = LinearLayoutManager(activity)
-        sessionsRv.layoutManager = layoutManager
-        sessionsRv.itemAnimator = DefaultItemAnimator()
-        sessionsRv.adapter = sessionsAdapter
-        sessionsRv.addOnItemTouchListener(ItemClickListener(context!!, sessionsRv, object : ItemClickListener.ClickListener {
-            override fun onClick(view: View, position: Int) {
-                val intent = Intent(context, SessionViewActivity::class.java)
-                intent.putExtra("sessionId", sessionsModelList[position].id)
-                intent.putExtra("dayNumber", "day_two")
-                intent.putExtra("starred", sessionsModelList[position].starred)
-                intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
-                intent.putExtra("roomId", sessionsModelList[position].room_id)
-                startActivity(intent)
-            }
-
-            override fun onLongClick(view: View?, position: Int) {
-            }
-        }))
-    }
+    }))
+  }
 
 }

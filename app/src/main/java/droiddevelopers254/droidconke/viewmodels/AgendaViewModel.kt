@@ -10,19 +10,19 @@ import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 class AgendaViewModel(private val agendaRepo: AgendaRepo) : ViewModel() {
-    private val agendaStateMediatorLiveData = NonNullMediatorLiveData<List<AgendaModel>>()
-    private val agendaError = NonNullMediatorLiveData<String>()
+  private val agendaStateMediatorLiveData = NonNullMediatorLiveData<List<AgendaModel>>()
+  private val agendaError = NonNullMediatorLiveData<String>()
 
-    fun getAgendasResponse(): LiveData<List<AgendaModel>> = agendaStateMediatorLiveData
+  fun getAgendasResponse(): LiveData<List<AgendaModel>> = agendaStateMediatorLiveData
 
-    fun getAgendaError(): LiveData<String> = agendaError
+  fun getAgendaError(): LiveData<String> = agendaError
 
-    fun fetchAgendas() {
-        viewModelScope.launch {
-            when (val value = agendaRepo.agendaData()) {
-                is Result.Success -> agendaStateMediatorLiveData.postValue(value.data)
-                is Result.Error -> agendaError.postValue(value.exception)
-            }
-        }
+  fun fetchAgendas() {
+    viewModelScope.launch {
+      when (val value = agendaRepo.agendaData()) {
+          is Result.Success -> agendaStateMediatorLiveData.postValue(value.data)
+          is Result.Error -> agendaError.postValue(value.exception)
+      }
     }
+  }
 }

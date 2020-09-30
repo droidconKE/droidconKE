@@ -15,70 +15,70 @@ import org.koin.android.ext.android.inject
 import java.util.*
 
 class AboutDetailsActivity : AppCompatActivity() {
-    private var aboutDetailsList: List<AboutDetailsModel> = ArrayList()
-    lateinit var aboutType: String
+  private var aboutDetailsList: List<AboutDetailsModel> = ArrayList()
+  private var aboutType: String? = null
 
-    private val aboutDetailsViewModel: AboutDetailsViewModel by inject()
+  private val aboutDetailsViewModel: AboutDetailsViewModel by inject()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_details)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_about_details)
+    setSupportActionBar(toolbar)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+    initView()
+
+    //get intent extras
+    val extraIntent = intent
+    aboutType = extraIntent.getStringExtra("aboutType")
+
+    when (aboutType) {
+      "about_droidconKE" -> supportActionBar?.title = "About droidconKE"
+      "organizers" -> supportActionBar?.title = "Organizers"
+      "sponsors" -> supportActionBar?.title = "Sponsors"
+    }
+
+    //fetch about details
+    fetchAboutDetails(aboutType)
+
+    //observe live data emitted by view model
+    observeLiveData()
+  }
+
+  private fun observeLiveData() {
+    aboutDetailsViewModel.getAboutDetailsResponse().nonNull().observe(this) {
+      handleFetchAboutDetails(it)
+    }
+    aboutDetailsViewModel.getAboutDetailsError().nonNull().observe(this) {
+      handleDatabaseError(it)
+    }
+
+  }
+
+  private fun fetchAboutDetails(aboutType: String?) {
+    aboutType?.let { aboutDetailsViewModel.fetchAboutDetails(it) }
+  }
+
+  private fun handleFetchAboutDetails(aboutDetailsModelList: List<AboutDetailsModel>?) {
+    when {
+      aboutDetailsModelList != null -> {
+        aboutDetailsList = aboutDetailsModelList
         initView()
-
-        //get intent extras
-        val extraIntent = intent
-        aboutType = extraIntent.getStringExtra("aboutType")
-
-        when (aboutType) {
-            "about_droidconKE" -> supportActionBar?.title = "About droidconKE"
-            "organizers" -> supportActionBar?.title = "Organizers"
-            "sponsors" -> supportActionBar?.title = "Sponsors"
-        }
-
-        //fetch about details
-        fetchAboutDetails(aboutType)
-
-        //observe live data emitted by view model
-        observeLiveData()
+      }
     }
+  }
 
-    private fun observeLiveData() {
-        aboutDetailsViewModel.getAboutDetailsResponse().nonNull().observe(this) {
-            handleFetchAboutDetails(it)
-        }
-        aboutDetailsViewModel.getAboutDetailsError().nonNull().observe(this) {
-            handleDatabaseError(it)
-        }
+  private fun handleDatabaseError(databaseError: String) {
+    toast(databaseError)
+  }
 
+  private fun initView() {
+    aboutDetailsRv.itemAnimator = DefaultItemAnimator()
+    val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, this) {
+      //handle on click
     }
-
-    private fun fetchAboutDetails(aboutType: String) {
-        aboutDetailsViewModel.fetchAboutDetails(aboutType)
-    }
-
-    private fun handleFetchAboutDetails(aboutDetailsModelList: List<AboutDetailsModel>?) {
-        when {
-            aboutDetailsModelList != null -> {
-                aboutDetailsList = aboutDetailsModelList
-                initView()
-            }
-        }
-    }
-
-    private fun handleDatabaseError(databaseError: String) {
-        toast(databaseError)
-    }
-
-    private fun initView() {
-        aboutDetailsRv.itemAnimator = DefaultItemAnimator()
-        val aboutDetailsAdapter = AboutDetailsAdapter(aboutDetailsList, this) {
-            //handle on click
-        }
-        aboutDetailsRv.adapter = aboutDetailsAdapter
-    }
+    aboutDetailsRv.adapter = aboutDetailsAdapter
+  }
 
 
 }
