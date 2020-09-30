@@ -19,8 +19,6 @@ import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.SpeakersModel
 import droiddevelopers254.droidconke.ui.feedback.SessionFeedBackActivity
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel
 import kotlinx.android.synthetic.main.activity_session_view.*
 import kotlinx.android.synthetic.main.content_session_view.*
@@ -64,16 +62,16 @@ class SessionViewActivity : AppCompatActivity() {
 
     bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView)
     bottomSheetBehavior!!.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-        override fun onStateChanged(bottomSheet: View, newState: Int) {
-            // this part hides the button immediately and waits bottom sheet
-            // to collapse to show
-            if (newState == BottomSheetBehavior.STATE_EXPANDED) fab.animate().scaleX(0f).scaleY(0f).setDuration(200).start()
-            else if (newState == BottomSheetBehavior.STATE_COLLAPSED) fab.animate().scaleX(1f).scaleY(1f).setDuration(200).start()
-        }
+      override fun onStateChanged(bottomSheet: View, newState: Int) {
+        // this part hides the button immediately and waits bottom sheet
+        // to collapse to show
+        if (newState == BottomSheetBehavior.STATE_EXPANDED) fab.animate().scaleX(0f).scaleY(0f).setDuration(200).start()
+        else if (newState == BottomSheetBehavior.STATE_COLLAPSED) fab.animate().scaleX(1f).scaleY(1f).setDuration(200).start()
+      }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+      override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
-        }
+      }
     })
 
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -94,18 +92,18 @@ class SessionViewActivity : AppCompatActivity() {
     bottomAppBar.setOnMenuItemClickListener { item ->
       val id = item.itemId
       when (id) {
-          R.id.action_feedback -> {
-              val sessionFeedbackIntent = Intent(this, SessionFeedBackActivity::class.java)
-              sessionFeedbackIntent.putExtra("sessionId", sessionId)
-              sessionFeedbackIntent.putExtra("dayNumber", dayNumber)
-              startActivity(sessionFeedbackIntent)
-          }
+        R.id.action_feedback -> {
+          val sessionFeedbackIntent = Intent(this, SessionFeedBackActivity::class.java)
+          sessionFeedbackIntent.putExtra("sessionId", sessionId)
+          sessionFeedbackIntent.putExtra("dayNumber", dayNumber)
+          startActivity(sessionFeedbackIntent)
+        }
       }
       when (id) {
-          R.id.action_map -> when {
-              bottomSheetBehavior!!.state != BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-              else -> bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-          }
+        R.id.action_map -> when {
+          bottomSheetBehavior!!.state != BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+          else -> bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        }
       }
       false
     }
@@ -127,22 +125,22 @@ class SessionViewActivity : AppCompatActivity() {
   }
 
   private fun observeLiveData() {
-    sessionDataViewModel.getSessionDataResponse().nonNull().observe(this) {
+    sessionDataViewModel.getSessionDataResponse().observe(this) {
       handleFetchSessionData(it)
     }
-    sessionDataViewModel.getSessionDataError().nonNull().observe(this) {
+    sessionDataViewModel.getSessionDataError().observe(this) {
       handleDatabaseError(it)
     }
-    sessionDataViewModel.getSpeakerInfoResponse().nonNull().observe(this) {
+    sessionDataViewModel.getSpeakerInfoResponse().observe(this) {
       handleFetchSpeakerDetails(it)
     }
-    sessionDataViewModel.getSpeakerError().nonNull().observe(this) {
+    sessionDataViewModel.getSpeakerError().observe(this) {
       handleDatabaseError(it)
     }
-    sessionDataViewModel.getRoomInfoResponse().nonNull().observe(this) {
+    sessionDataViewModel.getRoomInfoResponse().observe(this) {
       handleFetchRoomDetails(it)
     }
-    sessionDataViewModel.getRoomInfoError().nonNull().observe(this) {
+    sessionDataViewModel.getRoomInfoError().observe(this) {
       handleDatabaseError(it)
     }
 

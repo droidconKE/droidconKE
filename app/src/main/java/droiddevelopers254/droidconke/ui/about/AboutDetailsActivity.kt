@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.AboutDetailsModel
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.utils.toast
 import droiddevelopers254.droidconke.viewmodels.AboutDetailsViewModel
 import kotlinx.android.synthetic.main.activity_about_details.*
@@ -46,10 +44,10 @@ class AboutDetailsActivity : AppCompatActivity() {
   }
 
   private fun observeLiveData() {
-    aboutDetailsViewModel.getAboutDetailsResponse().nonNull().observe(this) {
+    aboutDetailsViewModel.getAboutDetailsResponse().observe(this) {
       handleFetchAboutDetails(it)
     }
-    aboutDetailsViewModel.getAboutDetailsError().nonNull().observe(this) {
+    aboutDetailsViewModel.getAboutDetailsError().observe(this) {
       handleDatabaseError(it)
     }
 

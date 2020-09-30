@@ -7,8 +7,6 @@ import butterknife.ButterKnife
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.models.SessionsUserFeedback
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.SessionDataViewModel
 import kotlinx.android.synthetic.main.activity_session_feed_back.*
 import kotlinx.android.synthetic.main.content_session_feed_back.*
@@ -43,7 +41,7 @@ class SessionFeedBackActivity : AppCompatActivity() {
     sessionId = extraIntent.getIntExtra("sessionId", 0)
     dayNumber = extraIntent.getStringExtra("dayNumber")
 
-      dayNumber?.let { getSessionData(it, sessionId) }
+    dayNumber?.let { getSessionData(it, sessionId) }
 
     //observe live data emitted by view model
     observeLiveData()
@@ -57,17 +55,17 @@ class SessionFeedBackActivity : AppCompatActivity() {
   }
 
   private fun observeLiveData() {
-    sessionDataViewModel.getSessionDataResponse().nonNull().observe(this) {
+    sessionDataViewModel.getSessionDataResponse().observe(this) {
       handleFetchSessionData(it)
 
     }
-    sessionDataViewModel.getSessionDataError().nonNull().observe(this) {
+    sessionDataViewModel.getSessionDataError().observe(this) {
       handleDatabaseError(it)
     }
-    sessionDataViewModel.getSessionFeedBackResponse().nonNull().observe(this) {
+    sessionDataViewModel.getSessionFeedBackResponse().observe(this) {
       handleFeedbackResponse(it)
     }
-    sessionDataViewModel.getSessionFeedbackError().nonNull().observe(this) {
+    sessionDataViewModel.getSessionFeedbackError().observe(this) {
       handleDatabaseError(it)
     }
   }

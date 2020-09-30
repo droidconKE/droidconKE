@@ -18,8 +18,6 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import droiddevelopers254.droidconke.utils.SharedPref.FIREBASE_TOKEN
 import droiddevelopers254.droidconke.utils.SharedPref.PREF_NAME
 import droiddevelopers254.droidconke.utils.SharedPref.TOKEN_SENT
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.HomeViewModel
 import droiddevelopers254.droidconke.ui.authentication.AuthenticateUserActivity
 import droiddevelopers254.droidconke.ui.feedback.EventFeedbackActivity
@@ -48,12 +46,12 @@ class HomeActivity : AppCompatActivity() {
     val tokenSent = sharedPreferences.getInt(TOKEN_SENT, 0)
 
     when (tokenSent) {
-        0 -> {
-            val refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
-            val firebaseUser = FirebaseAuth.getInstance().currentUser
-            //update in firestore
-            homeViewModel.updateToken(firebaseUser?.uid.toString(), refreshToken!!)
-        }
+      0 -> {
+        val refreshToken = sharedPreferences.getString(FIREBASE_TOKEN, null)
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        //update in firestore
+        homeViewModel.updateToken(firebaseUser?.uid.toString(), refreshToken!!)
+      }
     }
 
     when {
@@ -69,56 +67,56 @@ class HomeActivity : AppCompatActivity() {
     }
     navigation.setOnNavigationItemSelectedListener {
       when (it.itemId) {
-          R.id.navigation_home -> {
-              navItemIndex = 0
+        R.id.navigation_home -> {
+          navItemIndex = 0
 
-              //hide views not required by these fragment
-              accountImg.visibility = View.GONE
-              //fab.hide();
-              toolbarTitleText.setText(R.string.info_title)
+          //hide views not required by these fragment
+          accountImg.visibility = View.GONE
+          //fab.hide();
+          toolbarTitleText.setText(R.string.info_title)
 
-              //activate the hide toolbar
-              params = toolbar.layoutParams as AppBarLayout.LayoutParams
-              params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+          //activate the hide toolbar
+          params = toolbar.layoutParams as AppBarLayout.LayoutParams
+          params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 
-              val infoFragment = InfoFragment()
-              supportFragmentManager.beginTransaction().replace(R.id.content_home, infoFragment)
-                  .commit()
-          }
-          R.id.navigation_schedule -> {
+          val infoFragment = InfoFragment()
+          supportFragmentManager.beginTransaction().replace(R.id.content_home, infoFragment)
+              .commit()
+        }
+        R.id.navigation_schedule -> {
 
-              navItemIndex = 1
+          navItemIndex = 1
 
-              //hide views not required by these fragment
-              accountImg.visibility = View.VISIBLE
-              toolbarTitleText.setText(R.string.schedule_title)
+          //hide views not required by these fragment
+          accountImg.visibility = View.VISIBLE
+          toolbarTitleText.setText(R.string.schedule_title)
 
-              //activate the hide toolbar
-              params = toolbar.layoutParams as AppBarLayout.LayoutParams
-              params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+          //activate the hide toolbar
+          params = toolbar.layoutParams as AppBarLayout.LayoutParams
+          params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 
-              val scheduleFragment = ScheduleFragment()
-              supportFragmentManager.beginTransaction().replace(R.id.content_home, scheduleFragment)
-                  .commit()
+          val scheduleFragment = ScheduleFragment()
+          supportFragmentManager.beginTransaction().replace(R.id.content_home, scheduleFragment)
+              .commit()
 
-          }
-          R.id.navigation_map -> {
+        }
+        R.id.navigation_map -> {
 
-              navItemIndex = 2
+          navItemIndex = 2
 
-              //hide views not required by these fragment
-              accountImg!!.visibility = View.GONE
-              // fab.hide();
-              toolbarTitleText.setText(R.string.map_title)
+          //hide views not required by these fragment
+          accountImg!!.visibility = View.GONE
+          // fab.hide();
+          toolbarTitleText.setText(R.string.map_title)
 
-              //show toolbar if it was hidden
-              params = toolbar.layoutParams as AppBarLayout.LayoutParams
-              params.scrollFlags = 0  // clear all scroll flags
+          //show toolbar if it was hidden
+          params = toolbar.layoutParams as AppBarLayout.LayoutParams
+          params.scrollFlags = 0  // clear all scroll flags
 
-              val mapFragment = MapFragment()
-              supportFragmentManager.beginTransaction().replace(R.id.content_home, mapFragment)
-                  .commit()
-          }
+          val mapFragment = MapFragment()
+          supportFragmentManager.beginTransaction().replace(R.id.content_home, mapFragment)
+              .commit()
+        }
       }
       false
     }
@@ -130,7 +128,7 @@ class HomeActivity : AppCompatActivity() {
   }
 
   private fun observeLiveData() {
-    homeViewModel.getUpdateTokenResponse().nonNull().observe(this) {
+    homeViewModel.getUpdateTokenResponse().observe(this) {
       when {
         it -> {
           sharedPreferences.edit().putInt(TOKEN_SENT, 1).apply()
@@ -152,15 +150,15 @@ class HomeActivity : AppCompatActivity() {
     val id = item.itemId
 
     when (id) {
-        R.id.action_settings -> {
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this, AuthenticateUserActivity::class.java))
-            finish()
-            return true
-        }
-        R.id.action_feedback -> {
-            startActivity(Intent(this, EventFeedbackActivity::class.java))
-        }
+      R.id.action_settings -> {
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(this, AuthenticateUserActivity::class.java))
+        finish()
+        return true
+      }
+      R.id.action_feedback -> {
+        startActivity(Intent(this, EventFeedbackActivity::class.java))
+      }
       else -> return super.onOptionsItemSelected(item)
     }
     return super.onOptionsItemSelected(item)

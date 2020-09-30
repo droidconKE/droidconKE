@@ -16,8 +16,6 @@ import droiddevelopers254.droidconke.BuildConfig
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.EventTypeModel
 import droiddevelopers254.droidconke.models.WifiDetailsModel
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.EventTypeViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_event.view.*
@@ -57,10 +55,10 @@ class EventFragment : Fragment() {
   }
 
   private fun observeLiveData() {
-    eventTypeViewModel.getWifiDetailsResponse().nonNull().observe(this) {
+    eventTypeViewModel.getWifiDetailsResponse().observe(viewLifecycleOwner) {
       handleFetchEventsResponse(it, eventTypesRv)
     }
-    eventTypeViewModel.getWifiDetailsError().nonNull().observe(this) {
+    eventTypeViewModel.getWifiDetailsError().observe(viewLifecycleOwner) {
       handleDatabaseError(it)
     }
   }

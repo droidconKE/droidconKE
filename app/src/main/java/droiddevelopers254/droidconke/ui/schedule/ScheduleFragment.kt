@@ -30,9 +30,9 @@ class ScheduleFragment : Fragment() {
     tabLayout.setupWithViewPager(viewPager)
 
     when (viewPager.currentItem) {
-        2 -> {
-            HomeActivity.fabVisible = false
-        }
+      2 -> {
+        HomeActivity.fabVisible = false
+      }
     }
     return view
   }

@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.SessionsModel
 import droiddevelopers254.droidconke.utils.ItemClickListener
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.DayTwoViewModel
 import droiddevelopers254.droidconke.ui.sessiondetails.SessionViewActivity
 import kotlinx.android.synthetic.main.fragment_day_two.view.*
@@ -41,11 +39,11 @@ class DayTwoFragment : Fragment() {
   }
 
   private fun observerLiveData() {
-    dayTwoViewModel.getSessionsResponse().nonNull().observe(this) {
+    dayTwoViewModel.getSessionsResponse().observe(viewLifecycleOwner) {
       sessionsModelList = it
       sessionsAdapter.setSessionsAdapter(sessionsModelList)
     }
-    dayTwoViewModel.getSessionsError().nonNull().observe(this) {
+    dayTwoViewModel.getSessionsError().observe(viewLifecycleOwner) {
       handleError(it)
     }
   }
@@ -60,18 +58,18 @@ class DayTwoFragment : Fragment() {
     sessionsRv.itemAnimator = DefaultItemAnimator()
     sessionsRv.adapter = sessionsAdapter
     sessionsRv.addOnItemTouchListener(ItemClickListener(requireContext(), sessionsRv, object : ItemClickListener.ClickListener {
-        override fun onClick(view: View, position: Int) {
-            val intent = Intent(context, SessionViewActivity::class.java)
-            intent.putExtra("sessionId", sessionsModelList[position].id)
-            intent.putExtra("dayNumber", "day_two")
-            intent.putExtra("starred", sessionsModelList[position].starred)
-            intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
-            intent.putExtra("roomId", sessionsModelList[position].room_id)
-            startActivity(intent)
-        }
+      override fun onClick(view: View, position: Int) {
+        val intent = Intent(context, SessionViewActivity::class.java)
+        intent.putExtra("sessionId", sessionsModelList[position].id)
+        intent.putExtra("dayNumber", "day_two")
+        intent.putExtra("starred", sessionsModelList[position].starred)
+        intent.putIntegerArrayListExtra("speakerId", sessionsModelList[position].speaker_id)
+        intent.putExtra("roomId", sessionsModelList[position].room_id)
+        startActivity(intent)
+      }
 
-        override fun onLongClick(view: View?, position: Int) {
-        }
+      override fun onLongClick(view: View?, position: Int) {
+      }
     }))
   }
 

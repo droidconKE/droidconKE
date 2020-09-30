@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import droiddevelopers254.droidconke.R
 import droiddevelopers254.droidconke.models.AgendaModel
-import droiddevelopers254.droidconke.utils.nonNull
-import droiddevelopers254.droidconke.utils.observe
 import droiddevelopers254.droidconke.viewmodels.AgendaViewModel
 import kotlinx.android.synthetic.main.fragment_agenda.*
 import org.jetbrains.anko.toast
@@ -34,10 +32,10 @@ class AgendaFragment : Fragment() {
   }
 
   private fun observeLiveData() {
-    agendaViewModel.getAgendasResponse().nonNull().observe(this) {
+    agendaViewModel.getAgendasResponse().observe(viewLifecycleOwner) {
       handleAgendaResponse(it, agendaRv)
     }
-    agendaViewModel.getAgendaError().nonNull().observe(this) {
+    agendaViewModel.getAgendaError().observe(viewLifecycleOwner) {
       handleDatabaseError(it)
     }
   }

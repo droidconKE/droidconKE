@@ -1,6 +1,7 @@
 package droiddevelopers254.droidconke.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import droiddevelopers254.droidconke.datastates.Result
@@ -12,19 +13,18 @@ import droiddevelopers254.droidconke.repository.RoomRepo
 import droiddevelopers254.droidconke.repository.SessionDataRepo
 import droiddevelopers254.droidconke.repository.SessionFeedbackRepo
 import droiddevelopers254.droidconke.repository.SpeakersRepo
-import droiddevelopers254.droidconke.utils.NonNullMediatorLiveData
 import kotlinx.coroutines.launch
 
 
 class SessionDataViewModel(private val sessionDataRepo: SessionDataRepo, private val speakersRepo: SpeakersRepo, private val roomRepo: RoomRepo, private val sessionFeedbackRepo: SessionFeedbackRepo) : ViewModel() {
-  private val sessionDataStateMediatorLiveData = NonNullMediatorLiveData<SessionsModel>()
-  private val sessionDataError = NonNullMediatorLiveData<String>()
-  private val speakersStateMediatorLiveData = NonNullMediatorLiveData<List<SpeakersModel>>()
-  private val speakersError = NonNullMediatorLiveData<String>()
-  private val roomStateMediatorLiveData = NonNullMediatorLiveData<RoomModel>()
-  private val roomError = NonNullMediatorLiveData<String>()
-  private val sessionFeedBackMediatorLiveData = NonNullMediatorLiveData<String>()
-  private val sessionFeedbackError = NonNullMediatorLiveData<String>()
+  private val sessionDataStateMediatorLiveData = MutableLiveData<SessionsModel>()
+  private val sessionDataError = MutableLiveData<String>()
+  private val speakersStateMediatorLiveData = MutableLiveData<List<SpeakersModel>>()
+  private val speakersError = MutableLiveData<String>()
+  private val roomStateMediatorLiveData = MutableLiveData<RoomModel>()
+  private val roomError = MutableLiveData<String>()
+  private val sessionFeedBackMediatorLiveData = MutableLiveData<String>()
+  private val sessionFeedbackError = MutableLiveData<String>()
 
 
   fun getSessionDataResponse(): LiveData<SessionsModel> = sessionDataStateMediatorLiveData

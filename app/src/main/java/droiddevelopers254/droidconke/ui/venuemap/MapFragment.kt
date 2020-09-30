@@ -67,34 +67,34 @@ class MapFragment : Fragment(), OnMapReadyCallback {
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     when (requestCode) {
-        PERMISSION_CALLBACK_CONSTANT -> {
-            //check if all permissions are granted
-            var allgranted = false
-            loop@ for (i in grantResults.indices) {
-                when {
-                    grantResults[i] == PackageManager.PERMISSION_GRANTED -> allgranted = true
-                    else -> {
-                        allgranted = false
-                        break@loop
-                    }
-                }
+      PERMISSION_CALLBACK_CONSTANT -> {
+        //check if all permissions are granted
+        var allgranted = false
+        loop@ for (i in grantResults.indices) {
+          when {
+            grantResults[i] == PackageManager.PERMISSION_GRANTED -> allgranted = true
+            else -> {
+              allgranted = false
+              break@loop
             }
-            when {
-                allgranted -> mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
-                ActivityCompat.shouldShowRequestPermissionRationale(activity!!, permissionsRequired[0]) -> {
-                    val builder = AlertDialog.Builder(activity!!)
-                    builder.setTitle("Need Multiple Permissions")
-                    builder.setMessage("This app needs Location and Storage permissions.")
-                    builder.setPositiveButton("Grant") { dialog, _ ->
-                        dialog.cancel()
-                        ActivityCompat.requestPermissions(activity!!, permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
-                    }
-                    builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
-                    builder.show()
-                }
-                else -> Toast.makeText(activity, "Unable to get Permission", Toast.LENGTH_LONG).show()
-            }
+          }
         }
+        when {
+          allgranted -> mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+          ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permissionsRequired[0]) -> {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("Need Multiple Permissions")
+            builder.setMessage("This app needs Location and Storage permissions.")
+            builder.setPositiveButton("Grant") { dialog, _ ->
+              dialog.cancel()
+              ActivityCompat.requestPermissions(requireActivity(), permissionsRequired, PERMISSION_CALLBACK_CONSTANT)
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            builder.show()
+          }
+          else -> Toast.makeText(activity, "Unable to get Permission", Toast.LENGTH_LONG).show()
+        }
+      }
     }
   }
 
@@ -113,7 +113,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     //collapse bottom sheet
     view.collapseBottomSheetImg.setOnClickListener {
       when (bottomSheetBehavior?.state) {
-          BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+        BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
       }
     }
 
@@ -169,27 +169,27 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
       } catch (exception: ApiException) {
         when (exception.statusCode) {
-            LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
-                // Location settings are not satisfied. But could be fixed by showing the
-                // user a dialog.
-                mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
-                try {
-                    // Cast to a resolvable exception.
-                    val resolvable = exception as ResolvableApiException
-                    // Show the dialog by calling startResolutionForResult(),
-                    // and check the result in onActivityResult().
-                    resolvable.startResolutionForResult(
-                        activity,
-                        REQUEST_CHECK_SETTINGS)
-                } catch (e: IntentSender.SendIntentException) {
-                    // Ignore the error.
-                } catch (e: ClassCastException) {
-                    // Ignore, should be an impossible error.
-                }
+          LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+            // Location settings are not satisfied. But could be fixed by showing the
+            // user a dialog.
+            mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+            try {
+              // Cast to a resolvable exception.
+              val resolvable = exception as ResolvableApiException
+              // Show the dialog by calling startResolutionForResult(),
+              // and check the result in onActivityResult().
+              resolvable.startResolutionForResult(
+                  activity,
+                  REQUEST_CHECK_SETTINGS)
+            } catch (e: IntentSender.SendIntentException) {
+              // Ignore the error.
+            } catch (e: ClassCastException) {
+              // Ignore, should be an impossible error.
+            }
 
-            }
-            LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-            }
+          }
+          LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+          }
         }// Location settings are not satisfied. However, we have no way to fix the
         // settings so we won't show the dialog.
       }
@@ -259,16 +259,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     LocationSettingsStates.fromIntent(data!!)
     when (requestCode) {
-        REQUEST_CHECK_SETTINGS -> when (resultCode) {
-            Activity.RESULT_OK ->
-                // All required changes were successfully made
-                //start location updates
-                mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
-            Activity.RESULT_CANCELED -> {
-            }
-            else -> {
-            }
-        }// The user was asked to change settings, but chose not to
+      REQUEST_CHECK_SETTINGS -> when (resultCode) {
+        Activity.RESULT_OK ->
+          // All required changes were successfully made
+          //start location updates
+          mFusedLocationProviderClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+        Activity.RESULT_CANCELED -> {
+        }
+        else -> {
+        }
+      }// The user was asked to change settings, but chose not to
     }
     super.onActivityResult(requestCode, resultCode, data)
   }
