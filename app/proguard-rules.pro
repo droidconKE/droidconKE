@@ -19,6 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file description.
 #-renamesourcefileattribute SourceFile
+#noinspection ShrinkerUnresolvedReference
 -keep class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
 -keepclassmembers class com.ontbee.legacyforks.cn.pedant.SweetAlert.** {*;}
 -keep class droiddevelopers254.droidconke.models.** { *; }
